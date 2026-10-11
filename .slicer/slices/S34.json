@@ -1,0 +1,45 @@
+{
+  "id": "S34",
+  "title": "Store parsers: additional stores",
+  "lead": [
+    "Implement parsers for any other stores the deployment uses, one module each, following the first-store pattern."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "ingest",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** stores without item-level detail in their emails (park them).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Occasional orders from other stores would otherwise be invisible to the pantry."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Which additional stores, in priority order? Is each one used often enough to be worth a parser? (Split into one slice per store with `slicer add --discovered-from` if useful.)"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/ingest/stores/<store>.py` per store\n- `tests/test_store_<store>.py` per store"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "Per store:\n1. `test_parses_all_lines_from_each_sample`\n2. `test_unknown_layout_raises_parse_error_not_silent`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. For each chosen store: add redacted samples, write the parser, register it in config."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass on each store's redacted samples."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

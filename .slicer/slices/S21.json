@@ -1,0 +1,45 @@
+{
+  "id": "S21",
+  "title": "Weekly planning session",
+  "lead": [
+    "Page to review the suggested week, swap/skip/lock meals, and confirm the plan (P0, P4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** list generation (that slice consumes the confirmed plan).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "This is the one weekly habit larder asks for, so it has to take a few minutes."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Who can plan: admin only, or both (per the planning interview)?\n2. Is one tap on \"swap\" enough (shows the next alternative), or show a picker of 3?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/plan_views.py`, template `plan/week.html`\n- `src/larder/planner/plan.py`\n- `tests/test_plan_web.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_new_week_prefilled_from_suggestions`\n2. `test_swap_replaces_with_alternative`\n3. `test_skip_and_lock_persist`\n4. `test_confirm_marks_plan_final_and_triggers_list_generation_hook`\n5. `test_editing_confirmed_plan_updates_list_hook`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Create the week's `meal_plan` from `suggest_week`.\n2. Per night: swap, skip, lock, or pick any recipe.\n3. Confirm saves the plan and fires a `plan_confirmed` hook (the list slice subscribes).\n4. Mobile-first layout; one screen."
+    },
+    {
+      "heading": "Check",
+      "body": "- Web tests pass; the owner plans a real week in under 5 minutes."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,45 @@
+{
+  "id": "S12",
+  "title": "Hugo site one-time importer",
+  "lead": [
+    "Import recipes from a Hugo site's content directory into the recipe repo once (ADR 0011)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "recipes",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** ongoing sync; publishing back to the Hugo site (Later).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Existing recipes seed the rotation. The importer is also the first plugin, and it defines the importer interface (ADR 0005)."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Source: read from a local clone path the owner provides, or fetch from GitHub over HTTPS (public)? Recommend a local path or a public raw fetch, with no credentials either way.\n2. Which content directory, and should any recipes be skipped (duplicates, drafts)?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/importers/__init__.py` (Importer protocol, registry)\n- `src/larder/importers/hugo.py`\n- `src/larder/cli.py` (`larder import hugo …`)\n- `tests/test_import_hugo.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_imports_all_fixture_recipes_with_normalized_headings`\n2. `test_reimport_is_noop_when_unchanged`\n3. `test_skips_drafts`\n4. `test_records_source_in_front_matter_or_db` (per ADR 0018)\n5. `test_single_commit_for_whole_import`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Define an `Importer` protocol: `discover() -> list[SourceRecipe]`, `to_doc(src) -> RecipeDoc`.\n2. Hugo importer: read `*.md`, parse, normalize headings, keep the body.\n3. Write files into the recipe repo; one commit, then push.\n4. CLI subcommand plus dry-run that prints a plan."
+    },
+    {
+      "heading": "Check",
+      "body": "- Importer tests pass.\n- A dry run against the owner's Hugo site lists the expected recipes; the real run creates them in the recipe repo, with the owner's approval for the push."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks (this repo). The recipe-repo push happens only after the owner approves it."
+    }
+  ],
+  "notes": []
+}

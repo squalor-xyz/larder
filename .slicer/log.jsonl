@@ -1,0 +1,54 @@
+{"when": "2026-10-11T15:53:59Z", "item": "goals", "action": "prose", "from": "", "to": "", "note": "edit"}
+{"when": "2026-10-11T15:53:59Z", "item": "non_goals", "action": "prose", "from": "", "to": "", "note": "edit"}
+{"when": "2026-10-11T15:53:59Z", "item": "preamble", "action": "prose", "from": "", "to": "", "note": "edit"}
+{"when": "2026-10-11T15:54:09Z", "item": "S01", "action": "add", "from": "", "to": "open", "note": "Interview: dev tooling and conventions"}
+{"when": "2026-10-11T15:54:09Z", "item": "S02", "action": "add", "from": "", "to": "open", "note": "Project skeleton and AGENTS.md"}
+{"when": "2026-10-11T15:54:09Z", "item": "S03", "action": "add", "from": "", "to": "open", "note": "Config and data directory loading"}
+{"when": "2026-10-11T15:54:09Z", "item": "S04", "action": "add", "from": "", "to": "open", "note": "SQLite schema and migrations"}
+{"when": "2026-10-11T15:54:09Z", "item": "S05", "action": "add", "from": "", "to": "open", "note": "Flask app shell"}
+{"when": "2026-10-11T15:54:09Z", "item": "S06", "action": "add", "from": "", "to": "open", "note": "Interview: device pairing and admin bootstrap"}
+{"when": "2026-10-11T15:54:09Z", "item": "S07", "action": "add", "from": "", "to": "open", "note": "People and device pairing"}
+{"when": "2026-10-11T15:54:09Z", "item": "S08", "action": "add", "from": "", "to": "open", "note": "PWA shell"}
+{"when": "2026-10-11T15:54:09Z", "item": "S09", "action": "add", "from": "", "to": "open", "note": "Interview: recipe repo conventions"}
+{"when": "2026-10-11T15:54:09Z", "item": "S10", "action": "add", "from": "", "to": "open", "note": "Recipe file parser"}
+{"when": "2026-10-11T15:54:09Z", "item": "S11", "action": "add", "from": "", "to": "open", "note": "Recipe repo sync"}
+{"when": "2026-10-11T15:54:09Z", "item": "S12", "action": "add", "from": "", "to": "open", "note": "Hugo site one-time importer"}
+{"when": "2026-10-11T15:54:09Z", "item": "S13", "action": "add", "from": "", "to": "open", "note": "Recipe index"}
+{"when": "2026-10-11T15:54:09Z", "item": "S14", "action": "add", "from": "", "to": "open", "note": "Recipe browse and metadata editing"}
+{"when": "2026-10-11T15:54:09Z", "item": "S15", "action": "add", "from": "", "to": "open", "note": "Interview: grocery items, categories, staples and units"}
+{"when": "2026-10-11T15:54:09Z", "item": "S16", "action": "add", "from": "", "to": "open", "note": "Ingredient line parser"}
+{"when": "2026-10-11T15:54:09Z", "item": "S17", "action": "add", "from": "", "to": "open", "note": "Canonical item matching"}
+{"when": "2026-10-11T15:54:09Z", "item": "S18", "action": "add", "from": "", "to": "open", "note": "Parse review queue"}
+{"when": "2026-10-11T15:54:09Z", "item": "S19", "action": "add", "from": "", "to": "open", "note": "Interview: planning rules"}
+{"when": "2026-10-11T15:54:09Z", "item": "S20", "action": "add", "from": "", "to": "open", "note": "Meal suggestion ranking"}
+{"when": "2026-10-11T15:54:09Z", "item": "S21", "action": "add", "from": "", "to": "open", "note": "Weekly planning session"}
+{"when": "2026-10-11T15:54:09Z", "item": "S22", "action": "add", "from": "", "to": "open", "note": "Today view"}
+{"when": "2026-10-11T15:54:09Z", "item": "S23", "action": "add", "from": "", "to": "open", "note": "Interview: shopping list behavior"}
+{"when": "2026-10-11T15:54:09Z", "item": "S24", "action": "add", "from": "", "to": "open", "note": "Shopping list generation"}
+{"when": "2026-10-11T15:54:09Z", "item": "S25", "action": "add", "from": "", "to": "open", "note": "Shared shopping list UI"}
+{"when": "2026-10-11T15:54:09Z", "item": "S26", "action": "add", "from": "", "to": "open", "note": "Interview: deployment host and network"}
+{"when": "2026-10-11T15:54:09Z", "item": "S27", "action": "add", "from": "", "to": "open", "note": "Spike: HTTPS on the deployment network"}
+{"when": "2026-10-11T15:54:09Z", "item": "S28", "action": "add", "from": "", "to": "open", "note": "Container image and deployment"}
+{"when": "2026-10-11T15:54:09Z", "item": "S29", "action": "add", "from": "", "to": "open", "note": "Deploy and onboard"}
+{"when": "2026-10-11T15:54:09Z", "item": "S30", "action": "add", "from": "", "to": "open", "note": "MVP trial"}
+{"when": "2026-10-11T15:54:09Z", "item": "S31", "action": "add", "from": "", "to": "open", "note": "Interview: receipts mailbox and samples"}
+{"when": "2026-10-11T15:54:09Z", "item": "S32", "action": "add", "from": "", "to": "open", "note": "IMAP poller and raw email archive"}
+{"when": "2026-10-11T15:54:09Z", "item": "S33", "action": "add", "from": "", "to": "open", "note": "Store parser: first store"}
+{"when": "2026-10-11T15:54:09Z", "item": "S34", "action": "add", "from": "", "to": "open", "note": "Store parsers: additional stores"}
+{"when": "2026-10-11T15:54:09Z", "item": "S35", "action": "add", "from": "", "to": "open", "note": "Order line matching"}
+{"when": "2026-10-11T15:54:09Z", "item": "S36", "action": "add", "from": "", "to": "open", "note": "Interview: pantry model"}
+{"when": "2026-10-11T15:54:09Z", "item": "S37", "action": "add", "from": "", "to": "open", "note": "Pantry estimator"}
+{"when": "2026-10-11T15:54:09Z", "item": "S38", "action": "add", "from": "", "to": "open", "note": "Pantry taps and use-it-up nudges"}
+{"when": "2026-10-11T15:54:09Z", "item": "S39", "action": "add", "from": "", "to": "open", "note": "Runout predictor"}
+{"when": "2026-10-11T15:54:09Z", "item": "S40", "action": "add", "from": "", "to": "open", "note": "Pantry-aware planner and list"}
+{"when": "2026-10-11T15:54:09Z", "item": "S41", "action": "add", "from": "", "to": "open", "note": "Interview: notifications"}
+{"when": "2026-10-11T15:54:09Z", "item": "S42", "action": "add", "from": "", "to": "open", "note": "Notifier"}
+{"when": "2026-10-11T15:54:09Z", "item": "S43", "action": "add", "from": "", "to": "later", "note": "Ollama parse suggestions"}
+{"when": "2026-10-11T15:54:09Z", "item": "S44", "action": "add", "from": "", "to": "later", "note": "LLM meal suggestions from what's on hand"}
+{"when": "2026-10-11T15:54:09Z", "item": "S45", "action": "add", "from": "", "to": "later", "note": "Recipe URL importer (schema.org)"}
+{"when": "2026-10-11T15:54:09Z", "item": "S46", "action": "add", "from": "", "to": "later", "note": "Publish recipes to a Hugo site"}
+{"when": "2026-10-11T15:54:09Z", "item": "S47", "action": "add", "from": "", "to": "later", "note": "Remember store product names per item"}
+{"when": "2026-10-11T15:54:09Z", "item": "S48", "action": "add", "from": "", "to": "later", "note": "Kitchen tablet mode"}
+{"when": "2026-10-11T15:54:09Z", "item": "S49", "action": "add", "from": "", "to": "later", "note": "Native Android app"}
+{"when": "2026-10-11T15:54:09Z", "item": "S50", "action": "add", "from": "", "to": "later", "note": "Distributable self-host packaging"}
+{"when": "2026-10-11T15:54:09Z", "item": "S51", "action": "add", "from": "", "to": "later", "note": "Hosted multi-household instance"}

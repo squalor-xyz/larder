@@ -1,0 +1,45 @@
+{
+  "id": "S14",
+  "title": "Recipe browse and metadata editing",
+  "lead": [
+    "Admin pages to list and view recipes and edit their larder metadata (R4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** editing recipe content (done in git); ingredient review (separate slice).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "The planner needs metadata (meal type, in rotation, kid favorite, servings, effort) that the files don't carry."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Metadata fields: meal type (dinner/breakfast/lunch/side/dessert), servings, in rotation (bool), kid favorite (bool), effort (quick/normal/project). Add or remove any?\n2. Should a non-technical household member see recipe pages (read-only) from the Today view? (recommended: yes, with a \"view recipe\" link)"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/recipes_views.py`, templates `recipes/list.html`, `recipes/view.html`, `recipes/meta_form.html`\n- `tests/test_recipes_web.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_list_filters_by_meal_type_and_rotation`\n2. `test_view_renders_ingredients_and_directions_safely` (HTML-escaped Markdown)\n3. `test_admin_can_edit_meta_member_cannot`\n4. `test_meta_survives_reindex`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Recipe list with filters; recipe view rendering Markdown. Note: stdlib has no Markdown renderer, so render the known subset (headings, lists, bold, paragraphs) with escaping, or ask the owner before adding a dependency.\n2. Metadata form with CSRF; store in `recipe_meta`.\n3. Bulk \"mark in rotation\" checkboxes on the list for fast setup."
+    },
+    {
+      "heading": "Check",
+      "body": "- Web tests pass; after pairing, the owner can tag all imported recipes in a couple of minutes."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

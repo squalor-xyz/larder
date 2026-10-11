@@ -1,0 +1,45 @@
+{
+  "id": "S07",
+  "title": "People and device pairing",
+  "lead": [
+    "Implement people, device pairing, the long-lived cookie, and revocation (ADR 0010, requirement U7)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "web, core",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** multi-household accounts, passwords, OAuth.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Unpaired devices must not use larder. A non-technical household member must never see a login screen after pairing. Requirement `added_by` attribution needs a Person."
+    },
+    {
+      "heading": "Owner input",
+      "body": "Anything left unresolved by the pairing interview."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/auth.py`\n- `src/larder/web/auth_views.py`, templates `pair.html`, `unpaired.html`, `admin/devices.html`\n- `src/larder/migrations/` (if schema changes)\n- `tests/test_auth.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_bootstrap_token_creates_first_admin_once`\n2. `test_pairing_link_single_use_and_expires`\n3. `test_cookie_token_stored_hashed_only`\n4. `test_unpaired_request_gets_unpaired_page`\n5. `test_revoked_device_rejected`\n6. `test_member_cannot_access_admin`\n7. `test_cookie_flags_httponly_samesite_and_secure_when_https`\n8. `test_csrf_protection_on_state_changing_posts`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Generate tokens with `secrets`; store SHA-256 hashes; compare in constant time.\n2. Implement the bootstrap flow as decided.\n3. Pairing: admin creates a pairing link (QR rendered as decided). Opening it sets the device cookie bound to a Person.\n4. A `before_request` guard maps the cookie to a device and person; it updates `last_seen` (throttled).\n5. Admin devices page: list, rename, revoke.\n6. Add CSRF tokens for forms (stdlib `secrets` + session).\n7. Set `Secure` when the request scheme is https (via the trusted proxy)."
+    },
+    {
+      "heading": "Check",
+      "body": "- Auth tests pass.\n- Manual run: pair a desktop browser, revoke it, and see the unpaired page."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

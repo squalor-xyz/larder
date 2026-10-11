@@ -1,0 +1,45 @@
+{
+  "id": "S03",
+  "title": "Config and data directory loading",
+  "lead": [
+    "Load settings from a TOML file plus environment overrides, and define the data directory layout."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** secrets management beyond reading paths/env; the database schema.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Portability (ADR 0016) requires that household-specific values (people, stores, recipe repo URL, timezone) live in config, not code. Every component needs the data directory (DB, recipe clone, raw emails)."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Config file location: `$LARDER_DATA/larder.toml` (recommended) or `/etc`-style path?\n2. Timezone: in config (recommended), defaulting to the host?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/config.py`\n- `tests/test_config.py`\n- `docs/specs/architecture.md` (config section)\n- `larder.example.toml`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_loads_defaults_when_file_missing`\n2. `test_env_overrides_file_values`\n3. `test_rejects_unknown_keys_with_clear_error`\n4. `test_data_dir_layout_paths_resolved` (db, recipes, emails, secrets)\n5. `test_secret_values_not_in_repr`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Define a frozen dataclass `Settings` with typed fields and defaults.\n2. Parse TOML with `tomllib`; apply `LARDER_*` environment overrides.\n3. Validate: unknown keys error; required paths exist or are created.\n4. Derive data-dir subpaths: `larder.db`, `recipes/`, `emails/`, `secrets/`.\n5. Keep secrets (deploy key path, IMAP password file, ntfy token) as file paths; never log them, and redact them from `repr`.\n6. Add an example config and document it."
+    },
+    {
+      "heading": "Check",
+      "body": "- All config tests pass.\n- A review of `src/` finds no household-specific values (names, stores, URLs) in code."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

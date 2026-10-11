@@ -1,0 +1,45 @@
+{
+  "id": "S41",
+  "title": "Interview: notifications",
+  "lead": [
+    "Decide channels, recipients and timing (Q9, X1–X2)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** implementation.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Notifications should help without becoming noise, and a non-technical household member has to be OK with them."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Channel per person: ntfy (self-hosted? which server?), email, or both?\n2. Which pings: tonight's dinner/defrost (what time?), the weekly planning reminder, runout warnings, use-it-up?\n3. Quiet hours?\n4. Where does ntfy run (an existing instance, or add one to compose)? Is email sent via which SMTP?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0024-notifications.md` (new)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions, including a non-technical household member's preferences.\n2. Write ADR 0024; record the raw answers in `local/` (not committed); update the notifier slice."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0024 lists each ping with its channel, recipient and time."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

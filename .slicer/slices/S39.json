@@ -1,0 +1,45 @@
+{
+  "id": "S39",
+  "title": "Runout predictor",
+  "lead": [
+    "Predict when pet and household staples run out, from purchase frequency, and add them to the list ahead of time (N4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** notifications.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Running out of pet food is the kind of failure this should prevent."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the pantry interview is done."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/pantry/runout.py`\n- `tests/test_runout.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_interval_estimated_from_purchase_history`\n2. `test_adds_to_list_within_lead_time`\n3. `test_insufficient_history_no_prediction`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Median interval between purchases per tracked item; predict the next runout date.\n2. Within the lead time, add the item to the list (source=runout) unless it's already there."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; predictions for real history look right to the owner."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

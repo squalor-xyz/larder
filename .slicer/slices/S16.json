@@ -1,0 +1,45 @@
+{
+  "id": "S16",
+  "title": "Ingredient line parser",
+  "lead": [
+    "Turn a free-text ingredient line into quantity, unit, item text, notes and flags, with a confidence score (ADR 0007, I1–I4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "recipes",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** mapping to canonical items; the review UI.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Generating the shopping list needs structured ingredients. Being rule-based keeps it deterministic and testable."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the items interview is done. Any lines that remain ambiguous get flagged for review, not guessed."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/ingredients/parse.py`\n- `src/larder/ingredients/units.py`\n- `tests/test_ingredient_parse.py` (table-driven over every line in the fixtures)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_quantities_integers_fractions_mixed_ranges` (\"1 1/4\", \"2/3\", \"2-3\")\n2. `test_unit_synonyms` (tbsp/tablespoon, tsp/teaspoons, lb/pound, cup/cups)\n3. `test_package_with_size` (\"1 can (15 oz) corn, no salt added\")\n4. `test_optional_flag` (\"(optional)\")\n5. `test_alternatives` (\"honey, maple syrup, or agave\")\n6. `test_parenthetical_and_trailing_notes` (\"(modify to taste)\", \", chopped\")\n7. `test_non_food_flag` (\"1 small mason jar\")\n8. `test_unparseable_line_low_confidence_not_exception`\n9. `test_all_fixture_lines_parse_with_expected_results` (golden table)"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Tokenize the quantity (unicode fractions too), unit (from the units table), and package-with-size pattern.\n2. Remaining text → item text and notes (split on the first comma or parenthetical).\n3. Flags: optional, alternatives, non-food (keyword list from ADR 0019).\n4. Confidence: start high; lower it for unknown units, missing quantities, or multiple candidates.\n5. Pure functions only; no DB."
+    },
+    {
+      "heading": "Check",
+      "body": "- Parser tests pass; every line in the sample recipes is either parsed with high confidence or flagged."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

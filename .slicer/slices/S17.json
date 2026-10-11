@@ -1,0 +1,45 @@
+{
+  "id": "S17",
+  "title": "Canonical item matching",
+  "lead": [
+    "Map parsed item text to canonical grocery items with categories and aliases (I6)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "recipes, core",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** the review UI (next slice); order-line matching (Phase 2 reuses this).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "\"ground turkey meat\" and \"ground turkey\" must be the same thing on the list. Order lines in Phase 2 will reuse the same matcher."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None beyond ADR 0019."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/ingredients/match.py`\n- `src/larder/data/seed_items.toml`\n- `tests/test_item_match.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_exact_and_alias_match`\n2. `test_normalization_plural_case_descriptors` (\"sliced fresh mushrooms\" → mushrooms)\n3. `test_unknown_item_returns_candidate_with_low_confidence`\n4. `test_alias_learned_from_confirmation_is_used`\n5. `test_seed_loads_categories_in_order`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Seed items, categories and aliases from TOML (ADR 0019).\n2. Normalize: lowercase, strip descriptors (fresh, chopped, sliced, …), and singularize with simple rules.\n3. Match on exact, then alias, then token overlap (stdlib `difflib` for the score).\n4. Return the item with a confidence; below the threshold → review queue.\n5. Store results on `ingredient_line.item_id`."
+    },
+    {
+      "heading": "Check",
+      "body": "- Matching tests pass; all fixture ingredients map or are queued."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

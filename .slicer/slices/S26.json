@@ -1,0 +1,45 @@
+{
+  "id": "S26",
+  "title": "Interview: deployment host and network",
+  "lead": [
+    "Decide where larder runs and how this deployment gets HTTPS (Q10, Q14, ADR 0015)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs, deploy",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** testing on the phone (spike slice) or building the container.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "App is TLS-agnostic (ADR 0015), but each deployment still needs HTTPS for PWA install and secure cookies. docs/research/https-lan.md lists the candidates and their unknowns."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Host: which home machine (e.g., a Linux box with Docker Compose, or a NAS app platform)?\n2. HTTPS candidate to try first: Tailscale cert via Caddy on the host, or an owned domain (e.g. `larder.home.example.org`) + Let's Encrypt DNS-01?\n3. If own domain: who is the DNS provider, and does it have an API for DNS-01? Is a scoped API token acceptable?\n4. Router or local resolver: which one (for the local DNS override)? Does it have DNS-rebinding protection?\n5. Is a household phone that isn't on the VPN using Private DNS set to a specific hostname, or Chrome Secure DNS with a custom provider? (check together)\n6. Is there an existing reverse proxy on the host to reuse?\n7. Backups: where does the data volume get backed up (e.g., NAS snapshots), and how often?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0021-reference-deployment.md` (new; status Proposed until the spike passes)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions; walk through the research doc's candidate table.\n2. Write ADR 0021 (Proposed); record the raw answers in `local/` (not committed).\n3. Update the HTTPS spike and container slices (`slicer edit`)."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0021 (generic reference deployment; site specifics in `local/`) names the host type, the HTTPS candidate, the DNS override location and the backup target."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

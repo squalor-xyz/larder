@@ -1,0 +1,45 @@
+{
+  "id": "S08",
+  "title": "PWA shell",
+  "lead": [
+    "Add a manifest, icons and a minimal service worker so larder can be installed on Android (ADR 0004)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** offline editing or sync; push notifications.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "A non-technical household member reaches larder through a home-screen icon. Since Chrome 108 on Android, installing from the menu doesn't need a fetch handler, but the install prompt does (docs/research/https-lan.md)."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. App icon: commission/draw one, or a simple generated monogram (recommended for now)?\n2. Theme and background colors?\n3. Display mode: `standalone` (recommended)?\n4. Start URL: the Today view (recommended)."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/static/manifest.webmanifest`\n- `src/larder/web/static/icons/` (192, 512, maskable)\n- `src/larder/web/static/sw.js`\n- `src/larder/web/templates/base.html`\n- `tests/test_pwa.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_manifest_served_with_correct_mime_and_required_fields`\n2. `test_icons_192_and_512_present`\n3. `test_service_worker_served_from_root_scope`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Write a manifest with name, short_name, icons, start_url, display and colors.\n2. Service worker: cache static assets only; network-first for pages; include a fetch handler.\n3. Register the service worker in the base template.\n4. Add a route serving `sw.js` at `/sw.js` for root scope."
+    },
+    {
+      "heading": "Check",
+      "body": "- PWA tests pass.\n- Chrome desktop DevTools → Application → Manifest shows no installability errors when served over HTTPS or localhost."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

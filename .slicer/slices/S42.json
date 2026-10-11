@@ -1,0 +1,45 @@
+{
+  "id": "S42",
+  "title": "Notifier",
+  "lead": [
+    "Send the scheduled pings via ntfy (stdlib `urllib`) and/or email (stdlib `smtplib`) (X1, X2)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** PWA push.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "A short reminder at the right time (\"tacos tonight, defrost turkey\") makes larder useful without anyone opening it."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the notifications interview is done."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/notify/__init__.py` (Channel protocol)\n- `src/larder/notify/ntfy.py`, `src/larder/notify/email.py`\n- `src/larder/notify/schedule.py`\n- `tests/test_notify.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_ntfy_posts_with_token_from_secret_file`\n2. `test_email_sends_via_smtp_tls`\n3. `test_schedule_respects_quiet_hours_and_timezone`\n4. `test_each_ping_sent_once_per_period`\n5. `test_channel_failure_logged_not_fatal`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. A pluggable Channel protocol (portability); ntfy and email implementations.\n2. Scheduler jobs per ADR 0024; dedupe with a sent-log table.\n3. Admin page to send a test ping."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; the owner and a non-technical household member each receive a test ping on their chosen channel."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

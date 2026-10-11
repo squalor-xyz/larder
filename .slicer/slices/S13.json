@@ -1,0 +1,45 @@
+{
+  "id": "S13",
+  "title": "Recipe index",
+  "lead": [
+    "Mirror recipe files into SQLite on each sync, preserving metadata and parse confirmations (R5, ADR 0006)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "recipes, core",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** ingredient parsing (lines are stored raw here and parsed later); UI.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "The planner and list query recipes from the DB. Re-syncing must never lose UI-edited metadata."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. If a recipe file is deleted from the repo: archive it (hide, keep metadata) (recommended) or delete it?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/recipes/index.py`\n- `tests/test_recipe_index.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_new_file_inserts_recipe_and_raw_lines`\n2. `test_unchanged_hash_is_noop`\n3. `test_changed_file_updates_content_keeps_meta`\n4. `test_renamed_slug_handling` (per ADR 0018)\n5. `test_deleted_file_archives_recipe`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Walk the repo; parse each file; compute a content hash.\n2. Upsert recipes by slug; replace ingredient lines only when the hash changes; keep `recipe_meta` and `parse_override`.\n3. Archive recipes that are missing from the repo.\n4. Hook into sync: index after every pull or commit."
+    },
+    {
+      "heading": "Check",
+      "body": "- Index tests pass; indexing the imported recipes yields one row per file."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

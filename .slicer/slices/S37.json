@@ -1,0 +1,45 @@
+{
+  "id": "S37",
+  "title": "Pantry estimator",
+  "lead": [
+    "Compute per-item estimates from purchases, recipe consumption and shelf-life decay (N1)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** UI and nudges.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "This is the core of the waste-reduction goal, and it works without any manual input."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the pantry interview is done."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/pantry/estimate.py`\n- `src/larder/migrations/000N_pantry.sql`\n- `tests/test_pantry_estimate.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_purchase_increases_estimate`\n2. `test_made_meal_consumes_ingredients`\n3. `test_shelf_life_decay_by_category`\n4. `test_tap_events_override_estimate`\n5. `test_confidence_decreases_over_time`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. An event-sourced estimate: purchases, consumption from \"made\" meals, tap events.\n2. Apply shelf-life decay per ADR 0023; compute an estimated quantity, expiry and confidence.\n3. Recompute incrementally on new events."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; estimates from real order history look plausible to the owner."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

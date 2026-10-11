@@ -1,0 +1,45 @@
+{
+  "id": "S09",
+  "title": "Interview: recipe repo conventions",
+  "lead": [
+    "Fix the file and git conventions for `larder-recipes` (ADRs 0005, 0009, 0012)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** creating the GitHub repo or deploy key (done in \"Recipe repo sync\" with the owner).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "The parser, importer and sync code all depend on the file layout, how headings are normalized, and how commits are made."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. File path: `recipes/<slug>.md` (recommended) or flat at the repo root?\n2. Slug rule: from the filename (recommended), or from the title?\n3. Canonical headings: `## Ingredients`, `## Directions`, optional `## Notes`. Map `## Steps` to `## Directions` (recommended)?\n4. Ingredient sub-groups (e.g., \"Sauce\"): allow `### Sauce` under Ingredients?\n5. Front matter keys to keep from Hugo (title, date, tags) and any to add (e.g., `source`)?\n6. Commit identity (name/email) and message format for automated commits.\n7. Branch: commit straight to `main` (recommended), or open PRs?\n8. Keep `draft = true` recipes out of larder?\n9. Repo license for recipe content (e.g., CC BY-SA)?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0018-recipe-repo-conventions.md` (new)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions with recommendations; use the sample recipes as examples.\n2. Write ADR 0018 and record the raw answers in `local/` (not committed).\n3. Update the parser, sync and importer slices with the decisions (`slicer edit`)."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0018 is linked from README.\n- The dependent slices have no unresolved Owner input on conventions."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

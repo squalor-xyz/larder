@@ -1,0 +1,45 @@
+{
+  "id": "S30",
+  "title": "MVP trial",
+  "lead": [
+    "Two-week trial against the roadmap's MVP exit criteria."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** Phase 2 work.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "docs/roadmap.md exit criterion: for two straight weeks the household picks dinners and shop from larder's list, and a non-technical household member uses the home-screen app without help."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. At the end: did it meet the exit criteria? What was annoying? What did a non-technical household member say?\n2. Go/no-go for Phase 2, and in which order (receipts first, or notifications first)?"
+    },
+    {
+      "heading": "Files",
+      "body": "- private notes in `local/` (not committed); a generic summary in `docs/roadmap.md`\n- `docs/roadmap.md`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Run two weeks of real use.\n2. Hold a retrospective interview; record it.\n3. File fixes as slices; reprioritize Phase 2 with `slicer set`."
+    },
+    {
+      "heading": "Check",
+      "body": "- The retrospective is recorded; the exit criteria are marked met or not, with reasons."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

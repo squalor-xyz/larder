@@ -1,0 +1,45 @@
+{
+  "id": "S40",
+  "title": "Pantry-aware planner and list",
+  "lead": [
+    "Rank meals by what's on hand or expiring, and leave out items that are probably already on hand (P5, L5)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** LLM suggestions.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "This joins Phase 1 and Phase 2: fewer duplicate buys and less spoilage."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Confidence threshold for leaving an item off the list? Show these as \"probably have: X\" so they're easy to add back (recommended)?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/planner/rank.py`\n- `src/larder/shopping/generate.py`\n- `tests/test_pantry_aware.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_expiring_ingredients_boost_meal_score`\n2. `test_high_confidence_have_items_omitted_from_list`\n3. `test_omitted_items_listed_as_probably_have`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Add a pantry term to the ranking score.\n2. Subtract the estimate in list generation, with a \"probably have\" section."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; a real week's list skips items the owner agrees are on hand."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

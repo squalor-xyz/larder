@@ -1,0 +1,45 @@
+{
+  "id": "S19",
+  "title": "Interview: planning rules",
+  "lead": [
+    "Settle how the weekly plan works day to day (ADR 0013)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** implementation.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "The suggestion engine and the planning UI are mostly these rules."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Planning day and time (e.g., Saturday morning before ordering)?\n2. How many dinners per week (default 5)? Which nights are leftovers, takeout or open?\n3. Recency: minimum days before repeating a meal (e.g., 10)? Weight kid favorites higher?\n4. Skipped meal: roll it to the next open night (recommended), or return it to the pool?\n5. Effort balance: limit \"project\" meals to weeknights or weekends?\n6. Does a non-technical household member plan too, or only see the result?\n7. Breakfast/lunch (e.g., overnight oats): plan them, or only add their ingredients as staples?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0013-weekly-planning.md` (amend)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions with recommendations.\n2. Amend ADR 0013 with the rules; record the raw answers in `local/` (not committed).\n3. Update the ranking, planning session and Today view slices (`slicer edit`)."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0013 lists the concrete rules with numbers.\n- The dependent slices are updated."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

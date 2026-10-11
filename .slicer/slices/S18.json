@@ -1,0 +1,45 @@
+{
+  "id": "S18",
+  "title": "Parse review queue",
+  "lead": [
+    "Admin queue to confirm or correct low-confidence parses and matches; each answer is cached forever (I5)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** LLM suggestions (Later).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Rules won't cover everything. Confirming a line once means the same line never needs reviewing again, so the review workload trends toward zero."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Queue placement: an admin page with a count badge (recommended)?\n2. Confirm in bulk (one tap per line) vs. a full edit form per line?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/review_views.py`, template `review/queue.html`\n- `src/larder/ingredients/overrides.py`\n- `tests/test_review.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_queue_lists_low_confidence_and_unmatched_lines`\n2. `test_confirm_writes_override_and_alias`\n3. `test_override_applies_to_identical_line_in_other_recipe`\n4. `test_mark_non_food_excludes_from_lists`\n5. `test_create_new_item_from_review`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Query unresolved lines; show the raw text, parsed fields and a candidate item.\n2. Actions: confirm, edit fields, choose a different item, create an item, mark as non-food.\n3. Persist `parse_override` keyed by the normalized raw text, plus an `item_alias`.\n4. Re-apply overrides during indexing."
+    },
+    {
+      "heading": "Check",
+      "body": "- Review tests pass; clearing the queue for the imported recipes takes the owner a few minutes."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

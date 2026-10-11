@@ -1,0 +1,45 @@
+{
+  "id": "S04",
+  "title": "SQLite schema and migrations",
+  "lead": [
+    "Create a stdlib `sqlite3` data layer with numbered SQL migrations and the MVP tables from docs/specs/data-model.md."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** Phase 2 tables (Order, PantryEstimate, …); those are added by their own slices.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Every MVP feature persists data. Keeping data access in one layer is how ADR 0016 keeps a future household boundary possible."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None. The schema follows docs/specs/data-model.md; deviations are recorded there."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/db.py` (connect, migrate, transaction helper)\n- `src/larder/migrations/0001_init.sql`\n- `tests/test_db.py`\n- `docs/specs/data-model.md`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_migrate_creates_all_mvp_tables`\n2. `test_migrate_is_idempotent`\n3. `test_migrations_apply_in_order_and_record_version`\n4. `test_foreign_keys_enforced`\n5. `test_wal_mode_enabled`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. `connect(settings)` enables `foreign_keys=ON` and WAL journal mode, with a busy timeout.\n2. Runner: apply `migrations/NNNN_*.sql` in order inside a transaction; track versions in `schema_migrations`.\n3. `0001_init.sql`: person, device, recipe_source, recipe, recipe_meta, item, item_alias, unit, ingredient_line, parse_override, meal_plan, planned_meal, shopping_list, list_item, staple.\n4. Add a small repository-style helper module convention (documented in AGENTS.md).\n5. Update data-model.md to match the actual columns."
+    },
+    {
+      "heading": "Check",
+      "body": "- DB tests pass.\n- `sqlite3 $LARDER_DATA/larder.db .schema` matches data-model.md."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

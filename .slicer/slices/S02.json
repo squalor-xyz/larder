@@ -1,0 +1,45 @@
+{
+  "id": "S02",
+  "title": "Project skeleton and AGENTS.md",
+  "lead": [
+    "Create the Python package, test harness and agent/contributor guide."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "core, docs",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** Flask, config, database or any feature code.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "There is no code yet. Every later slice needs an importable package, a test command that works, and an AGENTS.md that states the project's rules (stdlib-first, ask before adding dependencies, no commits unless asked)."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None beyond the tooling interview. The license is decided (AGPL-3.0; `LICENSE` already exists)."
+    },
+    {
+      "heading": "Files",
+      "body": "- `pyproject.toml` (stdlib-friendly metadata; build backend per ADR 0017)\n- `src/larder/__init__.py` (version)\n- `tests/test_smoke.py`\n- `AGENTS.md`\n- `.gitignore` (exists; extend if the tooling adds caches)\n- `pyproject.toml` license field: `AGPL-3.0-only`\n- `README.md` (development section)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `tests/test_smoke.py::SmokeTest.test_package_imports_and_has_version`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Create the package and test layout chosen in ADR 0017.\n2. Write the smoke test; see it fail, then add `__version__`.\n3. Write AGENTS.md: project summary, test/lint commands, dependency policy (ask first; stdlib-first; Flask is the only approved runtime dependency), secrets policy, the rule that household-specific data goes only in the gitignored `local/` folder, links to `docs/`, and slicer usage.\n4. Set the license metadata to `AGPL-3.0-only`; add SPDX headers to source files if ADR 0017 says so.\n5. Add a development quick start to README."
+    },
+    {
+      "heading": "Check",
+      "body": "- The test command from ADR 0017 passes.\n- `python -c \"import larder\"` works from a fresh venv after install.\n- `slicer check` passes."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

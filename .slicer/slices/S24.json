@@ -1,0 +1,45 @@
+{
+  "id": "S24",
+  "title": "Shopping list generation",
+  "lead": [
+    "Build list items from the confirmed plan plus staples, aggregating quantities (L2, L3)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** pantry subtraction (Phase 2); UI.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Turning a plan into a list automatically is most of the value of the MVP."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the list interview is done."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/shopping/generate.py`\n- `tests/test_list_generate.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_items_from_plan_aggregated_across_recipes`\n2. `test_compatible_units_converted_and_summed`\n3. `test_incompatible_units_kept_separate`\n4. `test_optional_and_non_food_lines_excluded`\n5. `test_staples_flagged_low_added`\n6. `test_regenerate_preserves_manual_items_and_checks`\n7. `test_unresolved_lines_included_as_raw_text_with_warning`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Collect ingredient lines from the confirmed plan; skip optional and non-food ones per ADR 0020.\n2. Group by item; convert and sum within a dimension (ADR 0019).\n3. Merge with existing list items: generated items are tagged `source=plan` and replaced on regenerate; manual and staple items are kept.\n4. Subscribe to the `plan_confirmed` / plan-edit hooks."
+    },
+    {
+      "heading": "Check",
+      "body": "- Generation tests pass; the list for a real week matches what the owner would have written by hand."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

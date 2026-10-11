@@ -1,0 +1,1593 @@
+{
+  "version": 8,
+  "id_prefix": "S",
+  "id_width": 2,
+  "next_id": 52,
+  "preamble": "larder: a self-hosted, FLOSS household food system (recipes, weekly dinner planning, shared shopping list; later, pantry estimates driven by receipts). Specs: docs/goals.md, docs/requirements.md, docs/specs/, docs/decisions/. Slices titled \"Interview:\" collect the owner's decisions and come before the slices that depend on them. Every slice has an \"Owner input\" section listing what to confirm before starting. Household-specific answers go in the gitignored local/ folder, never in committed files.",
+  "passes": [],
+  "items": [
+    {
+      "id": "S01",
+      "title": "Interview: dev tooling and conventions",
+      "short_title": "Interview: dev tooling and conventions",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S02",
+      "title": "Project skeleton and AGENTS.md",
+      "short_title": "Project skeleton and AGENTS.md",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S01"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "core",
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S03",
+      "title": "Config and data directory loading",
+      "short_title": "Config and data directory loading",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S02"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S04",
+      "title": "SQLite schema and migrations",
+      "short_title": "SQLite schema and migrations",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S03"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S05",
+      "title": "Flask app shell",
+      "short_title": "Flask app shell",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S04"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S06",
+      "title": "Interview: device pairing and admin bootstrap",
+      "short_title": "Interview: device pairing and admin bootstrap",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S01"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S07",
+      "title": "People and device pairing",
+      "short_title": "People and device pairing",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S05",
+        "S06"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "web",
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S08",
+      "title": "PWA shell",
+      "short_title": "PWA shell",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S05"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 2,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S09",
+      "title": "Interview: recipe repo conventions",
+      "short_title": "Interview: recipe repo conventions",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S01"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S10",
+      "title": "Recipe file parser",
+      "short_title": "Recipe file parser",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S02",
+        "S09"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "recipes"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S11",
+      "title": "Recipe repo sync",
+      "short_title": "Recipe repo sync",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S03",
+        "S10"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "recipes"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S12",
+      "title": "Hugo site one-time importer",
+      "short_title": "Hugo site one-time importer",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S11"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "recipes"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S13",
+      "title": "Recipe index",
+      "short_title": "Recipe index",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S04",
+        "S10",
+        "S11"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "recipes",
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S14",
+      "title": "Recipe browse and metadata editing",
+      "short_title": "Recipe browse and metadata editing",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S13",
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S15",
+      "title": "Interview: grocery items, categories, staples and units",
+      "short_title": "Interview: grocery items, categories, staples and units",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S01"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1b — Ingredients",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S16",
+      "title": "Ingredient line parser",
+      "short_title": "Ingredient line parser",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S10",
+        "S15"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "recipes"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1b — Ingredients",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S17",
+      "title": "Canonical item matching",
+      "short_title": "Canonical item matching",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S16",
+        "S04"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "recipes",
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1b — Ingredients",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S18",
+      "title": "Parse review queue",
+      "short_title": "Parse review queue",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S17",
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1b — Ingredients",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S19",
+      "title": "Interview: planning rules",
+      "short_title": "Interview: planning rules",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S01"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1c — Planner",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S20",
+      "title": "Meal suggestion ranking",
+      "short_title": "Meal suggestion ranking",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S13",
+        "S19"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1c — Planner",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S21",
+      "title": "Weekly planning session",
+      "short_title": "Weekly planning session",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S20",
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1c — Planner",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S22",
+      "title": "Today view",
+      "short_title": "Today view",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S21"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1c — Planner",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S23",
+      "title": "Interview: shopping list behavior",
+      "short_title": "Interview: shopping list behavior",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S15"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1d — Shopping list",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S24",
+      "title": "Shopping list generation",
+      "short_title": "Shopping list generation",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S21",
+        "S18",
+        "S23"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1d — Shopping list",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S25",
+      "title": "Shared shopping list UI",
+      "short_title": "Shared shopping list UI",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S24",
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1d — Shopping list",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S26",
+      "title": "Interview: deployment host and network",
+      "short_title": "Interview: deployment host and network",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S01"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs",
+          "deploy"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1e — Deploy and trial",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S27",
+      "title": "Spike: HTTPS on the deployment network",
+      "short_title": "Spike: HTTPS on the deployment network",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S26",
+        "S08"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "deploy"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1e — Deploy and trial",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S28",
+      "title": "Container image and deployment",
+      "short_title": "Container image and deployment",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S27",
+        "S25",
+        "S22"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "deploy"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1e — Deploy and trial",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S29",
+      "title": "Deploy and onboard",
+      "short_title": "Deploy and onboard",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S28",
+        "S12",
+        "S14"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "deploy"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1e — Deploy and trial",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S30",
+      "title": "MVP trial",
+      "short_title": "MVP trial",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S29"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 1e — Deploy and trial",
+        "reason": "",
+        "importance": 3,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S31",
+      "title": "Interview: receipts mailbox and samples",
+      "short_title": "Interview: receipts mailbox and samples",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S30"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs",
+          "ingest"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S32",
+      "title": "IMAP poller and raw email archive",
+      "short_title": "IMAP poller and raw email archive",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S31"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "ingest"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S33",
+      "title": "Store parser: first store",
+      "short_title": "Store parser: first store",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S32"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "ingest"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S34",
+      "title": "Store parsers: additional stores",
+      "short_title": "Store parsers: additional stores",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S33"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "ingest"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S35",
+      "title": "Order line matching",
+      "short_title": "Order line matching",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S33",
+        "S18"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "ingest",
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S36",
+      "title": "Interview: pantry model",
+      "short_title": "Interview: pantry model",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S31"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S37",
+      "title": "Pantry estimator",
+      "short_title": "Pantry estimator",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S35",
+        "S36"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S38",
+      "title": "Pantry taps and use-it-up nudges",
+      "short_title": "Pantry taps and use-it-up nudges",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S37"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S39",
+      "title": "Runout predictor",
+      "short_title": "Runout predictor",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S37"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S40",
+      "title": "Pantry-aware planner and list",
+      "short_title": "Pantry-aware planner and list",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S37",
+        "S24",
+        "S20"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S41",
+      "title": "Interview: notifications",
+      "short_title": "Interview: notifications",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S30"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S42",
+      "title": "Notifier",
+      "short_title": "Notifier",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S41",
+        "S22"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S43",
+      "title": "Ollama parse suggestions",
+      "short_title": "Ollama parse suggestions",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S44",
+      "title": "LLM meal suggestions from what's on hand",
+      "short_title": "LLM meal suggestions from what's on hand",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S45",
+      "title": "Recipe URL importer (schema.org)",
+      "short_title": "Recipe URL importer (schema.org)",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S46",
+      "title": "Publish recipes to a Hugo site",
+      "short_title": "Publish recipes to a Hugo site",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S47",
+      "title": "Remember store product names per item",
+      "short_title": "Remember store product names per item",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S48",
+      "title": "Kitchen tablet mode",
+      "short_title": "Kitchen tablet mode",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S49",
+      "title": "Native Android app",
+      "short_title": "Native Android app",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S50",
+      "title": "Distributable self-host packaging",
+      "short_title": "Distributable self-host packaging",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S51",
+      "title": "Hosted multi-household instance",
+      "short_title": "Hosted multi-household instance",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    }
+  ],
+  "epilogue": "",
+  "goals": "- G1: Answer \"what's for dinner?\" in seconds, from meals the household actually makes.\n- G2: One shared shopping list that every household member trusts.\n- G3: Reduce waste and duplicate purchases using order data instead of manual logging (Phase 2).\n- G4: Near-zero required upkeep; optional taps improve accuracy, none are required.\n- G5: Usable by non-technical household members without help.\n- G6: Portable: any household can run it with its own stores, sources and network (ADR 0015, 0016).",
+  "non_goals": "- NG1: Placing store orders automatically.\n- NG2: Nutrition or calorie tracking.\n- NG3: Access from the public internet.\n- NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).\n- NG5: Exact, item-by-item inventory tracking.",
+  "catalog": {
+    "next_id": 1,
+    "id_prefix": "C",
+    "id_width": 2,
+    "records": []
+  }
+}

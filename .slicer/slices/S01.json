@@ -1,0 +1,45 @@
+{
+  "id": "S01",
+  "title": "Interview: dev tooling and conventions",
+  "lead": [
+    "Settle the development conventions every later slice assumes."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** writing any code; the skeleton itself (next slice).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Every implementation slice names test commands, file paths and dependency rules. If they are not settled first, those slices are built on guesses."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Minimum Python version? Recommend the newest version available on the deployment host and in the container base image (≥3.11 needed for `tomllib`).\n2. Test runner: stdlib `unittest` (recommended, no dependency) or pytest (dependency)?\n3. Lint/format: none, or a tool such as ruff (dependency, needs approval)?\n4. Dependency pinning: `requirements.txt` with exact pins and hashes (recommended), or a lock tool (dependency)?\n5. Layout: `src/larder/` package + `tests/` (recommended) or flat?\n6. Type hints: required on public functions? Run a type checker (dependency)?\n7. Commit message convention for this repo?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0017-dev-conventions.md` (new)\n- Dependent slices (via `slicer edit`)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the Owner input questions with options and a recommendation; batch them.\n2. Record the answers in the owner's private notes (`local/`, not committed) and an ADR `0017-dev-conventions.md`.\n3. Update the \"Project skeleton and AGENTS.md\" slice's Implement/Check with the chosen commands (`slicer edit`).\n4. If a test runner other than unittest is chosen, update the Failing tests wording in the open slices."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0017 exists and is linked from README.\n- Raw answers are recorded in `local/`; nothing household-specific is committed.\n- `slicer show` on \"Project skeleton and AGENTS.md\" shows concrete commands.\n- `slicer check` passes."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

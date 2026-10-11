@@ -1,0 +1,45 @@
+{
+  "id": "S22",
+  "title": "Today view",
+  "lead": [
+    "A non-technical member's default screen: tonight's dinner, mark it made, and a link to the list (P1, P3, U2)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** notifications; pantry nudges.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "This is the screen everyday users actually use. It must be readable at a glance and need one tap at most."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. What else, if anything, belongs on it: tomorrow's dinner? A \"defrost tonight\" hint (needs a recipe flag)?\n2. Label wording (\"Made it\" / \"Skip tonight\")?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/today_views.py`, template `today.html`\n- `tests/test_today.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_shows_tonights_planned_meal`\n2. `test_no_plan_shows_friendly_prompt`\n3. `test_made_updates_recency_history`\n4. `test_skip_applies_roll_forward_rule`\n5. `test_page_has_large_tap_targets_and_no_admin_links_for_member`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Query today's planned meal; render the title, a link to the recipe, and the made/skip buttons.\n2. \"Made\" records history (used by recency); \"skip\" applies the ADR 0013 rule.\n3. Add a link or button to the shopping list.\n4. Set as the PWA `start_url`."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; a non-technical household member can use it unassisted in a hallway test (the owner observes)."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

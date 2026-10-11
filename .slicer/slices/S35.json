@@ -1,0 +1,45 @@
+{
+  "id": "S35",
+  "title": "Order line matching",
+  "lead": [
+    "Map order lines (store product names) to canonical items, reusing the matcher and review queue (O4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "ingest, web",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** pantry estimation.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "\"HT Traders No Salt Added Black Beans 15.5 oz\" has to become \"black beans\", or the pantry can't use it."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Ignore non-food order lines (bags, fees, tips) automatically (recommended)?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/ingest/match_orders.py`\n- `src/larder/web/review_views.py` (order lines tab)\n- `tests/test_order_match.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_store_brand_prefixes_and_sizes_stripped`\n2. `test_reuses_aliases_learned_from_recipes`\n3. `test_low_confidence_goes_to_review`\n4. `test_fees_and_bags_ignored`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Strip store-specific noise (brand prefixes, sizes, \"no salt added\") with per-store rules from config.\n2. Run the canonical matcher; queue low-confidence lines in the review UI's order-lines tab.\n3. Confirmations add aliases shared with recipe matching."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; most sample lines auto-match after one review session."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

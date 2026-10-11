@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local runtime data: SQLite DB, recipe clone, raw emails (ADR 0003), secrets
+/data/
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Secrets and local config — never commit (deploy keys, IMAP/ntfy credentials)
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+/larder.toml
+
+# Raw order emails; only redacted fixtures under tests/fixtures/ are committed
+*.eml
+!tests/fixtures/**/*.eml
+
+# Agent worktrees
+.worktrees/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# slicer: .slicer/ is tracked state; only these local files are ignored
+/.slicer/lock
+/.slicer/feedback.md
+/.slicer/feedback-reported.json
+
+# Private, owner-only notes (household specifics, interview transcripts) — never commit
+/local/

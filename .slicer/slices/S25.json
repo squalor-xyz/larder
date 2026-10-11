@@ -1,0 +1,45 @@
+{
+  "id": "S25",
+  "title": "Shared shopping list UI",
+  "lead": [
+    "The shared list both phones use: add, check, remove, staples one-tap, ordered by category (L1, L4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** sending the list to a store; offline editing.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "This is the second everyday screen. Items anyone adds from the kitchen must show up on whichever phone is used to place the order."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the list interview is done. Confirm the final wording of buttons with the owner."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/list_views.py`, templates `list/index.html`, `list/_items.html`\n- `src/larder/web/static/list.js` (small polling/refresh script, no framework)\n- `tests/test_list_web.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_add_free_text_and_canonical_items`\n2. `test_check_and_uncheck_persist_with_added_by`\n3. `test_items_grouped_in_category_order`\n4. `test_staples_one_tap_add`\n5. `test_ordered_button_resets_per_adr_0020`\n6. `test_refresh_endpoint_returns_changes_since_version`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. List page grouped by category; large checkboxes; a sticky add box at the top.\n2. Progressive enhancement: plain forms work without JS; JS polls a version endpoint and re-renders the fragment.\n3. Staples drawer with one-tap add.\n4. \"Ordered\" action as decided in ADR 0020.\n5. Show \"added by\" subtly (from the device's person)."
+    },
+    {
+      "heading": "Check",
+      "body": "- Web tests pass; two browsers see each other's changes within the polling interval."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

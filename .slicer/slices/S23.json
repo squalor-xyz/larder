@@ -1,0 +1,45 @@
+{
+  "id": "S23",
+  "title": "Interview: shopping list behavior",
+  "lead": [
+    "Decide how the list is generated, displayed and cleared."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** implementation.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "The list is the main shared surface, so its behavior has to match how the household actually orders (e.g., typing items into a store's pickup app by hand)."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Aggregation: sum the same item across recipes in compatible units (recommended); show which recipes need it?\n2. Rounding: show recipe quantities (\"3 tbsp chili powder\") or a purchase hint (\"1 jar\")?\n3. Category order: per ADR 0019; is one order enough, or one per store?\n4. Checked items: hide immediately, or strike through until \"clear\"?\n5. When does a list \"reset\": after the order is placed (a manual \"Ordered\" button) (recommended), or weekly?\n6. Concurrency: two phones editing at once. Is polling every few seconds enough (recommended), or is live updating needed?\n7. Free-text items (not canonical): allowed (recommended)?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0020-shopping-list-behavior.md` (new)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions with recommendations.\n2. Write ADR 0020; record the raw answers in `local/` (not committed).\n3. Update the list generation and list UI slices (`slicer edit`)."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0020 covers aggregation, rounding, ordering, clearing and concurrency."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

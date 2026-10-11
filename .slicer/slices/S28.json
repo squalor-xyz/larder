@@ -1,0 +1,45 @@
+{
+  "id": "S28",
+  "title": "Container image and deployment",
+  "lead": [
+    "Build a container image, a compose file and a backup procedure for the chosen host (Q15)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "deploy",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** distributable packaging for other households (Later).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "larder has to run unattended for years on a home server."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. WSGI server: waitress (pure Python, no dependencies of its own) (recommended) or gunicorn? This is a new dependency, so it needs approval.\n2. Base image (e.g., official `python:<ver>-slim`)? Image registry: build locally on the host (recommended) or push to a registry?\n3. How should the deploy key and other secrets get onto the data volume?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `Containerfile` / `Dockerfile`\n- `deploy/compose.yaml`\n- `deploy/README.md` (install, upgrade, backup, restore)\n- `requirements.txt`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_wsgi_entrypoint_creates_app` (unit)\n2. Container smoke: `/healthz` returns ok in the built image (scripted check)"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Multi-stage build; non-root user; data volume at `/data`; healthcheck.\n2. Compose: larder service + the reverse proxy from ADR 0021; no published ports beyond the proxy.\n3. Scheduler: recipe sync interval (an in-process thread or a separate compose service, documented).\n4. Backups: SQLite `.backup` to a file on a schedule + data volume snapshot per ADR 0021; write a restore procedure and test it once.\n5. Upgrade procedure: pull, build, migrate on start."
+    },
+    {
+      "heading": "Check",
+      "body": "- The image builds; the container smoke check passes; a restore from backup works on a scratch volume."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

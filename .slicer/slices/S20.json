@@ -1,0 +1,45 @@
+{
+  "id": "S20",
+  "title": "Meal suggestion ranking",
+  "lead": [
+    "A deterministic engine that proposes a week of dinners from the rotation (P2)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** pantry awareness (Phase 2); LLM suggestions (Later).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "The point of the weekly session is starting from a good suggested plan instead of a blank week."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the planning rules interview is done."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/planner/rank.py`\n- `tests/test_rank.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_excludes_meals_made_within_min_repeat_days`\n2. `test_prefers_least_recently_made`\n3. `test_kid_favorite_weighting`\n4. `test_effort_balance_rules`\n5. `test_deterministic_with_seed`\n6. `test_fills_week_with_fewer_rotation_meals_than_nights` (graceful)"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Score = recency + favorite weight + effort fit, as pure functions with the rules from ADR 0013.\n2. Produce N picks for the configured nights, avoiding repeats within the week.\n3. Expose `suggest_week(date, rules, history)` and `alternatives(slot, k)` for swapping.\n4. Seeded randomness for tie-breaks so the output is reproducible."
+    },
+    {
+      "heading": "Check",
+      "body": "- Ranking tests pass; a suggested week from the imported recipes looks sensible to the owner."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

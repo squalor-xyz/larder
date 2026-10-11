@@ -1,0 +1,45 @@
+{
+  "id": "S15",
+  "title": "Interview: grocery items, categories, staples and units",
+  "lead": [
+    "Define the canonical item vocabulary: categories, initial staples, and unit handling."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** implementation.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Item matching, list ordering and later the pantry estimates all depend on categories and units. The category order should match how the household's store app or store is laid out, to make ordering quick (L4)."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Category list and order (e.g., produce, meat, dairy, bakery, canned, dry goods, spices, frozen, household, pet). Should it match the primary store app's departments?\n2. Initial staples list (always-buy or frequently-low items, including pet items).\n3. Unit conversions: convert within a dimension (tsp↔tbsp↔cup, oz↔lb) (recommended), or never convert?\n4. Should pantry spices and basics (salt, pepper, oil) ever appear on the list automatically? (recommend: no, unless marked as a staple that's low)\n5. How to treat \"1 can (15 oz)\": count of cans (recommended) or weight?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0019-items-categories-units.md` (new)\n- `src/larder/data/seed_items.toml` (seed data, written in the parser/matching slices)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions, showing all ingredient lines from the imported recipes as concrete examples.\n2. Write ADR 0019 and record the raw answers in `local/` (not committed).\n3. Update the ingredient parser, matching and list slices (`slicer edit`)."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0019 has the category order, staples and unit policy.\n- Dependent slices are updated."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

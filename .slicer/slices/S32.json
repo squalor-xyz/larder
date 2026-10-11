@@ -1,0 +1,45 @@
+{
+  "id": "S32",
+  "title": "IMAP poller and raw email archive",
+  "lead": [
+    "Poll the dedicated mailbox with stdlib `imaplib` and archive raw messages for (re)parsing (O1, O3)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "ingest",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** store-specific parsing.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Archiving raw emails means parsers can improve later and re-run over history."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Poll interval (recommend 30 minutes)?\n2. After archiving: leave the message on the server (recommended), or move it to an \"imported\" folder?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/ingest/imap.py`\n- `src/larder/migrations/000N_orders.sql` (raw_email, order, order_line)\n- `tests/test_imap.py` (fake IMAP server or an `imaplib` stub)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_fetches_new_messages_since_last_uid`\n2. `test_archives_raw_bytes_and_dedupes_by_message_id`\n3. `test_tls_required_and_password_read_from_secret_file`\n4. `test_routes_to_store_by_sender_rules`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. `IMAP4_SSL` connection; credentials from the secrets file; read-only `select`.\n2. UID-based incremental fetch; store the raw bytes in `emails/` and a row in `raw_email`.\n3. Route to a store by sender/subject rules from config (portability).\n4. Schedule it in the same scheduler as recipe sync."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; against the real mailbox, the samples are archived exactly once."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

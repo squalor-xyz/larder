@@ -1,0 +1,45 @@
+{
+  "id": "S36",
+  "title": "Interview: pantry model",
+  "lead": [
+    "Decide how \"probably in the house\" is estimated and corrected (N1–N4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** implementation.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Estimates need defaults (shelf lives, usage) that only the household knows, such as how fast it goes through milk or pet food."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Shelf-life defaults per category; overrides for specific items?\n2. Recipe consumption: when a meal is marked \"made\", subtract its ingredients from the estimate (recommended)?\n3. Which taps to offer: \"used it up\", \"tossed it\", \"plenty on hand\"? Where: on the list or a pantry page?\n4. \"Use it up\" nudges: how many days before the estimated expiry? Show them on the Today view?\n5. Runout predictor items: which pet and household staples? Lead time before running out?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0023-pantry-model.md` (new)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions, using real order history from the samples as examples.\n2. Write ADR 0023; record the raw answers in `local/` (not committed).\n3. Update the pantry slices (`slicer edit`)."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0023 has the default tables and the tap/nudge decisions."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

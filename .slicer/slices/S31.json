@@ -1,0 +1,45 @@
+{
+  "id": "S31",
+  "title": "Interview: receipts mailbox and samples",
+  "lead": [
+    "Settle the dedicated mailbox and collect real order emails (Q6–Q8, ADR 0003)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "docs, ingest",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** code.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Store parsers can't be written without real samples, and the mailbox's provider and routing decide how IMAP access works."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Provider for the dedicated mailbox: any provider with IMAP access (some, like Proton, need a bridge; plan support unverified)?\n2. Routing per store: change the store account's email to the dedicated address, or forward from the real inbox with a filter?\n3. Collect 2–3 recent order emails per store the household uses as `.eml` files into `tests/fixtures/orders/<store>/`. Redact personal data (address, payment digits) before committing.\n4. Do the emails list individual items with quantities? (Answered from the samples.)\n5. Do substitutions or refunds come in separate emails?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0022-receipts-mailbox.md` (new)\n- `tests/fixtures/orders/`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (interview slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Ask the questions; help set up the mailbox only with the owner's explicit approval for each external action.\n2. Check the samples: list the item-level fields available per store; record them in ADR 0022.\n3. Update the IMAP and store parser slices (`slicer edit`), and park any store whose emails lack item detail."
+    },
+    {
+      "heading": "Check",
+      "body": "- ADR 0022 records the provider, the routing and a per-store field inventory; redacted samples are present."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution. Never commit unredacted emails."
+    }
+  ],
+  "notes": []
+}

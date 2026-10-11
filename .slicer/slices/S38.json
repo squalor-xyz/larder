@@ -1,0 +1,45 @@
+{
+  "id": "S38",
+  "title": "Pantry taps and use-it-up nudges",
+  "lead": [
+    "Optional correction taps, and \"use it up\" hints (N2, N3)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** notifications (they reuse these hints later).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Taps improve accuracy at near-zero effort, and nudges turn the estimates into less waste."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the pantry interview is done. Confirm the placement on the Today view with a non-technical household member."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/pantry_views.py`, templates\n- `tests/test_pantry_web.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_tap_records_event_with_person`\n2. `test_nudges_list_items_near_estimated_expiry`\n3. `test_today_view_shows_top_nudge_when_enabled`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. A pantry page listing the estimates with taps.\n2. Nudge query plus an optional widget on the Today view."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; a non-technical household member can tap \"used it up\" from the Today view."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

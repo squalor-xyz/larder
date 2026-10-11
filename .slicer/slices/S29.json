@@ -1,0 +1,45 @@
+{
+  "id": "S29",
+  "title": "Deploy and onboard",
+  "lead": [
+    "Deploy for real, import recipes, pair both phones, and run the first weekly plan."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "deploy",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** feature changes. Any problems found become new slices (`--discovered-from`).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "The MVP isn't done until the household actually uses it."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. When is the first planning session (pick a day before an order)?\n2. A non-technical member's onboarding: the owner pairs their phone and installs the icon. Any preferences on how it's explained to them?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `deploy/README.md` (lessons learned)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "None (operational slice)."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Deploy per deploy/README.md; bootstrap the admin.\n2. Run the Hugo import; tag metadata; clear the review queue.\n3. Pair the owner's and a household phone that isn't on the VPNs; install the PWA on both.\n4. Run the first weekly plan; generate the list; place the order from it.\n5. File any friction as new slices."
+    },
+    {
+      "heading": "Check",
+      "body": "- Both phones are paired and installed; one real order was placed from larder's list."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}
