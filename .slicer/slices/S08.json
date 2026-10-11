@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. App icon: commission/draw one, or a simple generated monogram (recommended for now)?\n2. Theme and background colors?\n3. Display mode: `standalone` (recommended)?\n4. Start URL: the Today view (recommended)."
+      "body": "1. App icon: resolved by S52 (Brand mark and app icons); copy the 192, 512 and maskable 512 exports from the branding repo.\n2. Theme and background colors? (S52 uses the brand background `#0f1419` and teal `#6ee7d2`.)\n3. Display mode: `standalone` (recommended)?\n4. Start URL: the Today view (recommended)."
     },
     {
       "heading": "Files",

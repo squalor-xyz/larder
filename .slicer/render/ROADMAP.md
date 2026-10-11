@@ -21,7 +21,7 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 - NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).
 - NG5: Exact, item-by-item inventory tracking.
 
-51 items · — 42 · later 9
+52 items · — 42 · done 1 · later 9
 
 | # | Slice | Title | Size | Effort | Trees | Findings | Status |
 |---|---|---|---|---|---|---|---|
@@ -84,3 +84,10 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 | 49 | S49 | Native Android app |  | - |  |  | later |
 | 50 | S50 | Distributable self-host packaging |  | - |  |  | later |
 | 51 | S51 | Hosted multi-household instance |  | - |  |  | later |
+
+---
+
+| # | Slice | Title | Size | Effort | Trees | Findings | Status |
+|---|---|---|---|---|---|---|---|
+| Phase 0 — Foundations | | | | | | | |
+| 52 | [S52](slices/S52.md) | Brand mark and app icons | S | 1 | docs |  | done |

@@ -2,10 +2,39 @@
   "version": 8,
   "id_prefix": "S",
   "id_width": 2,
-  "next_id": 52,
+  "next_id": 53,
   "preamble": "larder: a self-hosted, FLOSS household food system (recipes, weekly dinner planning, shared shopping list; later, pantry estimates driven by receipts). Specs: docs/goals.md, docs/requirements.md, docs/specs/, docs/decisions/. Slices titled \"Interview:\" collect the owner's decisions and come before the slices that depend on them. Every slice has an \"Owner input\" section listing what to confirm before starting. Household-specific answers go in the gitignored local/ folder, never in committed files.",
   "passes": [],
   "items": [
+    {
+      "id": "S52",
+      "title": "Brand mark and app icons",
+      "short_title": "Brand mark and app icons",
+      "status": "done",
+      "has_slice": true,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
     {
       "id": "S01",
       "title": "Interview: dev tooling and conventions",
@@ -231,7 +260,8 @@
       "status": "open",
       "has_slice": true,
       "depends_on": [
-        "S05"
+        "S05",
+        "S52"
       ],
       "note_records": [],
       "claim": null,

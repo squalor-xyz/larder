@@ -1,3 +1,5 @@
+<img src="assets/larder-512.png" alt="larder logo" width="96" height="96">
+
 # larder
 
 Self-hosted, FLOSS household food system: recipes, weekly dinner planning and a

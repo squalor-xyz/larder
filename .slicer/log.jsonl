@@ -52,3 +52,9 @@
 {"when": "2026-10-11T15:54:09Z", "item": "S49", "action": "add", "from": "", "to": "later", "note": "Native Android app"}
 {"when": "2026-10-11T15:54:09Z", "item": "S50", "action": "add", "from": "", "to": "later", "note": "Distributable self-host packaging"}
 {"when": "2026-10-11T15:54:09Z", "item": "S51", "action": "add", "from": "", "to": "later", "note": "Hosted multi-household instance"}
+{"when": "2026-10-11T16:08:39Z", "item": "S52", "action": "add", "from": "", "to": "open", "note": "Brand mark and app icons"}
+{"when": "2026-10-11T16:08:39Z", "item": "S52", "action": "move", "from": "52", "to": "1", "note": ""}
+{"when": "2026-10-11T16:08:39Z", "item": "S52", "action": "edit", "from": "", "to": "", "note": "boundary"}
+{"when": "2026-10-11T16:08:39Z", "item": "S08", "action": "set", "from": "", "to": "", "note": "depends_on S05→S05,S52"}
+{"when": "2026-10-11T16:08:53Z", "item": "S08", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-10-11T16:20:50Z", "item": "S52", "action": "status", "from": "open", "to": "done", "note": "Mark C2 approved; exports in branding generated/logos/larder/; site card added.", "by": "Jon R"}
