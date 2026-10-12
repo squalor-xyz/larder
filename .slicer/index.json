@@ -176,7 +176,7 @@
       "id": "S04",
       "title": "SQLite schema and migrations",
       "short_title": "SQLite schema and migrations",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S03"
@@ -188,6 +188,61 @@
           "text": "**2026-10-12** — From the S03 review: reconcile the docs/specs/data-model.md Person row with config.Person from S03 (autonomy L0/L1, email, matrix_id), and decide whether people live in config only or are also mirrored in the DB.",
           "created_at": "2026-10-12T18:18:17Z",
           "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "9638f334-72eb-4c70-8255-22ed6cd86c46",
+          "kind": "",
+          "text": "**2026-10-12** — Owner decision 2026-10-12: people live in config (config.Person holds role, autonomy and contacts). The DB person table is a thin mirror (id, name UNIQUE, active) so other tables can FK to a person. Syncing it from config is a later slice; S04 only creates the table. This resolves the S03 review note.",
+          "created_at": "2026-10-12T18:40:02Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "49dc1932-aba2-469c-8db1-edeb149743bf",
+          "kind": "",
+          "text": "**2026-10-12** — Owner decision 2026-10-12: data access is one module per area (src/larder/<area>_db.py) with plain functions taking a sqlite3.Connection; SQL only in those modules, db.py and migrations; documented in AGENTS.md.",
+          "created_at": "2026-10-12T18:40:02Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "861b3935-3e3a-4277-90ea-2154ad265f43",
+          "kind": "",
+          "text": "**2026-10-12** — Owner decision 2026-10-12: migrations ship as .sql package data and are loaded through importlib.resources.",
+          "created_at": "2026-10-12T18:40:02Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "2c6c08af-05a9-4d0f-960a-05cbf005837b",
+          "kind": "",
+          "text": "**2026-10-12** — Owner decision 2026-10-12: the database is SQLite. The owner considered DuckDB and kept SQLite.",
+          "created_at": "2026-10-12T18:40:02Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "8d9cb89a-8b9f-4697-a207-e9fe601946d1",
+          "kind": "",
+          "text": "**2026-10-12** — Gate VERDICT: PASS (opus reviewer). connect/transaction/migrate plus 0001_init.sql (15 MVP tables + unit_alias, STRICT, explicit ON DELETE, FK indexes); 50 tests green, ruff clean; data-model.md matches the schema. Open lows: concurrent migrate race (noted on S05); a migration containing COMMIT breaks the no-trace promise, so migrations must not contain BEGIN/COMMIT/ROLLBACK; a future table-rebuild migration doing DROP TABLE recipe would cascade-delete recipe_meta (ADR 0006). Nits: data-model.md Deletes line says staple.item_id is RESTRICT (it is CASCADE); README.md still calls the data model a draft.",
+          "created_at": "2026-10-12T18:44:01Z",
+          "attempt": 1,
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
@@ -212,7 +267,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 2,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
@@ -230,6 +285,17 @@
           "kind": "",
           "text": "**2026-10-12** — Flask was pinned in S02 (requirements.in/requirements.txt). Owner input 2 and the requirements.txt entry under Files now mean only a re-pin check, if one is needed.",
           "created_at": "2026-10-12T17:14:15Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "c4d8bd29-4f17-40c6-a4a0-4e933510c4ce",
+          "kind": "",
+          "text": "**2026-10-12** — From the S04 review: create_app runs migrate on every worker, but db.migrate reads recorded versions outside the write lock (src/larder/db.py:87), so concurrent startup on a fresh DB can raise 'table already exists'. Re-check the version inside the transaction, or migrate once before workers fork.",
+          "created_at": "2026-10-12T18:44:01Z",
           "attempt": 0,
           "by": "Jon R",
           "verified_by": "",

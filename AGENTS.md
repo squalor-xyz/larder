@@ -54,6 +54,13 @@ pip-compile --generate-hashes --allow-unsafe requirements-dev.in
 - Type hints are required on public functions. There is no type checker.
 - Lint and format with ruff, configured in `pyproject.toml` (`target-version = "py312"`).
 
+### Data access
+
+- SQL lives only in `src/larder/db.py`, `src/larder/migrations/` and per-area `src/larder/<area>_db.py` modules.
+- An area module is plain functions that take a `sqlite3.Connection` first. No classes, no ORM.
+- Writes go through `db.transaction()`. Connections are autocommit, so every transaction is explicit.
+- A schema change is a new numbered migration `NNNN_name.sql`. Never edit an applied migration.
+
 ## Dependencies
 
 - Stdlib first. Prefer in-repo code and the standard library ([ADR 0002](docs/decisions/0002-python.md)).

@@ -83,7 +83,7 @@ A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
 
 | Path | Contents |
 |---|---|
-| `larder.db` | SQLite database |
+| `larder.db` | SQLite database; the schema is numbered migrations in `src/larder/migrations/` |
 | `larder.toml` | Config file (optional) |
 | `recipes/` | Clone of the recipe repo |
 | `emails/` | Raw order emails |
