@@ -1,0 +1,7 @@
+# Dev-only dependencies (ADR 0017). Never shipped in the runtime image.
+# The -c line keeps dev tools from changing runtime pins.
+# Compile with: pip-compile --generate-hashes --allow-unsafe requirements-dev.in
+# --allow-unsafe pins pip and setuptools; without it, --require-hashes installs fail.
+-c requirements.txt
+ruff
+pip-tools

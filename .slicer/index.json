@@ -68,7 +68,7 @@
       "id": "S02",
       "title": "Project skeleton and AGENTS.md",
       "short_title": "Project skeleton and AGENTS.md",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S01"
@@ -93,7 +93,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
@@ -167,7 +167,19 @@
       "depends_on": [
         "S04"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "c6aec377-e46c-4376-bc7f-24a557e871bf",
+          "kind": "",
+          "text": "**2026-10-12** — Flask was pinned in S02 (requirements.in/requirements.txt). Owner input 2 and the requirements.txt entry under Files now mean only a re-pin check, if one is needed.",
+          "created_at": "2026-10-12T17:14:15Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "S",

@@ -42,11 +42,13 @@ ruff format --check .             # `ruff format .` to apply
 
 # Regenerate pins after editing a .in file
 pip-compile --generate-hashes requirements.in
-pip-compile --generate-hashes requirements-dev.in
+pip-compile --generate-hashes --allow-unsafe requirements-dev.in
 ```
 
 `requirements-dev.in` includes `-c requirements.txt` so dev tools never
-change runtime pins.
+change runtime pins. `--allow-unsafe` is needed for the dev file: pip-tools
+depends on pip and setuptools, and without the flag pip-compile leaves them
+unpinned, so `pip install --require-hashes` fails.
 
 ### Dev dependencies
 

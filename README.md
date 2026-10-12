@@ -5,7 +5,7 @@
 Self-hosted, FLOSS household food system: recipes, weekly dinner planning and a
 shared shopping list.
 
-**Status:** planning. There is no application code yet.
+**Status:** planning. The package skeleton exists; there are no features yet.
 **License:** [AGPL-3.0](LICENSE)
 
 ## Docs
@@ -45,3 +45,21 @@ shared shopping list.
 | [0025](docs/decisions/0025-conversational-channels.md) | Conversational channels: email and Matrix |
 | [0026](docs/decisions/0026-autonomy-levels.md) | Autonomy levels per person |
 | [0027](docs/decisions/0027-message-interpretation.md) | Rule-based message interpretation, optional local LLM fallback |
+
+## Development
+
+Requires Python 3.12 or later. Run these from the repository root. The rules
+for contributors and coding agents are in [AGENTS.md](AGENTS.md).
+
+```sh
+python3.12 -m venv .venv          # or any python ≥ 3.12
+. .venv/bin/activate
+pip install --require-hashes -r requirements.txt -r requirements-dev.txt
+pip install --no-deps -e .
+
+python -m unittest discover -s tests -t .
+ruff check .
+ruff format --check .             # `ruff format .` to apply
+```
+
+The commands follow [ADR 0017](docs/decisions/0017-dev-conventions.md).
