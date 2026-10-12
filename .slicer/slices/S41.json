@@ -2,7 +2,7 @@
   "id": "S41",
   "title": "Interview: notifications",
   "lead": [
-    "Decide channels, recipients and timing (Q9, X1–X2)."
+    "Decide notification and conversation channels, recipients, timing and autonomy levels (Q9, X1–X2, C1–C5; ADRs 0025–0027)."
   ],
   "depends_note": null,
   "findings_note": "",
@@ -18,11 +18,11 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. Channel per person: ntfy (self-hosted? which server?), email, or both?\n2. Which pings: tonight's dinner/defrost (what time?), the weekly planning reminder, runout warnings, use-it-up?\n3. Quiet hours?\n4. Where does ntfy run (an existing instance, or add one to compose)? Is email sent via which SMTP?"
+      "body": "1. Channel per person: ntfy (self-hosted? which server?), email, or both?\n2. Which pings: tonight's dinner/defrost (what time?), the weekly planning reminder, runout warnings, use-it-up?\n3. Quiet hours?\n4. Where does ntfy run (an existing instance, or add one to compose)? Is email sent via which SMTP?\n5. Conversation mailbox: which provider and address? (Separate from the receipts mailbox, ADR 0025.) IMAP/SMTP sign-in method (app password or OAuth; check the provider's current rules).\n6. Matrix: an existing homeserver or a self-hosted one (which)? Which client library (new dependency; state why, license and cost)?\n7. Per person: which conversation channel(s), and which autonomy level (L0 or L1, ADR 0026)?\n8. Command vocabulary: confirm the starter commands (add, low, list, what's low, help) and the numbered-reply format."
     },
     {
       "heading": "Files",
-      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0024-notifications.md` (new)"
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0024-notifications.md` (new)\n- `docs/decisions/0025-conversational-channels.md`, `0026-autonomy-levels.md`, `0027-message-interpretation.md` (fill in deployment specifics)"
     },
     {
       "heading": "Failing tests",
@@ -30,11 +30,11 @@
     },
     {
       "heading": "Implement",
-      "body": "1. Ask the questions, including a non-technical household member's preferences.\n2. Write ADR 0024; record the raw answers in `local/` (not committed); update the notifier slice."
+      "body": "1. Ask the questions, including a non-technical household member's preferences.\n2. Write ADR 0024; add the deployment specifics to ADRs 0025–0027; record the raw answers in `local/` (not committed); update the notifier and conversation slices."
     },
     {
       "heading": "Check",
-      "body": "- ADR 0024 lists each ping with its channel, recipient and time."
+      "body": "- ADR 0024 lists each ping with its channel, recipient and time.\n- Each person has a conversation channel and autonomy level recorded; the Matrix library decision states why, license and cost."
     },
     {
       "heading": "Git",

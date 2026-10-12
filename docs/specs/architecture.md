@@ -20,7 +20,8 @@ front of it ([ADR 0015](../decisions/0015-app-tls-agnostic.md)).
                   │               ▼                                                 │
                   │        web app (HTML + PWA) ◄── reverse proxy (TLS) ◄── phones  │
                   │               │                                                 │
-                  │        notifier (P2) ──► ntfy / email                           │
+                  │        notifier (P2) ──► ntfy / email / Matrix                  │
+ email / Matrix ──┤► conversation adapters (P2) ─► intent core + autonomy check     │
                   │        Ollama client (optional) ──► local Ollama                │
                   └─────────────────────────────────────────────────────────────────┘
 ```
@@ -41,6 +42,9 @@ front of it ([ADR 0015](../decisions/0015-app-tls-agnostic.md)).
 | Order poller | IMAP fetch, raw archive, per-store parser plugins | P2 |
 | Pantry estimator | Purchases × consumption × shelf life; runout prediction | P2 |
 | Notifier | Channel plugins (ntfy, email) and schedules | P2 |
+| Intent core | Typed intents shared by all channels; per-person autonomy check ([ADR 0026](../decisions/0026-autonomy-levels.md)) | P2 |
+| Conversation adapters | Email and Matrix in/out; known senders only ([ADR 0025](../decisions/0025-conversational-channels.md)) | P2 |
+| Message interpreter | Command grammar and numbered replies; optional LLM fallback ([ADR 0027](../decisions/0027-message-interpretation.md)) | P2 |
 | Ollama client | Optional suggestions over HTTP | Later |
 
 ## Stack
@@ -71,8 +75,11 @@ household-specific is in code ([ADR 0016](../decisions/0016-future-multi-househo
 ## Security and privacy
 
 - **No public exposure:** LAN, plus an optional VPN.
-- **Least-privilege inputs:** a dedicated receipts mailbox; a repo-scoped
-  deploy key; no personal email, payment or store credentials.
+- **Least-privilege inputs:** a dedicated receipts mailbox; a dedicated
+  conversation mailbox and Matrix bot account; a repo-scoped deploy key; no
+  personal email, payment or store credentials.
+- **Untrusted messages:** conversation input is parsed into intents and checked
+  against the sender's autonomy level in code.
 - **Public vs. private data:** the recipe repo may be public, so only recipe
   content goes there. Plans, lists, orders, pantry data and metadata stay in
   the private DB.

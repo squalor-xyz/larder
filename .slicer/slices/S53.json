@@ -1,0 +1,45 @@
+{
+  "id": "S53",
+  "title": "Intent core and autonomy levels",
+  "lead": [
+    "Typed intents shared by every channel, with a per-person autonomy check (ADRs 0025, 0026)."
+  ],
+  "depends_note": null,
+  "findings_note": "C1, C4",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** channel adapters; LLM interpretation.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Email, Matrix and the PWA must change state the same way, and no message may do more than its sender's level allows."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the notifications interview is done."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/intents.py` (intents, required level, dispatch)\n- `src/larder/interpret.py` (command grammar, ADR 0027)\n- `tests/test_intents.py`, `tests/test_interpret.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_unknown_sender_is_ignored_and_logged`\n2. `test_intent_rejected_below_required_level`\n3. `test_default_level_is_l0`\n4. `test_add_command_adds_matched_items_to_list`\n5. `test_low_command_records_pantry_correction`\n6. `test_unparsed_message_gets_help_reply`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Intents with a required level; per-person level and sender IDs from config.\n2. Rule-based grammar for the starter commands; item matching via canonical items and aliases.\n3. Dispatch returns a short plain-text reply."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; L0 and L1 behave as in ADR 0026."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

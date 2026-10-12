@@ -21,7 +21,7 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 - NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).
 - NG5: Exact, item-by-item inventory tracking.
 
-52 items · — 42 · done 1 · later 9
+58 items · — 46 · done 1 · later 11
 
 | # | Slice | Title | Size | Effort | Trees | Findings | Status |
 |---|---|---|---|---|---|---|---|
@@ -74,20 +74,26 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 | 40 | [S40](slices/S40.md) | Pantry-aware planner and list | M | 2 | core |  | — |
 | 41 | [S41](slices/S41.md) | Interview: notifications | S | 1 | docs |  | — |
 | 42 | [S42](slices/S42.md) | Notifier | M | 2 | core |  | — |
+| 43 | [S53](slices/S53.md) | Intent core and autonomy levels | M | 2 | core | C1, C4 | — |
+| 44 | [S54](slices/S54.md) | Email conversation adapter | M | 2 | core | C2 | — |
+| 45 | [S55](slices/S55.md) | Matrix conversation adapter | M | 2 | core | C3 | — |
+| 46 | [S56](slices/S56.md) | Pantry questions and numbered replies | M | 2 | core | C5 | — |
 | Later | | | | | | | |
-| 43 | S43 | Ollama parse suggestions |  | - |  |  | later |
-| 44 | S44 | LLM meal suggestions from what's on hand |  | - |  |  | later |
-| 45 | S45 | Recipe URL importer (schema.org) |  | - |  |  | later |
-| 46 | S46 | Publish recipes to a Hugo site |  | - |  |  | later |
-| 47 | S47 | Remember store product names per item |  | - |  |  | later |
-| 48 | S48 | Kitchen tablet mode |  | - |  |  | later |
-| 49 | S49 | Native Android app |  | - |  |  | later |
-| 50 | S50 | Distributable self-host packaging |  | - |  |  | later |
-| 51 | S51 | Hosted multi-household instance |  | - |  |  | later |
+| 47 | S43 | Ollama parse suggestions |  | - |  |  | later |
+| 48 | S44 | LLM meal suggestions from what's on hand |  | - |  |  | later |
+| 49 | S45 | Recipe URL importer (schema.org) |  | - |  |  | later |
+| 50 | S46 | Publish recipes to a Hugo site |  | - |  |  | later |
+| 51 | S47 | Remember store product names per item |  | - |  |  | later |
+| 52 | S48 | Kitchen tablet mode |  | - |  |  | later |
+| 53 | S49 | Native Android app |  | - |  |  | later |
+| 54 | S50 | Distributable self-host packaging |  | - |  |  | later |
+| 55 | S51 | Hosted multi-household instance |  | - |  |  | later |
+| 56 | S57 | LLM fallback for conversation messages |  | - |  |  | later |
+| 57 | S58 | Spike: store cart building (autonomy L2) |  | - |  |  | later |
 
 ---
 
 | # | Slice | Title | Size | Effort | Trees | Findings | Status |
 |---|---|---|---|---|---|---|---|
 | Phase 0 — Foundations | | | | | | | |
-| 52 | [S52](slices/S52.md) | Brand mark and app icons | S | 1 | docs |  | done |
+| 58 | [S52](slices/S52.md) | Brand mark and app icons | S | 1 | docs |  | done |

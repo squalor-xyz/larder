@@ -1,0 +1,45 @@
+{
+  "id": "S55",
+  "title": "Matrix conversation adapter",
+  "lead": [
+    "A Matrix bot account that receives commands and sends replies and notifications."
+  ],
+  "depends_note": null,
+  "findings_note": "C3",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** end-to-end encrypted rooms, unless the interview requires them.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Chat suits quick back-and-forth better than email, and Matrix is FLOSS and self-hostable."
+    },
+    {
+      "heading": "Owner input",
+      "body": "Approve the Matrix client library chosen in the notifications interview (NF6)."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/converse/matrix.py`\n- `src/larder/notify/matrix.py` (notifier channel)\n- `tests/test_converse_matrix.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_message_from_known_user_dispatched`\n2. `test_message_from_unknown_user_ignored`\n3. `test_sync_token_persisted_across_restarts`\n4. `test_notifier_channel_sends_to_room`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Sync loop on the bot account; map Matrix IDs to people.\n2. Replies and notifier pings to each person's room."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; the owner and one household member exchange commands with larder in Matrix."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

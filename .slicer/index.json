@@ -2,7 +2,7 @@
   "version": 8,
   "id_prefix": "S",
   "id_width": 2,
-  "next_id": 53,
+  "next_id": 59,
   "preamble": "larder: a self-hosted, FLOSS household food system (recipes, weekly dinner planning, shared shopping list; later, pantry estimates driven by receipts). Specs: docs/goals.md, docs/requirements.md, docs/specs/, docs/decisions/. Slices titled \"Interview:\" collect the owner's decisions and come before the slices that depend on them. Every slice has an \"Owner input\" section listing what to confirm before starting. Household-specific answers go in the gitignored local/ folder, never in committed files.",
   "passes": [],
   "items": [
@@ -1368,6 +1368,136 @@
       }
     },
     {
+      "id": "S53",
+      "title": "Intent core and autonomy levels",
+      "short_title": "Intent core and autonomy levels",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S41",
+        "S25",
+        "S37"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "C1, C4",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S54",
+      "title": "Email conversation adapter",
+      "short_title": "Email conversation adapter",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S53",
+        "S42"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "C2",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S55",
+      "title": "Matrix conversation adapter",
+      "short_title": "Matrix conversation adapter",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S53",
+        "S42"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "C3",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S56",
+      "title": "Pantry questions and numbered replies",
+      "short_title": "Pantry questions and numbered replies",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S53",
+        "S39",
+        "S38"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "C5",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
       "id": "S43",
       "title": "Ollama parse suggestions",
       "short_title": "Ollama parse suggestions",
@@ -1591,6 +1721,84 @@
       "has_slice": false,
       "depends_on": [],
       "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S57",
+      "title": "LLM fallback for conversation messages",
+      "short_title": "LLM fallback for conversation messages",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [
+        {
+          "id": "2b90e8bb-bd65-4df4-83bc-b13a176a05ce",
+          "kind": "",
+          "text": "**2026-10-12** — Shares the optional Ollama client with S43; limited to the intents in ADR 0027.",
+          "created_at": "2026-10-12T15:44:21Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 1,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S58",
+      "title": "Spike: store cart building (autonomy L2)",
+      "short_title": "Spike: store cart building (autonomy L2)",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [
+        {
+          "id": "cb10a50a-c4e1-4732-919b-1092d65ad4e0",
+          "kind": "",
+          "text": "**2026-10-12** — Needs the ADR 0026 L2 prerequisites and an amendment to ADR 0003.",
+          "created_at": "2026-10-12T15:44:21Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "",

@@ -58,3 +58,21 @@
 {"when": "2026-10-11T16:08:39Z", "item": "S08", "action": "set", "from": "", "to": "", "note": "depends_on S05→S05,S52"}
 {"when": "2026-10-11T16:08:53Z", "item": "S08", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-10-11T16:20:50Z", "item": "S52", "action": "status", "from": "open", "to": "done", "note": "Mark C2 approved; exports in branding generated/logos/larder/; site card added.", "by": "Jon R"}
+{"when": "2026-10-12T15:43:37Z", "item": "S41", "action": "edit", "from": "", "to": "", "note": "lead"}
+{"when": "2026-10-12T15:43:37Z", "item": "S41", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-10-12T15:43:37Z", "item": "S41", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-10-12T15:43:37Z", "item": "S41", "action": "edit", "from": "", "to": "", "note": "Implement"}
+{"when": "2026-10-12T15:43:37Z", "item": "S41", "action": "edit", "from": "", "to": "", "note": "Check"}
+{"when": "2026-10-12T15:43:44Z", "item": "S41", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-10-12T15:44:10Z", "item": "S53", "action": "add", "from": "", "to": "open", "note": "Intent core and autonomy levels"}
+{"when": "2026-10-12T15:44:10Z", "item": "S54", "action": "add", "from": "", "to": "open", "note": "Email conversation adapter"}
+{"when": "2026-10-12T15:44:10Z", "item": "S55", "action": "add", "from": "", "to": "open", "note": "Matrix conversation adapter"}
+{"when": "2026-10-12T15:44:10Z", "item": "S56", "action": "add", "from": "", "to": "open", "note": "Pantry questions and numbered replies"}
+{"when": "2026-10-12T15:44:10Z", "item": "S57", "action": "add", "from": "", "to": "later", "note": "LLM fallback for conversation messages"}
+{"when": "2026-10-12T15:44:10Z", "item": "S58", "action": "add", "from": "", "to": "later", "note": "Spike: store cart building (autonomy L2)"}
+{"when": "2026-10-12T15:44:10Z", "item": "S53", "action": "move", "from": "53", "to": "44", "note": ""}
+{"when": "2026-10-12T15:44:10Z", "item": "S54", "action": "move", "from": "54", "to": "45", "note": ""}
+{"when": "2026-10-12T15:44:10Z", "item": "S55", "action": "move", "from": "55", "to": "46", "note": ""}
+{"when": "2026-10-12T15:44:10Z", "item": "S56", "action": "move", "from": "56", "to": "47", "note": ""}
+{"when": "2026-10-12T15:44:21Z", "item": "S57", "action": "note", "from": "", "to": "", "note": "Shares the optional Ollama client with S43; limited to the i", "by": "Jon R"}
+{"when": "2026-10-12T15:44:21Z", "item": "S58", "action": "note", "from": "", "to": "", "note": "Needs the ADR 0026 L2 prerequisites and an amendment to ADR ", "by": "Jon R"}

@@ -17,4 +17,5 @@ the larger open topics.
 | Receipts mailbox and email formats | Interview: receipts mailbox and samples | Item-level detail per store is **unverified** |
 | Pantry model | Interview: pantry model | Shelf lives, taps, nudges |
 | Notifications | Interview: notifications | Channels, schedule |
-| Automated store ordering | Not planned | Cart APIs **unverified**; manual entry assumed |
+| Conversation channels | Interview: notifications | Conversation mailbox, Matrix homeserver and client library (new dependency), commands, autonomy levels |
+| Automated store ordering | Not planned | Order placement is out of scope; cart building is Later ([ADR 0026](decisions/0026-autonomy-levels.md)). Cart APIs **unverified** |

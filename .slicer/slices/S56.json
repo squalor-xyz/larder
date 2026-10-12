@@ -1,0 +1,45 @@
+{
+  "id": "S56",
+  "title": "Pantry questions and numbered replies",
+  "lead": [
+    "larder asks about uncertain or low items, and numbered replies correct the estimates (ADR 0027)."
+  ],
+  "depends_note": null,
+  "findings_note": "C5",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** free-form answers (LLM fallback is Later).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "A one-digit reply is the cheapest way to keep pantry estimates honest."
+    },
+    {
+      "heading": "Owner input",
+      "body": "How many questions per week at most, and on which days?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/pantry/questions.py`\n- `tests/test_pantry_questions.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_question_has_id_and_numbered_options`\n2. `test_numbered_reply_maps_to_open_question`\n3. `test_stale_question_reply_is_rejected_with_help`\n4. `test_weekly_question_cap_respected`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Pick questions from runout predictions and low-confidence estimates.\n2. Send via the person's channel; apply replies as pantry corrections."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; a household member answers a question with one digit and the estimate updates."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

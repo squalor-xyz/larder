@@ -77,6 +77,18 @@ reference them.
 | X1 | Pluggable channels (ntfy, email), configurable per person. | P2 |
 | X2 | Scheduled pings (e.g., tonight's dinner, weekly planning reminder). | P2 |
 
+### C. Conversation
+
+| ID | Requirement | Tag |
+|---|---|---|
+| C1 | One command core turns messages from every channel into typed intents; only the core changes state ([ADR 0025](decisions/0025-conversational-channels.md)). | P2 |
+| C2 | Email channel: a dedicated conversation account over IMAP and SMTP, separate from the receipts mailbox. | P2 |
+| C3 | Matrix channel: a bot account on a configured homeserver. | P2 |
+| C4 | Only known senders, each mapped to a person; each person has an autonomy level checked in code ([ADR 0026](decisions/0026-autonomy-levels.md)). | P2 |
+| C5 | Rule-based commands, plus numbered replies to larder's own questions (e.g., "Low on rice?") that correct pantry estimates ([ADR 0027](decisions/0027-message-interpretation.md)). | P2 |
+| C6 | Optional local-LLM interpretation of free-form messages, limited to the same intents, with confirmation. | Later |
+| C7 | Build a cart on a store account without checking out (autonomy level L2). | Later |
+
 ### U. UI and access
 
 | ID | Requirement | Tag |
@@ -96,7 +108,7 @@ reference them.
 | NF1 | **Usability:** a non-technical user can use the everyday views without help after their device is paired. |
 | NF2 | **Upkeep:** no required daily input; one short weekly planning session at most. |
 | NF3 | **Privacy:** household data stays in the private DB; only recipe content goes to the recipe repo. |
-| NF4 | **Least privilege:** credentials are limited to a dedicated mailbox, a repo-scoped deploy key and notification tokens. |
+| NF4 | **Least privilege:** credentials are limited to dedicated mailboxes (receipts, conversation), a repo-scoped deploy key, a Matrix bot account and notification tokens. |
 | NF5 | **Portability:** no household-specific values in code; stores, importers and channels are plugins or config. |
 | NF6 | **Dependencies:** stdlib-first; every new dependency needs approval with a stated reason. |
 | NF7 | **Operations:** runs as one container with one data volume; backup and restore are documented and tested. |
@@ -106,7 +118,7 @@ reference them.
 
 Explicitly out of scope (see [goals](goals.md) non-goals):
 
-- Automated ordering or store-account integration.
+- Automated order placement (autonomy level L3). Store cart building is Later (C7).
 - Nutrition or calorie tracking.
 - Public internet exposure or public sign-up.
 - Multi-household tenancy in the MVP.

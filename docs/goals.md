@@ -22,11 +22,12 @@ decisions.
 - **G3:** Reduce waste and duplicate purchases using order data instead of manual logging (Phase 2).
 - **G4:** Near-zero required upkeep. Optional taps improve accuracy; none are required.
 - **G5:** Usable by non-technical household members without help: a home-screen icon, tonight's dinner, the list.
+- **G7:** Reachable by message from anywhere: email or Matrix to add to the list, ask what's low, and answer larder's pantry questions (Phase 2; [ADR 0025](decisions/0025-conversational-channels.md)).
 - **G6:** Portable: any household can run it with its own stores, sources and network.
 
 ## Non-goals
 
-- **NG1:** Placing store orders automatically. Store cart APIs are unverified; manual entry is assumed.
+- **NG1:** Placing store orders automatically. Store cart APIs are unverified; manual entry is assumed. Building a store cart without checking out is a Later option ([ADR 0026](decisions/0026-autonomy-levels.md)).
 - **NG2:** Nutrition or calorie tracking.
 - **NG3:** Access from the public internet.
 - **NG4:** Multi-household or hosted operation in the MVP. That's a future direction ([ADR 0016](decisions/0016-future-multi-household.md)).

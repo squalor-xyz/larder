@@ -1,0 +1,45 @@
+{
+  "id": "S54",
+  "title": "Email conversation adapter",
+  "lead": [
+    "Read the conversation mailbox over IMAP and reply over SMTP (stdlib)."
+  ],
+  "depends_note": null,
+  "findings_note": "C2",
+  "size": "M",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** Matrix; the receipts mailbox.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Email reaches everyone from anywhere with no new app."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the notifications interview is done."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/converse/email.py`\n- `tests/test_converse_email.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_new_message_dispatched_once`\n2. `test_reply_threads_to_original_message`\n3. `test_quoted_text_and_signatures_ignored`\n4. `test_credentials_read_from_secret_file`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. IMAP poll of the conversation mailbox; mark handled messages; extract the new text.\n2. SMTP reply through the notifier's email channel."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; the owner adds an item and asks \"what's low\" by email."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}
