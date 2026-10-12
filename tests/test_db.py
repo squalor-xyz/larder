@@ -173,6 +173,45 @@ class MigrateTest(DbTestCase):
 
         self.assertEqual(applied, [2])
 
+    def test_schema_version_reports_highest_applied_version(self) -> None:
+        conn = self.connect()
+        source = self.source(
+            {
+                "0001_a.sql": "CREATE TABLE a (n INTEGER) STRICT;",
+                "0002_b.sql": "CREATE TABLE b (n INTEGER) STRICT;",
+            }
+        )
+        db.migrate(conn, source)
+
+        self.assertEqual(db.schema_version(conn), 2)
+
+    def test_concurrent_migrate_skips_version_applied_by_other_connection(self) -> None:
+        # The second connection reads the recorded versions (none yet). Just
+        # before its first transaction, the first connection migrates fully.
+        # The second must re-check inside its transaction and skip version 1
+        # instead of running the script again.
+        first = self.connect()
+        second = self.connect()
+        real_transaction = db.transaction
+        first_applied: list[list[int]] = []
+        interleaved = False
+
+        def other_connection_migrates_first(conn: sqlite3.Connection) -> object:
+            nonlocal interleaved
+            if not interleaved:
+                interleaved = True  # set first: the nested migrate calls us too
+                first_applied.append(db.migrate(first))
+            return real_transaction(conn)
+
+        with mock.patch(
+            "larder.db.transaction", side_effect=other_connection_migrates_first
+        ):
+            applied = db.migrate(second)
+
+        self.assertEqual(first_applied, [[1]])
+        self.assertEqual(applied, [])
+        self.assertIn("person", self.table_names(second))
+
     def test_ignores_non_sql_entries(self) -> None:
         source = self.source(
             {

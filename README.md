@@ -63,3 +63,11 @@ ruff format --check .             # `ruff format .` to apply
 ```
 
 The commands follow [ADR 0017](docs/decisions/0017-dev-conventions.md).
+
+To run the web app, point `LARDER_DATA` at a data directory. Larder creates the
+database there on first start. This uses the Flask development server, which is
+not for production. `GET /healthz` returns the status and the schema version.
+
+```sh
+LARDER_DATA=/path/to/data python -m larder --host 127.0.0.1 --port 8000
+```

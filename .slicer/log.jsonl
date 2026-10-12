@@ -99,3 +99,11 @@
 {"when": "2026-10-12T18:44:01Z", "item": "S05", "action": "note", "from": "", "to": "", "note": "From the S04 review: create_app runs migrate on every worker", "by": "Jon R"}
 {"when": "2026-10-12T18:44:01Z", "item": "S04", "action": "note", "from": "", "to": "", "note": "Gate VERDICT: PASS (opus reviewer). connect/transaction/migr", "by": "Jon R"}
 {"when": "2026-10-12T18:44:01Z", "item": "S04", "action": "status", "from": "started", "to": "done", "note": "SQLite data layer and migration 0001 with the MVP tables done; 50 tests pass, ruff clean, reviewer gate PASS.", "by": "Jon R"}
+{"when": "2026-10-12T20:34:39Z", "item": "S05", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-10-12T20:36:23Z", "item": "S05", "action": "note", "from": "", "to": "", "note": "**2026-10-12** — Owner decision 1 (CSS): a small handwritten", "by": "Jon R"}
+{"when": "2026-10-12T20:36:23Z", "item": "S05", "action": "note", "from": "", "to": "", "note": "**2026-10-12** — Owner decision 2 (Flask): Flask is already ", "by": "Jon R"}
+{"when": "2026-10-12T20:36:23Z", "item": "S05", "action": "note", "from": "", "to": "", "note": "**2026-10-12** — Owner decision 3 (proxy trust): trusted_pro", "by": "Jon R"}
+{"when": "2026-10-12T20:36:23Z", "item": "S05", "action": "note", "from": "", "to": "", "note": "**2026-10-12** — Owner decision 4 (migrate race): fixed in t", "by": "Jon R"}
+{"when": "2026-10-12T20:45:31Z", "item": "S28", "action": "note", "from": "", "to": "", "note": "From the S05 review: trusted_proxies matching does not unwra", "by": "Jon R"}
+{"when": "2026-10-12T20:45:31Z", "item": "S05", "action": "note", "from": "", "to": "", "note": "Gate VERDICT: PASS (opus reviewer). create_app (migrate at s", "by": "Jon R"}
+{"when": "2026-10-12T20:45:31Z", "item": "S05", "action": "status", "from": "started", "to": "done", "note": "Flask app shell done: app factory, health check, base layout, proxy trust, security headers and dev entry point; 71 tests pass, ruff clean, reviewer gate PASS.", "by": "Jon R"}

@@ -22,6 +22,12 @@ category_order = ["produce", "bakery", "dairy", "meat", "frozen", "pantry"]
 # notifier in Phase 2.
 notify_channels = ["ntfy"]
 
+# Reverse proxies whose forwarded headers larder trusts: IP addresses or CIDR
+# networks. larder applies X-Forwarded-For, -Proto and -Host only when the
+# connecting address is in this list. Leave it empty when no proxy is in front.
+# This key is read from this file only; there is no environment override.
+trusted_proxies = ["127.0.0.1"]
+
 # Paths to secret files. A relative path resolves against $LARDER_DATA.
 # The files are not read when settings load.
 [secrets]

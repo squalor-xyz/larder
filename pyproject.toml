@@ -19,7 +19,7 @@ version = { attr = "larder.__version__" }
 where = ["src"]
 
 [tool.setuptools.package-data]
-larder = ["migrations/*.sql"]
+larder = ["migrations/*.sql", "web/templates/*.html", "web/static/*"]
 
 [tool.ruff]
 target-version = "py312"

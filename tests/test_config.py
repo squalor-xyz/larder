@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 import dataclasses
+import ipaddress
 import stat
 import tempfile
 import unittest
@@ -285,6 +286,54 @@ class LoadSettingsTest(unittest.TestCase):
 
         self.assertTrue(settings.people)
         self.assertTrue(settings.stores)
+
+    def test_parses_trusted_proxies_as_addresses_and_networks(self) -> None:
+        self.write_config(
+            'trusted_proxies = ["127.0.0.1", "10.0.0.0/8", "::1", "fd00::/8"]\n'
+        )
+
+        settings = load_settings(self.env())
+
+        self.assertEqual(
+            settings.trusted_proxies,
+            (
+                ipaddress.ip_network("127.0.0.1/32"),
+                ipaddress.ip_network("10.0.0.0/8"),
+                ipaddress.ip_network("::1/128"),
+                ipaddress.ip_network("fd00::/8"),
+            ),
+        )
+
+    def test_rejects_bad_trusted_proxy_entry(self) -> None:
+        cases = {
+            "host bits set": (
+                'trusted_proxies = ["127.0.0.1", "10.0.0.1/24"]\n',
+                "trusted_proxies[1]",
+            ),
+            "not an address": (
+                'trusted_proxies = ["proxy.example"]\n',
+                "trusted_proxies[0]",
+            ),
+            "empty string": ('trusted_proxies = [""]\n', "trusted_proxies[0]"),
+            "not a list": (
+                'trusted_proxies = "127.0.0.1"\n',
+                "trusted_proxies must be",
+            ),
+            "entry not a string": (
+                "trusted_proxies = [127]\n",
+                "trusted_proxies[0] must be",
+            ),
+        }
+        for case, (text, label) in cases.items():
+            with self.subTest(case=case):
+                self.write_config(text)
+                with self.assertRaises(ConfigError) as ctx:
+                    load_settings(self.env())
+                self.assertIn(label, str(ctx.exception))
+                self.assertIn(str(self.data_dir / "larder.toml"), str(ctx.exception))
+
+    def test_trusted_proxies_default_empty(self) -> None:
+        self.assertEqual(load_settings(self.env()).trusted_proxies, ())
 
 
 class EnsureDataDirsTest(unittest.TestCase):

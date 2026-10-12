@@ -274,7 +274,7 @@
       "id": "S05",
       "title": "Flask app shell",
       "short_title": "Flask app shell",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S04"
@@ -301,6 +301,61 @@
           "verified_by": "",
           "verified_at": "",
           "stale_after": ""
+        },
+        {
+          "id": "04e0f588-3fdb-49c0-bd93-4a7b01ab8c27",
+          "kind": "",
+          "text": "**2026-10-12** — **2026-10-12** — Owner decision 1 (CSS): a small handwritten stylesheet, src/larder/web/static/larder.css. No dependency and no vendored CSS file.",
+          "created_at": "2026-10-12T20:36:23Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "9a42d4e5-cfbb-4c2b-814f-627ff25bc489",
+          "kind": "",
+          "text": "**2026-10-12** — **2026-10-12** — Owner decision 2 (Flask): Flask is already pinned from S02 (requirements.in/requirements.txt, flask==3.1.3). No re-pin in this slice; requirements files are unchanged.",
+          "created_at": "2026-10-12T20:36:23Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "6d0474f4-b53b-4c95-9819-c01fdfdc3fbd",
+          "kind": "",
+          "text": "**2026-10-12** — **2026-10-12** — Owner decision 3 (proxy trust): trusted_proxies is a top-level larder.toml array of IP addresses or CIDR networks, parsed strictly. Forwarded headers (X-Forwarded-For, -Proto, -Host) are applied only when the direct peer address (REMOTE_ADDR) is in the list. The key is file-only, with no LARDER_* override.",
+          "created_at": "2026-10-12T20:36:23Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "acc1eb2b-9cef-4816-a82f-a8740100fe76",
+          "kind": "",
+          "text": "**2026-10-12** — **2026-10-12** — Owner decision 4 (migrate race): fixed in this slice. db.migrate re-checks schema_migrations for each pending version inside its BEGIN IMMEDIATE transaction and skips a version another connection has already applied.",
+          "created_at": "2026-10-12T20:36:23Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "194d5234-3ad9-45fb-a7f6-c989b52493c2",
+          "kind": "",
+          "text": "**2026-10-12** — Gate VERDICT: PASS (opus reviewer). create_app (migrate at startup), /healthz with db_version, 404 on the base layout, security headers on every response, trusted_proxies-gated ProxyFix, python -m larder; migrate race fixed by a re-check under the write lock; 71 tests green, ruff clean. Open lows: IPv4-mapped peers (noted on S28); python -m larder prints a traceback for an OSError from ensure_data_dirs. Nits: no test pins LARDER_TRUSTED_PROXIES as rejected; brand link to / 404s until a home page exists.",
+          "created_at": "2026-10-12T20:45:31Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
         }
       ],
       "claim": null,
@@ -321,7 +376,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
@@ -1037,7 +1092,19 @@
         "S25",
         "S22"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "41dd8620-258a-4ee5-9e04-4ece2b85718c",
+          "kind": "",
+          "text": "**2026-10-12** — From the S05 review: trusted_proxies matching does not unwrap IPv4-mapped peers. On a dual-stack bind (--host :: or a WSGI server listening on ::) an IPv4 proxy appears as ::ffff:a.b.c.d and does not match an IPv4 entry, so forwarded headers are ignored (fails closed). Unwrap address.ipv4_mapped in larder.web._is_trusted, or document listing the mapped form.",
+          "created_at": "2026-10-12T20:45:31Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",

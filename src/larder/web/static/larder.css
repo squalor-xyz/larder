@@ -1,0 +1,77 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+/* larder web shell: mobile first, no framework, no JavaScript. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #fbfaf6;
+  --fg: #1f1f1c;
+  --link: #2c6a3b;
+  --rule: #d8d4c8;
+  --focus: #b5651d;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171815;
+    --fg: #ece9e0;
+    --link: #9ccca4;
+    --rule: #3a3c35;
+    --focus: #e0a16a;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-header-inner,
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+main {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+/* The brand link is the only navigation so far: give it a 44px tap target. */
+.site-name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+a {
+  color: var(--link);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 0.5rem 0 1rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}

@@ -76,6 +76,12 @@ A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
   override wins over the file. Any other `LARDER_*` variable is an error.
 - **Timezone** is an optional IANA name. Without it, larder uses the host's
   local time.
+- **Trusted proxies:** `trusted_proxies` is an array of IP addresses or CIDR
+  networks (`"127.0.0.1"`, `"10.0.0.0/8"`). Entries are parsed strictly, so
+  `"10.0.0.1/24"` is an error. larder applies `X-Forwarded-For`,
+  `X-Forwarded-Proto` and `X-Forwarded-Host` only when the connecting address is
+  in the list. The default is empty, which ignores forwarded headers. The key is
+  file-only; there is no `LARDER_*` override.
 - **People** have a role (`admin` or `member`) and an autonomy level, `L0` or
   `L1`. The level defaults to `L0` ([ADR 0026](../decisions/0026-autonomy-levels.md)).
 

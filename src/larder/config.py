@@ -5,6 +5,7 @@ Settings come from ``$LARDER_DATA/larder.toml`` plus ``LARDER_*`` environment
 overrides. Loading only reads the config file; it creates nothing.
 """
 
+import ipaddress
 import os
 import tomllib
 from collections.abc import Mapping
@@ -15,6 +16,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 Role = Literal["admin", "member"]
 Autonomy = Literal["L0", "L1"]
+IPNetwork = ipaddress.IPv4Network | ipaddress.IPv6Network
 
 ROLES: tuple[str, ...] = ("admin", "member")
 AUTONOMY_LEVELS: tuple[str, ...] = ("L0", "L1")
@@ -31,6 +33,7 @@ _FILE_KEYS = frozenset(
         "secrets",
         "people",
         "stores",
+        "trusted_proxies",
     }
 )
 _PERSON_KEYS = frozenset(
@@ -109,6 +112,8 @@ class Settings:
     category_order: tuple[str, ...]
     notify_channels: tuple[str, ...]
     secrets: Secrets
+    # Peers whose forwarded headers larder trusts. File only; no env override.
+    trusted_proxies: tuple[IPNetwork, ...] = ()
 
     @property
     def db_path(self) -> Path:
@@ -177,6 +182,7 @@ def load_settings(env: Mapping[str, str] | None = None) -> Settings:
                 "ntfy_token_file", secrets_table, environ, data_dir, origin
             ),
         ),
+        trusted_proxies=_trusted_proxies(raw.get("trusted_proxies", []), origin),
     )
 
 
@@ -262,6 +268,21 @@ def _secret_path(
         return data_dir / "secrets" / default_name
     # A relative path resolves against the data dir; an absolute one replaces it.
     return data_dir / value[0]
+
+
+def _trusted_proxies(value: object, origin: str) -> tuple[IPNetwork, ...]:
+    entries = _as_str_list(value, "trusted_proxies", origin)
+    networks: list[IPNetwork] = []
+    for index, text in enumerate(entries):
+        try:
+            # strict: "10.0.0.1/24" is an error, not a silently widened network.
+            networks.append(ipaddress.ip_network(text))
+        except ValueError as exc:
+            raise ConfigError(
+                f"{origin}: trusted_proxies[{index}] must be an IP address or "
+                f"network such as 10.0.0.0/8, got '{text}'"
+            ) from exc
+    return tuple(networks)
 
 
 def _people(value: object, origin: str) -> tuple[Person, ...]:

@@ -71,7 +71,8 @@ def migrate(conn: sqlite3.Connection, source: Traversable | None = None) -> list
     packaged ``larder/migrations``. Raises DatabaseError for a bad file name, a
     duplicate version, a recorded version that no file provides (the database is
     newer than this code) or a migration that fails; a failed migration leaves
-    no trace.
+    no trace. Safe to run from several connections at once: a version another
+    connection applies first is skipped, not run twice.
     """
     if source is None:
         source = resources.files("larder") / "migrations"
@@ -98,6 +99,10 @@ def migrate(conn: sqlite3.Connection, source: Traversable | None = None) -> list
         try:
             sql = entry.read_text(encoding="utf-8")
             with transaction(conn):
+                # Another connection may have applied this version after the
+                # read above. Check again under the write lock.
+                if _is_recorded(conn, version):
+                    continue
                 conn.executescript(sql)
                 conn.execute(
                     "INSERT INTO schema_migrations (version, name, applied_at) "
@@ -108,6 +113,24 @@ def migrate(conn: sqlite3.Connection, source: Traversable | None = None) -> list
             raise DatabaseError(f"migration {name} failed: {exc}") from exc
         applied.append(version)
     return applied
+
+
+def schema_version(conn: sqlite3.Connection) -> int:
+    """Return the highest applied migration version, or 0 if none is recorded.
+
+    Call it after ``migrate``, which creates ``schema_migrations``.
+    """
+    row = conn.execute(
+        "SELECT COALESCE(MAX(version), 0) FROM schema_migrations"
+    ).fetchone()
+    return int(row[0])
+
+
+def _is_recorded(conn: sqlite3.Connection, version: int) -> bool:
+    row = conn.execute(
+        "SELECT 1 FROM schema_migrations WHERE version = ?", (version,)
+    ).fetchone()
+    return row is not None
 
 
 def _discover(source: Traversable) -> dict[int, tuple[str, Traversable]]:
