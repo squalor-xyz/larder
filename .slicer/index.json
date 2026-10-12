@@ -39,7 +39,7 @@
       "id": "S01",
       "title": "Interview: dev tooling and conventions",
       "short_title": "Interview: dev tooling and conventions",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [],
       "note_records": [],
@@ -61,7 +61,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {

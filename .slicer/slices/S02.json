@@ -22,7 +22,7 @@
     },
     {
       "heading": "Files",
-      "body": "- `pyproject.toml` (stdlib-friendly metadata; build backend per ADR 0017)\n- `src/larder/__init__.py` (version)\n- `tests/test_smoke.py`\n- `AGENTS.md`\n- `.gitignore` (exists; extend if the tooling adds caches)\n- `pyproject.toml` license field: `AGPL-3.0-only`\n- `README.md` (development section)"
+      "body": "- `pyproject.toml`: setuptools backend, `requires-python = \">=3.12\"`, `license = \"AGPL-3.0-only\"`, ruff config (`target-version = \"py312\"`)\n- `requirements.in` (Flask) and `requirements-dev.in` (`-c requirements.txt`, ruff, pip-tools)\n- `requirements.txt`, `requirements-dev.txt` (compiled with hashes)\n- `src/larder/__init__.py` (version)\n- `tests/__init__.py`, `tests/test_smoke.py`\n- `AGENTS.md`\n- `.gitignore` (exists; extend if the tooling adds caches)\n- `README.md` (development section)"
     },
     {
       "heading": "Failing tests",
@@ -30,11 +30,11 @@
     },
     {
       "heading": "Implement",
-      "body": "1. Create the package and test layout chosen in ADR 0017.\n2. Write the smoke test; see it fail, then add `__version__`.\n3. Write AGENTS.md: project summary, test/lint commands, dependency policy (ask first; stdlib-first; Flask is the only approved runtime dependency), secrets policy, the rule that household-specific data goes only in the gitignored `local/` folder, links to `docs/`, and slicer usage.\n4. Set the license metadata to `AGPL-3.0-only`; add SPDX headers to source files if ADR 0017 says so.\n5. Add a development quick start to README."
+      "body": "1. Create `src/larder/` and `tests/` per ADR 0017; every `.py` file starts with `# SPDX-License-Identifier: AGPL-3.0-only`.\n2. Write the smoke test; see it fail, then add `__version__`.\n3. Write `requirements.in` and `requirements-dev.in`; ask the owner before running `pip-compile --generate-hashes` (network); review the resolved Flask tree (ADR 0008).\n4. Write AGENTS.md: project summary; the ADR 0017 setup, test, lint and format commands; dependency policy (ask first; stdlib-first; Flask is the only approved runtime dependency; ruff and pip-tools are dev-only); secrets policy; household-specific data only in the gitignored `local/` folder; commit message style; links to `docs/`; slicer usage.\n5. Add a development quick start to README (the ADR 0017 commands)."
     },
     {
       "heading": "Check",
-      "body": "- The test command from ADR 0017 passes.\n- `python -c \"import larder\"` works from a fresh venv after install.\n- `slicer check` passes."
+      "body": "- In a fresh venv on Python ≥ 3.12: `pip install --require-hashes -r requirements.txt -r requirements-dev.txt` and `pip install --no-deps -e .` succeed.\n- `python -m unittest discover -s tests -t .` passes.\n- `ruff check .` and `ruff format --check .` pass.\n- `python -c \"import larder\"` works.\n- `slicer check` passes."
     },
     {
       "heading": "Git",

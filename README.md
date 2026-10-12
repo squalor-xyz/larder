@@ -41,3 +41,7 @@ shared shopping list.
 | [0014](docs/decisions/0014-https-tailscale-cert-local-dns.md) | HTTPS via Tailscale cert + local DNS override (superseded; deployment option) |
 | [0015](docs/decisions/0015-app-tls-agnostic.md) | The app is TLS-agnostic |
 | [0016](docs/decisions/0016-future-multi-household.md) | Single household first, portable for others later |
+| [0017](docs/decisions/0017-dev-conventions.md) | Development tooling and conventions |
+| [0025](docs/decisions/0025-conversational-channels.md) | Conversational channels: email and Matrix |
+| [0026](docs/decisions/0026-autonomy-levels.md) | Autonomy levels per person |
+| [0027](docs/decisions/0027-message-interpretation.md) | Rule-based message interpretation, optional local LLM fallback |
