@@ -1,37 +1,11 @@
 # Slice relay roles, models and efforts
 
-The owner's preferred defaults for running a slice as a slice relay
-(`slicer ai relay`). Read each slice's size and effort with
-`slicer show ID --json --lean`. The owner can override any role per run.
+The role matrix for slice relays now lives in slicer, at
+`.slicer/relay-roles.md`. Read it with `slicer ai relay-roles`;
+`slicer ai relay` also embeds it in the relay text. The owner edits that file
+by hand. Agents do not edit it.
 
-**Status:** Accepted (2026-10-12). The agents repo's
-`multi-agent-workflows/relay.conf` matches: its default lines are the
-sonnet implementer, opus reviewer and opus architect, and a comment states
-the haiku rule, since that file has no conditions.
-
-## Matrix
-
-| Role | When | Vendor | Model | Effort |
-|---|---|---|---|---|
-| Implementer | Well specified, and effort 1 with size S or M | Claude | haiku | xhigh |
-| Implementer | Well specified, and effort 2 with size S | Claude | haiku | xhigh |
-| Implementer | Anything else | Claude | sonnet | high |
-| Reviewer and gate | Every slice | Claude | opus | medium |
-| Architect | Only on a size L slice | Claude | opus | high |
-
-## Rules
-
-- A reviewer never wrote code in the slice it reviews.
-- No cross-vendor reviewer unless the owner asks.
-- Claude roles run as Claude Code subagents.
-- "Well specified" (proposed definition, not yet confirmed by the owner):
-  the slice names its files, failing tests, implementation steps and checks,
-  and needs no open owner decision.
-
-## Source
-
-- Implementer rule: owner, 2026-10-12.
-- Reviewer: `relay.conf` (`relay-reviewer claude opus medium`).
-- Architect: owner, 2026-10-12 (Claude opus, high; the grok line was removed
-  from `relay.conf`).
-- Architect only on size L: the owner's global agent guidance.
+History: the matrix was accepted on 2026-10-12 in this file and moved to slicer
+1.9.0's `slicer ai relay --init-roles` the same day. The owner confirmed the
+"well specified" definition then: the slice names its files, failing tests,
+implementation steps and checks, and needs no open owner decision.
