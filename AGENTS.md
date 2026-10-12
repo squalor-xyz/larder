@@ -60,6 +60,7 @@ pip-compile --generate-hashes --allow-unsafe requirements-dev.in
 - An area module is plain functions that take a `sqlite3.Connection` first. No classes, no ORM.
 - Writes go through `db.transaction()`. Connections are autocommit, so every transaction is explicit.
 - A schema change is a new numbered migration `NNNN_name.sql`. Never edit an applied migration.
+- A migration never contains `BEGIN`, `COMMIT` or `ROLLBACK`. The runner wraps each file in one transaction.
 
 ## Dependencies
 

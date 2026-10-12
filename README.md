@@ -15,7 +15,7 @@ shared shopping list.
 | [Goals](docs/goals.md) | Goals, non-goals, principles |
 | [Requirements](docs/requirements.md) | Functional and non-functional requirements, non-requirements |
 | [Architecture](docs/specs/architecture.md) | Components, data flow, deployment, security & privacy |
-| [Data model](docs/specs/data-model.md) | Draft entities and relationships |
+| [Data model](docs/specs/data-model.md) | MVP schema (migration 0001), Phase 2 entities, relationships |
 | [Roadmap](docs/roadmap.md) | Phases and exit criteria |
 | [Work items (slicer)](.slicer/render/ROADMAP.md) | Tracked slices; use `slicer list` / `slicer next` |
 | [Open questions](docs/open-questions.md) | Unresolved items and what each one blocks |

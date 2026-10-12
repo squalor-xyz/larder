@@ -48,7 +48,7 @@ is not part of the domain model.
 | `unit_alias.unit_id`, `item_alias.item_id`, `staple.item_id` | CASCADE |
 | `planned_meal.meal_plan_id`, `list_item.list_id` | CASCADE |
 | `list_item.added_by` | SET NULL |
-| All others (`device.person_id`, `recipe.source_id`, `planned_meal.recipe_id`, every `unit_id` and `item_id` on a line, override, list item or staple) | RESTRICT |
+| All others (`device.person_id`, `recipe.source_id`, `planned_meal.recipe_id`, every `unit_id` and `item_id` on a line, override or list item, and `staple.unit_id`) | RESTRICT |
 
 ### People
 
