@@ -62,6 +62,44 @@ All household-specific values (people, timezone, recipe repo URL, store sender
 rules, category order, notification channels) come from a TOML config file on
 the data volume plus `LARDER_*` environment overrides. Nothing
 household-specific is in code ([ADR 0016](../decisions/0016-future-multi-household.md)).
+A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
+
+- **Data directory:** `LARDER_DATA` is required and must be an existing directory.
+- **Config file:** `$LARDER_DATA/larder.toml`. It is optional; without it, every
+  key takes its default.
+- **Unknown keys are errors** at every level: the top level, `[secrets]`, each
+  `[[people]]` and each `[[stores]]`. So are values of the wrong type. The error
+  names the key and where it came from.
+- **Environment overrides** apply to scalar keys only: `LARDER_TIMEZONE`,
+  `LARDER_RECIPE_REPO_URL`, `LARDER_SECRETS_DEPLOY_KEY`,
+  `LARDER_SECRETS_IMAP_PASSWORD_FILE` and `LARDER_SECRETS_NTFY_TOKEN_FILE`. An
+  override wins over the file. Any other `LARDER_*` variable is an error.
+- **Timezone** is an optional IANA name. Without it, larder uses the host's
+  local time.
+- **People** have a role (`admin` or `member`) and an autonomy level, `L0` or
+  `L1`. The level defaults to `L0` ([ADR 0026](../decisions/0026-autonomy-levels.md)).
+
+### Data directory
+
+| Path | Contents |
+|---|---|
+| `larder.db` | SQLite database |
+| `larder.toml` | Config file (optional) |
+| `recipes/` | Clone of the recipe repo |
+| `emails/` | Raw order emails |
+| `secrets/` | Secret files; created with mode 0700 if missing |
+
+`ensure_data_dirs` creates `recipes/`, `emails/` and `secrets/` if they are
+missing. Loading the config creates nothing.
+
+### Secrets
+
+- The config holds file paths only: the deploy key, the IMAP password file and
+  the ntfy token file. A relative path resolves against `LARDER_DATA`. The
+  defaults are `secrets/deploy_key`, `secrets/imap_password` and
+  `secrets/ntfy_token`.
+- Loading reads no secret file. Secret paths are redacted from `repr`, and
+  larder never logs them.
 
 ## Deployment
 

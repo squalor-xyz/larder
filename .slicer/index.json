@@ -100,12 +100,57 @@
       "id": "S03",
       "title": "Config and data directory loading",
       "short_title": "Config and data directory loading",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S02"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "c4fe793d-6cad-435d-aa93-b846e17bb90d",
+          "kind": "",
+          "text": "**2026-10-12** — Owner answer 1 (config file location): the config file is $LARDER_DATA/larder.toml. LARDER_DATA is required and must be an existing directory.",
+          "created_at": "2026-10-12T18:15:45Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "f3d56e01-2615-4f3e-bd3a-e8d310d0a4f1",
+          "kind": "",
+          "text": "**2026-10-12** — Owner answer 2 (timezone): timezone is a config key, optional, as an IANA name. When it is unset, larder uses the host's local time.",
+          "created_at": "2026-10-12T18:15:46Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "ab062ecf-9dfd-478a-b62e-8b6037af1e0c",
+          "kind": "",
+          "text": "**2026-10-12** — Owner answer 3 (settings sketch, chosen now): people (name, role, autonomy, email, matrix_id, notify_channel); stores (name, senders); category_order; notify_channels; [secrets] paths (deploy_key, imap_password_file, ntfy_token_file). Secrets are paths only, never read or printed.",
+          "created_at": "2026-10-12T18:15:46Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "d730243b-4d3e-4539-8bd5-ff489903a157",
+          "kind": "",
+          "text": "**2026-10-12** — Gate VERDICT: PASS (opus reviewer). Settings load from $LARDER_DATA/larder.toml plus scalar LARDER_* overrides, reject unknown keys and LARDER_* vars, resolve the data-dir layout and redact secret paths; 20 tests green, ruff clean. Open lows: an env override skips type-checking the file value it replaces; LARDER_DATA is not resolved to an absolute path.",
+          "created_at": "2026-10-12T18:18:17Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "S",
@@ -124,7 +169,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
@@ -136,7 +181,19 @@
       "depends_on": [
         "S03"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "1649b9d2-d6d0-44f2-84db-8e4bff27d7c8",
+          "kind": "",
+          "text": "**2026-10-12** — From the S03 review: reconcile the docs/specs/data-model.md Person row with config.Person from S03 (autonomy L0/L1, email, matrix_id), and decide whether people live in config only or are also mirrored in the DB.",
+          "created_at": "2026-10-12T18:18:17Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",

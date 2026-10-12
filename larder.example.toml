@@ -1,0 +1,44 @@
+# larder.toml: household settings for larder. Every value here is a placeholder.
+#
+# Copy this file to $LARDER_DATA/larder.toml and edit it. The file holds
+# settings and secret file paths only; secret values never go in it.
+#
+# Environment overrides win over this file. Only these scalar keys can be
+# overridden: LARDER_TIMEZONE, LARDER_RECIPE_REPO_URL, LARDER_SECRETS_DEPLOY_KEY,
+# LARDER_SECRETS_IMAP_PASSWORD_FILE, LARDER_SECRETS_NTFY_TOKEN_FILE.
+# See docs/specs/architecture.md (Configuration).
+
+# IANA time zone name for dates and schedules, such as "Europe/Berlin".
+# Leave it out to use the host's local time.
+timezone = "UTC"
+
+# Git URL of the recipe repo that larder clones.
+recipe_repo_url = "https://git.example/recipes.git"
+
+# Order of categories on the shopping list, for quick manual entry in a store app.
+category_order = ["produce", "bakery", "dairy", "meat", "frozen", "pantry"]
+
+# Names of the notification channels in use. Channel setup comes with the
+# notifier in Phase 2.
+notify_channels = ["ntfy"]
+
+# Paths to secret files. A relative path resolves against $LARDER_DATA.
+# The files are not read when settings load.
+[secrets]
+deploy_key = "secrets/deploy_key"
+imap_password_file = "secrets/imap_password"
+ntfy_token_file = "secrets/ntfy_token"
+
+# One [[people]] table per household member.
+[[people]]
+name = "Alex"                    # required
+role = "admin"                   # "admin" or "member" (default "member")
+autonomy = "L0"                  # "L0" or "L1" (default "L0"); see ADR 0026
+email = "alex@example.test"      # optional
+matrix_id = "@alex:matrix.example"  # optional
+notify_channel = "ntfy"          # optional; the channel this person is notified on
+
+# One [[stores]] table per store whose order emails larder reads.
+[[stores]]
+name = "example-store"           # required
+senders = ["orders@store.example"]  # sender addresses of its order emails
