@@ -383,12 +383,24 @@
       "id": "S06",
       "title": "Interview: device pairing and admin bootstrap",
       "short_title": "Interview: device pairing and admin bootstrap",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S01"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "3ad88bce-1f0e-4655-b62d-c4c34b252018",
+          "kind": "",
+          "text": "**2026-10-13** — Owner answers 2026-10-13: bootstrap by log link (single use, replaced on restart) and CLI 'python -m larder pair --person NAME'; pairing by QR (segno, approved) + link, 10 min single use; links printed as path only; cookie 1 year sliding; members get 403 on admin pages; unpaired devices get a friendly 401 page; bootstrap picks an admin from config; startup fails with no admin. Recorded in ADR 0010 and S07.",
+          "created_at": "2026-10-13T14:03:57Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "S",
@@ -407,7 +419,7 @@
         "importance": 3,
         "urgency": 2,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
