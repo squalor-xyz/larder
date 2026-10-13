@@ -15,7 +15,7 @@ shared shopping list.
 | [Goals](docs/goals.md) | Goals, non-goals, principles |
 | [Requirements](docs/requirements.md) | Functional and non-functional requirements, non-requirements |
 | [Architecture](docs/specs/architecture.md) | Components, data flow, deployment, security & privacy |
-| [Data model](docs/specs/data-model.md) | MVP schema (migration 0001), Phase 2 entities, relationships |
+| [Data model](docs/specs/data-model.md) | MVP schema (migrations 0001 and 0002), Phase 2 entities, relationships |
 | [Roadmap](docs/roadmap.md) | Phases and exit criteria |
 | [Work items (slicer)](.slicer/render/ROADMAP.md) | Tracked slices; use `slicer list` / `slicer next` |
 | [Open questions](docs/open-questions.md) | Unresolved items and what each one blocks |
@@ -71,3 +71,11 @@ not for production. `GET /healthz` returns the status and the schema version.
 ```sh
 LARDER_DATA=/path/to/data python -m larder --host 127.0.0.1 --port 8000
 ```
+
+`larder.toml` must name at least one person with `role = "admin"`, or larder
+refuses to start. Every device has to be paired before it can use larder. While
+no admin device exists, larder logs a one-time `/pair/<token>` path at start:
+open it on larder's usual address to pair the first device. To pair someone
+else, or to recover when every admin device is lost, run
+`LARDER_DATA=/path/to/data python -m larder pair --person NAME`
+([ADR 0010](docs/decisions/0010-device-cookie-auth.md)).

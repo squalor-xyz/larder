@@ -75,3 +75,118 @@ h1 {
 p {
   margin: 0 0 1rem;
 }
+
+h2 {
+  font-size: 1.2rem;
+  line-height: 1.3;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Forms: labels above fields, 44px tap targets, no horizontal scroll. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+}
+
+input[type="text"],
+select {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 0 0.5rem;
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+button {
+  min-height: 44px;
+  padding: 0 1rem;
+  font: inherit;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid var(--fg);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.devices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.device {
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.device p {
+  margin: 0 0 0.25rem;
+}
+
+.device-meta {
+  font-size: 0.9rem;
+}
+
+.device-revoked {
+  opacity: 0.7;
+}
+
+.tag {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0 0.4rem;
+}
+
+.notice {
+  margin: 1rem 0;
+  padding: 0 1rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+/* The code keeps its own white background so it scans in dark mode. */
+.qr svg {
+  display: block;
+  width: min(100%, 16rem);
+  height: auto;
+}
+
+.break {
+  overflow-wrap: anywhere;
+}

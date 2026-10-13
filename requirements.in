@@ -1,3 +1,4 @@
-# Runtime dependencies. The only approved runtime dependency is Flask (ADR 0008).
+# Runtime dependencies. Approved: Flask (ADR 0008) and segno for QR codes (ADR 0010).
 # Compile with: pip-compile --generate-hashes requirements.in
 flask
+segno

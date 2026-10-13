@@ -1,7 +1,9 @@
 # Data model
 
 The MVP tables below are the schema in
-[`0001_init.sql`](../../src/larder/migrations/0001_init.sql). Phase 2 tables
+[`0001_init.sql`](../../src/larder/migrations/0001_init.sql), plus
+`pairing_token` from
+[`0002_pairing.sql`](../../src/larder/migrations/0002_pairing.sql). Phase 2 tables
 are indicative only; each is added by its own slice as a new migration.
 
 Conventions:
@@ -22,6 +24,7 @@ Conventions:
 |---|---|---|
 | **person** | id, name (unique), active | Mirror of the people in config; see below |
 | **device** | id, person_id, label, token_hash (unique), paired_at, last_seen, revoked_at | [ADR 0010](../decisions/0010-device-cookie-auth.md). `revoked_at` null means active |
+| **pairing_token** | id, token_hash (unique), kind (`bootstrap`/`pair`), person_id, created_at, expires_at, used_at | [ADR 0010](../decisions/0010-device-cookie-auth.md). Only the hash is stored. A `bootstrap` token has no person and no expiry; a `pair` token has both. `used_at` null means unused |
 | **recipe_source** | id, kind (`recipe-repo`, `hugo`, …), location | Where a recipe came from. Unique on (kind, location) |
 | **recipe** | id, source_id, slug, title, source_ref, content_hash, body, archived | Mirrored from the recipe repo. Unique on (source_id, slug) |
 | **recipe_meta** | recipe_id, meal_type, servings, in_rotation, favorite, effort | Edited in the UI; survives re-indexing ([ADR 0006](../decisions/0006-metadata-in-larder-db.md)). `servings` is positive when set |
@@ -48,15 +51,17 @@ is not part of the domain model.
 | `unit_alias.unit_id`, `item_alias.item_id`, `staple.item_id` | CASCADE |
 | `planned_meal.meal_plan_id`, `list_item.list_id` | CASCADE |
 | `list_item.added_by` | SET NULL |
-| All others (`device.person_id`, `recipe.source_id`, `planned_meal.recipe_id`, every `unit_id` and `item_id` on a line, override or list item, and `staple.unit_id`) | RESTRICT |
+| All others (`device.person_id`, `pairing_token.person_id`, `recipe.source_id`, `planned_meal.recipe_id`, every `unit_id` and `item_id` on a line, override or list item, and `staple.unit_id`) | RESTRICT |
 
 ### People
 
 Config is the source of truth for people: `config.Person` holds the role,
 autonomy level and contact details (email, Matrix id, notify channel). The
 `person` table is a thin mirror (id, name, active) so other tables can
-reference a person. Syncing it from config is a later slice; migration 0001
-only creates the table.
+reference a person. At every start larder syncs it from config: new names are
+inserted, names in config are set active, and names no longer in config are set
+inactive. Rows are never deleted. An inactive person's devices stop working and
+their pairing links stop being valid.
 
 ### Deviations from the earlier draft
 

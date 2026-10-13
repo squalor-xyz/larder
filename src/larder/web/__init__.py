@@ -14,7 +14,7 @@ from typing import Any
 from flask import Blueprint, Flask, Response, current_app, g, jsonify, render_template
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-from larder import db
+from larder import auth, db
 from larder.config import IPNetwork, Settings, ensure_data_dirs
 
 SETTINGS_KEY = "LARDER_SETTINGS"
@@ -35,17 +35,30 @@ WSGIApp = Callable[[dict[str, Any], Callable[..., Any]], Iterable[bytes]]
 
 
 def create_app(settings: Settings) -> Flask:
-    """Build the app. Creates the data layout and migrates the database first."""
+    """Build the app.
+
+    Creates the data layout, migrates the database, syncs the config people
+    into it and logs a bootstrap pairing link while no admin has a device.
+    Raises ConfigError when config names no admin.
+    """
+    auth.require_admin(settings)
     ensure_data_dirs(settings)
+    session_key = auth.load_session_key(settings)
     conn = db.connect(settings)
     try:
         db.migrate(conn)
+        auth.sync_people(conn, settings)
+        auth.ensure_bootstrap(conn, settings)
     finally:
         conn.close()
+
+    # Imported here: the views import this module for get_db and SETTINGS_KEY.
+    from larder.web import auth_views
 
     app = Flask(__name__)
     app.config[SETTINGS_KEY] = settings
     app.register_blueprint(shell)
+    auth_views.init_app(app, session_key)
     app.register_error_handler(404, _not_found)
     app.after_request(_security_headers)
     app.teardown_appcontext(_close_db)

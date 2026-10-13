@@ -11,6 +11,11 @@
     <header class="site-header">
       <div class="site-header-inner">
         <a class="site-name" href="/">larder</a>
+        {% if person and person.role == "admin" %}
+        <nav class="site-nav" aria-label="Admin">
+          <a href="{{ url_for('admin.devices') }}">Devices</a>
+        </nav>
+        {% endif %}
       </div>
     </header>
     <main>

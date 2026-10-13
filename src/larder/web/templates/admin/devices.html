@@ -1,0 +1,61 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}Devices - larder{% endblock %}
+{% block main %}
+  <h1>Devices</h1>
+
+  {% if new_link %}
+  <section class="notice" aria-labelledby="new-link-heading">
+    <h2 id="new-link-heading">Pairing link for {{ new_person }}</h2>
+    <p>Scan the code with the new device, or open the link on it. It works once and expires in 10 minutes.</p>
+    <div class="qr">{{ new_qr }}</div>
+    <p><a class="break" href="{{ new_link }}">{{ new_link }}</a></p>
+  </section>
+  {% endif %}
+
+  <section aria-labelledby="pair-heading">
+    <h2 id="pair-heading">Pair a new device</h2>
+    <form method="post" action="{{ url_for('admin.create_pairing_link') }}" class="stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="pair-person">Person</label>
+      <select id="pair-person" name="person" required>
+        {% for name in people %}
+        <option value="{{ name }}">{{ name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Create pairing link</button>
+    </form>
+  </section>
+
+  <section aria-labelledby="list-heading">
+    <h2 id="list-heading">Paired devices</h2>
+    {% if devices %}
+    <ul class="devices">
+      {% for device in devices %}
+      <li class="device{% if device.revoked_at %} device-revoked{% endif %}">
+        <p class="device-title">
+          <strong>{{ device.label }}</strong>
+          for {{ device.person_name }}
+          {% if device.revoked_at %}<span class="tag">revoked {{ device.revoked_at | when }}</span>{% endif %}
+        </p>
+        <p class="device-meta">Paired {{ device.paired_at | when }}. Last seen {{ device.last_seen | when }}.</p>
+        {% if not device.revoked_at %}
+        <form method="post" action="{{ url_for('admin.rename', device_id=device.id) }}" class="inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <label for="label-{{ device.id }}">Name</label>
+          <input id="label-{{ device.id }}" name="label" type="text" maxlength="80" value="{{ device.label }}" required>
+          <button type="submit">Rename</button>
+        </form>
+        <form method="post" action="{{ url_for('admin.revoke', device_id=device.id) }}" class="inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit">Revoke</button>
+        </form>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No devices are paired yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

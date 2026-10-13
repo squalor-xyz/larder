@@ -426,13 +426,47 @@
       "id": "S07",
       "title": "People and device pairing",
       "short_title": "People and device pairing",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S05",
         "S06"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "d29e5803-a467-43ec-a6d1-4e207f5b6c97",
+          "kind": "",
+          "text": "**2026-10-13** — Decisions: invalid, used or expired pairing links all get one plain 404 page (410 would say which). Pair confirm page: GET never consumes; POST consumes in db.transaction and sets cookie, 303 to /. Admin check runs inside the guard, so members get 403 before the CSRF check. Session key file is created by writing a 0600 temp file and os.link into place (atomic); a key under 32 bytes is a ConfigError. Session cookie class overrides get_cookie_secure to follow request.scheme (ProxyFix aware). pairing_token CHECK: kind=bootstrap or (person_id and expires_at not null). pyproject package-data gains web/templates/*/*.html for admin/devices.html. QR is segno svg_inline with omitsize and white background; no style attributes. Unused bootstrap tokens are also deleted at start once an admin device exists. segno 1.6.6, BSD-3-Clause, pinned in requirements.txt.",
+          "created_at": "2026-10-13T14:52:05Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "a09f3727-ed40-414e-9b1c-14d9f22c58f0",
+          "kind": "",
+          "text": "**2026-10-13** — Review fixes: a bootstrap link is now dead once an admin device exists, at GET (peek) and at POST (rechecked inside the pairing transaction, consume rolled back); MAX_CONTENT_LENGTH 1 MiB so oversized POSTs to /pair/... get 413; OSError on secrets/session_key becomes a ConfigError naming the path (clean exit 2); ADR 0010 now says tokens are looked up by hash and only CSRF tokens use constant-time compare; the no-bootstrap test now leaves the bootstrap token unused so it covers the delete-on-restart branch.",
+          "created_at": "2026-10-13T15:02:22Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "24ba4e15-2a0d-4b16-aa94-1ae9e212504b",
+          "kind": "",
+          "text": "**2026-10-13** — Gate PASS (opus/medium) after one fix round: M1 dead bootstrap link once an admin device exists (peek + consume with rollback), T1 non-vacuous bootstrap cleanup test, L1 MAX_CONTENT_LENGTH 1 MiB, L2 session_key OSError -> ConfigError, ADR wording. Open lows: 413 uses Flask's default page (no error.html handler); the 1 MiB limit is app-wide and undocumented, raise it for any upload feature; AGENTS.md status line still says 'no features yet'.",
+          "created_at": "2026-10-13T15:03:32Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",
@@ -452,7 +486,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 2,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
@@ -465,7 +499,19 @@
         "S05",
         "S52"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "fa103b61-23d6-453a-abbc-deaaae4a6baf",
+          "kind": "",
+          "text": "**2026-10-13** — From S07 review: the device guard serves 401 for any endpoint not in auth_views._OPEN_ENDPOINTS. Serve the manifest and service worker from static (or add them to that set), and never let the service worker cache the 401 unpaired page.",
+          "created_at": "2026-10-13T15:00:32Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "S",
@@ -657,7 +703,19 @@
         "S13",
         "S07"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "06183be0-ed1a-426a-811e-fcdb39f4fb8e",
+          "kind": "",
+          "text": "**2026-10-13** — From S07 review: the admin 403 check is request.blueprint == auth_views.admin. Register new admin pages on that blueprint or extend the guard.",
+          "created_at": "2026-10-13T15:00:32Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",
@@ -785,7 +843,19 @@
         "S17",
         "S07"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "0509d131-9136-4ed8-88e4-94d372633025",
+          "kind": "",
+          "text": "**2026-10-13** — From S07 review: the admin 403 check is request.blueprint == auth_views.admin. Register new admin pages on that blueprint or extend the guard.",
+          "created_at": "2026-10-13T15:00:32Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",
@@ -1110,6 +1180,17 @@
           "kind": "",
           "text": "**2026-10-12** — From the S05 review: trusted_proxies matching does not unwrap IPv4-mapped peers. On a dual-stack bind (--host :: or a WSGI server listening on ::) an IPv4 proxy appears as ::ffff:a.b.c.d and does not match an IPv4 entry, so forwarded headers are ignored (fails closed). Unwrap address.ipv4_mapped in larder.web._is_trusted, or document listing the mapped form.",
           "created_at": "2026-10-12T20:45:31Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": ""
+        },
+        {
+          "id": "9f8df878-5964-4601-919e-3e142faf443d",
+          "kind": "",
+          "text": "**2026-10-13** — From S07 review: every worker that calls create_app runs ensure_bootstrap. With a multi-worker WSGI server without preload, each worker logs its own /pair link, only the last works, and a respawn replaces a link the admin is about to use. Run create_app once (preload or single worker) or move bootstrap to a pre-start step (src/larder/web/__init__.py create_app).",
+          "created_at": "2026-10-13T15:00:32Z",
           "attempt": 0,
           "by": "Jon R",
           "verified_by": "",

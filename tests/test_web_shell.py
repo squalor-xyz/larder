@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 import contextlib
 import io
+import logging
 import os
+import re
 import sqlite3
 import tempfile
 import tomllib
@@ -11,9 +13,10 @@ from pathlib import Path
 from unittest import mock
 
 from flask import Flask, Response, jsonify, request
+from flask.testing import FlaskClient
 from werkzeug.test import TestResponse
 
-from larder import db
+from larder import auth, db
 from larder.__main__ import main
 from larder.config import Settings, load_settings
 from larder.db import DatabaseError
@@ -55,14 +58,52 @@ def add_probe(app: Flask) -> None:
     app.add_url_rule(PROBE_PATH, "probe", probe)
 
 
+# Every config needs an admin (ADR 0010). [[people]] tables must follow the
+# top-level keys that a test passes to write_config.
+PEOPLE = """
+[[people]]
+name = "Ada"
+role = "admin"
+
+[[people]]
+name = "Sam"
+role = "member"
+"""
+DEVICE_COOKIE = "larder_device"
+CSRF_FIELD = re.compile(r'name="csrf_token" value="([^"]+)"')
+
+
 class WebShellTestCase(unittest.TestCase):
     def setUp(self) -> None:
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         self.data_dir = Path(tmp.name)
+        self.write_config("")
+        # A handler on larder.auth keeps the bootstrap warning off stderr
+        # (logging's last-resort handler prints it when nothing handles it).
+        sink = logging.NullHandler()
+        logging.getLogger("larder.auth").addHandler(sink)
+        self.addCleanup(logging.getLogger("larder.auth").removeHandler, sink)
 
-    def write_config(self, text: str) -> None:
-        (self.data_dir / "larder.toml").write_text(text, encoding="utf-8")
+    def write_config(self, text: str, people: str = PEOPLE) -> None:
+        (self.data_dir / "larder.toml").write_text(text + people, encoding="utf-8")
+
+    def paired_client(self, app: Flask, person: str = "Ada") -> FlaskClient:
+        """Return a test client holding a device cookie for ``person``."""
+        conn = db.connect(self.settings())
+        try:
+            token = auth.create_pair_token(conn, person)
+        finally:
+            conn.close()
+        client = app.test_client()
+        page = client.get(f"/pair/{token}")
+        csrf = CSRF_FIELD.search(page.get_data(as_text=True))
+        assert csrf is not None, "pair page has no CSRF field"
+        done = client.post(
+            f"/pair/{token}", data={"csrf_token": csrf.group(1), "label": "Test"}
+        )
+        assert done.status_code == 303, done.status_code
+        return client
 
     def settings(self) -> Settings:
         return load_settings({"LARDER_DATA": str(self.data_dir)})
@@ -73,8 +114,9 @@ class WebShellTestCase(unittest.TestCase):
         path: str,
         remote_addr: str = "127.0.0.1",
         headers: dict[str, str] | None = None,
+        client: FlaskClient | None = None,
     ) -> TestResponse:
-        return app.test_client().get(
+        return (client or app.test_client()).get(
             path, headers=headers, environ_base={"REMOTE_ADDR": remote_addr}
         )
 
@@ -118,7 +160,7 @@ class ErrorPageTest(WebShellTestCase):
     def test_unknown_route_404_uses_base_template(self) -> None:
         app = create_app(self.settings())
 
-        response = self.get(app, "/no-such-page")
+        response = self.paired_client(app).get("/no-such-page")
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.mimetype, "text/html")
@@ -133,7 +175,7 @@ class ErrorPageTest(WebShellTestCase):
     def test_404_has_security_headers(self) -> None:
         app = create_app(self.settings())
 
-        response = self.get(app, "/no-such-page")
+        response = self.paired_client(app).get("/no-such-page")
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.headers.get("Content-Security-Policy"), CSP)
@@ -167,7 +209,9 @@ class ProxyHeadersTest(WebShellTestCase):
         app = create_app(self.settings())
         add_probe(app)
 
-        response = self.get(app, PROBE_PATH, "10.1.2.3", FORWARDED)
+        response = self.get(
+            app, PROBE_PATH, "10.1.2.3", FORWARDED, client=self.paired_client(app)
+        )
 
         self.assertEqual(
             response.get_json(),
@@ -179,7 +223,9 @@ class ProxyHeadersTest(WebShellTestCase):
         app = create_app(self.settings())
         add_probe(app)
 
-        response = self.get(app, PROBE_PATH, "192.0.2.7", FORWARDED)
+        response = self.get(
+            app, PROBE_PATH, "192.0.2.7", FORWARDED, client=self.paired_client(app)
+        )
 
         self.assertEqual(
             response.get_json(),
@@ -191,7 +237,9 @@ class ProxyHeadersTest(WebShellTestCase):
         app = create_app(self.settings())
         add_probe(app)
 
-        response = self.get(app, PROBE_PATH, "10.1.2.3", FORWARDED)
+        response = self.get(
+            app, PROBE_PATH, "10.1.2.3", FORWARDED, client=self.paired_client(app)
+        )
 
         self.assertEqual(
             response.get_json(),
@@ -209,7 +257,9 @@ class ProxyHeadersTest(WebShellTestCase):
 
         for peer in ("not-an-ip", ""):
             with self.subTest(peer=peer):
-                response = self.get(app, PROBE_PATH, peer, FORWARDED)
+                response = self.get(
+                    app, PROBE_PATH, peer, FORWARDED, client=self.paired_client(app)
+                )
 
                 self.assertEqual(
                     response.get_json(),
@@ -261,14 +311,17 @@ class MainTest(WebShellTestCase):
 
 class TemplateRulesTest(unittest.TestCase):
     def test_templates_have_no_inline_script_or_style(self) -> None:
-        templates = resources.files("larder.web") / "templates"
-        names = {entry.name for entry in templates.iterdir()}
-        self.assertTrue({"base.html", "404.html"} <= names)
+        templates = Path(str(resources.files("larder.web") / "templates"))
+        found = {
+            path.relative_to(templates).as_posix() for path in templates.rglob("*")
+        }
+        self.assertTrue(
+            {"base.html", "404.html", "unpaired.html", "admin/devices.html"} <= found
+        )
 
-        for entry in templates.iterdir():
-            text = entry.read_text(encoding="utf-8")
-            lowered = text.lower()
-            with self.subTest(template=entry.name):
+        for path in sorted(templates.rglob("*.html")):
+            lowered = path.read_text(encoding="utf-8").lower()
+            with self.subTest(template=path.relative_to(templates).as_posix()):
                 self.assertNotIn("<script", lowered)
                 self.assertNotIn("<style", lowered)
                 self.assertNotIn(" style=", lowered)
@@ -281,11 +334,12 @@ class PackageDataTest(unittest.TestCase):
             (REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8")
         )
         patterns = pyproject["tool"]["setuptools"]["package-data"]["larder"]
-        self.assertIn("web/templates/*.html", patterns)
-        self.assertIn("web/static/*", patterns)
+        wanted = ("web/templates/*.html", "web/templates/*/*.html", "web/static/*")
+        for pattern in wanted:
+            self.assertIn(pattern, patterns)
 
         package_root = REPO_ROOT / "src" / "larder"
-        for pattern in ("web/templates/*.html", "web/static/*"):
+        for pattern in wanted:
             with self.subTest(pattern=pattern):
                 self.assertTrue(list(package_root.glob(pattern)))
 

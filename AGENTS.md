@@ -65,7 +65,8 @@ pip-compile --generate-hashes --allow-unsafe requirements-dev.in
 ## Dependencies
 
 - Stdlib first. Prefer in-repo code and the standard library ([ADR 0002](docs/decisions/0002-python.md)).
-- Flask is the only approved runtime dependency ([ADR 0008](docs/decisions/0008-flask.md)).
+- Flask is the approved runtime dependency ([ADR 0008](docs/decisions/0008-flask.md)).
+  segno (BSD-3-Clause) is also approved, for QR codes; the owner approved it on 2026-10-13 ([ADR 0010](docs/decisions/0010-device-cookie-auth.md)).
 - ruff and pip-tools are dev-only. They never ship in the runtime image ([ADR 0017](docs/decisions/0017-dev-conventions.md)).
 - Ask the owner before you add any dependency, including dev and test ones. State why the stdlib or in-repo code is not enough, and the license. FLOSS only.
 - A new dependency needs an edit to the `.in` file, a regenerated hashed pin file, and owner approval.

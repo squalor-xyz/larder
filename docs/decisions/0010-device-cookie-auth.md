@@ -1,6 +1,6 @@
 # 0010: Device pairing with a long-lived cookie
 
-**Status:** Accepted (2026-10-11). Flow details amended 2026-10-13 (S06).
+**Status:** Accepted (2026-10-11). Flow details amended 2026-10-13 (S06, S07).
 
 ## Context
 
@@ -27,7 +27,9 @@ screen after pairing.
 - **Bootstrap:** while no admin has an active device, larder prints a one-time
   bootstrap link to the server log at startup. It is single use and has no
   fixed expiry; each restart replaces it until one is used. Opening it lists
-  the admins from config, and the device is paired to the one picked.
+  the admins from config, and the device is paired to the one picked. The link
+  only works while no admin has an active device: once one does (for example
+  paired by CLI), the link is dead, even if unused.
 - **CLI:** `python -m larder pair --person NAME` prints a one-time pairing link
   for any person in config. It follows the pairing-link rules below and is the
   recovery path when every admin device is lost or revoked.
@@ -42,12 +44,28 @@ screen after pairing.
   unchanged.
 - **Pairing links** are valid for 10 minutes and for one use, whichever ends
   first.
+- **Opening a link only shows a confirm page.** A `GET` of `/pair/<token>`
+  never uses the link up, because messaging apps prefetch links to build
+  previews. The confirm page asks for an optional device name (and, on the
+  bootstrap link, which admin). Submitting it (`POST`, CSRF-protected) uses the
+  link up, creates the device and sets the cookie in one transaction, then
+  redirects to `/`. An unknown, used or expired link gets the same plain 404
+  page, so it does not say which.
 - **Tokens** (bootstrap, pairing, device) come from `secrets`. Only SHA-256
-  hashes are stored, and they are compared in constant time.
-- **Device cookie:** a 1-year `Max-Age`, renewed on use, so active devices never
-  expire. A device unused for a year has to be paired again. An admin can
+  hashes are stored, and a token is looked up by its hash. CSRF tokens are
+  compared in constant time.
+- **Device cookie** (`larder_device`): a 1-year `Max-Age`, renewed on use, so
+  active devices never expire. `last_seen` is updated, and the cookie
+  re-issued, at most once an hour. A device unused for a year has to be paired again. An admin can
   revoke a device at any time, and revocation takes effect on its next
   request.
+- **Session key and CSRF:** Flask's session cookie carries a per-session CSRF
+  token, and every `POST`, `PUT`, `PATCH` and `DELETE` must send it back in a
+  hidden `csrf_token` field (400 otherwise). The session is signed with a
+  random 32-byte key in `secrets/session_key`, created with mode 0600 on first
+  start and reused after (owner decision, 2026-10-13). The session cookie is
+  `HttpOnly`, `SameSite=Lax` and `Secure` over HTTPS. It holds nothing but the
+  CSRF token; who the user is comes from the device cookie.
 - **Admin pages** (devices, recipe metadata, parse review, imports;
   requirement U3) are admin-only. Members get 403, and admin links are hidden
   from them.

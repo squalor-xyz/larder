@@ -1,0 +1,23 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}Pair this device - larder{% endblock %}
+{% block main %}
+  <h1>Pair this device</h1>
+  <form method="post" action="{{ url_for('auth.pair_submit', token=token) }}" class="stack">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% if bootstrap %}
+    <p>Who is using this device? Pick an admin.</p>
+    <label for="person">Person</label>
+    <select id="person" name="person" required>
+      {% for name in admins %}
+      <option value="{{ name }}">{{ name }}</option>
+      {% endfor %}
+    </select>
+    {% else %}
+    <p>This device will be set up for <strong>{{ person_name }}</strong>.</p>
+    {% endif %}
+    <label for="label">Device name (optional)</label>
+    <input id="label" name="label" type="text" maxlength="80" autocomplete="off" placeholder="Kitchen tablet">
+    <button type="submit">Pair this device</button>
+  </form>
+{% endblock %}

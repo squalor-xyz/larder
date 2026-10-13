@@ -94,6 +94,7 @@ A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
 | `recipes/` | Clone of the recipe repo |
 | `emails/` | Raw order emails |
 | `secrets/` | Secret files; created with mode 0700 if missing |
+| `secrets/session_key` | 32 random bytes that sign the session cookie; created with mode 0600 at first start and reused |
 
 `ensure_data_dirs` creates `recipes/`, `emails/` and `secrets/` if they are
 missing. Loading the config creates nothing.
@@ -129,5 +130,6 @@ missing. Loading the config creates nothing.
   the private DB.
 - **Secrets** are read from files or the environment, never committed, never logged.
 - **Auth:** device pairing with a long-lived, revocable cookie that is
-  `HttpOnly`, `SameSite`, and `Secure` behind HTTPS; CSRF protection on forms
-  ([ADR 0010](../decisions/0010-device-cookie-auth.md)).
+  `HttpOnly`, `SameSite`, and `Secure` behind HTTPS; a per-session CSRF token
+  on every state-changing request; larder refuses to start without an admin in
+  config ([ADR 0010](../decisions/0010-device-cookie-auth.md)).

@@ -115,3 +115,12 @@
 {"when": "2026-10-13T14:03:57Z", "item": "S07", "action": "edit", "from": "", "to": "", "note": "Check"}
 {"when": "2026-10-13T14:03:57Z", "item": "S06", "action": "note", "from": "", "to": "", "note": "Owner answers 2026-10-13: bootstrap by log link (single use,", "by": "Jon R"}
 {"when": "2026-10-13T14:04:02Z", "item": "S06", "action": "status", "from": "started", "to": "done", "note": "ADR 0010 amended with the bootstrap, pairing, lifetimes and roles; S07 Owner input resolved and Implement/Check/Failing tests updated; raw answers in local/.", "by": "Jon R"}
+{"when": "2026-10-13T14:43:08Z", "item": "S07", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-10-13T14:52:05Z", "item": "S07", "action": "note", "from": "", "to": "", "note": "Decisions: invalid, used or expired pairing links all get on", "by": "Jon R"}
+{"when": "2026-10-13T15:00:32Z", "item": "S28", "action": "note", "from": "", "to": "", "note": "From S07 review: every worker that calls create_app runs ens", "by": "Jon R"}
+{"when": "2026-10-13T15:00:32Z", "item": "S08", "action": "note", "from": "", "to": "", "note": "From S07 review: the device guard serves 401 for any endpoin", "by": "Jon R"}
+{"when": "2026-10-13T15:00:32Z", "item": "S14", "action": "note", "from": "", "to": "", "note": "From S07 review: the admin 403 check is request.blueprint ==", "by": "Jon R"}
+{"when": "2026-10-13T15:00:32Z", "item": "S18", "action": "note", "from": "", "to": "", "note": "From S07 review: the admin 403 check is request.blueprint ==", "by": "Jon R"}
+{"when": "2026-10-13T15:02:22Z", "item": "S07", "action": "note", "from": "", "to": "", "note": "Review fixes: a bootstrap link is now dead once an admin dev", "by": "Jon R"}
+{"when": "2026-10-13T15:03:32Z", "item": "S07", "action": "note", "from": "", "to": "", "note": "Gate PASS (opus/medium) after one fix round: M1 dead bootstr", "by": "Jon R"}
+{"when": "2026-10-13T15:03:32Z", "item": "S07", "action": "status", "from": "started", "to": "done", "note": "People sync, bootstrap log link + CLI pair, QR (segno) + link pairing, 1-year sliding device cookie, unpaired 401 page, admin-only devices page, CSRF with a generated session key; 124 tests green, ruff clean, gate PASS.", "by": "Jon R"}

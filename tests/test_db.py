@@ -16,6 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 MVP_TABLES = {
     "person",
     "device",
+    "pairing_token",
     "recipe_source",
     "recipe",
     "recipe_meta",
@@ -134,7 +135,7 @@ class MigrateTest(DbTestCase):
 
         second = db.migrate(conn)
 
-        self.assertEqual(first, [1])
+        self.assertEqual(first, [1, 2])
         self.assertEqual(second, [])
         self.assertEqual(self.master(conn), before)
 
@@ -208,7 +209,7 @@ class MigrateTest(DbTestCase):
         ):
             applied = db.migrate(second)
 
-        self.assertEqual(first_applied, [[1]])
+        self.assertEqual(first_applied, [[1, 2]])
         self.assertEqual(applied, [])
         self.assertIn("person", self.table_names(second))
 
