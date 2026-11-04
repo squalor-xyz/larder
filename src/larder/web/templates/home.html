@@ -1,0 +1,9 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}larder{% endblock %}
+{% block main %}
+  <h1>You're paired</h1>
+  {% if meal %}
+  <p>Tonight: {{ meal["title"] }}</p>
+  {% endif %}
+{% endblock %}
