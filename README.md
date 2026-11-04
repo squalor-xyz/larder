@@ -39,13 +39,17 @@ brand icons. Not built yet: recipes, planning and the shopping list.
 | [0010](docs/decisions/0010-device-cookie-auth.md) | Device pairing with a long-lived cookie |
 | [0011](docs/decisions/0011-blog-one-time-import.md) | Hugo site import is one-time |
 | [0012](docs/decisions/0012-recipe-repo-github-push.md) | Recipe repo on a git host; larder pushes with a scoped key |
-| [0013](docs/decisions/0013-weekly-planning.md) | Weekly planning |
+| [0013](docs/decisions/0013-weekly-planning.md) | Weekly planning, with the rules from the planning interview |
 | [0014](docs/decisions/0014-https-tailscale-cert-local-dns.md) | HTTPS via Tailscale cert + local DNS override (superseded; deployment option) |
 | [0015](docs/decisions/0015-app-tls-agnostic.md) | The app is TLS-agnostic |
 | [0016](docs/decisions/0016-future-multi-household.md) | Single household first, portable for others later |
 | [0017](docs/decisions/0017-dev-conventions.md) | Development tooling and conventions |
 | [0018](docs/decisions/0018-recipe-repo-conventions.md) | Recipe repo conventions |
-| 0019–0024 | Reserved: each is written by its interview slice (`slicer find Interview`) |
+| [0019](docs/decisions/0019-items-categories-units.md) | Items, categories, staples and units |
+| [0020](docs/decisions/0020-shopping-list-behavior.md) | Shopping list behavior |
+| [0021](docs/decisions/0021-reference-deployment.md) | Reference deployment (Proposed) |
+| [0022](docs/decisions/0022-receipts-mailbox.md) | Receipts mailbox (Proposed) |
+| 0023–0024 | Reserved: each is written by its interview slice (`slicer find Interview`) |
 | [0025](docs/decisions/0025-conversational-channels.md) | Conversational channels: email and Matrix |
 | [0026](docs/decisions/0026-autonomy-levels.md) | Autonomy levels per person |
 | [0027](docs/decisions/0027-message-interpretation.md) | Rule-based message interpretation, optional local LLM fallback |

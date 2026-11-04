@@ -362,3 +362,30 @@
 {"when": "2026-11-04T12:39:45Z", "item": "S10", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
 {"when": "2026-11-04T12:56:31Z", "item": "S10", "action": "note", "from": "", "to": "", "note": "Added the recipe file parser larder.recipes.doc: parse_recip", "by": "Jon R"}
 {"when": "2026-11-04T12:56:42Z", "item": "S10", "action": "status", "from": "started", "to": "done", "note": "Recipe file parser verified: larder.recipes.doc parses and serializes Hugo-style recipe files (+++ TOML front matter), with sections, sub-groups, draft flag and a minimal TOML writer. Full suite 186 passed, 0 failed; ruff check and format clean; slicer check passed.", "by": "Jon R"}
+{"when": "2026-11-04T12:43:07Z", "item": "S15", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:43:08Z", "item": "S19", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:43:20Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:43:20Z", "item": "S17", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:43:21Z", "item": "S24", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:43:21Z", "item": "S20", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:43:22Z", "item": "S21", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:43:22Z", "item": "S22", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:43:22Z", "item": "S15", "action": "note", "from": "", "to": "", "note": "Verified outcome: ADR 0019 records the five owner answers (c", "by": "Jon R"}
+{"when": "2026-11-04T12:43:23Z", "item": "S19", "action": "note", "from": "", "to": "", "note": "Verified outcome: ADR 0013 now lists the planning rules with", "by": "Jon R"}
+{"when": "2026-11-04T12:43:23Z", "item": "S15", "action": "status", "from": "started", "to": "done", "note": "ADR 0019 written and ADR 0013 amended from the owner interviews", "by": "Jon R"}
+{"when": "2026-11-04T12:43:23Z", "item": "S19", "action": "status", "from": "started", "to": "done", "note": "ADR 0019 written and ADR 0013 amended from the owner interviews", "by": "Jon R"}
+{"when": "2026-11-04T12:45:54Z", "item": "S23", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:46:09Z", "item": "S24", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:46:10Z", "item": "S25", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:46:10Z", "item": "S23", "action": "note", "from": "", "to": "", "note": "Verified outcome: ADR 0020 records the eight owner answers (", "by": "Jon R"}
+{"when": "2026-11-04T12:46:11Z", "item": "S23", "action": "status", "from": "started", "to": "done", "note": "ADR 0020 written from the owner interview", "by": "Jon R"}
+{"when": "2026-11-04T12:50:26Z", "item": "S26", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:50:47Z", "item": "S27", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:50:48Z", "item": "S28", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:50:48Z", "item": "S26", "action": "note", "from": "", "to": "", "note": "Partial interview 2026-11-04: ADR 0021 (Proposed) records HT", "by": "Jon R"}
+{"when": "2026-11-04T12:50:56Z", "item": "S26", "action": "release", "from": "Jon R", "to": "", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:51:10Z", "item": "S26", "action": "set", "from": "started", "to": "open", "note": "status started→open"}
+{"when": "2026-11-04T12:53:46Z", "item": "S31", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:53:47Z", "item": "S32", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:53:48Z", "item": "S31", "action": "note", "from": "", "to": "", "note": "Partial interview 2026-11-04: ADR 0022 (Proposed) records a ", "by": "Jon R"}
+{"when": "2026-11-04T12:53:49Z", "item": "S31", "action": "set", "from": "started", "to": "open", "note": "status started→open"}
