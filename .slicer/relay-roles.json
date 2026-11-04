@@ -1,0 +1,561 @@
+{
+  "version": 3,
+  "rows": [
+    {
+      "id": "r12",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": true
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "haiku",
+      "reasoning": "xhigh",
+      "note": "per sliver"
+    },
+    {
+      "id": "r13",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": true
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-terra",
+      "reasoning": "medium",
+      "note": "terra medium per sliver: Haiku-class Codex model (owner 2026-11-03)"
+    },
+    {
+      "id": "r14",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": true
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-terra",
+      "reasoning": "high",
+      "note": "terra high per sliver: Haiku-class Codex model (owner 2026-11-03)"
+    },
+    {
+      "id": "r15",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": true,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "haiku",
+      "reasoning": "xhigh",
+      "note": "per part of a split slice"
+    },
+    {
+      "id": "r16",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": true,
+        "sliver": null
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-terra",
+      "reasoning": "medium",
+      "note": "terra medium per part of a split slice (owner 2026-11-03)"
+    },
+    {
+      "id": "r17",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": true,
+        "sliver": null
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-terra",
+      "reasoning": "high",
+      "note": "terra high per part of a split slice (owner 2026-11-03)"
+    },
+    {
+      "id": "r18",
+      "role": "implementer",
+      "when": {
+        "size": [
+          "L"
+        ],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": false,
+        "sliver": false
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-sol",
+      "reasoning": "high",
+      "note": "owner lineup 2026-10-23: Codex implementer at high on a size L slice"
+    },
+    {
+      "id": "r19",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [
+          3
+        ],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": false,
+        "sliver": null
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-sol",
+      "reasoning": "high",
+      "note": "effort 3 slice: Codex at high (owner 2026-10-29)"
+    },
+    {
+      "id": "r20",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": false,
+        "sliver": null
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-sol",
+      "reasoning": "medium",
+      "note": "default implementer for a whole slice (owner lineup 2026-10-23: medium); Codex sandbox cannot bind Unix sockets, so rerun socket-test packages outside it"
+    },
+    {
+      "id": "r21",
+      "role": "implementer",
+      "when": {
+        "size": [
+          "M"
+        ],
+        "effort": [
+          2
+        ],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": false,
+        "sliver": null
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-terra",
+      "reasoning": "xhigh",
+      "note": "terra xhigh, whole slice of size M at effort 2 (owner 2026-11-03), ahead of terra high; Claude sonnet high is the fallback"
+    },
+    {
+      "id": "r22",
+      "role": "implementer",
+      "when": {
+        "size": [
+          "S",
+          "M"
+        ],
+        "effort": [
+          1,
+          2
+        ],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": false,
+        "sliver": null
+      },
+      "agent": "Codex",
+      "vendor": "OpenAI",
+      "model": "gpt-6.1-terra",
+      "reasoning": "high",
+      "note": "terra high, whole slice of size S or M at effort 1 or 2 (owner 2026-11-03): Sonnet-class Codex model, after sol; larger or effort 3 slices go from sol to Claude sonnet high"
+    },
+    {
+      "id": "r23",
+      "role": "implementer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": false,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "sonnet",
+      "reasoning": "high",
+      "note": "Claude stand-in for a whole slice at sonnet high: used when Codex is out of credits or the owner picks Claude (owner 2026-10-29)"
+    },
+    {
+      "id": "r24",
+      "role": "reviewer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Grok",
+      "vendor": "xAI",
+      "model": "latest",
+      "reasoning": "medium",
+      "note": "Grok reviewer, first choice (owner 2026-11-03); Claude opus (r27) is the fallback. cross-vendor review is allowed by review.cross-vendor (#25). Model 'latest' = the grok CLI default. Grok runs in plan mode, which can run read-only shell commands (probe 13, 2026-11-03)."
+    },
+    {
+      "id": "r25",
+      "role": "reviewer",
+      "when": {
+        "size": [],
+        "effort": [
+          3
+        ],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "high",
+      "note": "reviewer at high for a effort 3 slice (owner 2026-10-29)"
+    },
+    {
+      "id": "r26",
+      "role": "reviewer",
+      "when": {
+        "size": [
+          "L"
+        ],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "high",
+      "note": "reviewer at high for a size L slice (owner 2026-10-29)"
+    },
+    {
+      "id": "r27",
+      "role": "reviewer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "medium",
+      "note": ""
+    },
+    {
+      "id": "r28",
+      "role": "reviewer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "medium",
+      "note": "UI pass, only for a slice that touches the UI (rule u10)"
+    },
+    {
+      "id": "r29",
+      "role": "gate",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Grok",
+      "vendor": "xAI",
+      "model": "latest",
+      "reasoning": "medium",
+      "note": "Grok gate, first choice (owner 2026-11-03); Claude opus (r32) is the fallback. cross-vendor gate is allowed by review.cross-vendor (#25). Model 'latest' = the grok CLI default. Grok runs in plan mode, which can run read-only shell commands (probe 13, 2026-11-03)."
+    },
+    {
+      "id": "r30",
+      "role": "gate",
+      "when": {
+        "size": [],
+        "effort": [
+          3
+        ],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "high",
+      "note": "gate at high for a effort 3 slice (owner 2026-10-29)"
+    },
+    {
+      "id": "r31",
+      "role": "gate",
+      "when": {
+        "size": [
+          "L"
+        ],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "high",
+      "note": "gate at high for a size L slice (owner 2026-10-29)"
+    },
+    {
+      "id": "r32",
+      "role": "gate",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "medium",
+      "note": ""
+    },
+    {
+      "id": "r33",
+      "role": "architect",
+      "when": {
+        "size": [
+          "L"
+        ],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Grok",
+      "vendor": "xAI",
+      "model": "latest",
+      "reasoning": "high",
+      "note": "Grok architect, size L (owner 2026-11-03): first choice, Claude opus (r34) is the fallback; model 'latest' = the grok CLI default; grok runs read-only in plan mode, which can run read-only shell commands (probe 13, 2026-11-03)"
+    },
+    {
+      "id": "r34",
+      "role": "architect",
+      "when": {
+        "size": [
+          "L"
+        ],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "opus",
+      "reasoning": "high",
+      "note": ""
+    },
+    {
+      "id": "r35",
+      "role": "orchestrator",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "sonnet",
+      "reasoning": "high",
+      "note": "the outer session the owner talks to orchestrates; ork's engine spawns roles itself (owner 2026-10-29)"
+    },
+    {
+      "id": "r36",
+      "role": "reviewer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Claude Code",
+      "vendor": "Claude",
+      "model": "sonnet",
+      "reasoning": "high",
+      "note": "Spec check row (sonnet high, owner 2026-10-29)"
+    },
+    {
+      "id": "r37",
+      "role": "orchestrator",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Grok",
+      "vendor": "xAI",
+      "model": "latest",
+      "reasoning": "medium",
+      "note": "Grok orchestrator alternative (owner 2026-11-02). Model 'latest' = do not pin a version: use the grok CLI default (grok-4.7 on 2026-11-02); owner 2026-11-02: default to the latest unless asked. ork cannot run Grok until S72 lands, so it is used by hand until then"
+    },
+    {
+      "id": "r38",
+      "role": "reviewer",
+      "when": {
+        "size": [],
+        "effort": [],
+        "importance": [],
+        "urgency": [],
+        "well_specified": null,
+        "split": null,
+        "sliver": null
+      },
+      "agent": "Grok",
+      "vendor": "xAI",
+      "model": "latest",
+      "reasoning": "medium",
+      "note": "Spec check row on Grok (owner 2026-11-02): one read-only pass over every ticked slice before a wave (rule u11); an alternative to r36"
+    }
+  ],
+  "rules": [
+    {
+      "id": "u9",
+      "text": "A reviewer never wrote code in the slice it reviews."
+    },
+    {
+      "id": "u10",
+      "text": "Roles on the orchestrator's own agent run as subagents; a role on another agent runs headless in the slice worktree with the same brief."
+    },
+    {
+      "id": "u11",
+      "text": "\"well specified\" means the slice names its files, failing tests, implementation steps and checks, and needs no open owner decision."
+    },
+    {
+      "id": "u12",
+      "text": "Split a slice only into parts with disjoint files and their own tests; a slice too big for one implementer is two slices or a slivered slice."
+    },
+    {
+      "id": "u13",
+      "text": "Sliver a slice only at effort 1, or at effort 2 when every sliver is effort 1; never at effort 3."
+    },
+    {
+      "id": "u14",
+      "text": "Slivers share the parent's worktree and branch, run one after another, and land once (record 124); `ork run PARENT --slivers` runs the chain."
+    },
+    {
+      "id": "u15",
+      "text": "A sliver that fails its gate twice, or whose diff falls short of the check, moves to the next model up (haiku to sonnet high). The Haiku rows are for slivers (r12) and parts of a split slice (r15) only; whole slices run on Codex (r20, r19, r18) with Claude sonnet high (r23) as the stand-in."
+    },
+    {
+      "id": "u16",
+      "text": "The orchestrator reads a Haiku sliver or part diff itself before review and switches that role to Sonnet early when quality falls short."
+    },
+    {
+      "id": "u17",
+      "text": "A slice that touches the UI (src/larder/web/templates, src/larder/web/static, or a view in src/larder/web that renders HTML) also runs the UI pass row (r28) as its own role, in parallel with the reviewer, not instead of it, on every size. The UI pass runs as a general-purpose subagent (it needs the Skill tool), loads the tui-design:tui-design and frontend-design:frontend-design skills, edits nothing, and sends suggested design edits to the orchestrator for the implementer; the gate still decides. A vendor that cannot load these skills gets ork's vendor-neutral UI prompt instead."
+    },
+    {
+      "id": "u18",
+      "text": "The spec check before a wave runs the Spec check row (r36): one read-only pass over every ticked slice, answered in one sitting. The matrix has no spec-check or ui role (slicer's ledger records them as roles spec-check and ui, but a row is a reviewer row), so r28 and r36 are reviewer rows with notes; they are never a fallback of the reviewer or the gate, and the reviewer's rule u1 does not apply to the spec check because it reads specs and writes no code."
+    }
+  ],
+  "next_row": 39,
+  "next_rule": 19
+}

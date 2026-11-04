@@ -3,15 +3,17 @@
 log.jsonl merge=union
 
 # render/ is a generated projection of index.json, never merged by hand. The
-# slicer-generated driver keeps the current branch's copy on merge instead of
-# writing conflict markers; re-run `slicer render` after resolving index.json so
-# the kept files match it. The name resolves only once a clone defines the driver
+# slicer-generated driver is optional: without it a merge may leave conflict markers
+# or one side's rows in render/, and the next slicer write regenerates the stale
+# files from index.json. With it the merge keeps the current branch's copy instead of
+# writing markers. The name resolves only once a clone defines the driver
 # (one-time, per clone -- slicer's git allowlist cannot run `git config` for you):
 #   git config merge.slicer-generated.name "keep the current branch's generated files"
 #   git config merge.slicer-generated.driver true
 render/ROADMAP.md merge=slicer-generated
 render/ROADMAP.html merge=slicer-generated
 render/slices/*.md merge=slicer-generated
+render/RELAY-ROLES.md merge=slicer-generated
 
 # index.json is merged by the slicer-index driver, which matches items by id and
 # fields by name: independent edits merge, next_id takes the larger value so ids are
@@ -19,3 +21,12 @@ render/slices/*.md merge=slicer-generated
 #   git config merge.slicer-index.name "keep the larger next_id when merging the index"
 #   git config merge.slicer-index.driver "slicer merge-index %O %A %B"
 index.json merge=slicer-index
+
+# relay-roles.json is merged by the slicer-relay-roles driver, which matches rows and
+# rules by id: independent edits merge, a row or rule both sides added under one id
+# keeps both with a fresh id for the side merged in, the id counters move past every id
+# issued, and a same-field disagreement is refused with the file left as it was. Also
+# defined once per clone:
+#   git config merge.slicer-relay-roles.name "keep both sides' relay roles rows and rules with fresh ids"
+#   git config merge.slicer-relay-roles.driver "slicer merge-relay-roles %O %A %B"
+relay-roles.json merge=slicer-relay-roles
