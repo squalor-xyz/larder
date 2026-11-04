@@ -1,8 +1,8 @@
 {
-  "version": 8,
+  "version": 11,
   "id_prefix": "S",
   "id_width": 2,
-  "next_id": 59,
+  "next_id": 68,
   "preamble": "larder: a self-hosted, FLOSS household food system (recipes, weekly dinner planning, shared shopping list; later, pantry estimates driven by receipts). Specs: docs/goals.md, docs/requirements.md, docs/specs/, docs/decisions/. Slices titled \"Interview:\" collect the owner's decisions and come before the slices that depend on them. Every slice has an \"Owner input\" section listing what to confirm before starting. Household-specific answers go in the gitignored local/ folder, never in committed files.",
   "passes": [],
   "items": [
@@ -24,6 +24,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -53,6 +54,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -85,6 +87,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -115,7 +118,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "f3d56e01-2615-4f3e-bd3a-e8d310d0a4f1",
@@ -126,7 +132,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "ab062ecf-9dfd-478a-b62e-8b6037af1e0c",
@@ -137,7 +146,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "d730243b-4d3e-4539-8bd5-ff489903a157",
@@ -148,7 +160,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -161,6 +176,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -191,7 +207,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "9638f334-72eb-4c70-8255-22ed6cd86c46",
@@ -202,7 +221,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "49dc1932-aba2-469c-8db1-edeb149743bf",
@@ -213,7 +235,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "861b3935-3e3a-4277-90ea-2154ad265f43",
@@ -224,7 +249,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "2c6c08af-05a9-4d0f-960a-05cbf005837b",
@@ -235,7 +263,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "8d9cb89a-8b9f-4697-a207-e9fe601946d1",
@@ -246,7 +277,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -259,6 +293,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -289,7 +324,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "c4d8bd29-4f17-40c6-a4a0-4e933510c4ce",
@@ -300,7 +338,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "04e0f588-3fdb-49c0-bd93-4a7b01ab8c27",
@@ -311,7 +352,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "9a42d4e5-cfbb-4c2b-814f-627ff25bc489",
@@ -322,7 +366,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "6d0474f4-b53b-4c95-9819-c01fdfdc3fbd",
@@ -333,7 +380,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "acc1eb2b-9cef-4816-a82f-a8740100fe76",
@@ -344,7 +394,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "194d5234-3ad9-45fb-a7f6-c989b52493c2",
@@ -355,7 +408,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -368,6 +424,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -398,7 +455,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -411,6 +471,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -442,7 +503,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "a09f3727-ed40-414e-9b1c-14d9f22c58f0",
@@ -453,7 +517,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "24ba4e15-2a0d-4b16-aa94-1ae9e212504b",
@@ -464,7 +531,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -478,6 +548,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -490,6 +561,102 @@
       }
     },
     {
+      "id": "S62",
+      "title": "Paired landing route",
+      "short_title": "Paired landing route",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "G5, U2",
+        "discovered_from": "S07",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n4",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S63",
+      "title": "Proxy trust and single bootstrap fixes",
+      "short_title": "Proxy trust and single bootstrap fixes",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "G5, U4",
+        "discovered_from": "S28",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n5",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S64",
+      "title": "In-process scheduler",
+      "short_title": "In-process scheduler",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S05"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "G4, NF7",
+        "discovered_from": "S11",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n6",
+        "pass": "",
+        "group": "Phase 0 — Foundations",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
       "id": "S08",
       "title": "PWA shell",
       "short_title": "PWA shell",
@@ -497,7 +664,8 @@
       "has_slice": true,
       "depends_on": [
         "S05",
-        "S52"
+        "S52",
+        "S62"
       ],
       "note_records": [
         {
@@ -509,7 +677,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -522,6 +693,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -553,6 +725,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -585,6 +758,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -604,7 +778,8 @@
       "has_slice": true,
       "depends_on": [
         "S03",
-        "S10"
+        "S10",
+        "S64"
       ],
       "note_records": [],
       "claim": null,
@@ -617,6 +792,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -648,6 +824,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -682,6 +859,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -713,7 +891,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -726,6 +907,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -734,6 +916,39 @@
         "importance": 3,
         "urgency": 2,
         "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S66",
+      "title": "Recipe repo status page",
+      "short_title": "Recipe repo status page",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S11",
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "G4, R1",
+        "discovered_from": "S11",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n8",
+        "pass": "",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
         "attempts": 0
       }
     },
@@ -757,8 +972,41 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
+        "pass": "",
+        "group": "Phase 1b — Ingredients",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S59",
+      "title": "Ingredient ranges and alternatives schema",
+      "short_title": "Ingredient ranges and alternatives schema",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S04"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "G2, I3",
+        "discovered_from": "S16",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n1",
         "pass": "",
         "group": "Phase 1b — Ingredients",
         "reason": "",
@@ -776,7 +1024,8 @@
       "has_slice": true,
       "depends_on": [
         "S10",
-        "S15"
+        "S15",
+        "S59"
       ],
       "note_records": [],
       "claim": null,
@@ -789,6 +1038,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -808,7 +1058,8 @@
       "has_slice": true,
       "depends_on": [
         "S16",
-        "S04"
+        "S04",
+        "S59"
       ],
       "note_records": [],
       "claim": null,
@@ -822,6 +1073,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -853,7 +1105,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -866,6 +1121,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -897,6 +1153,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -929,6 +1186,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -961,6 +1219,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -979,7 +1238,8 @@
       "status": "open",
       "has_slice": true,
       "depends_on": [
-        "S21"
+        "S21",
+        "S62"
       ],
       "note_records": [],
       "claim": null,
@@ -992,8 +1252,42 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
+        "pass": "",
+        "group": "Phase 1c — Planner",
+        "reason": "",
+        "importance": 3,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S60",
+      "title": "Read-only week view",
+      "short_title": "Read-only week view",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S21",
+        "S14"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "G1, P1",
+        "discovered_from": "S22",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n2",
         "pass": "",
         "group": "Phase 1c — Planner",
         "reason": "",
@@ -1023,6 +1317,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1043,7 +1338,8 @@
       "depends_on": [
         "S21",
         "S18",
-        "S23"
+        "S23",
+        "S59"
       ],
       "note_records": [],
       "claim": null,
@@ -1056,6 +1352,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1088,6 +1385,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1120,6 +1418,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1152,6 +1451,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1172,7 +1472,8 @@
       "depends_on": [
         "S27",
         "S25",
-        "S22"
+        "S22",
+        "S63"
       ],
       "note_records": [
         {
@@ -1184,7 +1485,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         },
         {
           "id": "9f8df878-5964-4601-919e-3e142faf443d",
@@ -1195,7 +1499,24 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        },
+        {
+          "id": "fdb130d2-620c-44db-a9a3-0ba0c493a526",
+          "kind": "",
+          "text": "**2026-11-04** — 2026-11-03 roadmap review: the two notes above (IPv4-mapped trusted_proxies peers; every worker running ensure_bootstrap) moved to S63 and are no longer part of this slice. S28 depends on S63. Scheduler: S64 provides it; this slice only starts it from the WSGI entrypoint.",
+          "created_at": "2026-11-04T03:21:24Z",
+          "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -1208,6 +1529,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1227,7 +1549,6 @@
       "has_slice": true,
       "depends_on": [
         "S28",
-        "S12",
         "S14"
       ],
       "note_records": [],
@@ -1241,6 +1562,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1272,6 +1594,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1290,7 +1613,7 @@
       "status": "open",
       "has_slice": true,
       "depends_on": [
-        "S30"
+        "S01"
       ],
       "note_records": [],
       "claim": null,
@@ -1304,6 +1627,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1322,7 +1646,9 @@
       "status": "open",
       "has_slice": true,
       "depends_on": [
-        "S31"
+        "S31",
+        "S30",
+        "S64"
       ],
       "note_records": [],
       "claim": null,
@@ -1335,6 +1661,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1366,6 +1693,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1381,7 +1709,7 @@
       "id": "S34",
       "title": "Store parsers: additional stores",
       "short_title": "Store parsers: additional stores",
-      "status": "open",
+      "status": "later",
       "has_slice": true,
       "depends_on": [
         "S33"
@@ -1397,6 +1725,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1430,6 +1759,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1448,7 +1778,8 @@
       "status": "open",
       "has_slice": true,
       "depends_on": [
-        "S31"
+        "S31",
+        "S30"
       ],
       "note_records": [],
       "claim": null,
@@ -1461,6 +1792,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1493,6 +1825,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1524,6 +1857,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1555,6 +1889,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1588,6 +1923,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1619,8 +1955,74 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S61",
+      "title": "Interview: conversation channels",
+      "short_title": "Interview: conversation channels",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S30"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "G7, C1-C5",
+        "discovered_from": "S41",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n3",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S67",
+      "title": "SMTP secret field",
+      "short_title": "SMTP secret field",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S41",
+        "S03"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "X1, NF4",
+        "discovered_from": "S42",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n9",
         "pass": "",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
@@ -1638,7 +2040,9 @@
       "has_slice": true,
       "depends_on": [
         "S41",
-        "S22"
+        "S22",
+        "S67",
+        "S64"
       ],
       "note_records": [],
       "claim": null,
@@ -1651,6 +2055,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1669,9 +2074,8 @@
       "status": "open",
       "has_slice": true,
       "depends_on": [
-        "S41",
         "S25",
-        "S37"
+        "S61"
       ],
       "note_records": [],
       "claim": null,
@@ -1684,6 +2088,7 @@
         "trees_literal": false,
         "findings": "C1, C4",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1696,6 +2101,39 @@
       }
     },
     {
+      "id": "S65",
+      "title": "Conversation secret fields",
+      "short_title": "Conversation secret fields",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S61",
+        "S03"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "G7, NF4",
+        "discovered_from": "S54",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n7",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
       "id": "S54",
       "title": "Email conversation adapter",
       "short_title": "Email conversation adapter",
@@ -1703,7 +2141,9 @@
       "has_slice": true,
       "depends_on": [
         "S53",
-        "S42"
+        "S42",
+        "S65",
+        "S67"
       ],
       "note_records": [],
       "claim": null,
@@ -1716,6 +2156,7 @@
         "trees_literal": false,
         "findings": "C2",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1735,7 +2176,9 @@
       "has_slice": true,
       "depends_on": [
         "S53",
-        "S42"
+        "S42",
+        "S65",
+        "S54"
       ],
       "note_records": [],
       "claim": null,
@@ -1748,6 +2191,7 @@
         "trees_literal": false,
         "findings": "C3",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1781,6 +2225,7 @@
         "trees_literal": false,
         "findings": "C5",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1808,6 +2253,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1835,6 +2281,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1862,6 +2309,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1889,6 +2337,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1916,6 +2365,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1943,6 +2393,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1970,6 +2421,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -1997,6 +2449,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -2024,6 +2477,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -2052,7 +2506,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -2063,6 +2520,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -2091,7 +2549,10 @@
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
-          "stale_after": ""
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
         }
       ],
       "claim": null,
@@ -2102,6 +2563,7 @@
         "trees_literal": false,
         "findings": "",
         "discovered_from": "",
+        "parent": "",
         "cites": [],
         "key": "",
         "pass": "",
@@ -2115,7 +2577,7 @@
     }
   ],
   "epilogue": "",
-  "goals": "- G1: Answer \"what's for dinner?\" in seconds, from meals the household actually makes.\n- G2: One shared shopping list that every household member trusts.\n- G3: Reduce waste and duplicate purchases using order data instead of manual logging (Phase 2).\n- G4: Near-zero required upkeep; optional taps improve accuracy, none are required.\n- G5: Usable by non-technical household members without help.\n- G6: Portable: any household can run it with its own stores, sources and network (ADR 0015, 0016).",
+  "goals": "- G1: Answer \"what's for dinner?\" in seconds, from meals the household actually makes.\n- G2: One shared shopping list that every household member trusts.\n- G3: Reduce waste and duplicate purchases using order data instead of manual logging (Phase 2).\n- G4: Near-zero required upkeep; optional taps improve accuracy, none are required.\n- G5: Usable by non-technical household members without help.\n- G6: Portable: any household can run it with its own stores, sources and network (ADR 0015, 0016).\n- G7: Reachable by message from anywhere: email or Matrix to add to the list, ask what's low, and answer larder's pantry questions (Phase 2; ADR 0025).",
   "non_goals": "- NG1: Placing store orders automatically.\n- NG2: Nutrition or calorie tracking.\n- NG3: Access from the public internet.\n- NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).\n- NG5: Exact, item-by-item inventory tracking.",
   "catalog": {
     "next_id": 1,

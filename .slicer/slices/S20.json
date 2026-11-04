@@ -26,7 +26,7 @@
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_excludes_meals_made_within_min_repeat_days`\n2. `test_prefers_least_recently_made`\n3. `test_kid_favorite_weighting`\n4. `test_effort_balance_rules`\n5. `test_deterministic_with_seed`\n6. `test_fills_week_with_fewer_rotation_meals_than_nights` (graceful)"
+      "body": "1. `test_excludes_meals_made_within_min_repeat_days`\n2. `test_prefers_least_recently_made`\n3. `test_favorite_weighting`\n4. `test_effort_balance_rules`\n5. `test_deterministic_with_seed`\n6. `test_fills_week_with_fewer_rotation_meals_than_nights` (graceful)"
     },
     {
       "heading": "Implement",

@@ -1,0 +1,45 @@
+{
+  "id": "S59",
+  "title": "Ingredient ranges and alternatives schema",
+  "lead": [
+    "Add the column and the tables that hold a quantity range and ingredient alternatives, so the line parser (S16) has a place to store what I3 requires."
+  ],
+  "depends_note": null,
+  "findings_note": "G2, I3",
+  "size": "S",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** the parser that fills them (S16); matching alternatives to canonical items (S17); how list generation treats a range or an alternative (ADR 0020, S24); any UI.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "I3 requires ranges (\"2-3\") and alternatives (\"honey, maple syrup, or agave\"). `ingredient_line` has one `qty` and one `item_id` (`src/larder/migrations/0001_init.sql`), and `docs/specs/data-model.md` (Deviations) leaves both to a later migration. Without a place to store them the parser would squeeze a range into one number or into `notes`, and \"honey, maple syrup, or agave\" could not become a list line. A wrong list is the risk to G2, so the shape is settled before S16 and S24 are built."
+    },
+    {
+      "heading": "Owner input",
+      "body": "Confirm the shape (recommended as written):\n1. A range stores its lower bound in `qty` and its upper bound in the new `qty_max`. `qty_max` is null for a plain quantity and requires `qty`.\n2. The first choice of an alternatives line stays on `ingredient_line` (`item_id`, `unit_id`, `qty`). The other choices are child rows in `ingredient_line_alt`, in order, sharing the line's quantity and unit. `parse_override` gets the same pair (`qty_max`, `parse_override_alt`), because one confirmation applies everywhere (ADR 0007).\n3. A flat alternative-group column is not used: `ingredient_line` is unique on (recipe_id, position) and `parse_override` is unique on normalized_text, so a group id cannot span several rows."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/migrations/0003_ingredient_ranges.sql`\n- `tests/test_db.py` (add the two tables to `MVP_TABLES`; new schema tests)\n- `docs/specs/data-model.md` (columns, tables, delete actions; replace the Deviations bullet about ranges and alternatives)"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "In `tests/test_db.py`, class `SchemaTest` unless noted:\n1. `test_qty_max_needs_qty_and_is_not_below_it` (both `ingredient_line` and `parse_override`: `qty_max` with null `qty`, or below `qty`, raises `IntegrityError` mentioning CHECK; equal or above is accepted)\n2. `test_deleting_line_cascades_to_its_alternatives`\n3. `test_deleting_override_cascades_to_its_alternatives`\n4. `test_alternative_item_cannot_be_deleted_while_referenced` (RESTRICT)\n5. `test_alternative_positions_start_at_one_and_are_unique_per_line` (both alt tables)\n6. `test_migration_0003_keeps_existing_ingredient_lines` (class `MigrateTest`: apply only 0001 and 0002 from a temporary source directory, insert a line, migrate to the shipped set, the line survives with `qty_max` null)\n7. `test_all_tables_are_strict` and the foreign-key index and `ON DELETE` tests pass unchanged once `MVP_TABLES` lists the two new tables"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. `0003_ingredient_ranges.sql`: SPDX header comment, no `BEGIN`/`COMMIT` (the runner wraps the file):\n   - `ALTER TABLE ingredient_line ADD COLUMN qty_max REAL CHECK (qty_max IS NULL OR (qty IS NOT NULL AND qty_max >= qty));` and the same for `parse_override`.\n   - `CREATE TABLE ingredient_line_alt (id INTEGER PRIMARY KEY, line_id INTEGER NOT NULL REFERENCES ingredient_line (id) ON DELETE CASCADE, position INTEGER NOT NULL CHECK (position >= 1), alt_text TEXT NOT NULL, item_id INTEGER REFERENCES item (id) ON DELETE RESTRICT, UNIQUE (line_id, position)) STRICT;` plus `CREATE INDEX idx_ingredient_line_alt_item_id ON ingredient_line_alt (item_id);`.\n   - `parse_override_alt` the same, with `override_id` referencing `parse_override (id) ON DELETE CASCADE` and `idx_parse_override_alt_item_id`.\n   - `alt_text` is the raw alternative as written; `item_id` stays null until S17 matches it.\n2. Add both tables to `MVP_TABLES` in `tests/test_db.py`.\n3. Update `docs/specs/data-model.md`: the two columns, the two tables, the deletes table (CASCADE on `line_id`/`override_id`, RESTRICT on `item_id`), and the Deviations bullet.\n4. No code reads or writes the new columns yet. Migration number 0003 is taken here; later migrations take the next free number when they land."
+    },
+    {
+      "heading": "Check",
+      "body": "- `python -m unittest discover -s tests -t .` and `ruff check .` pass.\n- Starting `python -m larder` on a database at version 2 applies 0003, and `/healthz` reports `db_version` 3.\n- `PRAGMA foreign_key_check` is empty after the migration on a database that already has lines."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

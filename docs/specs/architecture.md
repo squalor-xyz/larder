@@ -65,8 +65,9 @@ household-specific is in code ([ADR 0016](../decisions/0016-future-multi-househo
 A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
 
 - **Data directory:** `LARDER_DATA` is required and must be an existing directory.
-- **Config file:** `$LARDER_DATA/larder.toml`. It is optional; without it, every
-  key takes its default.
+- **Config file:** `$LARDER_DATA/larder.toml`. Every key has a default except the
+  people list: larder refuses to start unless at least one person has
+  `role = "admin"` (see Auth below), so in practice the file is required.
 - **Unknown keys are errors** at every level: the top level, `[secrets]`, each
   `[[people]]` and each `[[stores]]`. So are values of the wrong type. The error
   names the key and where it came from.

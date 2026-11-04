@@ -2,7 +2,7 @@
   "id": "S41",
   "title": "Interview: notifications",
   "lead": [
-    "Decide notification and conversation channels, recipients, timing and autonomy levels (Q9, X1–X2, C1–C5; ADRs 0025–0027)."
+    "Decide notification channels, recipients, ping times and quiet hours (X1-X2; ADR 0024)."
   ],
   "depends_note": null,
   "findings_note": "",
@@ -10,19 +10,19 @@
   "flags": [],
   "trees_note": "docs",
   "trees_plural": false,
-  "boundary": "**Not in this slice:** implementation.",
+  "boundary": "**Not in this slice:** implementation; the conversation mailbox, Matrix, autonomy levels and commands (S61, ADR 0028).",
   "sections": [
     {
       "heading": "Why",
-      "body": "Notifications should help without becoming noise, and a non-technical household member has to be OK with them."
+      "body": "Notifications should help without becoming noise, and a non-technical household member has to be OK with them. The conversation channels moved to S61 so the notifier (S42) does not wait on Matrix."
     },
     {
       "heading": "Owner input",
-      "body": "1. Channel per person: ntfy (self-hosted? which server?), email, or both?\n2. Which pings: tonight's dinner/defrost (what time?), the weekly planning reminder, runout warnings, use-it-up?\n3. Quiet hours?\n4. Where does ntfy run (an existing instance, or add one to compose)? Is email sent via which SMTP?\n5. Conversation mailbox: which provider and address? (Separate from the receipts mailbox, ADR 0025.) IMAP/SMTP sign-in method (app password or OAuth; check the provider's current rules).\n6. Matrix: an existing homeserver or a self-hosted one (which)? Which client library (new dependency; state why, license and cost)?\n7. Per person: which conversation channel(s), and which autonomy level (L0 or L1, ADR 0026)?\n8. Command vocabulary: confirm the starter commands (add, low, list, what's low, help) and the numbered-reply format."
+      "body": "1. Channel per person: ntfy (self-hosted? which server?), email, or both?\n2. Which pings: tonight's dinner/defrost (what time?), the weekly planning reminder, runout warnings, use-it-up?\n3. Quiet hours?\n4. Where does ntfy run (an existing instance, or add one to compose)? Which SMTP sends the email pings, and which secret file holds its password?"
     },
     {
       "heading": "Files",
-      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0024-notifications.md` (new)\n- `docs/decisions/0025-conversational-channels.md`, `0026-autonomy-levels.md`, `0027-message-interpretation.md` (fill in deployment specifics)"
+      "body": "- `local/` private notes (not committed)\n- `docs/decisions/0024-notifications.md` (new)"
     },
     {
       "heading": "Failing tests",
@@ -30,11 +30,11 @@
     },
     {
       "heading": "Implement",
-      "body": "1. Ask the questions, including a non-technical household member's preferences.\n2. Write ADR 0024; add the deployment specifics to ADRs 0025–0027; record the raw answers in `local/` (not committed); update the notifier and conversation slices."
+      "body": "1. Ask the questions, including a non-technical household member's preferences.\n2. Write ADR 0024; record the raw answers in `local/` (not committed); update the notifier slice (S42)."
     },
     {
       "heading": "Check",
-      "body": "- ADR 0024 lists each ping with its channel, recipient and time.\n- Each person has a conversation channel and autonomy level recorded; the Matrix library decision states why, license and cost."
+      "body": "- ADR 0024 lists each ping with its channel, recipient and time, and the quiet hours."
     },
     {
       "heading": "Git",

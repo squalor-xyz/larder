@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None if the notifications interview is done."
+      "body": "None if the conversation interview (S61, ADR 0028) is done."
     },
     {
       "heading": "Files",
@@ -26,11 +26,11 @@
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_new_message_dispatched_once`\n2. `test_reply_threads_to_original_message`\n3. `test_quoted_text_and_signatures_ignored`\n4. `test_credentials_read_from_secret_file`"
+      "body": "1. `test_new_message_dispatched_once`\n2. `test_reply_threads_to_original_message`\n3. `test_quoted_text_and_signatures_ignored`\n4. `test_credentials_read_from_the_conversation_secret_files` (`settings.secrets.conversation_imap_password_file` from S65, and `smtp_password_file`, from S67)"
     },
     {
       "heading": "Implement",
-      "body": "1. IMAP poll of the conversation mailbox; mark handled messages; extract the new text.\n2. SMTP reply through the notifier's email channel."
+      "body": "1. IMAP poll of the conversation mailbox; mark handled messages; extract the new text.\n2. SMTP reply through the notifier's email channel, using the SMTP secret from S67.\n3. Read the passwords from the files named by `settings.secrets` only when connecting."
     },
     {
       "heading": "Check",

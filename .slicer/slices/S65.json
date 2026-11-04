@@ -1,0 +1,45 @@
+{
+  "id": "S65",
+  "title": "Conversation secret fields",
+  "lead": [
+    "Add explicit `[secrets]` keys for the conversation mailbox password and the Matrix token, with the rules the existing secret paths follow."
+  ],
+  "depends_note": null,
+  "findings_note": "G7, NF4",
+  "size": "S",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** reading any secret file (S54, S55); the adapters; the existing secret keys; the SMTP password (S67); email addresses and Matrix IDs, which are already `Person.email` and `Person.matrix_id`.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "`_SECRET_FIELDS` in `src/larder/config.py` is a closed set of three, and unknown `[secrets]` keys are errors (`_check_keys`). ADR 0025 requires a conversation mailbox separate from the receipts mailbox, and Matrix needs a token. Replies use the SMTP key from S67. Without keys, S54 and S55 either fail at load or reuse `imap_password`, which exposes both mailboxes if one leaks."
+    },
+    {
+      "heading": "Owner input",
+      "body": "Confirm the key names after the conversation interview (S61). Recommended:\n- `conversation_imap_password_file`, default `secrets/conversation_imap_password`, override `LARDER_SECRETS_CONVERSATION_IMAP_PASSWORD_FILE`\n- `matrix_token_file`, default `secrets/matrix_token`, override `LARDER_SECRETS_MATRIX_TOKEN_FILE`"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/config.py` (`_SECRET_FIELDS`, `Secrets`, `load_settings`)\n- `larder.example.toml` (the header comment's override list and the `[secrets]` table)\n- `docs/specs/architecture.md` (Configuration: environment overrides; Secrets)\n- `tests/test_config.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "In `tests/test_config.py`, class `LoadSettingsTest`:\n1. `test_conversation_secret_paths_default_under_secrets` (and update `test_loads_defaults_when_file_missing`)\n2. `test_conversation_secret_paths_read_from_file_and_env_override` (relative paths resolve against the data dir; absolute ones replace it; env wins over the file)\n3. `test_conversation_secret_values_not_in_repr` (extend `test_secret_values_not_in_repr`)\n4. `test_unknown_secret_key_still_fails_and_lists_the_new_keys`\n5. `test_unknown_larder_env_var_still_rejected`\n6. `test_example_config_loads` still passes with the new keys in `larder.example.toml`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Add two entries to `_SECRET_FIELDS`; the override names join `_ENV_OVERRIDES` automatically.\n2. Add two `field(repr=False)` fields to `Secrets` and two `_secret_path` calls in `load_settings`. Loading reads no secret file.\n3. Update `larder.example.toml` and the architecture doc. Fix the tests that build `Secrets(...)` with keywords."
+    },
+    {
+      "heading": "Check",
+      "body": "- Config tests and the full suite pass; `repr(settings)` still prints `Secrets(<redacted>)`."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

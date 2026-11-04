@@ -30,7 +30,7 @@
     },
     {
       "heading": "Implement",
-      "body": "1. Deploy per deploy/README.md; bootstrap the admin.\n2. Run the Hugo import; tag metadata; clear the review queue.\n3. Pair the owner's and a household phone that isn't on the VPNs; install the PWA on both.\n4. Run the first weekly plan; generate the list; place the order from it.\n5. File any friction as new slices."
+      "body": "1. Deploy per deploy/README.md; bootstrap the admin.\n2. Seed the recipe repo: run the Hugo import if S12 is done, or copy recipe files into the repo by hand; tag metadata; clear the review queue.\n3. Pair the owner's and a household phone that isn't on the VPNs; install the PWA on both.\n4. Run the first weekly plan; generate the list; place the order from it.\n5. File any friction as new slices."
     },
     {
       "heading": "Check",

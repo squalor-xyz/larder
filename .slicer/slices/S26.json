@@ -2,7 +2,7 @@
   "id": "S26",
   "title": "Interview: deployment host and network",
   "lead": [
-    "Decide where larder runs and how this deployment gets HTTPS (Q10, Q14, ADR 0015)."
+    "Decide where larder runs and how this deployment gets HTTPS (ADR 0015; see \"Deployment host and HTTPS\" in docs/open-questions.md)."
   ],
   "depends_note": null,
   "findings_note": "",

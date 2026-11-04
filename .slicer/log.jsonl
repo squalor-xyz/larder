@@ -124,3 +124,77 @@
 {"when": "2026-10-13T15:02:22Z", "item": "S07", "action": "note", "from": "", "to": "", "note": "Review fixes: a bootstrap link is now dead once an admin dev", "by": "Jon R"}
 {"when": "2026-10-13T15:03:32Z", "item": "S07", "action": "note", "from": "", "to": "", "note": "Gate PASS (opus/medium) after one fix round: M1 dead bootstr", "by": "Jon R"}
 {"when": "2026-10-13T15:03:32Z", "item": "S07", "action": "status", "from": "started", "to": "done", "note": "People sync, bootstrap log link + CLI pair, QR (segno) + link pairing, 1-year sliding device cookie, unpaired 401 page, admin-only devices page, CSRF with a generated session key; 124 tests green, ruff clean, gate PASS.", "by": "Jon R"}
+{"when": "2026-11-04T03:21:08Z", "item": "goals", "action": "prose", "from": "", "to": "", "note": "edit"}
+{"when": "2026-11-04T03:21:08Z", "item": "S59", "action": "add", "from": "", "to": "open", "note": "Ingredient ranges and alternatives schema"}
+{"when": "2026-11-04T03:21:08Z", "item": "S59", "action": "set", "from": "", "to": "", "note": "group -→Phase 1b — Ingredients"}
+{"when": "2026-11-04T03:21:09Z", "item": "S60", "action": "add", "from": "", "to": "open", "note": "Read-only week view"}
+{"when": "2026-11-04T03:21:09Z", "item": "S60", "action": "set", "from": "", "to": "", "note": "group -→Phase 1c — Planner"}
+{"when": "2026-11-04T03:21:09Z", "item": "S61", "action": "add", "from": "", "to": "open", "note": "Interview: conversation channels"}
+{"when": "2026-11-04T03:21:09Z", "item": "S61", "action": "set", "from": "", "to": "", "note": "group -→Phase 2 — Orders, pantry, notifications"}
+{"when": "2026-11-04T03:21:09Z", "item": "S62", "action": "add", "from": "", "to": "open", "note": "Paired landing route"}
+{"when": "2026-11-04T03:21:10Z", "item": "S62", "action": "set", "from": "", "to": "", "note": "group -→Phase 0 — Foundations"}
+{"when": "2026-11-04T03:21:10Z", "item": "S63", "action": "add", "from": "", "to": "open", "note": "Proxy trust and single bootstrap fixes"}
+{"when": "2026-11-04T03:21:10Z", "item": "S63", "action": "set", "from": "", "to": "", "note": "group -→Phase 0 — Foundations"}
+{"when": "2026-11-04T03:21:10Z", "item": "S64", "action": "add", "from": "", "to": "open", "note": "In-process scheduler"}
+{"when": "2026-11-04T03:21:10Z", "item": "S64", "action": "set", "from": "", "to": "", "note": "group -→Phase 0 — Foundations"}
+{"when": "2026-11-04T03:21:11Z", "item": "S65", "action": "add", "from": "", "to": "open", "note": "Conversation secret fields"}
+{"when": "2026-11-04T03:21:11Z", "item": "S65", "action": "set", "from": "", "to": "", "note": "group -→Phase 2 — Orders, pantry, notifications"}
+{"when": "2026-11-04T03:21:11Z", "item": "S66", "action": "add", "from": "", "to": "open", "note": "Recipe repo status page"}
+{"when": "2026-11-04T03:21:11Z", "item": "S66", "action": "set", "from": "", "to": "", "note": "group -→Phase 1a — Recipes"}
+{"when": "2026-11-04T03:21:12Z", "item": "S67", "action": "add", "from": "", "to": "open", "note": "SMTP secret field"}
+{"when": "2026-11-04T03:21:12Z", "item": "S67", "action": "set", "from": "", "to": "", "note": "group -→Phase 2 — Orders, pantry, notifications"}
+{"when": "2026-11-04T03:21:12Z", "item": "S59", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:12Z", "item": "S60", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:13Z", "item": "S61", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:13Z", "item": "S62", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:13Z", "item": "S63", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:13Z", "item": "S64", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:13Z", "item": "S65", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:14Z", "item": "S66", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:14Z", "item": "S67", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:14Z", "item": "S59", "action": "move", "from": "59", "to": "17", "note": ""}
+{"when": "2026-11-04T03:21:14Z", "item": "S60", "action": "move", "from": "60", "to": "25", "note": ""}
+{"when": "2026-11-04T03:21:14Z", "item": "S61", "action": "move", "from": "61", "to": "45", "note": ""}
+{"when": "2026-11-04T03:21:15Z", "item": "S62", "action": "move", "from": "62", "to": "9", "note": ""}
+{"when": "2026-11-04T03:21:15Z", "item": "S63", "action": "move", "from": "63", "to": "10", "note": ""}
+{"when": "2026-11-04T03:21:15Z", "item": "S64", "action": "move", "from": "64", "to": "11", "note": ""}
+{"when": "2026-11-04T03:21:15Z", "item": "S65", "action": "move", "from": "65", "to": "51", "note": ""}
+{"when": "2026-11-04T03:21:16Z", "item": "S66", "action": "move", "from": "66", "to": "19", "note": ""}
+{"when": "2026-11-04T03:21:16Z", "item": "S67", "action": "move", "from": "67", "to": "50", "note": ""}
+{"when": "2026-11-04T03:21:16Z", "item": "S08", "action": "set", "from": "", "to": "", "note": "depends_on S05,S52→S05,S52,S62"}
+{"when": "2026-11-04T03:21:16Z", "item": "S11", "action": "set", "from": "", "to": "", "note": "depends_on S03,S10→S03,S10,S64"}
+{"when": "2026-11-04T03:21:16Z", "item": "S16", "action": "set", "from": "", "to": "", "note": "depends_on S10,S15→S10,S15,S59"}
+{"when": "2026-11-04T03:21:17Z", "item": "S22", "action": "set", "from": "", "to": "", "note": "depends_on S21→S21,S62"}
+{"when": "2026-11-04T03:21:17Z", "item": "S24", "action": "set", "from": "", "to": "", "note": "depends_on S21,S18,S23→S21,S18,S23,S59"}
+{"when": "2026-11-04T03:21:17Z", "item": "S28", "action": "set", "from": "", "to": "", "note": "depends_on S27,S25,S22→S27,S25,S22,S63"}
+{"when": "2026-11-04T03:21:17Z", "item": "S29", "action": "set", "from": "", "to": "", "note": "depends_on S28,S12,S14→S28,S14"}
+{"when": "2026-11-04T03:21:17Z", "item": "S31", "action": "set", "from": "", "to": "", "note": "depends_on S30→S01"}
+{"when": "2026-11-04T03:21:18Z", "item": "S32", "action": "set", "from": "", "to": "", "note": "depends_on S31→S31,S30,S64"}
+{"when": "2026-11-04T03:21:18Z", "item": "S36", "action": "set", "from": "", "to": "", "note": "depends_on S31→S31,S30"}
+{"when": "2026-11-04T03:21:18Z", "item": "S42", "action": "set", "from": "", "to": "", "note": "depends_on S41,S22→S41,S22,S67,S64"}
+{"when": "2026-11-04T03:21:18Z", "item": "S17", "action": "set", "from": "", "to": "", "note": "depends_on S16,S04→S16,S04,S59"}
+{"when": "2026-11-04T03:21:18Z", "item": "S53", "action": "set", "from": "", "to": "", "note": "depends_on S41,S25,S37→S25,S61"}
+{"when": "2026-11-04T03:21:19Z", "item": "S54", "action": "set", "from": "", "to": "", "note": "depends_on S53,S42→S53,S42,S65,S67"}
+{"when": "2026-11-04T03:21:19Z", "item": "S55", "action": "set", "from": "", "to": "", "note": "depends_on S53,S42→S53,S42,S65,S54"}
+{"when": "2026-11-04T03:21:19Z", "item": "S34", "action": "set", "from": "open", "to": "later", "note": "status open→later"}
+{"when": "2026-11-04T03:21:19Z", "item": "S08", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:19Z", "item": "S11", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:20Z", "item": "S12", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:20Z", "item": "S14", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:20Z", "item": "S16", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:20Z", "item": "S20", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:21Z", "item": "S22", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:21Z", "item": "S24", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:21Z", "item": "S26", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:21Z", "item": "S28", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:22Z", "item": "S29", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:22Z", "item": "S31", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:23Z", "item": "S41", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:23Z", "item": "S53", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:23Z", "item": "S54", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:24Z", "item": "S55", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:24Z", "item": "S56", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-04T03:21:24Z", "item": "S17", "action": "edit", "from": "", "to": "", "note": "Implement"}
+{"when": "2026-11-04T03:21:24Z", "item": "S23", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T03:21:24Z", "item": "S28", "action": "note", "from": "", "to": "", "note": "2026-11-03 roadmap review: the two notes above (IPv4-mapped ", "by": "Jon R"}
+{"when": "2026-11-04T03:25:36Z", "item": "S30", "action": "edit", "from": "", "to": "", "note": "Check"}

@@ -12,6 +12,7 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 - G4: Near-zero required upkeep; optional taps improve accuracy, none are required.
 - G5: Usable by non-technical household members without help.
 - G6: Portable: any household can run it with its own stores, sources and network (ADR 0015, 0016).
+- G7: Reachable by message from anywhere: email or Matrix to add to the list, ask what's low, and answer larder's pantry questions (Phase 2; ADR 0025).
 
 ## Non-goals
 
@@ -21,79 +22,88 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 - NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).
 - NG5: Exact, item-by-item inventory tracking.
 
-58 items · — 39 · done 8 · later 11
+67 items · — 47 · done 8 · later 12
 
 | # | Slice | Title | Size | Effort | Trees | Findings | Status |
 |---|---|---|---|---|---|---|---|
 | Phase 0 — Foundations | | | | | | | |
-| 1 | [S08](slices/S08.md) | PWA shell | S | 1 | web |  | — |
+| 1 | [S62](slices/S62.md) | Paired landing route | S | 1 | web | G5, U2 · discovered from S07 | — |
+| 2 | [S63](slices/S63.md) | Proxy trust and single bootstrap fixes | S | 1 | web | G5, U4 · discovered from S28 | — |
+| 3 | [S64](slices/S64.md) | In-process scheduler | S | 1 | core | G4, NF7 · discovered from S11 | — |
+| 4 | [S08](slices/S08.md) | PWA shell | S | 1 | web |  | — |
 | Phase 1a — Recipes | | | | | | | |
-| 2 | [S09](slices/S09.md) | Interview: recipe repo conventions | S | 1 | docs |  | — |
-| 3 | [S10](slices/S10.md) | Recipe file parser | M | 2 | recipes |  | — |
-| 4 | [S11](slices/S11.md) | Recipe repo sync | M | 2 | recipes |  | — |
-| 5 | [S12](slices/S12.md) | Hugo site one-time importer | S | 1 | recipes |  | — |
-| 6 | [S13](slices/S13.md) | Recipe index | S | 1 | recipes, core |  | — |
-| 7 | [S14](slices/S14.md) | Recipe browse and metadata editing | M | 2 | web |  | — |
+| 5 | [S09](slices/S09.md) | Interview: recipe repo conventions | S | 1 | docs |  | — |
+| 6 | [S10](slices/S10.md) | Recipe file parser | M | 2 | recipes |  | — |
+| 7 | [S11](slices/S11.md) | Recipe repo sync | M | 2 | recipes |  | — |
+| 8 | [S12](slices/S12.md) | Hugo site one-time importer | S | 1 | recipes |  | — |
+| 9 | [S13](slices/S13.md) | Recipe index | S | 1 | recipes, core |  | — |
+| 10 | [S14](slices/S14.md) | Recipe browse and metadata editing | M | 2 | web |  | — |
+| 11 | [S66](slices/S66.md) | Recipe repo status page | S | 1 | web | G4, R1 · discovered from S11 | — |
 | Phase 1b — Ingredients | | | | | | | |
-| 8 | [S15](slices/S15.md) | Interview: grocery items, categories, staples and units | S | 1 | docs |  | — |
-| 9 | [S16](slices/S16.md) | Ingredient line parser | M | 2 | recipes |  | — |
-| 10 | [S17](slices/S17.md) | Canonical item matching | M | 2 | recipes, core |  | — |
-| 11 | [S18](slices/S18.md) | Parse review queue | M | 2 | web |  | — |
+| 12 | [S15](slices/S15.md) | Interview: grocery items, categories, staples and units | S | 1 | docs |  | — |
+| 13 | [S59](slices/S59.md) | Ingredient ranges and alternatives schema | S | 1 | core | G2, I3 · discovered from S16 | — |
+| 14 | [S16](slices/S16.md) | Ingredient line parser | M | 2 | recipes |  | — |
+| 15 | [S17](slices/S17.md) | Canonical item matching | M | 2 | recipes, core |  | — |
+| 16 | [S18](slices/S18.md) | Parse review queue | M | 2 | web |  | — |
 | Phase 1c — Planner | | | | | | | |
-| 12 | [S19](slices/S19.md) | Interview: planning rules | S | 1 | docs |  | — |
-| 13 | [S20](slices/S20.md) | Meal suggestion ranking | M | 2 | core |  | — |
-| 14 | [S21](slices/S21.md) | Weekly planning session | M | 2 | web |  | — |
-| 15 | [S22](slices/S22.md) | Today view | S | 1 | web |  | — |
+| 17 | [S19](slices/S19.md) | Interview: planning rules | S | 1 | docs |  | — |
+| 18 | [S20](slices/S20.md) | Meal suggestion ranking | M | 2 | core |  | — |
+| 19 | [S21](slices/S21.md) | Weekly planning session | M | 2 | web |  | — |
+| 20 | [S22](slices/S22.md) | Today view | S | 1 | web |  | — |
+| 21 | [S60](slices/S60.md) | Read-only week view | S | 1 | web | G1, P1 · discovered from S22 | — |
 | Phase 1d — Shopping list | | | | | | | |
-| 16 | [S23](slices/S23.md) | Interview: shopping list behavior | S | 1 | docs |  | — |
-| 17 | [S24](slices/S24.md) | Shopping list generation | M | 2 | core |  | — |
-| 18 | [S25](slices/S25.md) | Shared shopping list UI | M | 2 | web |  | — |
+| 22 | [S23](slices/S23.md) | Interview: shopping list behavior | S | 1 | docs |  | — |
+| 23 | [S24](slices/S24.md) | Shopping list generation | M | 2 | core |  | — |
+| 24 | [S25](slices/S25.md) | Shared shopping list UI | M | 2 | web |  | — |
 | Phase 1e — Deploy and trial | | | | | | | |
-| 19 | [S26](slices/S26.md) | Interview: deployment host and network | S | 1 | docs, deploy |  | — |
-| 20 | [S27](slices/S27.md) | Spike: HTTPS on the deployment network | S | 2 | deploy |  | — |
-| 21 | [S28](slices/S28.md) | Container image and deployment | M | 2 | deploy |  | — |
-| 22 | [S29](slices/S29.md) | Deploy and onboard | S | 1 | deploy |  | — |
-| 23 | [S30](slices/S30.md) | MVP trial | S | 1 | docs |  | — |
+| 25 | [S26](slices/S26.md) | Interview: deployment host and network | S | 1 | docs, deploy |  | — |
+| 26 | [S27](slices/S27.md) | Spike: HTTPS on the deployment network | S | 2 | deploy |  | — |
+| 27 | [S28](slices/S28.md) | Container image and deployment | M | 2 | deploy |  | — |
+| 28 | [S29](slices/S29.md) | Deploy and onboard | S | 1 | deploy |  | — |
+| 29 | [S30](slices/S30.md) | MVP trial | S | 1 | docs |  | — |
 | Phase 2 — Orders, pantry, notifications | | | | | | | |
-| 24 | [S31](slices/S31.md) | Interview: receipts mailbox and samples | S | 1 | docs, ingest |  | — |
-| 25 | [S32](slices/S32.md) | IMAP poller and raw email archive | M | 2 | ingest |  | — |
-| 26 | [S33](slices/S33.md) | Store parser: first store | M | 2 | ingest |  | — |
-| 27 | [S34](slices/S34.md) | Store parsers: additional stores | M | 2 | ingest |  | — |
-| 28 | [S35](slices/S35.md) | Order line matching | M | 2 | ingest, web |  | — |
-| 29 | [S36](slices/S36.md) | Interview: pantry model | S | 1 | docs |  | — |
-| 30 | [S37](slices/S37.md) | Pantry estimator | M | 2 | core |  | — |
-| 31 | [S38](slices/S38.md) | Pantry taps and use-it-up nudges | M | 2 | web |  | — |
-| 32 | [S39](slices/S39.md) | Runout predictor | S | 1 | core |  | — |
-| 33 | [S40](slices/S40.md) | Pantry-aware planner and list | M | 2 | core |  | — |
-| 34 | [S41](slices/S41.md) | Interview: notifications | S | 1 | docs |  | — |
-| 35 | [S42](slices/S42.md) | Notifier | M | 2 | core |  | — |
-| 36 | [S53](slices/S53.md) | Intent core and autonomy levels | M | 2 | core | C1, C4 | — |
-| 37 | [S54](slices/S54.md) | Email conversation adapter | M | 2 | core | C2 | — |
-| 38 | [S55](slices/S55.md) | Matrix conversation adapter | M | 2 | core | C3 | — |
-| 39 | [S56](slices/S56.md) | Pantry questions and numbered replies | M | 2 | core | C5 | — |
+| 30 | [S31](slices/S31.md) | Interview: receipts mailbox and samples | S | 1 | docs, ingest |  | — |
+| 31 | [S32](slices/S32.md) | IMAP poller and raw email archive | M | 2 | ingest |  | — |
+| 32 | [S33](slices/S33.md) | Store parser: first store | M | 2 | ingest |  | — |
+| 33 | [S34](slices/S34.md) | Store parsers: additional stores | M | 2 | ingest |  | later |
+| 34 | [S35](slices/S35.md) | Order line matching | M | 2 | ingest, web |  | — |
+| 35 | [S36](slices/S36.md) | Interview: pantry model | S | 1 | docs |  | — |
+| 36 | [S37](slices/S37.md) | Pantry estimator | M | 2 | core |  | — |
+| 37 | [S38](slices/S38.md) | Pantry taps and use-it-up nudges | M | 2 | web |  | — |
+| 38 | [S39](slices/S39.md) | Runout predictor | S | 1 | core |  | — |
+| 39 | [S40](slices/S40.md) | Pantry-aware planner and list | M | 2 | core |  | — |
+| 40 | [S41](slices/S41.md) | Interview: notifications | S | 1 | docs |  | — |
+| 41 | [S61](slices/S61.md) | Interview: conversation channels | S | 1 | docs | G7, C1-C5 · discovered from S41 | — |
+| 42 | [S67](slices/S67.md) | SMTP secret field | S | 1 | core | X1, NF4 · discovered from S42 | — |
+| 43 | [S42](slices/S42.md) | Notifier | M | 2 | core |  | — |
+| 44 | [S53](slices/S53.md) | Intent core and autonomy levels | M | 2 | core | C1, C4 | — |
+| 45 | [S65](slices/S65.md) | Conversation secret fields | S | 1 | core | G7, NF4 · discovered from S54 | — |
+| 46 | [S54](slices/S54.md) | Email conversation adapter | M | 2 | core | C2 | — |
+| 47 | [S55](slices/S55.md) | Matrix conversation adapter | M | 2 | core | C3 | — |
+| 48 | [S56](slices/S56.md) | Pantry questions and numbered replies | M | 2 | core | C5 | — |
 | Later | | | | | | | |
-| 40 | S43 | Ollama parse suggestions |  | - |  |  | later |
-| 41 | S44 | LLM meal suggestions from what's on hand |  | - |  |  | later |
-| 42 | S45 | Recipe URL importer (schema.org) |  | - |  |  | later |
-| 43 | S46 | Publish recipes to a Hugo site |  | - |  |  | later |
-| 44 | S47 | Remember store product names per item |  | - |  |  | later |
-| 45 | S48 | Kitchen tablet mode |  | - |  |  | later |
-| 46 | S49 | Native Android app |  | - |  |  | later |
-| 47 | S50 | Distributable self-host packaging |  | - |  |  | later |
-| 48 | S51 | Hosted multi-household instance |  | - |  |  | later |
-| 49 | S57 | LLM fallback for conversation messages |  | - |  |  | later |
-| 50 | S58 | Spike: store cart building (autonomy L2) |  | - |  |  | later |
+| 49 | S43 | Ollama parse suggestions |  | - |  |  | later |
+| 50 | S44 | LLM meal suggestions from what's on hand |  | - |  |  | later |
+| 51 | S45 | Recipe URL importer (schema.org) |  | - |  |  | later |
+| 52 | S46 | Publish recipes to a Hugo site |  | - |  |  | later |
+| 53 | S47 | Remember store product names per item |  | - |  |  | later |
+| 54 | S48 | Kitchen tablet mode |  | - |  |  | later |
+| 55 | S49 | Native Android app |  | - |  |  | later |
+| 56 | S50 | Distributable self-host packaging |  | - |  |  | later |
+| 57 | S51 | Hosted multi-household instance |  | - |  |  | later |
+| 58 | S57 | LLM fallback for conversation messages |  | - |  |  | later |
+| 59 | S58 | Spike: store cart building (autonomy L2) |  | - |  |  | later |
 
 ---
 
 | # | Slice | Title | Size | Effort | Trees | Findings | Status |
 |---|---|---|---|---|---|---|---|
 | Phase 0 — Foundations | | | | | | | |
-| 51 | [S52](slices/S52.md) | Brand mark and app icons | S | 1 | docs |  | done |
-| 52 | [S01](slices/S01.md) | Interview: dev tooling and conventions | S | 1 | docs |  | done |
-| 53 | [S02](slices/S02.md) | Project skeleton and AGENTS.md | S | 1 | core, docs |  | done |
-| 54 | [S03](slices/S03.md) | Config and data directory loading | S | 1 | core |  | done |
-| 55 | [S04](slices/S04.md) | SQLite schema and migrations | M | 2 | core |  | done |
-| 56 | [S05](slices/S05.md) | Flask app shell | S | 1 | web |  | done |
-| 57 | [S06](slices/S06.md) | Interview: device pairing and admin bootstrap | S | 1 | docs |  | done |
-| 58 | [S07](slices/S07.md) | People and device pairing | M | 2 | web, core |  | done |
+| 60 | [S52](slices/S52.md) | Brand mark and app icons | S | 1 | docs |  | done |
+| 61 | [S01](slices/S01.md) | Interview: dev tooling and conventions | S | 1 | docs |  | done |
+| 62 | [S02](slices/S02.md) | Project skeleton and AGENTS.md | S | 1 | core, docs |  | done |
+| 63 | [S03](slices/S03.md) | Config and data directory loading | S | 1 | core |  | done |
+| 64 | [S04](slices/S04.md) | SQLite schema and migrations | M | 2 | core |  | done |
+| 65 | [S05](slices/S05.md) | Flask app shell | S | 1 | web |  | done |
+| 66 | [S06](slices/S06.md) | Interview: device pairing and admin bootstrap | S | 1 | docs |  | done |
+| 67 | [S07](slices/S07.md) | People and device pairing | M | 2 | web, core |  | done |

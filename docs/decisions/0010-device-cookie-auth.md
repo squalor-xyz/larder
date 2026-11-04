@@ -26,7 +26,9 @@ screen after pairing.
   refuses to start (`ConfigError`) when config names no admin.
 - **Bootstrap:** while no admin has an active device, larder prints a one-time
   bootstrap link to the server log at startup. It is single use and has no
-  fixed expiry; each restart replaces it until one is used. Opening it lists
+  fixed expiry; each run of the bootstrap step replaces it until one is used
+  (amended 2026-11-03: the step runs once before the server starts, not in
+  every worker; slice S63). Opening it lists
   the admins from config, and the device is paired to the one picked. The link
   only works while no admin has an active device: once one does (for example
   paired by CLI), the link is dead, even if unused.

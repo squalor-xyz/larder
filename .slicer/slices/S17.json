@@ -30,7 +30,7 @@
     },
     {
       "heading": "Implement",
-      "body": "1. Seed items, categories and aliases from TOML (ADR 0019).\n2. Normalize: lowercase, strip descriptors (fresh, chopped, sliced, …), and singularize with simple rules.\n3. Match on exact, then alias, then token overlap (stdlib `difflib` for the score).\n4. Return the item with a confidence; below the threshold → review queue.\n5. Store results on `ingredient_line.item_id`."
+      "body": "1. Seed items, categories and aliases from TOML (ADR 0019).\n2. Normalize: lowercase, strip descriptors (fresh, chopped, sliced, …), and singularize with simple rules.\n3. Match on exact, then alias, then token overlap (stdlib `difflib` for the score).\n4. Return the item with a confidence; below the threshold → review queue.\n5. Store the whole parse from S16's `ParsedLine` on `ingredient_line` (qty, qty_max, unit_id, item_id, notes, optional, is_food, confidence), and the extra choices in `ingredient_line_alt` (S59). This slice is the only writer of parsed fields; S13 writes raw lines and S16 stays pure."
     },
     {
       "heading": "Check",

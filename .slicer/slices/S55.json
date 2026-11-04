@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "Approve the Matrix client library chosen in the notifications interview (NF6)."
+      "body": "1. Approve the Matrix client library recorded in ADR 0028 (S61): why the stdlib is not enough, the license and the cost (NF6).\n2. Where the sync token is stored: a one-row table in a new numbered migration (recommended; it is backed up with the database), or a file in the data directory?"
     },
     {
       "heading": "Files",
@@ -30,7 +30,7 @@
     },
     {
       "heading": "Implement",
-      "body": "1. Sync loop on the bot account; map Matrix IDs to people.\n2. Replies and notifier pings to each person's room."
+      "body": "1. Sync loop on the bot account, with the token from `settings.secrets.matrix_token_file` (S65); map Matrix IDs to people.\n2. Replies and notifier pings to each person's room.\n3. Persist the sync token where Owner input 2 decided."
     },
     {
       "heading": "Check",

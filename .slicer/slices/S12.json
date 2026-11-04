@@ -22,15 +22,15 @@
     },
     {
       "heading": "Files",
-      "body": "- `src/larder/importers/__init__.py` (Importer protocol, registry)\n- `src/larder/importers/hugo.py`\n- `src/larder/cli.py` (`larder import hugo …`)\n- `tests/test_import_hugo.py`"
+      "body": "- `src/larder/importers/__init__.py` (Importer protocol, registry)\n- `src/larder/importers/hugo.py`\n- `src/larder/__main__.py` (`import hugo` subcommand beside `pair`)\n- `tests/test_import_hugo.py`"
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_imports_all_fixture_recipes_with_normalized_headings`\n2. `test_reimport_is_noop_when_unchanged`\n3. `test_skips_drafts`\n4. `test_records_source_in_front_matter_or_db` (per ADR 0018)\n5. `test_single_commit_for_whole_import`"
+      "body": "1. `test_imports_all_fixture_recipes_with_normalized_headings`\n2. `test_reimport_is_noop_when_unchanged`\n3. `test_skips_drafts`\n4. `test_records_source_in_front_matter_or_db` (per ADR 0018)\n5. `test_single_commit_for_whole_import`\n6. `test_import_hugo_subcommand_dry_run_prints_the_plan_and_writes_nothing` (call `larder.__main__.main([\"import\", \"hugo\", \"--source\", ..., \"--dry-run\"])`)"
     },
     {
       "heading": "Implement",
-      "body": "1. Define an `Importer` protocol: `discover() -> list[SourceRecipe]`, `to_doc(src) -> RecipeDoc`.\n2. Hugo importer: read `*.md`, parse, normalize headings, keep the body.\n3. Write files into the recipe repo; one commit, then push.\n4. CLI subcommand plus dry-run that prints a plan."
+      "body": "1. Define an `Importer` protocol: `discover() -> list[SourceRecipe]`, `to_doc(src) -> RecipeDoc`.\n2. Hugo importer: read `*.md`, parse, normalize headings, keep the body.\n3. Write files into the recipe repo; one commit, then push.\n4. Add an `import` subcommand with a `hugo` target to `larder.__main__.main` next to `pair`: `--source PATH` and `--dry-run`, which prints a plan and changes nothing. There is no `src/larder/cli.py`."
     },
     {
       "heading": "Check",

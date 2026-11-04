@@ -20,10 +20,10 @@ decisions.
 - **G1:** Answer "what's for dinner?" in seconds, from meals the household actually makes.
 - **G2:** One shared shopping list that every household member trusts.
 - **G3:** Reduce waste and duplicate purchases using order data instead of manual logging (Phase 2).
-- **G4:** Near-zero required upkeep. Optional taps improve accuracy; none are required.
+- **G4:** Near-zero required upkeep. Optional taps improve accuracy; none are required. The one-time parse review during the recipe import is accepted upkeep ([ADR 0007](decisions/0007-rule-based-ingredient-parsing.md)).
 - **G5:** Usable by non-technical household members without help: a home-screen icon, tonight's dinner, the list.
-- **G7:** Reachable by message from anywhere: email or Matrix to add to the list, ask what's low, and answer larder's pantry questions (Phase 2; [ADR 0025](decisions/0025-conversational-channels.md)).
 - **G6:** Portable: any household can run it with its own stores, sources and network.
+- **G7:** Reachable by message from anywhere: email or Matrix to add to the list, ask what's low, and answer larder's pantry questions (Phase 2; [ADR 0025](decisions/0025-conversational-channels.md)).
 
 ## Non-goals
 

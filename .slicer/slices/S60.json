@@ -1,0 +1,45 @@
+{
+  "id": "S60",
+  "title": "Read-only week view",
+  "lead": [
+    "A read-only page for the current week: seven dates, each night's meal title, and a link to its recipe (P1)."
+  ],
+  "depends_note": null,
+  "findings_note": "G1, P1",
+  "size": "S",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** swap, skip, lock or made controls (S21, S22); editing the plan; past or future weeks; the shopping list.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "P1 asks for tonight's dinner and a simple week view. S22 delivers tonight only. A paired member who does not plan can see the week without opening the planning session, and the glanceable Today page stays uncluttered."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the planning rules interview is done (S19): which nights are planned and which day a week starts. A night with no meal shows as empty."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/week_views.py` (blueprint `week`, route `GET /week`)\n- `src/larder/web/templates/week.html`\n- `src/larder/web/templates/base.html` (a \"Week\" link in the header for any paired person)\n- `src/larder/web/__init__.py` (register the blueprint in `create_app`)\n- `src/larder/planner_db.py` (SQL: `week_meals(conn, week_start)`; create the file if S21 has not, otherwise add to it)\n- `tests/test_week.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "In `tests/test_week.py`, built on `WebShellTestCase` (`tests/test_web_shell.py`):\n1. `test_week_shows_seven_dates_with_meal_titles`\n2. `test_night_without_a_meal_is_shown_empty`\n3. `test_meal_title_links_to_the_recipe_view` (the href comes from `url_for` on S14's recipe view endpoint, not a hard-coded path)\n4. `test_no_plan_shows_a_friendly_message`\n5. `test_member_can_open_the_week` (not admin-only)\n6. `test_page_has_no_forms_or_controls` and `test_post_is_not_allowed` (405)\n7. `test_unpaired_device_gets_401`\n8. `test_header_has_a_week_link_for_paired_people`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. `planner_db.week_meals(conn, week_start)` returns the `planned_meal` rows of the `meal_plan` with that `week_start`, joined to `recipe.title`, ordered by date then id. `planned_meal` is not unique on (meal_plan_id, date), so a date can have several rows; show them all.\n2. The view finds the plan that contains today (today in `settings.timezone`; the host's local time when it is unset), builds the seven ISO dates from `week_start`, and renders them.\n3. Register the blueprint in `create_app` after `auth_views.init_app`. Do not add the endpoint to `_OPEN_ENDPOINTS`: the device guard in `auth_views` already answers 401 for unpaired devices.\n4. Template extends `base.html`; no inline script or style (`TemplateRulesTest`)."
+    },
+    {
+      "heading": "Check",
+      "body": "- Web tests pass; on the dev server a paired phone shows the planned week and an unpaired browser gets the 401 page."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

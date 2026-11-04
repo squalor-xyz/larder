@@ -1,0 +1,45 @@
+{
+  "id": "S64",
+  "title": "In-process scheduler",
+  "lead": [
+    "One background thread runs registered interval jobs one at a time, and only one process per data directory runs them."
+  ],
+  "depends_note": null,
+  "findings_note": "G4, NF7",
+  "size": "S",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** any job (recipe pull is S11, IMAP polling S32, pings S42); time-of-day schedules (S42 decides how it picks the minute); a separate scheduler process or compose service; starting the thread under a WSGI server (S28 does that).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "S11, S32 and S42 each need a periodic task, and S28 was to choose the mechanism at the end of the MVP chain. A small stdlib scheduler keeps ADR 0002 (stdlib first) and the single container (NF7). The lock file stops duplicate jobs when a WSGI server starts several processes."
+    },
+    {
+      "heading": "Owner input",
+      "body": "Confirm (recommended as written): one daemon thread; jobs run one at a time in registration order; an exclusive lock file `$LARDER_DATA/scheduler.lock` (`fcntl.flock`, POSIX only) so a second process on the same data directory runs no jobs; the dev server starts it, `create_app` and the tests do not."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/scheduler.py`\n- `src/larder/web/__init__.py` (`create_app` builds the scheduler and stores it in `app.extensions[\"larder.scheduler\"]`; it does not start it)\n- `src/larder/__main__.py` (start it before `app.run`, stop it afterwards)\n- `tests/test_scheduler.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "In `tests/test_scheduler.py` (an injected clock; no sleeping except the thread tests):\n1. `test_job_runs_when_its_interval_has_elapsed_and_not_before`\n2. `test_due_jobs_run_one_at_a_time_in_registration_order`\n3. `test_next_run_is_one_interval_after_the_job_finishes`\n4. `test_failing_job_is_logged_and_does_not_stop_the_others` (`assertLogs(\"larder.scheduler\")`)\n5. `test_register_rejects_duplicate_names_and_non_positive_intervals`\n6. `test_start_runs_jobs_on_a_thread_and_stop_joins_it` (an `Event` with a timeout, interval 0.01 s)\n7. `test_second_scheduler_on_the_same_data_dir_runs_no_jobs`\n8. `test_stop_releases_the_lock_so_another_scheduler_can_run`\n9. `test_create_app_does_not_start_the_thread` (in `tests/test_web_shell.py::AppFactoryTest`)\n10. `test_main_starts_the_scheduler_before_the_dev_server` (in `MainTest`; patch `flask.Flask.run`)"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. `Scheduler(data_dir, clock=time.monotonic)` with `register(name, interval_seconds, func)`, `run_due()`, `start()`, `stop()` and a `running` property. A job is a no-argument callable; callers close over their settings.\n2. `run_due()` runs each due job inside `try/except Exception`, logs a failure with `logging.getLogger(\"larder.scheduler\")`, and schedules the next run one interval after the job finishes.\n3. `start()` takes the lock with `flock(LOCK_EX | LOCK_NB)`; if it cannot, it logs once and returns without a thread. Otherwise it starts a daemon thread that loops: `run_due()`, then waits on a stop `Event` for at most one second.\n4. `stop()` sets the event, joins the thread and releases the lock. `start()` twice is a no-op.\n5. Wire it into `create_app` and `main` as listed in Files."
+    },
+    {
+      "heading": "Check",
+      "body": "- Scheduler tests and the full suite pass; `ruff check .` is clean.\n- The dev server starts and stops without hanging or leaving a thread."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

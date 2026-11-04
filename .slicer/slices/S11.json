@@ -2,7 +2,7 @@
   "id": "S11",
   "title": "Recipe repo sync",
   "lead": [
-    "Clone, pull, commit and push `larder-recipes` using a repo-scoped deploy key (ADR 0012)."
+    "Clone, pull, commit and push the household's recipe repo (`recipe_repo_url`) using a repo-scoped deploy key (ADR 0012)."
   ],
   "depends_note": null,
   "findings_note": "",
@@ -10,31 +10,31 @@
   "flags": [],
   "trees_note": "recipes",
   "trees_plural": false,
-  "boundary": "**Not in this slice:** the importer; the UI for resolving conflicts (shown as status only).",
+  "boundary": "**Not in this slice:** the importer; any admin UI for conflicts (this slice only exposes `status()`; the page is S66); the scheduler itself (S64).",
   "sections": [
     {
       "heading": "Why",
-      "body": "Recipes live in git. larder must read the latest version and push its own changes without ever needing broader credentials."
+      "body": "Recipes live in git. larder must read the latest version and push its own changes without ever needing broader credentials. The git host is whatever `recipe_repo_url` names; any host that accepts a deploy key works (ADR 0012)."
     },
     {
       "heading": "Owner input",
-      "body": "1. Create `larder-recipes` on GitHub (the owner does it, or an agent does with `gh` after explicit approval).\n2. Generate a deploy key with write access: the owner adds the public key in GitHub settings. The private key lives in `$LARDER_DATA/secrets/` and is never committed.\n3. Sync cadence: on startup + every N minutes (recommend 15) + after each write?\n4. On divergence: rebase local commits onto the remote (recommended), or stop and show \"needs attention\"?"
+      "body": "Owner checklist (the owner does these on their git host; no agent runs host tooling or touches the host):\n1. Create an empty repo on your git host and set `recipe_repo_url` (in `larder.toml` or `LARDER_RECIPE_REPO_URL`).\n2. Generate a deploy key with write access and add its public half to that repo in the host's settings. Put the private key at `$LARDER_DATA/secrets/deploy_key` (or the `[secrets] deploy_key` path), mode 0600. It is never committed.\n3. Add the host's SSH key to `$LARDER_DATA/secrets/known_hosts` so ssh never prompts.\n\nDecisions:\n4. Sync cadence: on startup, every N minutes (recommend 15) and after each write?\n5. On divergence: rebase local commits onto the remote (recommended), or stop and show \"needs attention\"?"
     },
     {
       "heading": "Files",
-      "body": "- `src/larder/recipes/repo.py`\n- `tests/test_recipe_repo.py` (uses a local bare repo as the \"remote\")"
+      "body": "- `src/larder/recipes/repo.py`\n- `src/larder/web/__init__.py` (`create_app` registers the sync job on S64's scheduler when `recipe_repo_url` is set)\n- `tests/test_recipe_repo.py` (uses a local bare repo as the \"remote\")"
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_clone_when_missing_then_pull_when_present`\n2. `test_commit_and_push_writes_file_with_configured_identity`\n3. `test_push_uses_deploy_key_via_GIT_SSH_COMMAND_only`\n4. `test_diverged_remote_rebases_cleanly`\n5. `test_conflict_surfaces_status_and_leaves_repo_clean`\n6. `test_secrets_never_logged`"
+      "body": "1. `test_clone_when_missing_then_pull_when_present`\n2. `test_commit_and_push_writes_file_with_configured_identity`\n3. `test_push_uses_deploy_key_via_GIT_SSH_COMMAND_only`\n4. `test_diverged_remote_rebases_cleanly`\n5. `test_conflict_surfaces_status_and_leaves_repo_clean`\n6. `test_secrets_never_logged`\n7. `test_status_before_first_clone_and_when_in_sync`\n8. `test_conflict_status_is_readable_from_a_new_process`\n9. `test_sync_job_is_registered_only_when_the_repo_url_is_set` (run it with `Scheduler.run_due()` and an injected clock)\n10. `test_git_calls_are_serialized_by_the_lock_file`"
     },
     {
       "heading": "Implement",
-      "body": "1. Wrap git via `subprocess.run([...], check=True)` with no shell. Set `GIT_SSH_COMMAND` to `ssh -i <key> -o IdentitiesOnly=yes`.\n2. `ensure_clone()`, `pull()`, `commit(paths, message)`, `push()`, `status()`.\n3. Divergence policy per Owner input; abort rebase on conflict and record status.\n4. Use a file lock around git operations so the scheduler and requests don't race.\n5. Log commands without secrets."
+      "body": "1. Wrap git via `subprocess.run([...], check=True)` with no shell. Set `GIT_SSH_COMMAND` to `ssh -i <key> -o IdentitiesOnly=yes -o BatchMode=yes -o UserKnownHostsFile=<known_hosts> -o StrictHostKeyChecking=yes`.\n2. Functions take `settings` first: `ensure_clone(settings)`, `pull(settings)`, `commit(settings, paths, message)`, `push(settings)`, `status(settings) -> RepoStatus`. `RepoStatus` is a frozen dataclass: `state` (`not_cloned`, `ok` or `needs_attention`), `detail`, `last_sync_at`, `ahead`, `behind`, `conflicted_files`. S66 renders it.\n3. Divergence policy per Owner input; abort the rebase on conflict and write the status to `.git/larder-status.json` inside the clone (never committed), so a later process can read it.\n4. Take an exclusive `fcntl.flock` on `$LARDER_DATA/recipes.lock` around git operations so the scheduler and requests don't race.\n5. Log commands without secrets.\n6. `register_sync(scheduler, settings, interval_seconds=900)` registers a \"recipe-sync\" job on the scheduler S64 provides that calls `pull`. S13 adds the index hook later."
     },
     {
       "heading": "Check",
-      "body": "- Repo tests pass against a local bare repo.\n- With the owner: the real repo clones and a test commit pushes (then is reverted only if the owner asks)."
+      "body": "- Repo tests pass against a local bare repo.\n- With the owner: the owner checklist is done, the real repo clones, and a test commit pushes (then is reverted only if the owner asks)."
     },
     {
       "heading": "Git",

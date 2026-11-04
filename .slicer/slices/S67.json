@@ -1,0 +1,45 @@
+{
+  "id": "S67",
+  "title": "SMTP secret field",
+  "lead": [
+    "Add an explicit `[secrets]` key for the SMTP password, with the rules the existing secret paths follow, so the notifier's email channel (S42) and the email conversation adapter (S54) share one credential."
+  ],
+  "depends_note": null,
+  "findings_note": "X1, NF4",
+  "size": "S",
+  "flags": [],
+  "trees_note": "core",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** reading the secret file or sending mail (S42, S54); the conversation mailbox and Matrix keys (S65); SMTP host, port and sender address, which the notifications interview (S41, ADR 0024) places in config.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "`_SECRET_FIELDS` in `src/larder/config.py` is a closed set of three, and unknown `[secrets]` keys are errors. S42 tests an SMTP channel but nothing holds its credential. The key was first drafted inside the conversation secrets slice (S65). That would have made the notifier wait on the conversation interview, so it gets its own slice after S41."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None beyond ADR 0024. Recommended key: `smtp_password_file`, default `secrets/smtp_password`, override `LARDER_SECRETS_SMTP_PASSWORD_FILE`."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/config.py` (`_SECRET_FIELDS`, `Secrets`, `load_settings`)\n- `larder.example.toml` (the header comment's override list and the `[secrets]` table)\n- `docs/specs/architecture.md` (Configuration: environment overrides; Secrets)\n- `tests/test_config.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "In `tests/test_config.py`, class `LoadSettingsTest`:\n1. `test_smtp_secret_path_defaults_under_secrets` (and update `test_loads_defaults_when_file_missing`)\n2. `test_smtp_secret_path_read_from_file_and_env_override` (relative paths resolve against the data dir; absolute ones replace it; env wins over the file)\n3. `test_smtp_secret_value_not_in_repr`\n4. `test_unknown_secret_key_still_fails`\n5. `test_example_config_loads` still passes with the new key in `larder.example.toml`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Add one entry to `_SECRET_FIELDS`; the override name joins `_ENV_OVERRIDES` automatically.\n2. Add a `field(repr=False)` field to `Secrets` and a `_secret_path` call in `load_settings`. Loading reads no secret file.\n3. Update `larder.example.toml` and the architecture doc. Fix the tests that build `Secrets(...)` with keywords."
+    },
+    {
+      "heading": "Check",
+      "body": "- Config tests and the full suite pass; `repr(settings)` still prints `Secrets(<redacted>)`."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}

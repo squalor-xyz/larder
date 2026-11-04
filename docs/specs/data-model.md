@@ -71,7 +71,9 @@ their pairing links stop being valid.
   config.
 - `staple` gains `unit_id`, matching `default_qty`.
 - Ranges and alternatives in ingredient lines ("1–2 onions", "butter or oil")
-  are left to the parser slice, which adds columns in a later migration.
+  get their own migration, 0003 (slice S59): `qty_max` on `ingredient_line` and
+  `parse_override`, plus the child tables `ingredient_line_alt` and
+  `parse_override_alt`.
 
 ## Phase 2
 

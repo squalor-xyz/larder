@@ -10,23 +10,31 @@ that depend on them can't start until they're done. Every slice also has an
 
 ## Phase 0: Foundations
 
-Conventions, project skeleton, config, database, web shell, device pairing, PWA shell.
+Conventions, project skeleton, config, database, web shell, device pairing, landing
+route, proxy and bootstrap fixes, in-process scheduler, PWA shell.
 
 ## Phase 1: MVP (recipes, planner, shopping list)
 
-1. Recipe repo conventions, file parser, repo sync, Hugo importer, index, metadata UI
-2. Ingredient parsing, item matching, review queue
-3. Planning rules, suggestion ranking, weekly session, Today view
+1. Recipe repo conventions, file parser, repo sync, Hugo importer, index, metadata UI,
+   repo status page
+2. Ingredient ranges and alternatives schema, ingredient parsing, item matching,
+   review queue
+3. Planning rules, suggestion ranking, weekly session, Today view, read-only week view
 4. Shopping list behavior, generation, shared list UI
 5. Deployment interview, HTTPS spike, container, deploy and onboard, two-week trial
 
 **Exit:** for two straight weeks the household picks dinners and shops from
 larder's list, and a non-technical member uses the home-screen app without help.
 
-## Phase 2: Orders, pantry, notifications
+## Phase 2: Orders, pantry, notifications, conversation
 
 Receipts mailbox, IMAP poller, store parsers, order matching, pantry estimates,
 use-it-up nudges, runout prediction, pantry-aware planning, notifications.
+Order-email samples are collected during Phase 1 to check that store emails list
+items; the rest waits for the trial.
+
+Conversation (G7) comes after notifications, in this order: intent core, email,
+then Matrix once email has been used.
 
 **Exit:** lists skip items already on hand, and recurring staples are flagged
 before they run out.

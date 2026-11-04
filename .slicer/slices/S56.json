@@ -18,19 +18,19 @@
     },
     {
       "heading": "Owner input",
-      "body": "How many questions per week at most, and on which days?"
+      "body": "The weekly question cap and the days come from ADR 0028 (S61). Nothing else to ask."
     },
     {
       "heading": "Files",
-      "body": "- `src/larder/pantry/questions.py`\n- `tests/test_pantry_questions.py`"
+      "body": "- `src/larder/pantry/questions.py`\n- `src/larder/questions_db.py` (SQL)\n- `src/larder/migrations/000N_questions.sql` (question: id, person_id, item_id, options, created_at, expires_at, answered_at)\n- `tests/test_pantry_questions.py`"
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_question_has_id_and_numbered_options`\n2. `test_numbered_reply_maps_to_open_question`\n3. `test_stale_question_reply_is_rejected_with_help`\n4. `test_weekly_question_cap_respected`"
+      "body": "1. `test_question_has_id_and_numbered_options`\n2. `test_numbered_reply_maps_to_open_question`\n3. `test_stale_question_reply_is_rejected_with_help`\n4. `test_weekly_question_cap_respected`\n5. `test_low_command_records_pantry_correction` (moved from S53)\n6. `test_whats_low_lists_low_items`"
     },
     {
       "heading": "Implement",
-      "body": "1. Pick questions from runout predictions and low-confidence estimates.\n2. Send via the person's channel; apply replies as pantry corrections."
+      "body": "1. Pick questions from runout predictions and low-confidence estimates.\n2. Send via the person's channel; apply replies as pantry corrections.\n3. Register the `low` and `what's low` intents with S53's intent core (`register_intent`)."
     },
     {
       "heading": "Check",

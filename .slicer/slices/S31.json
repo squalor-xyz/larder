@@ -2,7 +2,7 @@
   "id": "S31",
   "title": "Interview: receipts mailbox and samples",
   "lead": [
-    "Settle the dedicated mailbox and collect real order emails (Q6–Q8, ADR 0003)."
+    "Settle the dedicated mailbox and collect real order emails (ADR 0003; see \"Receipts mailbox and email formats\" in docs/open-questions.md)."
   ],
   "depends_note": null,
   "findings_note": "",
@@ -14,7 +14,7 @@
   "sections": [
     {
       "heading": "Why",
-      "body": "Store parsers can't be written without real samples, and the mailbox's provider and routing decide how IMAP access works."
+      "body": "Store parsers can't be written without real samples, and the mailbox's provider and routing decide how IMAP access works. This needs no trial results, so do it during the MVP: whether the emails list items decides whether Phase 2 is worth building."
     },
     {
       "heading": "Owner input",

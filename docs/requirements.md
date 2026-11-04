@@ -94,7 +94,7 @@ reference them.
 | ID | Requirement | Tag |
 |---|---|---|
 | U1 | Installable PWA that works well on Android ([ADR 0004](decisions/0004-pwa-first.md)). | MVP |
-| U2 | Minimal default view: tonight's dinner, the list, an add-item box. | MVP |
+| U2 | Minimal everyday pages: Today (tonight's dinner, mark made), the list with its add-item box, and a read-only week view. | MVP |
 | U3 | Separate admin views: recipe metadata, parse review, imports, devices. | MVP |
 | U4 | Reachable on the LAN (and optionally over a VPN); never exposed publicly. | MVP |
 | U5 | Kitchen tablet mode. | Later |
@@ -112,7 +112,7 @@ reference them.
 | NF5 | **Portability:** no household-specific values in code; stores, importers and channels are plugins or config. |
 | NF6 | **Dependencies:** stdlib-first; every new dependency needs approval with a stated reason. |
 | NF7 | **Operations:** runs as one container with one data volume; backup and restore are documented and tested. |
-| NF8 | **Offline tolerance:** pages load from cache when the network is flaky; editing requires the server. |
+| NF8 | **Offline tolerance:** the static app shell is cached; pages are network-first; editing requires the server. |
 
 ## Non-requirements
 

@@ -1,0 +1,45 @@
+{
+  "id": "S62",
+  "title": "Paired landing route",
+  "lead": [
+    "Serve a real page at `/` for paired devices, so a successful pairing no longer ends on a 404."
+  ],
+  "depends_note": null,
+  "findings_note": "G5, U2",
+  "size": "S",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** the Today view, mark-made and skip controls, the list link (S22 replaces this page's body and keeps the URL); the PWA manifest (S08).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "`pair_submit` redirects to `/` (`src/larder/web/auth_views.py`, `redirect(\"/\", code=303)`), and the header link in `base.html` points at `/`, but no route serves `/`. A paired device gets the 404 page. Every pairing check from S08 to S21, and an installed icon, ends there until S22 lands."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None. The placeholder wording is \"You're paired\"."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/home_views.py` (blueprint `home`, route `GET /`, endpoint `home.index`)\n- `src/larder/web/templates/home.html`\n- `src/larder/planner_db.py` (SQL: `meal_on(conn, day)`; S21 and S60 extend this file)\n- `src/larder/web/__init__.py` (register the blueprint in `create_app`)\n- `tests/test_home.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "In `tests/test_home.py`, built on `WebShellTestCase` (`paired_client`):\n1. `test_paired_device_gets_the_landing_page`\n2. `test_unpaired_device_still_gets_401_at_root`\n3. `test_landing_says_paired_when_no_plan`\n4. `test_landing_shows_tonights_meal_when_planned` (patch `larder.web.home_views.today`)\n5. `test_landing_ignores_other_dates_and_skipped_meals`\n6. `test_pairing_redirect_lands_on_a_200_page` (follow the `Location` of a completed pairing)"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. `planner_db.meal_on(conn, day)`: the `planned_meal` row on that ISO date whose status is `planned`, joined to `recipe.title`; lowest id first; none returns None.\n2. `home_views.today(settings)` returns `datetime.now(settings.timezone).date()` (host local time when the timezone is unset). `index()` renders `home.html` with the meal or None.\n3. Register the blueprint in `create_app` after `auth_views.init_app`. The endpoint is not in `_OPEN_ENDPOINTS`, so unpaired devices keep getting the 401 page from the existing guard.\n4. `home.html` extends `base.html`: a \"You're paired\" heading, and tonight's title when there is one. No inline script or style."
+    },
+    {
+      "heading": "Check",
+      "body": "- Tests pass; on the dev server, completing a pairing shows the landing page, not the 404 page."
+    },
+    {
+      "heading": "Git",
+      "body": "Commit only when the owner asks; no AI attribution."
+    }
+  ],
+  "notes": []
+}
