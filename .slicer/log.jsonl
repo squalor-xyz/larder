@@ -357,3 +357,8 @@
 {"when": "2026-11-04T12:16:06Z", "item": "S09", "action": "status", "from": "started", "to": "done", "note": "ADR 0018 written from the owner interview", "by": "Jon R"}
 {"when": "2026-11-04T12:16:23Z", "item": "S10", "action": "edit", "from": "", "to": "", "note": "Git"}
 {"when": "2026-11-04T12:37:48Z", "item": "S10", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:39:00Z", "item": "S10", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:39:45Z", "item": "S10", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T12:39:45Z", "item": "S10", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-04T12:56:31Z", "item": "S10", "action": "note", "from": "", "to": "", "note": "Added the recipe file parser larder.recipes.doc: parse_recip", "by": "Jon R"}
+{"when": "2026-11-04T12:56:42Z", "item": "S10", "action": "status", "from": "started", "to": "done", "note": "Recipe file parser verified: larder.recipes.doc parses and serializes Hugo-style recipe files (+++ TOML front matter), with sections, sub-groups, draft flag and a minimal TOML writer. Full suite 186 passed, 0 failed; ruff check and format clean; slicer check passed.", "by": "Jon R"}

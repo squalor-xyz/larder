@@ -864,13 +864,28 @@
       "id": "S10",
       "title": "Recipe file parser",
       "short_title": "Recipe file parser",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S02",
         "S09"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "d5f29d37-b6e0-4cfa-837d-3adc96720941",
+          "kind": "",
+          "text": "**2026-11-04** — Added the recipe file parser larder.recipes.doc: parse_recipe, read_recipe and serialize_recipe turn a Hugo-style Markdown file with +++ TOML front matter into a RecipeDoc and back, with a minimal TOML writer. Headings are case-insensitive with trailing colon and closing hashes, Steps reads as Directions, and Ingredients allows ### sub-groups. A draft = true file reports is_draft. Three synthetic fixtures in tests/fixtures/hugo. Full suite 186 passed, 0 failed; ruff check and format clean; reviewer findings fixed and mutation-checked.",
+          "created_at": "2026-11-04T12:56:31Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",
@@ -890,7 +905,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 2,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {

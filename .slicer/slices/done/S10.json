@@ -22,11 +22,11 @@
     },
     {
       "heading": "Files",
-      "body": "- `src/larder/recipes/doc.py`\n- `tests/fixtures/hugo/` (sample Hugo recipe files the owner provides, under a license compatible with AGPL-3.0)\n- `tests/test_recipe_doc.py`"
+      "body": "- `src/larder/recipes/__init__.py`\n- `src/larder/recipes/doc.py`\n- `tests/fixtures/hugo/` (three synthetic Hugo-style recipe files written for this repo, no household data)\n- `tests/test_recipe_doc.py`"
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_parses_toml_front_matter_fields`\n2. `test_extracts_ingredient_lines_in_order`\n3. `test_heading_variants_normalized` (`## Ingredients:`, `## Steps:`)\n4. `test_ignores_stray_h1_and_nutrition_block_but_keeps_body`\n5. `test_missing_front_matter_raises_clear_error`\n6. `test_round_trip_preserves_content`\n7. `test_ingredient_subgroups` (if allowed by ADR 0018)"
+      "body": "1. `test_parses_toml_front_matter_fields`\n2. `test_extracts_ingredient_lines_in_order`\n3. `test_heading_variants_normalized` (`## Ingredients:`, `## Steps:`)\n4. `test_ignores_stray_h1_and_nutrition_block_but_keeps_body`\n5. `test_missing_front_matter_raises_clear_error`\n6. `test_round_trip_preserves_content`\n7. `test_ingredient_subgroups` (allowed by ADR 0018)\n8. `test_draft_flag` (`draft = true` is kept out, ADR 0018)"
     },
     {
       "heading": "Implement",
