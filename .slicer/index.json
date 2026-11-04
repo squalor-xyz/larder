@@ -4,7 +4,38 @@
   "id_width": 2,
   "next_id": 68,
   "preamble": "larder: a self-hosted, FLOSS household food system (recipes, weekly dinner planning, shared shopping list; later, pantry estimates driven by receipts). Specs: docs/goals.md, docs/requirements.md, docs/specs/, docs/decisions/. Slices titled \"Interview:\" collect the owner's decisions and come before the slices that depend on them. Every slice has an \"Owner input\" section listing what to confirm before starting. Household-specific answers go in the gitignored local/ folder, never in committed files.",
-  "passes": [],
+  "passes": [
+    {
+      "key": "unblock",
+      "heading": "Pass 1 — Unblock: interviews and foundation fixes",
+      "intro": "",
+      "outro": ""
+    },
+    {
+      "key": "core-mvp",
+      "heading": "Pass 2 — Core MVP: recipes, ingredients, planner",
+      "intro": "",
+      "outro": ""
+    },
+    {
+      "key": "ship-trial",
+      "heading": "Pass 3 — Ship and trial: list, deploy, two-week trial",
+      "intro": "",
+      "outro": ""
+    },
+    {
+      "key": "orders-pantry",
+      "heading": "Pass 4 — Orders and pantry",
+      "intro": "",
+      "outro": ""
+    },
+    {
+      "key": "notify-chat",
+      "heading": "Pass 5 — Notifications and conversation",
+      "intro": "",
+      "outro": ""
+    }
+  ],
   "items": [
     {
       "id": "S52",
@@ -583,11 +614,11 @@
         "parent": "",
         "cites": [],
         "key": "roadmap-review-2026-11-03-n4",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 0 — Foundations",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -615,10 +646,10 @@
         "parent": "",
         "cites": [],
         "key": "roadmap-review-2026-11-03-n5",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 0 — Foundations",
         "reason": "",
-        "importance": 3,
+        "importance": 2,
         "urgency": 2,
         "effort": 1,
         "attempts": 0
@@ -647,11 +678,11 @@
         "parent": "",
         "cites": [],
         "key": "roadmap-review-2026-11-03-n6",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 0 — Foundations",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -696,10 +727,10 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 0 — Foundations",
         "reason": "",
-        "importance": 2,
+        "importance": 3,
         "urgency": 2,
         "effort": 1,
         "attempts": 0
@@ -728,11 +759,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 1a — Recipes",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -761,7 +792,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1a — Recipes",
         "reason": "",
         "importance": 3,
@@ -795,44 +826,12 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1a — Recipes",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
-        "effort": 2,
-        "attempts": 0
-      }
-    },
-    {
-      "id": "S12",
-      "title": "Hugo site one-time importer",
-      "short_title": "Hugo site one-time importer",
-      "status": "open",
-      "has_slice": true,
-      "depends_on": [
-        "S11"
-      ],
-      "note_records": [],
-      "claim": null,
-      "fields": {
-        "size": "S",
-        "flags": [],
-        "trees": [
-          "recipes"
-        ],
-        "trees_literal": false,
-        "findings": "",
-        "discovered_from": "",
-        "parent": "",
-        "cites": [],
-        "key": "",
-        "pass": "",
-        "group": "Phase 1a — Recipes",
-        "reason": "",
-        "importance": 3,
-        "urgency": 2,
-        "effort": 1,
+        "urgency": 3,
+        "effort": 3,
         "attempts": 0
       }
     },
@@ -862,11 +861,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1a — Recipes",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -910,45 +909,12 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1a — Recipes",
         "reason": "",
         "importance": 3,
         "urgency": 2,
         "effort": 2,
-        "attempts": 0
-      }
-    },
-    {
-      "id": "S66",
-      "title": "Recipe repo status page",
-      "short_title": "Recipe repo status page",
-      "status": "open",
-      "has_slice": true,
-      "depends_on": [
-        "S11",
-        "S07"
-      ],
-      "note_records": [],
-      "claim": null,
-      "fields": {
-        "size": "S",
-        "flags": [],
-        "trees": [
-          "web"
-        ],
-        "trees_literal": false,
-        "findings": "G4, R1",
-        "discovered_from": "S11",
-        "parent": "",
-        "cites": [],
-        "key": "roadmap-review-2026-11-03-n8",
-        "pass": "",
-        "group": "Phase 1a — Recipes",
-        "reason": "",
-        "importance": 3,
-        "urgency": 2,
-        "effort": 1,
         "attempts": 0
       }
     },
@@ -975,11 +941,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 1b — Ingredients",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -1007,11 +973,11 @@
         "parent": "",
         "cites": [],
         "key": "roadmap-review-2026-11-03-n1",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 1b — Ingredients",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -1030,7 +996,7 @@
       "note_records": [],
       "claim": null,
       "fields": {
-        "size": "M",
+        "size": "L",
         "flags": [],
         "trees": [
           "recipes"
@@ -1041,12 +1007,12 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1b — Ingredients",
         "reason": "",
         "importance": 3,
         "urgency": 2,
-        "effort": 2,
+        "effort": 3,
         "attempts": 0
       }
     },
@@ -1076,7 +1042,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1b — Ingredients",
         "reason": "",
         "importance": 3,
@@ -1124,7 +1090,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1b — Ingredients",
         "reason": "",
         "importance": 3,
@@ -1156,11 +1122,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 1c — Planner",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -1189,11 +1155,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1c — Planner",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 2,
         "attempts": 0
       }
@@ -1222,11 +1188,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1c — Planner",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 2,
         "attempts": 0
       }
@@ -1255,40 +1221,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
-        "group": "Phase 1c — Planner",
-        "reason": "",
-        "importance": 3,
-        "urgency": 2,
-        "effort": 1,
-        "attempts": 0
-      }
-    },
-    {
-      "id": "S60",
-      "title": "Read-only week view",
-      "short_title": "Read-only week view",
-      "status": "open",
-      "has_slice": true,
-      "depends_on": [
-        "S21",
-        "S14"
-      ],
-      "note_records": [],
-      "claim": null,
-      "fields": {
-        "size": "S",
-        "flags": [],
-        "trees": [
-          "web"
-        ],
-        "trees_literal": false,
-        "findings": "G1, P1",
-        "discovered_from": "S22",
-        "parent": "",
-        "cites": [],
-        "key": "roadmap-review-2026-11-03-n2",
-        "pass": "",
+        "pass": "core-mvp",
         "group": "Phase 1c — Planner",
         "reason": "",
         "importance": 3,
@@ -1320,7 +1253,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 1d — Shopping list",
         "reason": "",
         "importance": 3,
@@ -1355,11 +1288,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "ship-trial",
         "group": "Phase 1d — Shopping list",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 2,
         "attempts": 0
       }
@@ -1388,11 +1321,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "ship-trial",
         "group": "Phase 1d — Shopping list",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 2,
         "attempts": 0
       }
@@ -1421,11 +1354,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 1e — Deploy and trial",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -1454,7 +1387,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "ship-trial",
         "group": "Phase 1e — Deploy and trial",
         "reason": "",
         "importance": 3,
@@ -1521,7 +1454,7 @@
       ],
       "claim": null,
       "fields": {
-        "size": "M",
+        "size": "L",
         "flags": [],
         "trees": [
           "deploy"
@@ -1532,12 +1465,12 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "ship-trial",
         "group": "Phase 1e — Deploy and trial",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
-        "effort": 2,
+        "urgency": 3,
+        "effort": 3,
         "attempts": 0
       }
     },
@@ -1565,11 +1498,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "ship-trial",
         "group": "Phase 1e — Deploy and trial",
         "reason": "",
         "importance": 3,
-        "urgency": 2,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -1597,11 +1530,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "ship-trial",
         "group": "Phase 1e — Deploy and trial",
         "reason": "",
         "importance": 3,
-        "urgency": 1,
+        "urgency": 3,
         "effort": 1,
         "attempts": 0
       }
@@ -1630,11 +1563,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "unblock",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
-        "importance": 2,
-        "urgency": 1,
+        "importance": 3,
+        "urgency": 2,
         "effort": 1,
         "attempts": 0
       }
@@ -1664,11 +1597,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "orders-pantry",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
-        "urgency": 1,
+        "urgency": 2,
         "effort": 2,
         "attempts": 0
       }
@@ -1696,43 +1629,11 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "orders-pantry",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
-        "urgency": 1,
-        "effort": 2,
-        "attempts": 0
-      }
-    },
-    {
-      "id": "S34",
-      "title": "Store parsers: additional stores",
-      "short_title": "Store parsers: additional stores",
-      "status": "later",
-      "has_slice": true,
-      "depends_on": [
-        "S33"
-      ],
-      "note_records": [],
-      "claim": null,
-      "fields": {
-        "size": "M",
-        "flags": [],
-        "trees": [
-          "ingest"
-        ],
-        "trees_literal": false,
-        "findings": "",
-        "discovered_from": "",
-        "parent": "",
-        "cites": [],
-        "key": "",
-        "pass": "",
-        "group": "Phase 2 — Orders, pantry, notifications",
-        "reason": "",
-        "importance": 1,
-        "urgency": 1,
+        "urgency": 2,
         "effort": 2,
         "attempts": 0
       }
@@ -1762,7 +1663,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "orders-pantry",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -1795,7 +1696,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "orders-pantry",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -1828,12 +1729,176 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "orders-pantry",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
         "urgency": 1,
+        "effort": 3,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S40",
+      "title": "Pantry-aware planner and list",
+      "short_title": "Pantry-aware planner and list",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S37",
+        "S24",
+        "S20"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "core"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "parent": "",
+        "cites": [],
+        "key": "",
+        "pass": "orders-pantry",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 3,
+        "urgency": 1,
         "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S41",
+      "title": "Interview: notifications",
+      "short_title": "Interview: notifications",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S30"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "docs"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "parent": "",
+        "cites": [],
+        "key": "",
+        "pass": "notify-chat",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 2,
+        "urgency": 2,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S12",
+      "title": "Hugo site one-time importer",
+      "short_title": "Hugo site one-time importer",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S11"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "recipes"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "parent": "",
+        "cites": [],
+        "key": "",
+        "pass": "core-mvp",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S66",
+      "title": "Recipe repo status page",
+      "short_title": "Recipe repo status page",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S11",
+        "S07"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "G4, R1",
+        "discovered_from": "S11",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n8",
+        "pass": "core-mvp",
+        "group": "Phase 1a — Recipes",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S60",
+      "title": "Read-only week view",
+      "short_title": "Read-only week view",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S21",
+        "S14"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "G1, P1",
+        "discovered_from": "S22",
+        "parent": "",
+        "cites": [],
+        "key": "roadmap-review-2026-11-03-n2",
+        "pass": "core-mvp",
+        "group": "Phase 1c — Planner",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": 1,
         "attempts": 0
       }
     },
@@ -1860,7 +1925,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "orders-pantry",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -1892,73 +1957,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
-        "group": "Phase 2 — Orders, pantry, notifications",
-        "reason": "",
-        "importance": 2,
-        "urgency": 1,
-        "effort": 1,
-        "attempts": 0
-      }
-    },
-    {
-      "id": "S40",
-      "title": "Pantry-aware planner and list",
-      "short_title": "Pantry-aware planner and list",
-      "status": "open",
-      "has_slice": true,
-      "depends_on": [
-        "S37",
-        "S24",
-        "S20"
-      ],
-      "note_records": [],
-      "claim": null,
-      "fields": {
-        "size": "M",
-        "flags": [],
-        "trees": [
-          "core"
-        ],
-        "trees_literal": false,
-        "findings": "",
-        "discovered_from": "",
-        "parent": "",
-        "cites": [],
-        "key": "",
-        "pass": "",
-        "group": "Phase 2 — Orders, pantry, notifications",
-        "reason": "",
-        "importance": 2,
-        "urgency": 1,
-        "effort": 2,
-        "attempts": 0
-      }
-    },
-    {
-      "id": "S41",
-      "title": "Interview: notifications",
-      "short_title": "Interview: notifications",
-      "status": "open",
-      "has_slice": true,
-      "depends_on": [
-        "S30"
-      ],
-      "note_records": [],
-      "claim": null,
-      "fields": {
-        "size": "S",
-        "flags": [],
-        "trees": [
-          "docs"
-        ],
-        "trees_literal": false,
-        "findings": "",
-        "discovered_from": "",
-        "parent": "",
-        "cites": [],
-        "key": "",
-        "pass": "",
+        "pass": "orders-pantry",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -1990,7 +1989,7 @@
         "parent": "",
         "cites": [],
         "key": "roadmap-review-2026-11-03-n3",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -2023,7 +2022,7 @@
         "parent": "",
         "cites": [],
         "key": "roadmap-review-2026-11-03-n9",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -2058,7 +2057,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -2091,7 +2090,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -2124,7 +2123,7 @@
         "parent": "",
         "cites": [],
         "key": "roadmap-review-2026-11-03-n7",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -2159,7 +2158,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -2194,7 +2193,7 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
@@ -2228,10 +2227,70 @@
         "parent": "",
         "cites": [],
         "key": "",
-        "pass": "",
+        "pass": "notify-chat",
         "group": "Phase 2 — Orders, pantry, notifications",
         "reason": "",
         "importance": 2,
+        "urgency": 1,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S50",
+      "title": "Distributable self-host packaging",
+      "short_title": "Distributable self-host packaging",
+      "status": "later",
+      "has_slice": false,
+      "depends_on": [],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "",
+        "flags": [],
+        "trees": [],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "parent": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Later",
+        "reason": "",
+        "importance": 2,
+        "urgency": 1,
+        "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S34",
+      "title": "Store parsers: additional stores",
+      "short_title": "Store parsers: additional stores",
+      "status": "later",
+      "has_slice": true,
+      "depends_on": [
+        "S33"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "M",
+        "flags": [],
+        "trees": [
+          "ingest"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "",
+        "parent": "",
+        "cites": [],
+        "key": "",
+        "pass": "",
+        "group": "Phase 2 — Orders, pantry, notifications",
+        "reason": "",
+        "importance": 1,
         "urgency": 1,
         "effort": 2,
         "attempts": 0
@@ -2428,34 +2487,6 @@
         "group": "Later",
         "reason": "",
         "importance": 1,
-        "urgency": 1,
-        "effort": null,
-        "attempts": 0
-      }
-    },
-    {
-      "id": "S50",
-      "title": "Distributable self-host packaging",
-      "short_title": "Distributable self-host packaging",
-      "status": "later",
-      "has_slice": false,
-      "depends_on": [],
-      "note_records": [],
-      "claim": null,
-      "fields": {
-        "size": "",
-        "flags": [],
-        "trees": [],
-        "trees_literal": false,
-        "findings": "",
-        "discovered_from": "",
-        "parent": "",
-        "cites": [],
-        "key": "",
-        "pass": "",
-        "group": "Later",
-        "reason": "",
-        "importance": 2,
         "urgency": 1,
         "effort": null,
         "attempts": 0

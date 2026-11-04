@@ -198,3 +198,59 @@
 {"when": "2026-11-04T03:21:24Z", "item": "S23", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-04T03:21:24Z", "item": "S28", "action": "note", "from": "", "to": "", "note": "2026-11-03 roadmap review: the two notes above (IPv4-mapped ", "by": "Jon R"}
 {"when": "2026-11-04T03:25:36Z", "item": "S30", "action": "edit", "from": "", "to": "", "note": "Check"}
+{"when": "2026-11-04T03:31:00Z", "item": "pass.unblock", "action": "prose", "from": "", "to": "unblock", "note": "add-pass"}
+{"when": "2026-11-04T03:31:00Z", "item": "pass.core-mvp", "action": "prose", "from": "", "to": "core-mvp", "note": "add-pass"}
+{"when": "2026-11-04T03:31:00Z", "item": "pass.ship-trial", "action": "prose", "from": "", "to": "ship-trial", "note": "add-pass"}
+{"when": "2026-11-04T03:31:01Z", "item": "pass.orders-pantry", "action": "prose", "from": "", "to": "orders-pantry", "note": "add-pass"}
+{"when": "2026-11-04T03:31:01Z", "item": "pass.notify-chat", "action": "prose", "from": "", "to": "notify-chat", "note": "add-pass"}
+{"when": "2026-11-04T03:31:01Z", "item": "S09", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; urgency 2→3"}
+{"when": "2026-11-04T03:31:01Z", "item": "S15", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; urgency 2→3"}
+{"when": "2026-11-04T03:31:02Z", "item": "S19", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; urgency 2→3"}
+{"when": "2026-11-04T03:31:02Z", "item": "S23", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock"}
+{"when": "2026-11-04T03:31:02Z", "item": "S26", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; urgency 2→3"}
+{"when": "2026-11-04T03:31:02Z", "item": "S31", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; importance 2→3; urgency 1→2"}
+{"when": "2026-11-04T03:31:02Z", "item": "S59", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; urgency 2→3"}
+{"when": "2026-11-04T03:31:03Z", "item": "S62", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; urgency 2→3"}
+{"when": "2026-11-04T03:31:03Z", "item": "S63", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; importance 3→2"}
+{"when": "2026-11-04T03:31:03Z", "item": "S64", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; urgency 2→3"}
+{"when": "2026-11-04T03:31:03Z", "item": "S08", "action": "set", "from": "", "to": "", "note": "pass_key -→unblock; importance 2→3"}
+{"when": "2026-11-04T03:31:03Z", "item": "S10", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp"}
+{"when": "2026-11-04T03:31:04Z", "item": "S11", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp; urgency 2→3; effort 2→3"}
+{"when": "2026-11-04T03:31:04Z", "item": "S12", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp; importance 3→2; urgency 2→1"}
+{"when": "2026-11-04T03:31:04Z", "item": "S13", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp; urgency 2→3"}
+{"when": "2026-11-04T03:31:04Z", "item": "S14", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp"}
+{"when": "2026-11-04T03:31:04Z", "item": "S66", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp; importance 3→2; urgency 2→1"}
+{"when": "2026-11-04T03:31:05Z", "item": "S16", "action": "set", "from": "", "to": "", "note": "size M→L; pass_key -→core-mvp; effort 2→3"}
+{"when": "2026-11-04T03:31:05Z", "item": "S17", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp"}
+{"when": "2026-11-04T03:31:05Z", "item": "S18", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp"}
+{"when": "2026-11-04T03:31:05Z", "item": "S20", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp; urgency 2→3"}
+{"when": "2026-11-04T03:31:05Z", "item": "S21", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp; urgency 2→3"}
+{"when": "2026-11-04T03:31:06Z", "item": "S22", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp"}
+{"when": "2026-11-04T03:31:06Z", "item": "S60", "action": "set", "from": "", "to": "", "note": "pass_key -→core-mvp; importance 3→2; urgency 2→1"}
+{"when": "2026-11-04T03:31:06Z", "item": "S24", "action": "set", "from": "", "to": "", "note": "pass_key -→ship-trial; urgency 2→3"}
+{"when": "2026-11-04T03:31:06Z", "item": "S25", "action": "set", "from": "", "to": "", "note": "pass_key -→ship-trial; urgency 2→3"}
+{"when": "2026-11-04T03:31:07Z", "item": "S27", "action": "set", "from": "", "to": "", "note": "pass_key -→ship-trial"}
+{"when": "2026-11-04T03:31:07Z", "item": "S28", "action": "set", "from": "", "to": "", "note": "size M→L; pass_key -→ship-trial; urgency 2→3; effort 2→3"}
+{"when": "2026-11-04T03:31:07Z", "item": "S29", "action": "set", "from": "", "to": "", "note": "pass_key -→ship-trial; urgency 2→3"}
+{"when": "2026-11-04T03:31:07Z", "item": "S30", "action": "set", "from": "", "to": "", "note": "pass_key -→ship-trial; urgency 1→3"}
+{"when": "2026-11-04T03:31:07Z", "item": "S32", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry; urgency 1→2"}
+{"when": "2026-11-04T03:31:08Z", "item": "S33", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry; urgency 1→2"}
+{"when": "2026-11-04T03:31:08Z", "item": "S35", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry"}
+{"when": "2026-11-04T03:31:08Z", "item": "S36", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry"}
+{"when": "2026-11-04T03:31:08Z", "item": "S37", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry; effort 2→3"}
+{"when": "2026-11-04T03:31:08Z", "item": "S38", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry"}
+{"when": "2026-11-04T03:31:09Z", "item": "S39", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry"}
+{"when": "2026-11-04T03:31:09Z", "item": "S40", "action": "set", "from": "", "to": "", "note": "pass_key -→orders-pantry; importance 2→3"}
+{"when": "2026-11-04T03:31:09Z", "item": "S41", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat; urgency 1→2"}
+{"when": "2026-11-04T03:31:09Z", "item": "S67", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat"}
+{"when": "2026-11-04T03:31:09Z", "item": "S42", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat"}
+{"when": "2026-11-04T03:31:10Z", "item": "S61", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat"}
+{"when": "2026-11-04T03:31:10Z", "item": "S65", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat"}
+{"when": "2026-11-04T03:31:10Z", "item": "S53", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat"}
+{"when": "2026-11-04T03:31:10Z", "item": "S54", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat"}
+{"when": "2026-11-04T03:31:10Z", "item": "S55", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat; importance 2→1"}
+{"when": "2026-11-04T03:31:11Z", "item": "S56", "action": "set", "from": "", "to": "", "note": "pass_key -→notify-chat"}
+{"when": "2026-11-04T03:31:11Z", "item": "*", "action": "sort", "from": "", "to": "", "note": "by score (49 moved)"}
+{"when": "2026-11-04T03:31:18Z", "item": "S55", "action": "set", "from": "", "to": "", "note": "importance 1→2"}
+{"when": "2026-11-04T03:31:19Z", "item": "*", "action": "sort", "from": "", "to": "", "note": "by score (2 moved)"}
+{"when": "2026-11-04T03:31:23Z", "item": "S55", "action": "move", "from": "56", "to": "54", "note": ""}
