@@ -3,7 +3,8 @@
 
 Without a subcommand this runs the Flask development server. It is not for
 production: put a TLS reverse proxy in front of it (ADR 0015). The production
-WSGI server is chosen when the container is built.
+WSGI server is chosen when the container is built. The dev server also starts
+the in-process scheduler and stops it on exit.
 
 ``python -m larder pair --person NAME`` prints a one-time pairing link for a
 person in the config (ADR 0010). It is the recovery path when every admin
@@ -22,7 +23,8 @@ from collections.abc import Sequence
 from larder import auth, db
 from larder.config import ConfigError, Settings, ensure_data_dirs, load_settings
 from larder.db import DatabaseError
-from larder.web import create_app
+from larder.scheduler import Scheduler
+from larder.web import SCHEDULER_KEY, create_app
 
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8000
@@ -66,7 +68,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     except (ConfigError, DatabaseError) as exc:
         print(f"larder: {exc}", file=sys.stderr)
         return 2
-    app.run(host=args.host, port=args.port, debug=False)
+    scheduler: Scheduler = app.extensions[SCHEDULER_KEY]
+    scheduler.start()
+    try:
+        app.run(host=args.host, port=args.port, debug=False)
+    finally:
+        scheduler.stop()
     return 0
 
 

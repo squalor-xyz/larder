@@ -96,6 +96,7 @@ A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
 | `emails/` | Raw order emails |
 | `secrets/` | Secret files; created with mode 0700 if missing |
 | `secrets/session_key` | 32 random bytes that sign the session cookie; created with mode 0600 at first start and reused |
+| `scheduler.lock` | Lock file for the in-process scheduler; created when the scheduler starts (see Scheduler below) |
 
 `ensure_data_dirs` creates `recipes/`, `emails/` and `secrets/` if they are
 missing. Loading the config creates nothing.
@@ -108,6 +109,27 @@ missing. Loading the config creates nothing.
   `secrets/ntfy_token`.
 - Loading reads no secret file. Secret paths are redacted from `repr`, and
   larder never logs them.
+
+## Scheduler
+
+Periodic work (recipe pull, order polling, pings) runs on one in-process
+scheduler, `larder.scheduler.Scheduler`, with no separate process or compose
+service (stdlib first, [ADR 0002](../decisions/0002-python.md)).
+
+- **One daemon thread** runs registered interval jobs one at a time, in
+  registration order. A job is a no-argument callable. Its first run is
+  registration time plus one interval; each later run is one interval after the
+  previous run finished. A job that raises is logged to `larder.scheduler` and
+  does not stop the others.
+- **One process per data directory** runs jobs. `start()` takes an exclusive
+  `flock` on `$LARDER_DATA/scheduler.lock` (POSIX only). A second process on the
+  same data directory logs once and runs no jobs. `stop()` joins the thread and
+  releases the lock.
+- **Wiring:** `create_app` builds the scheduler and stores it in
+  `app.extensions["larder.scheduler"]` without starting it, so tests and WSGI
+  workers start no thread. `python -m larder` starts it before the dev server and
+  stops it afterwards. Starting it under a WSGI server is decided with the
+  container (S28).
 
 ## Deployment
 

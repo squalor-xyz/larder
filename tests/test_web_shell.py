@@ -6,6 +6,7 @@ import os
 import re
 import sqlite3
 import tempfile
+import threading
 import tomllib
 import unittest
 from importlib import resources
@@ -20,6 +21,7 @@ from larder import auth, db
 from larder.__main__ import main
 from larder.config import Settings, load_settings
 from larder.db import DatabaseError
+from larder.scheduler import Scheduler
 from larder.web import create_app, get_db
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -158,6 +160,18 @@ class AppFactoryTest(WebShellTestCase):
             app = create_app(self.settings(), bootstrap=False)
 
         self.assertEqual(app.test_client().get(f"/pair/{token}").status_code, 200)
+
+    def test_create_app_does_not_start_the_thread(self) -> None:
+        app = create_app(self.settings())
+
+        scheduler = app.extensions["larder.scheduler"]
+
+        self.assertIsInstance(scheduler, Scheduler)
+        self.assertFalse(scheduler.running)
+        self.assertEqual(
+            [t for t in threading.enumerate() if t.name == "larder-scheduler"], []
+        )
+        self.assertFalse((self.data_dir / "scheduler.lock").exists())
 
     def test_db_connection_closed_at_teardown(self) -> None:
         app = create_app(self.settings())
@@ -384,6 +398,34 @@ class MainTest(WebShellTestCase):
             code, _ = self.run_main(["--host", "0.0.0.0", "--port", "9000"], env)
             self.assertEqual(code, 0)
             run.assert_called_once_with(host="0.0.0.0", port=9000, debug=False)
+
+    def test_main_starts_the_scheduler_before_the_dev_server(self) -> None:
+        env = {"LARDER_DATA": str(self.data_dir)}
+        seen: list[bool] = []
+
+        def fake_run(app: Flask, **_kwargs: object) -> None:
+            seen.append(app.extensions["larder.scheduler"].running)
+
+        with mock.patch("flask.Flask.run", autospec=True, side_effect=fake_run):
+            code, _ = self.run_main([], env)
+
+        self.assertEqual(code, 0)
+        self.assertEqual(seen, [True])
+        self.assertEqual(
+            [t for t in threading.enumerate() if t.name == "larder-scheduler"], []
+        )
+
+    def test_main_stops_the_scheduler_when_the_dev_server_fails(self) -> None:
+        env = {"LARDER_DATA": str(self.data_dir)}
+        with (
+            mock.patch("flask.Flask.run", side_effect=OSError("port in use")),
+            self.assertRaises(OSError),
+        ):
+            self.run_main([], env)
+
+        self.assertEqual(
+            [t for t in threading.enumerate() if t.name == "larder-scheduler"], []
+        )
 
 
 class TemplateRulesTest(unittest.TestCase):

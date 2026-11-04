@@ -686,12 +686,27 @@
       "id": "S64",
       "title": "In-process scheduler",
       "short_title": "In-process scheduler",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S05"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "3d224436-9f0e-40a2-a1bd-f1403a609dfc",
+          "kind": "",
+          "text": "**2026-11-04** — Added larder.scheduler.Scheduler: one daemon thread runs interval jobs one at a time in registration order, first run one interval after registration, failures logged on larder.scheduler. start() takes flock on LARDER_DATA/scheduler.lock so a second process runs no jobs; stop() joins and releases it. create_app builds it unstarted in app.extensions; python -m larder starts it before app.run and stops it in a finally. Verified: 144 tests pass, ruff check and format clean, 15 mutations each turned a test red. Real dev server run not possible in the sandbox.",
+          "created_at": "2026-11-04T04:04:59Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        }
+      ],
       "claim": null,
       "readiness": {
         "by": "spec-check sonnet/high (r36), 2026-11-03",
@@ -717,7 +732,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {

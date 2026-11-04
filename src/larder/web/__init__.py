@@ -16,8 +16,10 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from larder import auth, db
 from larder.config import IPNetwork, Settings, ensure_data_dirs
+from larder.scheduler import Scheduler
 
 SETTINGS_KEY = "LARDER_SETTINGS"
+SCHEDULER_KEY = "larder.scheduler"
 
 SECURITY_HEADERS: dict[str, str] = {
     "Content-Security-Policy": (
@@ -61,6 +63,8 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
 
     app = Flask(__name__)
     app.config[SETTINGS_KEY] = settings
+    # Built, not started: the dev server starts it (``python -m larder``).
+    app.extensions[SCHEDULER_KEY] = Scheduler(settings.data_dir)
     app.register_blueprint(shell)
     auth_views.init_app(app, session_key)
     app.register_error_handler(404, _not_found)

@@ -9,8 +9,8 @@ planning and a shared shopping list. It runs on the household's own hardware.
 It reads grocery order emails and recipe files.
 
 **Status:** Phase 0 (foundations). Built: config, the SQLite database and migrations, the Flask
-app shell, people sync, device pairing with an admin bootstrap, admin device management and
-brand icons. Not built yet: recipes, planning and the shopping list.
+app shell, people sync, device pairing with an admin bootstrap, admin device management,
+brand icons and the in-process scheduler (no jobs yet). Not built yet: recipes, planning and the shopping list.
 
 Read these before you propose features or change behavior:
 
