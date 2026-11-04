@@ -8,6 +8,11 @@ WSGI server is chosen when the container is built.
 ``python -m larder pair --person NAME`` prints a one-time pairing link for a
 person in the config (ADR 0010). It is the recovery path when every admin
 device is lost.
+
+``python -m larder bootstrap`` logs the bootstrap pairing link and replaces an
+unused one. Run it once before a server that starts several processes, each
+built with ``create_app(settings, bootstrap=False)``, so that starting a
+process never replaces the link. The dev server does it itself.
 """
 
 import argparse
@@ -45,17 +50,41 @@ def main(argv: Sequence[str] | None = None) -> int:
         "pair", help="print a one-time pairing link for a person in the config"
     )
     pair.add_argument("--person", required=True, help="name of a person in larder.toml")
+    commands.add_parser(
+        "bootstrap",
+        help="log the bootstrap pairing link; run once before a multi-process server",
+    )
     args = parser.parse_args(argv)
 
     try:
         settings = load_settings()
         if args.command == "pair":
             return _pair(settings, args.person)
+        if args.command == "bootstrap":
+            return _bootstrap(settings)
         app = create_app(settings)
     except (ConfigError, DatabaseError) as exc:
         print(f"larder: {exc}", file=sys.stderr)
         return 2
     app.run(host=args.host, port=args.port, debug=False)
+    return 0
+
+
+def _bootstrap(settings: Settings) -> int:
+    """Log the bootstrap link, replacing an unused one (ADR 0010).
+
+    Logs nothing while an admin has an active device. A server whose app is
+    built with ``create_app(settings, bootstrap=False)`` runs this once first.
+    """
+    auth.require_admin(settings)
+    ensure_data_dirs(settings)
+    conn = db.connect(settings)
+    try:
+        db.migrate(conn)
+        auth.sync_people(conn, settings)
+        auth.ensure_bootstrap(conn, settings)
+    finally:
+        conn.close()
     return 0
 
 

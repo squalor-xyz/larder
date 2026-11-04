@@ -26,7 +26,7 @@
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_proxy_headers_applied_from_ipv4_mapped_peer` (`trusted_proxies = [\"10.0.0.0/8\"]`, peer `::ffff:10.1.2.3`)\n2. `test_ipv4_mapped_peer_outside_the_trusted_network_is_ignored` (peer `::ffff:192.0.2.7`)\n3. `test_plain_ipv6_peer_in_a_trusted_ipv6_network_is_still_trusted`\n4. `test_create_app_without_bootstrap_logs_no_link_and_keeps_the_existing_one` (`assertNoLogs(\"larder.auth\")`; the earlier `/pair/<token>` still answers 200)\n5. `test_bootstrap_command_logs_a_working_link_and_replaces_the_previous_one`\n6. `test_bootstrap_command_logs_nothing_when_an_admin_device_exists`\n7. `test_default_create_app_still_logs_and_replaces_on_start` (the existing behavior, kept)"
+      "body": "1. `test_proxy_headers_applied_from_ipv4_mapped_peer` (`trusted_proxies = [\"10.0.0.0/8\"]`, peer `::ffff:10.1.2.3`)\n2. `test_ipv4_mapped_peer_outside_the_trusted_network_is_ignored` (peer `::ffff:192.0.2.7`)\n3. `test_plain_ipv6_peer_in_a_trusted_ipv6_network_is_still_trusted`\n4. `test_create_app_without_bootstrap_logs_no_link_and_keeps_the_existing_one` (`assertNoLogs(\"larder.auth\")`; the earlier `/pair/<token>` still answers 200)\n5. `test_bootstrap_command_logs_a_working_link_and_replaces_the_previous_one`\n6. `test_bootstrap_command_logs_nothing_when_an_admin_device_exists`\n7. `test_default_create_app_still_logs_and_replaces_on_start` (the existing behavior, kept)\n8. `test_bootstrap_command_needs_an_admin_in_config` (exit 2, no database made)"
     },
     {
       "heading": "Implement",
