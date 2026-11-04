@@ -32,8 +32,10 @@ Conventions:
 | **unit_alias** | id, unit_id, alias (unique) | Spellings that map to a unit (`tbsp`, `tablespoon`) |
 | **item** | id, canonical_name (unique), category | Canonical grocery item |
 | **item_alias** | id, item_id, alias (unique) | Learned from review |
-| **ingredient_line** | id, recipe_id, position, raw_text, qty, unit_id, item_id, notes, optional, is_food, confidence (0–1), confirmed | One per Markdown list item. Unique on (recipe_id, position) |
-| **parse_override** | id, normalized_text (unique), qty, unit_id, item_id, notes, is_food | One confirmation applies everywhere ([ADR 0007](../decisions/0007-rule-based-ingredient-parsing.md)) |
+| **ingredient_line** | id, recipe_id, position, raw_text, qty, qty_max, unit_id, item_id, notes, optional, is_food, confidence (0–1), confirmed | One per Markdown list item. Unique on (recipe_id, position). A range ("2–3") keeps its lower bound in `qty` and its upper bound in `qty_max`; `qty_max` is null for a plain quantity, needs `qty` and is not below it. For an alternatives line the first choice stays here |
+| **ingredient_line_alt** | id, line_id, position, alt_text, item_id | The other choices of an alternatives line ("honey, maple syrup, or agave"), in order. `position` starts at 1 and is unique per line. The choices share the line's `qty` and `unit_id`. `alt_text` is the alternative as written; `item_id` stays null until it is matched to a canonical item |
+| **parse_override** | id, normalized_text (unique), qty, qty_max, unit_id, item_id, notes, is_food | One confirmation applies everywhere ([ADR 0007](../decisions/0007-rule-based-ingredient-parsing.md)). `qty_max` works as on `ingredient_line` |
+| **parse_override_alt** | id, override_id, position, alt_text, item_id | Alternatives of an override, the same shape as `ingredient_line_alt`. Unique on (override_id, position) |
 | **meal_plan** | id, week_start (unique) | One row per week |
 | **planned_meal** | id, meal_plan_id, date, recipe_id, status (planned/made/skipped), locked | |
 | **shopping_list** | id, created_at, archived_at | At most one row has `archived_at` null: the one active shared list |
@@ -48,10 +50,11 @@ is not part of the domain model.
 | Foreign key | On delete |
 |---|---|
 | `recipe_meta.recipe_id`, `ingredient_line.recipe_id` | CASCADE |
+| `ingredient_line_alt.line_id`, `parse_override_alt.override_id` | CASCADE |
 | `unit_alias.unit_id`, `item_alias.item_id`, `staple.item_id` | CASCADE |
 | `planned_meal.meal_plan_id`, `list_item.list_id` | CASCADE |
 | `list_item.added_by` | SET NULL |
-| All others (`device.person_id`, `pairing_token.person_id`, `recipe.source_id`, `planned_meal.recipe_id`, every `unit_id` and `item_id` on a line, override or list item, and `staple.unit_id`) | RESTRICT |
+| All others (`device.person_id`, `pairing_token.person_id`, `recipe.source_id`, `planned_meal.recipe_id`, every `unit_id` and `item_id` on a line, line alternative, override, override alternative or list item, and `staple.unit_id`) | RESTRICT |
 
 ### People
 
@@ -71,9 +74,11 @@ their pairing links stop being valid.
   config.
 - `staple` gains `unit_id`, matching `default_qty`.
 - Ranges and alternatives in ingredient lines ("1–2 onions", "butter or oil")
-  get their own migration, 0003 (slice S59): `qty_max` on `ingredient_line` and
+  are added by migration 0003 (slice S59): `qty_max` on `ingredient_line` and
   `parse_override`, plus the child tables `ingredient_line_alt` and
-  `parse_override_alt`.
+  `parse_override_alt`. Nothing reads or writes them yet. The parser (S16) fills
+  them; how list generation treats a range or an alternative is decided
+  separately.
 
 ## Phase 2
 
