@@ -380,3 +380,7 @@
 {"when": "2026-11-04T12:50:48Z", "item": "S26", "action": "note", "from": "", "to": "", "note": "Partial interview 2026-11-04: ADR 0021 (Proposed) records HT", "by": "Jon R"}
 {"when": "2026-11-04T12:50:56Z", "item": "S26", "action": "release", "from": "Jon R", "to": "", "note": "", "by": "Jon R"}
 {"when": "2026-11-04T12:51:10Z", "item": "S26", "action": "set", "from": "started", "to": "open", "note": "status started→open"}
+{"when": "2026-11-04T12:53:46Z", "item": "S31", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T12:53:47Z", "item": "S32", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T12:53:48Z", "item": "S31", "action": "note", "from": "", "to": "", "note": "Partial interview 2026-11-04: ADR 0022 (Proposed) records a ", "by": "Jon R"}
+{"when": "2026-11-04T12:53:49Z", "item": "S31", "action": "set", "from": "started", "to": "open", "note": "status started→open"}
