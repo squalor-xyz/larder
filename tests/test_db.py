@@ -25,7 +25,9 @@ MVP_TABLES = {
     "unit",
     "unit_alias",
     "ingredient_line",
+    "ingredient_line_alt",
     "parse_override",
+    "parse_override_alt",
     "meal_plan",
     "planned_meal",
     "shopping_list",
@@ -135,7 +137,7 @@ class MigrateTest(DbTestCase):
 
         second = db.migrate(conn)
 
-        self.assertEqual(first, [1, 2])
+        self.assertEqual(first, [1, 2, 3])
         self.assertEqual(second, [])
         self.assertEqual(self.master(conn), before)
 
@@ -163,6 +165,37 @@ class MigrateTest(DbTestCase):
             stamp = datetime.strptime(row["applied_at"], "%Y-%m-%dT%H:%M:%SZ")
             self.assertIsNotNone(stamp)
         self.assertEqual(conn.execute("SELECT label FROM thing").fetchone()[0], "seed")
+
+    def test_migration_0003_keeps_existing_ingredient_lines(self) -> None:
+        shipped = resources.files("larder") / "migrations"
+        before = self.source(
+            {
+                name: (shipped / name).read_text(encoding="utf-8")
+                for name in ("0001_init.sql", "0002_pairing.sql")
+            }
+        )
+        conn = self.connect()
+        self.assertEqual(db.migrate(conn, before), [1, 2])
+        conn.execute("INSERT INTO recipe_source (kind, location) VALUES ('x', 'y')")
+        conn.execute(
+            "INSERT INTO recipe (id, source_id, slug, title, source_ref, "
+            "content_hash, body) VALUES (1, 1, 'soup', 'Soup', 'r', 'h', 'b')"
+        )
+        conn.execute(
+            "INSERT INTO ingredient_line (recipe_id, position, raw_text, qty, "
+            "confidence) VALUES (1, 0, '2 onions', 2, 0.5)"
+        )
+        conn.execute(
+            "INSERT INTO parse_override (normalized_text, qty) VALUES ('1 egg', 1)"
+        )
+
+        self.assertEqual(db.migrate(conn), [3])
+
+        line = conn.execute("SELECT raw_text, qty, qty_max FROM ingredient_line")
+        self.assertEqual(tuple(line.fetchone()), ("2 onions", 2.0, None))
+        override = conn.execute("SELECT qty, qty_max FROM parse_override").fetchone()
+        self.assertEqual(tuple(override), (1.0, None))
+        self.assertEqual(conn.execute("PRAGMA foreign_key_check").fetchall(), [])
 
     def test_migrate_applies_only_pending_versions(self) -> None:
         conn = self.connect()
@@ -209,7 +242,7 @@ class MigrateTest(DbTestCase):
         ):
             applied = db.migrate(second)
 
-        self.assertEqual(first_applied, [[1, 2]])
+        self.assertEqual(first_applied, [[1, 2, 3]])
         self.assertEqual(applied, [])
         self.assertIn("person", self.table_names(second))
 
@@ -487,6 +520,123 @@ class SchemaTest(DbTestCase):
                 with self.assertRaises(sqlite3.IntegrityError) as raised:
                     conn.execute(sql)
                 self.assertIn("CHECK", str(raised.exception))
+
+    def add_line(self, conn: sqlite3.Connection) -> None:
+        """Insert recipe 1 with ingredient line 1 and override 1."""
+        conn.execute("INSERT INTO recipe_source (kind, location) VALUES ('x', 'y')")
+        conn.execute(
+            "INSERT INTO recipe (id, source_id, slug, title, source_ref, "
+            "content_hash, body) VALUES (1, 1, 'soup', 'Soup', 'r', 'h', 'b')"
+        )
+        conn.execute(
+            "INSERT INTO ingredient_line (id, recipe_id, position, raw_text, "
+            "confidence) VALUES (1, 1, 0, 'honey or agave', 0.5)"
+        )
+        conn.execute(
+            "INSERT INTO parse_override (id, normalized_text) VALUES (1, 'honey')"
+        )
+
+    def test_qty_max_needs_qty_and_is_not_below_it(self) -> None:
+        conn = self.migrated()
+        self.add_line(conn)
+        cases = [
+            (None, 3, False),
+            (3, 2, False),
+            (2, 2, True),
+            (2, 3, True),
+            (None, None, True),
+            (2, None, True),
+        ]
+        for table in ("ingredient_line", "parse_override"):
+            for qty, qty_max, ok in cases:
+                with self.subTest(table=table, qty=qty, qty_max=qty_max):
+                    sql = f"UPDATE {table} SET qty = ?, qty_max = ? WHERE id = 1"
+                    if ok:
+                        conn.execute(sql, (qty, qty_max))
+                    else:
+                        with self.assertRaises(sqlite3.IntegrityError) as raised:
+                            conn.execute(sql, (qty, qty_max))
+                        self.assertIn("CHECK", str(raised.exception))
+
+    def test_deleting_line_cascades_to_its_alternatives(self) -> None:
+        conn = self.migrated()
+        self.add_line(conn)
+        conn.execute(
+            "INSERT INTO ingredient_line_alt (line_id, position, alt_text) "
+            "VALUES (1, 1, 'agave')"
+        )
+
+        conn.execute("DELETE FROM ingredient_line WHERE id = 1")
+
+        count = conn.execute("SELECT count(*) FROM ingredient_line_alt").fetchone()[0]
+        self.assertEqual(count, 0)
+
+    def test_deleting_override_cascades_to_its_alternatives(self) -> None:
+        conn = self.migrated()
+        self.add_line(conn)
+        conn.execute(
+            "INSERT INTO parse_override_alt (override_id, position, alt_text) "
+            "VALUES (1, 1, 'agave')"
+        )
+
+        conn.execute("DELETE FROM parse_override WHERE id = 1")
+
+        count = conn.execute("SELECT count(*) FROM parse_override_alt").fetchone()[0]
+        self.assertEqual(count, 0)
+
+    def test_alternative_item_cannot_be_deleted_while_referenced(self) -> None:
+        conn = self.migrated()
+        self.add_line(conn)
+        conn.execute("INSERT INTO item (id, canonical_name) VALUES (1, 'agave')")
+        tables = {
+            "ingredient_line_alt": "line_id",
+            "parse_override_alt": "override_id",
+        }
+        # One table at a time, so a weak action on one cannot hide behind the other.
+        for table, parent in tables.items():
+            with self.subTest(table=table):
+                conn.execute(
+                    f"INSERT INTO {table} ({parent}, position, alt_text, item_id) "
+                    "VALUES (1, 1, 'agave', 1)"
+                )
+
+                with self.assertRaises(sqlite3.IntegrityError):
+                    conn.execute("DELETE FROM item WHERE id = 1")
+
+                conn.execute(f"DELETE FROM {table}")
+        conn.execute("DELETE FROM item WHERE id = 1")
+
+    def test_alternative_positions_start_at_one_and_are_unique_per_line(self) -> None:
+        conn = self.migrated()
+        self.add_line(conn)
+        conn.execute(
+            "INSERT INTO ingredient_line (id, recipe_id, position, raw_text, "
+            "confidence) VALUES (2, 1, 1, 'butter or oil', 0.5)"
+        )
+        conn.execute(
+            "INSERT INTO parse_override (id, normalized_text) VALUES (2, 'butter')"
+        )
+        tables = {
+            "ingredient_line_alt": "line_id",
+            "parse_override_alt": "override_id",
+        }
+        for table, parent in tables.items():
+            # Every row has its own alt_text, so only the position can collide.
+            insert = (
+                f"INSERT INTO {table} ({parent}, position, alt_text) VALUES (?, ?, ?)"
+            )
+            with self.subTest(table=table, case="position below one"):
+                with self.assertRaises(sqlite3.IntegrityError) as raised:
+                    conn.execute(insert, (1, 0, "zero"))
+                self.assertIn("CHECK", str(raised.exception))
+            conn.execute(insert, (1, 1, "first"))
+            conn.execute(insert, (1, 2, "second"))
+            with self.subTest(table=table, case="duplicate position"):
+                with self.assertRaises(sqlite3.IntegrityError) as raised:
+                    conn.execute(insert, (1, 2, "third"))
+                self.assertIn("UNIQUE", str(raised.exception))
+            with self.subTest(table=table, case="same position on another parent"):
+                conn.execute(insert, (2, 1, "first"))
 
     def test_all_tables_are_strict(self) -> None:
         conn = self.migrated()

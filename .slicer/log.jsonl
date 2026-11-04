@@ -327,6 +327,9 @@
 {"when": "2026-11-04T03:43:44Z", "item": "S64", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-04T03:43:44Z", "item": "S59", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-04T03:43:45Z", "item": "S62", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T03:46:54Z", "item": "S59", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T04:01:00Z", "item": "S59", "action": "note", "from": "", "to": "", "note": "Migration 0003 adds qty_max (CHECK: needs qty, not below it)", "by": "Jon R"}
+{"when": "2026-11-04T04:01:03Z", "item": "S59", "action": "status", "from": "started", "to": "done", "note": "Migration 0003 adds qty_max and the ingredient_line_alt and parse_override_alt tables with the specified constraints; data-model.md updated. Full suite 130 tests and ruff pass; new assertions mutation-checked. Live server start on a version-2 database not run.", "by": "Jon R"}
 {"when": "2026-11-04T03:44:39Z", "item": "S63", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
 {"when": "2026-11-04T03:46:32Z", "item": "S63", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
 {"when": "2026-11-04T03:55:02Z", "item": "S63", "action": "note", "from": "", "to": "", "note": "Verified: _is_trusted now also tests the IPv4-mapped form of", "by": "Jon R"}
