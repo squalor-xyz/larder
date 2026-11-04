@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. Source: read from a local clone path the owner provides, or fetch from GitHub over HTTPS (public)? Recommend a local path or a public raw fetch, with no credentials either way.\n2. Which content directory, and should any recipes be skipped (duplicates, drafts)?"
+      "body": "1. Source: read from a local clone path the owner provides, or fetch from GitHub over HTTPS (public)? Recommend a local path or a public raw fetch, with no credentials either way.\n2. Which content directory, and should any recipes be skipped (duplicates, drafts)?\n\nOwner decisions: 2026-11-04, settled by ADR 0018 (S09): the importer writes into recipes/<slug>.md and skips files with draft = true."
     },
     {
       "heading": "Files",
