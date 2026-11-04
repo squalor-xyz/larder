@@ -44,7 +44,8 @@ brand icons. Not built yet: recipes, planning and the shopping list.
 | [0015](docs/decisions/0015-app-tls-agnostic.md) | The app is TLS-agnostic |
 | [0016](docs/decisions/0016-future-multi-household.md) | Single household first, portable for others later |
 | [0017](docs/decisions/0017-dev-conventions.md) | Development tooling and conventions |
-| 0018–0024 | Reserved: each is written by its interview slice (`slicer find Interview`) |
+| [0018](docs/decisions/0018-recipe-repo-conventions.md) | Recipe repo conventions |
+| 0019–0024 | Reserved: each is written by its interview slice (`slicer find Interview`) |
 | [0025](docs/decisions/0025-conversational-channels.md) | Conversational channels: email and Matrix |
 | [0026](docs/decisions/0026-autonomy-levels.md) | Autonomy levels per person |
 | [0027](docs/decisions/0027-message-interpretation.md) | Rule-based message interpretation, optional local LLM fallback |
