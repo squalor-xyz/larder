@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "Confirm (recommended as written): one daemon thread; jobs run one at a time in registration order; an exclusive lock file `$LARDER_DATA/scheduler.lock` (`fcntl.flock`, POSIX only) so a second process on the same data directory runs no jobs; the dev server starts it, `create_app` and the tests do not."
+      "body": "Confirm (recommended as written): one daemon thread; jobs run one at a time in registration order; an exclusive lock file `$LARDER_DATA/scheduler.lock` (`fcntl.flock`, POSIX only) so a second process on the same data directory runs no jobs; the dev server starts it, `create_app` and the tests do not.\n\nOwner decisions: approved as written, 2026-11-03. Spec-check note: the first run of a job is registration time plus one interval; state that in the tests."
     },
     {
       "heading": "Files",

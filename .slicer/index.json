@@ -602,6 +602,12 @@
       ],
       "note_records": [],
       "claim": null,
+      "readiness": {
+        "by": "spec-check sonnet/high (r36), 2026-11-03",
+        "at": "2026-11-04T03:43:42Z",
+        "note": "ready; owner approved as written 2026-11-03",
+        "digest": "sha256:b7b2f3d504ea1724886f38d50805693a599725fbfc53afb2cbceebf3284bad85"
+      },
       "fields": {
         "size": "S",
         "flags": [],
@@ -634,6 +640,12 @@
       ],
       "note_records": [],
       "claim": null,
+      "readiness": {
+        "by": "spec-check sonnet/high (r36), 2026-11-03",
+        "at": "2026-11-04T03:43:42Z",
+        "note": "ready; owner approved as written 2026-11-03",
+        "digest": "sha256:29f3a6fd57d0e74cc427c710df2f4712ee9be98471f310d9a53c9944cda035d0"
+      },
       "fields": {
         "size": "S",
         "flags": [],
@@ -666,6 +678,12 @@
       ],
       "note_records": [],
       "claim": null,
+      "readiness": {
+        "by": "spec-check sonnet/high (r36), 2026-11-03",
+        "at": "2026-11-04T03:43:42Z",
+        "note": "ready; owner approved as written 2026-11-03",
+        "digest": "sha256:61bc0559cb9dfb65a006b8b3ed18fb5ea82703be0cbe8b622fb183a96609951f"
+      },
       "fields": {
         "size": "S",
         "flags": [],
@@ -961,6 +979,12 @@
       ],
       "note_records": [],
       "claim": null,
+      "readiness": {
+        "by": "spec-check sonnet/high (r36), 2026-11-03",
+        "at": "2026-11-04T03:43:42Z",
+        "note": "ready; owner approved as written 2026-11-03",
+        "digest": "sha256:1c55f57d8ff73ebc86a922ac4d77d90c50171ee8c2d1af11a305661b48d268b9"
+      },
       "fields": {
         "size": "S",
         "flags": [],

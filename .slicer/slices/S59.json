@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "Confirm the shape (recommended as written):\n1. A range stores its lower bound in `qty` and its upper bound in the new `qty_max`. `qty_max` is null for a plain quantity and requires `qty`.\n2. The first choice of an alternatives line stays on `ingredient_line` (`item_id`, `unit_id`, `qty`). The other choices are child rows in `ingredient_line_alt`, in order, sharing the line's quantity and unit. `parse_override` gets the same pair (`qty_max`, `parse_override_alt`), because one confirmation applies everywhere (ADR 0007).\n3. A flat alternative-group column is not used: `ingredient_line` is unique on (recipe_id, position) and `parse_override` is unique on normalized_text, so a group id cannot span several rows."
+      "body": "Confirm the shape (recommended as written):\n1. A range stores its lower bound in `qty` and its upper bound in the new `qty_max`. `qty_max` is null for a plain quantity and requires `qty`.\n2. The first choice of an alternatives line stays on `ingredient_line` (`item_id`, `unit_id`, `qty`). The other choices are child rows in `ingredient_line_alt`, in order, sharing the line's quantity and unit. `parse_override` gets the same pair (`qty_max`, `parse_override_alt`), because one confirmation applies everywhere (ADR 0007).\n3. A flat alternative-group column is not used: `ingredient_line` is unique on (recipe_id, position) and `parse_override` is unique on normalized_text, so a group id cannot span several rows.\n\nOwner decisions: approved as written, 2026-11-03."
     },
     {
       "heading": "Files",

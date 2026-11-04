@@ -319,3 +319,11 @@
 {"when": "2026-11-04T03:41:34Z", "item": "relay-roles.u15", "action": "relay-roles", "from": "", "to": "", "note": "rule-edit"}
 {"when": "2026-11-04T03:41:34Z", "item": "relay-roles.u17", "action": "relay-roles", "from": "", "to": "", "note": "rule-edit"}
 {"when": "2026-11-04T03:41:34Z", "item": "relay-roles.u18", "action": "relay-roles", "from": "", "to": "", "note": "rule-edit"}
+{"when": "2026-11-04T03:43:42Z", "item": "S62", "action": "ready", "from": "", "to": "", "note": "ready; owner approved as written 2026-11-03", "by": "spec-check sonnet/high (r36), 2026-11-03"}
+{"when": "2026-11-04T03:43:42Z", "item": "S63", "action": "ready", "from": "", "to": "", "note": "ready; owner approved as written 2026-11-03", "by": "spec-check sonnet/high (r36), 2026-11-03"}
+{"when": "2026-11-04T03:43:42Z", "item": "S64", "action": "ready", "from": "", "to": "", "note": "ready; owner approved as written 2026-11-03", "by": "spec-check sonnet/high (r36), 2026-11-03"}
+{"when": "2026-11-04T03:43:43Z", "item": "S59", "action": "ready", "from": "", "to": "", "note": "ready; owner approved as written 2026-11-03", "by": "spec-check sonnet/high (r36), 2026-11-03"}
+{"when": "2026-11-04T03:43:43Z", "item": "S63", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T03:43:44Z", "item": "S64", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T03:43:44Z", "item": "S59", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T03:43:45Z", "item": "S62", "action": "edit", "from": "", "to": "", "note": "Owner input"}
