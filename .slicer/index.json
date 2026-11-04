@@ -1492,7 +1492,7 @@
       "id": "S26",
       "title": "Interview: deployment host and network",
       "short_title": "Interview: deployment host and network",
-      "status": "started",
+      "status": "open",
       "has_slice": true,
       "depends_on": [
         "S01"
