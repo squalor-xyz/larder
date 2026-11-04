@@ -182,6 +182,79 @@ class BootstrapTest(AuthTestCase):
         self.assertEqual(self.complete_pairing(fresh, second_token).status_code, 404)
         self.assertEqual(len(self.rows("SELECT id FROM device")), 1)
 
+    def test_default_create_app_still_logs_and_replaces_on_start(self) -> None:
+        _, first = self.app_logging()
+
+        _, second = self.app_logging()  # create_app(settings): bootstrap=True
+
+        self.assertNotEqual(first, second)
+        client = self.app_client_without_bootstrap()
+        self.assertEqual(client.get(f"/pair/{first}").status_code, 404)
+        self.assertEqual(client.get(f"/pair/{second}").status_code, 200)
+
+    def app_client_without_bootstrap(self) -> FlaskClient:
+        return create_app(self.settings(), bootstrap=False).test_client()
+
+    def run_bootstrap(self) -> tuple[int, str, str]:
+        out, err = io.StringIO(), io.StringIO()
+        env = {"LARDER_DATA": str(self.data_dir)}
+        with (
+            mock.patch.dict(os.environ, env, clear=True),
+            contextlib.redirect_stdout(out),
+            contextlib.redirect_stderr(err),
+        ):
+            code = main(["bootstrap"])
+        return code, out.getvalue(), err.getvalue()
+
+    @staticmethod
+    def logged_token(output: list[str]) -> str:
+        found = PAIR_PATH.search("\n".join(output))
+        assert found is not None, output
+        return found.group(1)
+
+    def test_bootstrap_command_logs_a_working_link_and_replaces_the_previous_one(
+        self,
+    ) -> None:
+        with self.assertLogs("larder.auth", "WARNING") as logs:
+            code, _, _ = self.run_bootstrap()
+        first = self.logged_token(logs.output)
+
+        self.assertEqual(code, 0)
+        # Two workers started after the step leave the link alone.
+        self.app_client_without_bootstrap()
+        client = self.app_client_without_bootstrap()
+        self.assertEqual(client.get(f"/pair/{first}").status_code, 200)
+
+        # Running the step again replaces the unused link.
+        with self.assertLogs("larder.auth", "WARNING") as again:
+            code, _, _ = self.run_bootstrap()
+        second = self.logged_token(again.output)
+
+        self.assertEqual(code, 0)
+        self.assertNotEqual(first, second)
+        self.assertEqual(client.get(f"/pair/{first}").status_code, 404)
+        self.assertEqual(client.get(f"/pair/{second}").status_code, 200)
+
+    def test_bootstrap_command_logs_nothing_when_an_admin_device_exists(self) -> None:
+        app = create_app(self.settings(), bootstrap=False)
+        self.complete_pairing(app.test_client(), self.pair_token("Ada"))
+        self.assertEqual(len(self.rows("SELECT id FROM device")), 1)
+
+        with self.assertNoLogs("larder.auth", "DEBUG"):
+            code, out, err = self.run_bootstrap()
+
+        self.assertEqual((code, out, err), (0, "", ""))
+
+    def test_bootstrap_command_needs_an_admin_in_config(self) -> None:
+        self.write_config("", people='[[people]]\nname = "Sam"\n')
+
+        code, _, err = self.run_bootstrap()
+
+        self.assertEqual(code, 2)
+        self.assertIn("admin", err)
+        self.assertNotIn("Traceback", err)
+        self.assertFalse((self.data_dir / "larder.db").exists())  # nothing was made
+
     def test_bootstrap_log_hints_at_the_usual_address(self) -> None:
         with self.assertLogs("larder.auth", "WARNING") as logs:
             self.app()

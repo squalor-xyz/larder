@@ -34,11 +34,14 @@ shell = Blueprint("shell", __name__)
 WSGIApp = Callable[[dict[str, Any], Callable[..., Any]], Iterable[bytes]]
 
 
-def create_app(settings: Settings) -> Flask:
+def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
     """Build the app.
 
     Creates the data layout, migrates the database, syncs the config people
-    into it and logs a bootstrap pairing link while no admin has a device.
+    into it and, when ``bootstrap`` is true, logs a bootstrap pairing link
+    while no admin has a device (replacing an unused one). A WSGI entrypoint
+    that starts several processes passes ``bootstrap=False`` and runs
+    ``python -m larder bootstrap`` once before the server instead.
     Raises ConfigError when config names no admin.
     """
     auth.require_admin(settings)
@@ -48,7 +51,8 @@ def create_app(settings: Settings) -> Flask:
     try:
         db.migrate(conn)
         auth.sync_people(conn, settings)
-        auth.ensure_bootstrap(conn, settings)
+        if bootstrap:
+            auth.ensure_bootstrap(conn, settings)
     finally:
         conn.close()
 
@@ -108,7 +112,12 @@ def _is_trusted(remote_addr: str | None, trusted: Sequence[IPNetwork]) -> bool:
         address = ipaddress.ip_address(remote_addr)
     except ValueError:
         return False
-    return any(address in network for network in trusted)
+    # A dual-stack socket reports an IPv4 peer as ::ffff:a.b.c.d. Test both
+    # forms, so an IPv4 network matches it and a ::/0 entry still does.
+    candidates: list[ipaddress.IPv4Address | ipaddress.IPv6Address] = [address]
+    if isinstance(address, ipaddress.IPv6Address) and address.ipv4_mapped:
+        candidates.append(address.ipv4_mapped)
+    return any(candidate in network for candidate in candidates for network in trusted)
 
 
 def _security_headers(response: Response) -> Response:

@@ -145,6 +145,20 @@ class AppFactoryTest(WebShellTestCase):
         # Nothing is left to apply: create_app already did it.
         self.assertEqual(db.migrate(conn), [])
 
+    def test_create_app_without_bootstrap_logs_no_link_and_keeps_the_existing_one(
+        self,
+    ) -> None:
+        with self.assertLogs("larder.auth", "WARNING") as logs:
+            create_app(self.settings())
+        found = re.search(r"/pair/([A-Za-z0-9_-]+)", "\n".join(logs.output))
+        assert found is not None, logs.output
+        token = found.group(1)
+
+        with self.assertNoLogs("larder.auth"):
+            app = create_app(self.settings(), bootstrap=False)
+
+        self.assertEqual(app.test_client().get(f"/pair/{token}").status_code, 200)
+
     def test_db_connection_closed_at_teardown(self) -> None:
         app = create_app(self.settings())
 
@@ -239,6 +253,69 @@ class ProxyHeadersTest(WebShellTestCase):
 
         response = self.get(
             app, PROBE_PATH, "10.1.2.3", FORWARDED, client=self.paired_client(app)
+        )
+
+        self.assertEqual(
+            response.get_json(),
+            {
+                "remote_addr": "203.0.113.9",
+                "scheme": "https",
+                "host": "larder.example",
+            },
+        )
+
+    def test_proxy_headers_applied_from_ipv4_mapped_peer(self) -> None:
+        # A dual-stack socket reports an IPv4 proxy as ::ffff:a.b.c.d.
+        self.write_config('trusted_proxies = ["10.0.0.0/8"]\n')
+        app = create_app(self.settings())
+        add_probe(app)
+
+        response = self.get(
+            app,
+            PROBE_PATH,
+            "::ffff:10.1.2.3",
+            FORWARDED,
+            client=self.paired_client(app),
+        )
+
+        self.assertEqual(
+            response.get_json(),
+            {
+                "remote_addr": "203.0.113.9",
+                "scheme": "https",
+                "host": "larder.example",
+            },
+        )
+
+    def test_ipv4_mapped_peer_outside_the_trusted_network_is_ignored(self) -> None:
+        self.write_config('trusted_proxies = ["10.0.0.0/8"]\n')
+        app = create_app(self.settings())
+        add_probe(app)
+
+        response = self.get(
+            app,
+            PROBE_PATH,
+            "::ffff:192.0.2.7",
+            FORWARDED,
+            client=self.paired_client(app),
+        )
+
+        self.assertEqual(
+            response.get_json(),
+            {
+                "remote_addr": "::ffff:192.0.2.7",
+                "scheme": "http",
+                "host": "localhost",
+            },
+        )
+
+    def test_plain_ipv6_peer_in_a_trusted_ipv6_network_is_still_trusted(self) -> None:
+        self.write_config('trusted_proxies = ["fd00::/8"]\n')
+        app = create_app(self.settings())
+        add_probe(app)
+
+        response = self.get(
+            app, PROBE_PATH, "fd00::1", FORWARDED, client=self.paired_client(app)
         )
 
         self.assertEqual(
