@@ -350,3 +350,4 @@
 {"when": "2026-11-04T12:16:06Z", "item": "S12", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-04T12:16:06Z", "item": "S09", "action": "note", "from": "", "to": "", "note": "Verified outcome: ADR 0018 records the nine owner answers (p", "by": "Jon R"}
 {"when": "2026-11-04T12:16:06Z", "item": "S09", "action": "status", "from": "started", "to": "done", "note": "ADR 0018 written from the owner interview", "by": "Jon R"}
+{"when": "2026-11-04T12:16:23Z", "item": "S10", "action": "edit", "from": "", "to": "", "note": "Git"}
