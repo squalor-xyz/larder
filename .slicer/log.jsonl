@@ -406,3 +406,6 @@
 {"when": "2026-11-04T13:49:09Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Files"}
 {"when": "2026-11-04T14:11:08Z", "item": "S16", "action": "note", "from": "", "to": "", "note": "Implemented and verified pure ingredient parsing with quanti", "by": "Jon R"}
 {"when": "2026-11-04T14:11:11Z", "item": "S16", "action": "status", "from": "started", "to": "done", "note": "Implemented and verified pure ingredient parsing with quantity ranges, unit synonyms, alternatives, notes, flags and confidence scoring; golden fixtures, package discovery, 197 tests, lint and formatting passed.", "by": "Jon R"}
+{"when": "2026-11-04T13:08:17Z", "item": "S11", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T13:08:17Z", "item": "S11", "action": "edit", "from": "", "to": "", "note": "Git"}
+{"when": "2026-11-04T13:10:31Z", "item": "S11", "action": "edit", "from": "", "to": "", "note": "Owner input"}
