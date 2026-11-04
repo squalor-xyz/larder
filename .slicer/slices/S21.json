@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. Who can plan: admin only, or both (per the planning interview)?\n2. Is one tap on \"swap\" enough (shows the next alternative), or show a picker of 3?"
+      "body": "1. Who can plan: admin only, or both (per the planning interview)?\n2. Is one tap on \"swap\" enough (shows the next alternative), or show a picker of 3?\n\nOwner decisions: 2026-11-04, ADR 0013 Rules (S19): everyone can plan (any paired person can edit the plan); the planning session is Saturday evening; 6 dinners and 1 open night, the open night chosen when planning; a skipped meal rolls to the next open night. The swap question (one tap or a picker of 3) is still open."
     },
     {
       "heading": "Files",

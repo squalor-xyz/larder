@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None if the list interview is done. ADR 0020 must say how a range and an alternatives line become a list quantity and text; if it does not, ask the owner before implementing tests 7 and 8."
+      "body": "None if the list interview is done. ADR 0020 must say how a range and an alternatives line become a list quantity and text; if it does not, ask the owner before implementing tests 7 and 8.\n\nOwner decisions: 2026-11-04, ADR 0019 (S15): sum the same item across recipes within one unit dimension, never across volume and weight; cans count as cans; basics (salt, pepper, oil) never appear automatically unless a staple that is low; category order per ADR 0019. The range and alternatives question still waits for the shopping-list interview (S23)."
     },
     {
       "heading": "Files",
