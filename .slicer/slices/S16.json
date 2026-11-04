@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None if the items interview is done. Any lines that remain ambiguous get flagged for review, not guessed.\n\nOwner decisions: 2026-11-04, settled by ADR 0019 (S15): '1 can (15 oz)' counts as cans, with the weight kept as a note; unit conversion happens within a dimension only (volume or weight), never between them."
+      "body": "None if the items interview is done. Any lines that remain ambiguous get flagged for review, not guessed.\n\nOwner decisions: 2026-11-04, settled by ADR 0019 (S15): '1 can (15 oz)' counts as cans, with the weight kept as a note; unit conversion happens within a dimension only (volume or weight), never between them.\n\nOwner decisions: 2026-11-04, answered in the spec check: (1) the review threshold is 0.8 (below 0.8 is flagged); (2) the implementer seeds a small conservative non-food keyword list in code (mason jar, foil, parchment, toothpick, skewer), matching the item text and not the unit 'jar', and the owner reviews it at handoff; (3) the unit table is Python constants in src/larder/ingredients/units.py and ADR 0019 is amended to say so."
     },
     {
       "heading": "Files",
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Git",
-      "body": "Commit only when the owner asks; no AI attribution."
+      "body": "Add the rule-based ingredient line parser (S16)."
     }
   ],
   "notes": []

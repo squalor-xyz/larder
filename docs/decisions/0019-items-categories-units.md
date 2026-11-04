@@ -22,5 +22,5 @@ rule for staples. The shopping list order should make a store trip quick (L4).
 
 - The parser keeps a parenthetical size as a note and takes the count as the quantity.
 - List generation sums the same item across recipes within one dimension. Lines in unconvertible units stay separate lines.
-- Seed data holds the category order and the unit table. It starts with no staples.
+- Seed data holds the category order. It starts with no staples. The unit table is Python constants in `src/larder/ingredients/units.py` (amended 2026-11-04, S16): the parser stays pure, and S17 seeds the `unit` and `unit_alias` rows from it.
 - How a range or an alternatives line becomes a list quantity is not decided here. It belongs to the shopping-list interview (S23).

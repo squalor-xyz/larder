@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None beyond ADR 0019.\n\nOwner decisions: 2026-11-04, ADR 0019 (S15): no staples are seeded (the household adds them); category order is produce, meat, dairy, bakery, canned, dry goods, spices, frozen, household, pet."
+      "body": "None beyond ADR 0019.\n\nOwner decisions: 2026-11-04, ADR 0019 (S15): no staples are seeded (the household adds them); category order is produce, meat, dairy, bakery, canned, dry goods, spices, frozen, household, pet.\n\nOwner decisions: 2026-11-04, ADR 0019 amended (S16): the unit table is Python constants in src/larder/ingredients/units.py; S17 seeds the unit and unit_alias rows from it."
     },
     {
       "heading": "Files",
