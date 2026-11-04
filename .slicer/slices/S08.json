@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "Decided, nothing to ask:\n1. Icons: S52 made them. The owner copies the 192, 512 and maskable 512 PNG exports from the branding repo into `src/larder/web/static/icons/` (that repo is outside this workspace).\n2. Colors: S52's brand background `#0f1419` for `background_color` and `theme_color`; the mark is teal `#6ee7d2` and cream `#f4efe7` on a transparent field, so it needs the dark field. The maskable icon keeps the mark in the inner 80% on `#0f1419`.\n3. Display mode: `standalone`.\n4. Start URL: `/`. S62 serves a real page there and S22 later replaces its body. Neither edits the manifest."
+      "body": "Decided, nothing to ask:\n1. Icons: S52 made them. The owner copies the 192, 512 and maskable 512 PNG exports from the branding repo into `src/larder/web/static/icons/` (that repo is outside this workspace).\n2. Colors: S52's brand background `#0f1419` for `background_color` and `theme_color`; the mark is teal `#6ee7d2` and cream `#f4efe7` on a transparent field, so it needs the dark field. The maskable icon keeps the mark in the inner 80% on `#0f1419`.\n3. Display mode: `standalone`.\n4. Start URL: `/`. S62 serves a real page there and S22 later replaces its body. Neither edits the manifest.\n\nOwner decisions: 2026-11-04, owner pointed at ../branding/. The icon exports were copied from generated/logos/larder/exports/ into src/larder/web/static/icons/ as larder-192.png, larder-512.png and larder-maskable-512.png and committed on main before the worktree is cut."
     },
     {
       "heading": "Files",
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Git",
-      "body": "Commit only when the owner asks; no AI attribution."
+      "body": "Add the PWA manifest, icons and service worker (S08)."
     }
   ],
   "notes": []
