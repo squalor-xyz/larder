@@ -1,0 +1,305 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Every Hugo fixture ingredient, plus ranges, alternatives and review cases.
+# Absent qty, qty_max and unit mean None. Confidence below 0.8 needs review.
+
+[[lines]]
+raw = "400 g spaghetti"
+qty = 400
+unit = "g"
+item_text = "spaghetti"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "2 lemons, zest and juice"
+qty = 2
+item_text = "lemons"
+alternatives = []
+notes = "zest and juice"
+optional = false
+is_food = true
+confidence = 0.7
+
+[[lines]]
+raw = "60 g butter"
+qty = 60
+unit = "g"
+item_text = "butter"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1/2 cup grated parmesan"
+qty = 0.5
+unit = "cup"
+item_text = "grated parmesan"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "salt and black pepper"
+item_text = "salt and black pepper"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 0.8
+
+[[lines]]
+raw = "1 1/2 cups flour"
+qty = 1.5
+unit = "cup"
+item_text = "flour"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 tbsp sugar"
+qty = 1
+unit = "tbsp"
+item_text = "sugar"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 egg"
+qty = 1
+item_text = "egg"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 0.7
+
+[[lines]]
+raw = "1 cup milk"
+qty = 1
+unit = "cup"
+item_text = "milk"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "2 tbsp oil"
+qty = 2
+unit = "tbsp"
+item_text = "oil"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 onion, diced"
+qty = 1
+item_text = "onion"
+alternatives = []
+notes = "diced"
+optional = false
+is_food = true
+confidence = 0.7
+
+[[lines]]
+raw = "2 cans chickpeas, drained"
+qty = 2
+unit = "can"
+item_text = "chickpeas"
+alternatives = []
+notes = "drained"
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 can coconut milk"
+qty = 1
+unit = "can"
+item_text = "coconut milk"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1.5 cups basmati rice"
+qty = 1.5
+unit = "cup"
+item_text = "basmati rice"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "3 cups water"
+qty = 3
+unit = "cup"
+item_text = "water"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "2-3 cloves garlic"
+qty = 2
+qty_max = 3
+unit = "clove"
+item_text = "garlic"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "½–¾ cup milk"
+qty = 0.5
+qty_max = 0.75
+unit = "cup"
+item_text = "milk"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 1/4-1 1/2 cups flour"
+qty = 1.25
+qty_max = 1.5
+unit = "cup"
+item_text = "flour"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "2 to 3 cups water"
+qty = 2
+qty_max = 3
+unit = "cup"
+item_text = "water"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "honey, maple syrup, or agave"
+item_text = "honey"
+alternatives = ["maple syrup", "agave"]
+notes = ""
+optional = false
+is_food = true
+confidence = 0.7
+
+[[lines]]
+raw = "1 tbsp honey, maple syrup or agave"
+qty = 1
+unit = "tbsp"
+item_text = "honey"
+alternatives = ["maple syrup", "agave"]
+notes = ""
+optional = false
+is_food = true
+confidence = 0.9
+
+[[lines]]
+raw = "1 tbsp honey or maple syrup or agave"
+qty = 1
+unit = "tbsp"
+item_text = "honey"
+alternatives = ["maple syrup", "agave"]
+notes = ""
+optional = false
+is_food = true
+confidence = 0.9
+
+[[lines]]
+raw = "1 cup butter or oil"
+qty = 1
+unit = "cup"
+item_text = "butter"
+alternatives = ["oil"]
+notes = ""
+optional = false
+is_food = true
+confidence = 0.9
+
+[[lines]]
+raw = "1 can (15 oz) corn, no salt added"
+qty = 1
+unit = "can"
+item_text = "corn"
+alternatives = []
+notes = "15 oz; no salt added"
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 tsp salt (optional)"
+qty = 1
+unit = "tsp"
+item_text = "salt"
+alternatives = []
+notes = ""
+optional = true
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 cup herbs (modify to taste), chopped"
+qty = 1
+unit = "cup"
+item_text = "herbs"
+alternatives = []
+notes = "modify to taste; chopped"
+optional = false
+is_food = true
+confidence = 1.0
+
+[[lines]]
+raw = "1 small mason jar"
+qty = 1
+item_text = "small mason jar"
+alternatives = []
+notes = ""
+optional = false
+is_food = false
+confidence = 0.7
+
+[[lines]]
+raw = "???"
+item_text = "???"
+alternatives = []
+notes = ""
+optional = false
+is_food = true
+confidence = 0.5

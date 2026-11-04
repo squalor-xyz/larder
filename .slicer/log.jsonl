@@ -392,3 +392,17 @@
 {"when": "2026-11-04T13:02:27Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-04T13:02:27Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Git"}
 {"when": "2026-11-04T13:02:28Z", "item": "S17", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T13:06:23Z", "item": "S16", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T13:07:05Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T13:07:05Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-04T13:07:13Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T13:40:37Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T13:40:37Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-04T13:41:33Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Implement"}
+{"when": "2026-11-04T13:42:11Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T13:42:11Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-04T13:47:42Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T13:47:42Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-04T13:49:09Z", "item": "S16", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T14:11:08Z", "item": "S16", "action": "note", "from": "", "to": "", "note": "Implemented and verified pure ingredient parsing with quanti", "by": "Jon R"}
+{"when": "2026-11-04T14:11:11Z", "item": "S16", "action": "status", "from": "started", "to": "done", "note": "Implemented and verified pure ingredient parsing with quantity ranges, unit synonyms, alternatives, notes, flags and confidence scoring; golden fixtures, package discovery, 197 tests, lint and formatting passed.", "by": "Jon R"}

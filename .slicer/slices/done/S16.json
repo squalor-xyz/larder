@@ -1,0 +1,45 @@
+{
+  "id": "S16",
+  "title": "Ingredient line parser",
+  "lead": [
+    "Turn a free-text ingredient line into a `ParsedLine`: quantity with an optional upper bound, unit, item text, alternatives, notes, flags and a confidence score (ADR 0007, I1-I4)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "L",
+  "flags": [],
+  "trees_note": "recipes",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** mapping to canonical items and writing rows (S17); the storage shape (S59); the review UI.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "Generating the shopping list needs structured ingredients. Being rule-based keeps it deterministic and testable. The result has the shape S59 stores: `qty` and `qty_max` for a range, the first choice as the item text, further choices as alternatives, and the flags and confidence columns of `ingredient_line`."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None if the items interview is done. Any lines that remain ambiguous get flagged for review, not guessed.\n\nOwner decisions: 2026-11-04, settled by ADR 0019 (S15): '1 can (15 oz)' counts as cans, with the weight kept as a note; unit conversion happens within a dimension only (volume or weight), never between them.\n\nOwner decisions: 2026-11-04, answered in the spec check: (1) the review threshold is 0.8 (below 0.8 is flagged); (2) the implementer seeds a small conservative non-food keyword list in code (mason jar, foil, parchment, toothpick, skewer), matching the item text and not the unit 'jar', and the owner reviews it at handoff; (3) the unit table is Python constants in src/larder/ingredients/units.py and ADR 0019 is amended to say so."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/ingredients/parse.py:83` (ParsedLine), `:96` (parse_line); behavior documented in module; all penalty constants at :35-38 and dangling-or pattern at :73\n- `src/larder/ingredients/__init__.py:1` (SPDX-only regular package marker, architect change-now N1)\n- `src/larder/ingredients/units.py` (canonical unit synonyms and review threshold)\n- `tests/test_ingredient_parse.py:14` (IngredientParseTestCase), `:223` (test_confidence_penalties_are_applied_as_listed; reused unchanged for architect N2)\n- `tests/fixtures/ingredients/golden.toml` (every Hugo ingredient plus parser cases; opaque ??? case at :299)\n- `AGENTS.md:11` (ingredient parser status documentation)\nRead-only anchors: src/larder/recipes/doc.py:81 read_recipe; src/larder/db.py:67 migrate; src/larder/migrations/0003_ingredient_ranges.sql:9 qty_max and :17 ingredient_line_alt."
+    },
+    {
+      "heading": "Failing tests",
+      "body": "All in tests/test_ingredient_parse.py::IngredientParseTestCase:14:\n1. test_quantities_integers_fractions_mixed_ranges\n2. test_unit_synonyms\n3. test_package_with_size\n4. test_optional_flag\n5. test_alternatives\n6. test_parenthetical_and_trailing_notes\n7. test_non_food_flag\n8. test_unparseable_line_low_confidence_not_exception\n9. test_all_fixture_lines_parse_with_expected_results (read_recipe and golden.toml; opaque confidence 0.5)\n10. test_parsed_line_fields_match_the_ingredient_line_columns (db.migrate and migration 0003)\n11. test_confidence_penalties_are_applied_as_listed (:223; unknown unit 0.3, alternatives 0.1, leftovers 0.3; reused unchanged for architect N2 constant extraction)\nArchitect N1: foreground packaging probe asserts larder.ingredients appears in setuptools.find_packages with the absolute worktree src path. No new permanent test or changed assertion is needed for these behavior-preserving cleanups."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Tokenize the quantity (unicode fractions and ranges too), unit (from the units table) and package-with-size pattern.\n2. Remaining text becomes item text and notes (split on the first comma or parenthetical). A \"x, y or z\" item list becomes the first item plus alternatives. A standalone \"or\" at either end of a choice counts as unparsed text.\n3. Flags: optional, non-food (keyword list from ADR 0019).\n4. Confidence is `1.0` minus penalties, floored at 0. Values: unknown unit 0.3, missing quantity 0.2, unparsed leftover tokens 0.3 (owner decision 2026-11-04, supplied in fix-round review), alternatives present 0.1. The review threshold is 0.8. Opaque lines apply the shared missing-quantity and leftover penalties, giving 0.5.\n5. Return a frozen dataclass `ParsedLine(raw, qty, qty_max, unit, item_text, alternatives, notes, optional, is_food, confidence)`. Pure functions only; no DB. S17 resolves `unit` and items to ids and writes the rows, including `qty_max` and `ingredient_line_alt` (S59)."
+    },
+    {
+      "heading": "Check",
+      "body": "- Parser tests pass; every line in the sample recipes is either parsed with high confidence or flagged.\n- The golden table covers every range and alternatives form found in the fixtures."
+    },
+    {
+      "heading": "Git",
+      "body": "Add the rule-based ingredient line parser (S16)."
+    }
+  ],
+  "notes": []
+}
