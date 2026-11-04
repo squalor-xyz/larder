@@ -22,7 +22,7 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 - NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).
 - NG5: Exact, item-by-item inventory tracking.
 
-67 items · — 46 · done 9 · later 12
+67 items · — 45 · done 10 · later 12
 
 Pass 1 — Unblock: interviews and foundation fixes
 
@@ -30,7 +30,7 @@ Pass 1 — Unblock: interviews and foundation fixes
 |---|---|---|---|---|---|---|---|
 | Phase 0 — Foundations | | | | | | | |
 | 1 | [S62](slices/S62.md) | Paired landing route | S | 1 | web | G5, U2 · discovered from S07 | — |
-| 2 | [S63](slices/S63.md) | Proxy trust and single bootstrap fixes | S | 1 | web | G5, U4 · discovered from S28 | — |
+| 2 | [S63](slices/S63.md) | Proxy trust and single bootstrap fixes | S | 1 | web | G5, U4 · discovered from S28 | done |
 | 3 | [S64](slices/S64.md) | In-process scheduler | S | 1 | core | G4, NF7 · discovered from S11 | — |
 | 4 | [S08](slices/S08.md) | PWA shell | S | 1 | web |  | — |
 | Phase 1a — Recipes | | | | | | | |
