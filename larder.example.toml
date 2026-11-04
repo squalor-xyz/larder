@@ -13,7 +13,7 @@
 timezone = "UTC"
 
 # Git URL of the recipe repo that larder clones.
-recipe_repo_url = "https://git.example/recipes.git"
+recipe_repo_url = "git@git.example:household/recipes.git"
 
 # Order of categories on the shopping list, for quick manual entry in a store app.
 category_order = ["produce", "bakery", "dairy", "meat", "frozen", "pantry"]
@@ -27,6 +27,11 @@ notify_channels = ["ntfy"]
 # connecting address is in this list. Leave it empty when no proxy is in front.
 # This key is read from this file only; there is no environment override.
 trusted_proxies = ["127.0.0.1"]
+
+# Identity for commits straight to main. Both keys are optional, file-only.
+[git]
+author_name = "larder"
+author_email = "larder@localhost"
 
 # Paths to secret files. A relative path resolves against $LARDER_DATA.
 # The files are not read when settings load.

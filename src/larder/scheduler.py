@@ -3,8 +3,8 @@
 
 Jobs run one at a time, in registration order. A job is a no-argument callable;
 callers close over their settings. The first run of a job is its registration
-time plus one interval, and each later run is one interval after the previous
-run finished.
+time plus one interval (or an explicit first-run delay), and each later run is
+one interval after the previous run finished.
 
 ``start`` takes an exclusive lock on ``scheduler.lock`` in the data directory
 (``fcntl.flock``, POSIX only). A second process on the same data directory
@@ -57,17 +57,26 @@ class Scheduler:
         return thread is not None and thread.is_alive()
 
     def register(
-        self, name: str, interval_seconds: float, func: Callable[[], object]
+        self,
+        name: str,
+        interval_seconds: float,
+        func: Callable[[], object],
+        *,
+        first_run_delay: float | None = None,
     ) -> None:
-        """Add a job. Raises ValueError for a duplicate name or interval <= 0."""
+        """Add a job, optionally due after a nonnegative first-run delay.
+
+        Raises ValueError for a duplicate name, interval <= 0 or delay < 0.
+        """
         if interval_seconds <= 0:
             raise ValueError(f"interval for job '{name}' must be positive")
+        if first_run_delay is not None and first_run_delay < 0:
+            raise ValueError(f"first-run delay for job '{name}' must be nonnegative")
+        delay = interval_seconds if first_run_delay is None else first_run_delay
         with self._jobs_lock:
             if any(job.name == name for job in self._jobs):
                 raise ValueError(f"job '{name}' is already registered")
-            self._jobs.append(
-                _Job(name, interval_seconds, func, self._clock() + interval_seconds)
-            )
+            self._jobs.append(_Job(name, interval_seconds, func, self._clock() + delay))
 
     def run_due(self) -> None:
         """Run each due job once, in registration order, one at a time.

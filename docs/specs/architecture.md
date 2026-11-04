@@ -68,7 +68,7 @@ A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
 - **Config file:** `$LARDER_DATA/larder.toml`. Every key has a default except the
   people list: larder refuses to start unless at least one person has
   `role = "admin"` (see Auth below), so in practice the file is required.
-- **Unknown keys are errors** at every level: the top level, `[secrets]`, each
+- **Unknown keys are errors** at every level: the top level, `[secrets]`, `[git]`, each
   `[[people]]` and each `[[stores]]`. So are values of the wrong type. The error
   names the key and where it came from.
 - **Environment overrides** apply to scalar keys only: `LARDER_TIMEZONE`,
@@ -77,6 +77,10 @@ A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
   override wins over the file. Any other `LARDER_*` variable is an error.
 - **Timezone** is an optional IANA name. Without it, larder uses the host's
   local time.
+- **Git identity:** optional `[git]` keys `author_name` and `author_email`
+  default to `larder` and `larder@localhost`. Both must be nonempty strings.
+  They set the author and committer for recipe commits. These keys are
+  file-only, with no environment overrides.
 - **Trusted proxies:** `trusted_proxies` is an array of IP addresses or CIDR
   networks (`"127.0.0.1"`, `"10.0.0.0/8"`). Entries are parsed strictly, so
   `"10.0.0.1/24"` is an error. larder applies `X-Forwarded-For`,
@@ -97,6 +101,10 @@ A placeholder config is in [`larder.example.toml`](../../larder.example.toml).
 | `secrets/` | Secret files; created with mode 0700 if missing |
 | `secrets/session_key` | 32 random bytes that sign the session cookie; created with mode 0600 at first start and reused |
 | `scheduler.lock` | Lock file for the in-process scheduler; created when the scheduler starts (see Scheduler below) |
+| `recipes.lock` | Exclusive lock serializing recipe git operations across threads and processes |
+| `recipes/.git/larder-status.json` | Last sync outcome, timestamp and conflict details; never committed |
+| `secrets/deploy_key` | Owner-provided repo-scoped SSH private key, mode 0600 |
+| `secrets/known_hosts` | Owner-provided SSH host keys for the recipe git host |
 
 `ensure_data_dirs` creates `recipes/`, `emails/` and `secrets/` if they are
 missing. Loading the config creates nothing.
@@ -118,8 +126,9 @@ service (stdlib first, [ADR 0002](../decisions/0002-python.md)).
 
 - **One daemon thread** runs registered interval jobs one at a time, in
   registration order. A job is a no-argument callable. Its first run is
-  registration time plus one interval; each later run is one interval after the
-  previous run finished. A job that raises is logged to `larder.scheduler` and
+  registration time plus one interval, unless `register` receives an explicit
+  nonnegative `first_run_delay` (zero means immediately due). Each later run is
+  one interval after the previous run finished. A job that raises is logged to `larder.scheduler` and
   does not stop the others.
 - **One process per data directory** runs jobs. `start()` takes an exclusive
   `flock` on `$LARDER_DATA/scheduler.lock` (POSIX only). A second process on the
@@ -130,6 +139,49 @@ service (stdlib first, [ADR 0002](../decisions/0002-python.md)).
   workers start no thread. `python -m larder` starts it before the dev server and
   stops it afterwards. Starting it under a WSGI server is decided with the
   container (S28).
+
+## Recipe sync
+
+When `recipe_repo_url` is set, `create_app` registers the `recipe-sync` job.
+It pulls and pushes any pending local commits as soon as the scheduler thread
+starts (within its one-second tick), then every 900 seconds after the previous
+run finishes. The pull and conditional push hold one recipe lock. Only the
+process holding the scheduler lock runs the job. Without a URL no job is
+registered. The factory itself performs no git or network work.
+
+`larder.recipes.repo` exposes settings-first `ensure_clone`, `pull`, `commit`,
+`push` and `status`. Git operations hold an exclusive `flock` on
+`recipes.lock`. A missing clone is created under `recipes/`, including from an
+empty remote. Writes go straight to `main`: callers write files, then call
+`commit(settings, paths, message)` with an imperative sentence such as
+`Add pad-thai.`. This commits the named paths, pulls with rebase and pushes.
+`push` also rebases first. Pulling alone preserves unpushed local commits and
+reports `needs_attention` with their count; it never labels them synced. The
+scheduled job retries their push, including after an earlier push was rejected.
+Sync and commit require the clone to be on `main`; another branch raises a
+`RepoError` and persists `needs_attention`, including on repeated attempts.
+An empty or whitespace-only commit message raises `ValueError` before staging
+any paths, preserving the caller's working files and index.
+
+If a rebase conflicts, sync aborts it, preserves the local commit and clean
+working tree, skips the push and persists `needs_attention` with the affected
+files under `.git/`. A later process can read the frozen `RepoStatus` through
+`status`: state (`not_cloned`, `ok`, `needs_attention`), detail, last successful
+sync timestamp (UTC ISO-8601), ahead/behind counts and conflicted files. Counts
+compare against the last fetched `origin/main`; `status` does not fetch.
+After the owner resolves the conflict, the next successful sync clears it.
+Other git failures raise a sanitized `RepoError`; fetch, rebase and push
+failures also persist a needs-attention sync status with a sanitized detail
+identifying the failed operation.
+
+The owner creates the remote and installs a write-enabled repo deploy key and
+the host's SSH key in the paths above. Git uses `subprocess.run` without a
+shell. SSH receives only the configured identity through `GIT_SSH_COMMAND`,
+with `IdentitiesOnly=yes`, `BatchMode=yes`, `UserKnownHostsFile` and
+`StrictHostKeyChecking=yes`; it never prompts. Logs contain command verbs,
+excluding URLs, paths, commit messages and raw git diagnostics. The sync
+module never reads the deploy key itself. Local bare repos exercise the same
+git operations in tests without host credentials or network access.
 
 ## Deployment
 

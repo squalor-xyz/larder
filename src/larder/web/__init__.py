@@ -16,6 +16,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from larder import auth, db
 from larder.config import IPNetwork, Settings, ensure_data_dirs
+from larder.recipes.repo import register_sync
 from larder.scheduler import Scheduler
 
 SETTINGS_KEY = "LARDER_SETTINGS"
@@ -65,6 +66,8 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
     app.config[SETTINGS_KEY] = settings
     # Built, not started: the dev server starts it (``python -m larder``).
     app.extensions[SCHEDULER_KEY] = Scheduler(settings.data_dir)
+    if settings.recipe_repo_url:
+        register_sync(app.extensions[SCHEDULER_KEY], settings)
     app.register_blueprint(shell)
     auth_views.init_app(app, session_key)
     app.register_blueprint(home_views.home)

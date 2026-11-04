@@ -37,6 +37,26 @@ class SchedulerTestCase(unittest.TestCase):
 
 
 class RunDueTest(SchedulerTestCase):
+    def test_explicit_first_run_delay(self) -> None:
+        scheduler = self.make()
+        output = self.data_dir / "output"
+        scheduler.register(
+            "immediate", 10, lambda: output.write_text("ran"), first_run_delay=0
+        )
+        scheduler.run_due()
+        self.assertEqual(output.read_text(), "ran")
+        output.unlink()
+        self.clock.now = 9.9
+        scheduler.run_due()
+        self.assertFalse(output.exists())
+        self.clock.now = 10
+        scheduler.run_due()
+        self.assertEqual(output.read_text(), "ran")
+
+    def test_rejects_negative_first_run_delay(self) -> None:
+        with self.assertRaises(ValueError):
+            self.make().register("invalid", 10, lambda: None, first_run_delay=-1)
+
     def test_job_runs_when_its_interval_has_elapsed_and_not_before(self) -> None:
         calls: list[float] = []
         scheduler = self.make()

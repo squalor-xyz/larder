@@ -50,6 +50,34 @@ class LoadSettingsTest(unittest.TestCase):
             ),
         )
 
+    def test_git_identity_defaults_and_file_values(self) -> None:
+        settings = load_settings(self.env())
+        self.assertEqual(
+            (settings.git_author_name, settings.git_author_email),
+            ("larder", "larder@localhost"),
+        )
+        self.write_config(
+            '[git]\nauthor_name = "Recipe Bot"\nauthor_email = "bot@example.test"\n'
+        )
+        settings = load_settings(self.env())
+        self.assertEqual(
+            (settings.git_author_name, settings.git_author_email),
+            ("Recipe Bot", "bot@example.test"),
+        )
+
+    def test_rejects_invalid_git_identity(self) -> None:
+        for text, message in (
+            ('git = "bot"', "git must be a table"),
+            ('[git]\nauthor_nmae = "Bot"', "unknown key 'author_nmae'"),
+            ("[git]\nauthor_name = 3", "git.author_name must be a string"),
+            ('[git]\nauthor_email = ""', "git.author_email must not be empty"),
+        ):
+            with self.subTest(text=text):
+                self.write_config(text)
+                with self.assertRaises(ConfigError) as caught:
+                    load_settings(self.env())
+                self.assertIn(message, str(caught.exception))
+
     def test_env_overrides_file_values(self) -> None:
         self.write_config(
             'timezone = "Europe/Berlin"\n'

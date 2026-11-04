@@ -34,6 +34,7 @@ _FILE_KEYS = frozenset(
         "people",
         "stores",
         "trusted_proxies",
+        "git",
     }
 )
 _PERSON_KEYS = frozenset(
@@ -114,6 +115,8 @@ class Settings:
     secrets: Secrets
     # Peers whose forwarded headers larder trusts. File only; no env override.
     trusted_proxies: tuple[IPNetwork, ...] = ()
+    git_author_name: str = "larder"
+    git_author_email: str = "larder@localhost"
 
     @property
     def db_path(self) -> Path:
@@ -158,6 +161,8 @@ def load_settings(env: Mapping[str, str] | None = None) -> Settings:
     )
     secrets_table = _as_table(raw.get("secrets", {}), "secrets", origin)
     _check_keys(secrets_table, frozenset(_SECRET_FIELDS), "[secrets]", origin)
+    git_table = _as_table(raw.get("git", {}), "git", origin)
+    _check_keys(git_table, frozenset({"author_name", "author_email"}), "[git]", origin)
 
     return Settings(
         data_dir=data_dir,
@@ -183,6 +188,14 @@ def load_settings(env: Mapping[str, str] | None = None) -> Settings:
             ),
         ),
         trusted_proxies=_trusted_proxies(raw.get("trusted_proxies", []), origin),
+        git_author_name=_as_str(
+            git_table.get("author_name", "larder"), "git.author_name", origin
+        ),
+        git_author_email=_as_str(
+            git_table.get("author_email", "larder@localhost"),
+            "git.author_email",
+            origin,
+        ),
     )
 
 
