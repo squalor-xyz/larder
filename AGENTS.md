@@ -11,8 +11,11 @@ It reads grocery order emails and recipe files.
 **Status:** Phase 0 (foundations). Built: config, the SQLite database and migrations, the Flask
 app shell, people sync, device pairing with an admin bootstrap, admin device management,
 brand icons, the in-process scheduler with recipe repo sync, a placeholder landing page at `/` for paired devices, the PWA shell (manifest, icons, service worker),
-the recipe file parser (`larder.recipes.doc`: parse and serialize one recipe file, no ingredient-line parsing, git or DB)
-and the ingredient line parser (`larder.ingredients.parse`: one line to a `ParsedLine`, no item matching or DB).
+the recipe file parser (`larder.recipes.doc`: parse and serialize one recipe file, no ingredient-line parsing, git or DB),
+the ingredient line parser (`larder.ingredients.parse`: one line to a `ParsedLine`, no item matching or DB),
+and the item matcher (`larder.ingredients.match`: missing categories, items,
+aliases and units seeded at startup; `parse_and_match_recipe` writes parsed
+lines and alternatives, not yet wired into indexing).
 Recipe sync clones, rebases and pushes using a repo-scoped deploy key, with persisted conflict status.
 Not built yet: the recipe index, planning and the shopping list.
 

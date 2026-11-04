@@ -1,0 +1,111 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Small generic catalog from recipe fixtures and matching examples (S17).
+# Startup inserts missing rows only: editing this file does not overwrite DB
+# edits or remove old rows. Category order is used for newly inserted names.
+# No staples are seeded.
+categories = [
+  "produce", "meat", "dairy", "bakery", "canned", "dry goods",
+  "spices", "frozen", "household", "pet",
+]
+
+[[items]]
+name = "ground turkey"
+category = "meat"
+aliases = ["ground turkey meat"]
+
+[[items]]
+name = "mushrooms"
+category = "produce"
+
+[[items]]
+name = "lemons"
+category = "produce"
+
+[[items]]
+name = "onion"
+category = "produce"
+
+[[items]]
+name = "garlic"
+category = "produce"
+
+[[items]]
+name = "herbs"
+category = "produce"
+
+[[items]]
+name = "butter"
+category = "dairy"
+
+[[items]]
+name = "parmesan"
+category = "dairy"
+
+[[items]]
+name = "egg"
+category = "dairy"
+
+[[items]]
+name = "milk"
+category = "dairy"
+
+[[items]]
+name = "chickpeas"
+category = "canned"
+aliases = ["garbanzo beans"]
+
+[[items]]
+name = "coconut milk"
+category = "canned"
+
+[[items]]
+name = "corn"
+category = "canned"
+
+[[items]]
+name = "spaghetti"
+category = "dry goods"
+
+[[items]]
+name = "flour"
+category = "dry goods"
+
+[[items]]
+name = "sugar"
+category = "dry goods"
+
+[[items]]
+name = "oil"
+category = "dry goods"
+
+[[items]]
+name = "basmati rice"
+category = "dry goods"
+
+[[items]]
+name = "water"
+category = "dry goods"
+
+[[items]]
+name = "honey"
+category = "dry goods"
+
+[[items]]
+name = "maple syrup"
+category = "dry goods"
+
+[[items]]
+name = "agave"
+category = "dry goods"
+
+[[items]]
+name = "salt"
+category = "spices"
+
+[[items]]
+name = "black pepper"
+category = "spices"
+
+[[items]]
+name = "mason jar"
+category = "household"
