@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. If a recipe file is deleted from the repo: archive it (hide, keep metadata) (recommended) or delete it?"
+      "body": "None. Owner decisions: 2026-11-04, if a recipe file is deleted from the repo larder archives the recipe (hides it from browse and planning, keeps its metadata so restoring the file brings it back intact)."
     },
     {
       "heading": "Files",
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Git",
-      "body": "Commit only when the owner asks; no AI attribution."
+      "body": "Add the recipe index built from the recipe repo (S13)."
     }
   ],
   "notes": []
