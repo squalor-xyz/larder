@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. Metadata fields: meal type (dinner/breakfast/lunch/side/dessert), servings, in rotation (bool), favorite (bool; `recipe_meta.favorite`, R4), effort (quick/normal/project). Add or remove any?\n2. Should a non-technical household member see recipe pages (read-only) from the Today view? (recommended: yes, with a \"view recipe\" link)"
+      "body": "1. Metadata fields: meal type (dinner/breakfast/lunch/side/dessert), servings, in rotation (bool), favorite (bool; `recipe_meta.favorite`, R4), effort (quick/normal/project). Add or remove any?\n2. Should a non-technical household member see recipe pages (read-only) from the Today view? (recommended: yes, with a \"view recipe\" link)\n\nOwner decisions: 2026-11-04, answered by the owner: (1) keep the metadata fields as listed (meal type dinner/breakfast/lunch/side/dessert, servings, in rotation, favorite, effort quick/normal/project); (2) a non-technical household member sees recipe pages read-only from the Today view, with a 'view recipe' link."
     },
     {
       "heading": "Files",
