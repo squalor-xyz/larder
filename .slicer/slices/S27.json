@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. A time when the owner and a household phone that isn't on the VPN are both available.\n2. Approval for any DNS-provider token or Tailscale setting changes."
+      "body": "1. A time when the owner and a household phone that isn't on the VPN are both available.\n2. Approval for any DNS-provider token or Tailscale setting changes.\n\nOwner decisions: 2026-11-04, ADR 0021 (S26, Proposed): try the Tailscale certificate served by Caddy first; no owned domain or DNS API token is involved for this candidate. The host (TrueNAS box, NUC or Raspberry Pi), the local DNS override and the off-VPN phone setup are still open."
     },
     {
       "heading": "Files",

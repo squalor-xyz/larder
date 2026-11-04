@@ -47,7 +47,8 @@ brand icons. Not built yet: recipes, planning and the shopping list.
 | [0018](docs/decisions/0018-recipe-repo-conventions.md) | Recipe repo conventions |
 | [0019](docs/decisions/0019-items-categories-units.md) | Items, categories, staples and units |
 | [0020](docs/decisions/0020-shopping-list-behavior.md) | Shopping list behavior |
-| 0021–0024 | Reserved: each is written by its interview slice (`slicer find Interview`) |
+| [0021](docs/decisions/0021-reference-deployment.md) | Reference deployment (Proposed) |
+| 0022–0024 | Reserved: each is written by its interview slice (`slicer find Interview`) |
 | [0025](docs/decisions/0025-conversational-channels.md) | Conversational channels: email and Matrix |
 | [0026](docs/decisions/0026-autonomy-levels.md) | Autonomy levels per person |
 | [0027](docs/decisions/0027-message-interpretation.md) | Rule-based message interpretation, optional local LLM fallback |
