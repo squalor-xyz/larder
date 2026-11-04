@@ -441,7 +441,9 @@ class TemplateRulesTest(unittest.TestCase):
         for path in sorted(templates.rglob("*.html")):
             lowered = path.read_text(encoding="utf-8").lower()
             with self.subTest(template=path.relative_to(templates).as_posix()):
-                self.assertNotIn("<script", lowered)
+                # Only external scripts: <script src="..."></script>, no body.
+                external = re.sub(r"<script\s[^>]*\bsrc=[^>]*></script>", "", lowered)
+                self.assertNotIn("<script", external)
                 self.assertNotIn("<style", lowered)
                 self.assertNotIn(" style=", lowered)
                 self.assertNotRegex(lowered, r"\son\w+\s*=")

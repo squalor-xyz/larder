@@ -37,7 +37,13 @@ _SAFE_METHODS = frozenset({"GET", "HEAD", "OPTIONS", "TRACE"})
 # Reachable without a device cookie. Unknown paths are not: an unpaired device
 # learns nothing about what exists.
 _OPEN_ENDPOINTS = frozenset(
-    {"shell.healthz", "static", "auth.pair_page", "auth.pair_submit"}
+    {
+        "shell.healthz",
+        "static",
+        "pwa.service_worker",
+        "auth.pair_page",
+        "auth.pair_submit",
+    }
 )
 
 pairing = Blueprint("auth", __name__)

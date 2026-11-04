@@ -59,7 +59,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
         conn.close()
 
     # Imported here: the views import this module for get_db and SETTINGS_KEY.
-    from larder.web import auth_views, home_views
+    from larder.web import auth_views, home_views, pwa_views
 
     app = Flask(__name__)
     app.config[SETTINGS_KEY] = settings
@@ -68,6 +68,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
     app.register_blueprint(shell)
     auth_views.init_app(app, session_key)
     app.register_blueprint(home_views.home)
+    app.register_blueprint(pwa_views.pwa)
     app.register_error_handler(404, _not_found)
     app.after_request(_security_headers)
     app.teardown_appcontext(_close_db)

@@ -754,7 +754,7 @@
       "id": "S08",
       "title": "PWA shell",
       "short_title": "PWA shell",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S05",
@@ -768,6 +768,20 @@
           "text": "**2026-10-13** — From S07 review: the device guard serves 401 for any endpoint not in auth_views._OPEN_ENDPOINTS. Serve the manifest and service worker from static (or add them to that set), and never let the service worker cache the 401 unpaired page.",
           "created_at": "2026-10-13T15:00:32Z",
           "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        },
+        {
+          "id": "cc264a0b-43eb-4926-81ce-ac31ade1a6e8",
+          "kind": "",
+          "text": "**2026-11-04** — Verified: PWA shell added. manifest.webmanifest (standalone, start_url and scope /, #0f1419), 192/512/maskable icons, sw.js (precache static shell; static cache-first; navigations network-first; stores only ok, non-redirected, non-no-store responses; never /pair/ or /admin/) and register-sw.js as an external file. /sw.js is served by the pwa blueprint with Cache-Control no-cache and is open to unpaired devices; the 401 page is never cached. base.html links the manifest and theme-color; web/static/*/* ships as package data. Full suite 165 passed, ruff clean. Browser checks (DevTools installability, Cache Storage, installed launch) not run.",
+          "created_at": "2026-11-04T12:37:32Z",
+          "attempt": 1,
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
@@ -796,7 +810,7 @@
         "importance": 3,
         "urgency": 2,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
