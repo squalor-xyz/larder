@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None. The planning rules interview is done (ADR 0013 Rules, S19). Owner decisions: 2026-11-04, 6 planned dinners and 1 open night per week; no repeat within 10 days; favorites rank higher; at most one project meal per week, and only on a weekend; dinners only (breakfast and lunch ingredients are staples)."
+      "body": "None. The planning rules interview is done (ADR 0013 Rules, S19). Owner decisions: 2026-11-04, 6 planned dinners and 1 open night per week; no repeat within 10 days; favorites rank higher; at most one project meal per week, and only on a weekend; dinners only (breakfast and lunch ingredients are staples).\n\nOwner decisions: 2026-11-05, spec-check answers: (1) the planning week starts on Sunday and covers the 7 nights after the Saturday-evening session; the weekend is Saturday and Sunday, so a project meal may fall only on those days; (2) suggest_week returns ranked picks for all 7 nights and the planning session (S21) drops whichever night the household marks open; (3) rank.py is pure functions on plain data (candidate, history, rules and seed dataclasses) and never touches SQLite; two loader functions (rotation candidates, made-or-planned history) go in src/larder/planner_db.py, which joins this slice's files with src/larder/planner/__init__.py, and alternatives takes the in-progress week with its locked picks plus the night; (4) any in-rotation recipe whose meal_type is null or 'dinner' is a candidate."
     },
     {
       "heading": "Files",
