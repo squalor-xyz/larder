@@ -494,3 +494,78 @@ class RecipeRepoTest(unittest.TestCase):
                 self.assertEqual(
                     (result.state, result.detail), ("needs_attention", expected)
                 )
+
+    def prepare_index(self) -> None:
+        from larder import db
+
+        conn = db.connect(self.settings)
+        try:
+            db.migrate(conn)
+        finally:
+            conn.close()
+        (self.writer / "recipes").mkdir()
+        self.remote_write("recipes/indexed.md", '+++\ntitle="Indexed"\n+++\nBody\n')
+
+    def indexed_title(self) -> str | None:
+        from larder import db
+
+        conn = db.connect(self.settings)
+        try:
+            row = conn.execute(
+                "SELECT title FROM recipe WHERE slug='indexed'"
+            ).fetchone()
+            return row[0] if row else None
+        finally:
+            conn.close()
+
+    def test_sync_indexes_recipe_content(self) -> None:
+        self.prepare_index()
+        for operation in (self.repo.pull, self.repo.push, self.repo._sync):
+            with self.subTest(operation=operation.__name__):
+                title = operation.__name__
+                self.remote_write(
+                    "recipes/indexed.md", f'+++\ntitle="{title}"\n+++\nBody\n'
+                )
+                operation(self.settings)
+                self.assertEqual(self.indexed_title(), title)
+        (self.settings.recipes_dir / "recipes" / "indexed.md").write_text(
+            '+++\ntitle="Committed"\n+++\nBody\n'
+        )
+        self.repo.commit(self.settings, ["recipes/indexed.md"], "Update indexed.")
+        self.assertEqual(self.indexed_title(), "Committed")
+
+    def test_index_failure_does_not_fail_sync(self) -> None:
+        self.prepare_index()
+        with (
+            mock.patch(
+                "larder.recipes.repo.index_recipes",
+                create=True,
+                side_effect=RuntimeError("private detail"),
+            ),
+            self.assertLogs("larder.recipes.repo", level="ERROR") as logs,
+        ):
+            self.repo.pull(self.settings)
+        self.assertEqual(
+            logs.output,
+            [
+                "ERROR:larder.recipes.repo:Recipe indexing failed; will retry after the next sync."
+            ],
+        )
+        self.assertEqual(self.repo.status(self.settings).state, "ok")
+
+    def test_commit_indexes_before_failed_push(self) -> None:
+        self.prepare_index()
+        self.repo.ensure_clone(self.settings)
+        (self.settings.recipes_dir / "recipes" / "indexed.md").write_text(
+            '+++\ntitle="Local"\n+++\nBody\n'
+        )
+        with (
+            mock.patch("larder.recipes.repo._pull", return_value=True),
+            mock.patch(
+                "larder.recipes.repo._push",
+                side_effect=self.repo.RepoError("Push failed"),
+            ),
+            self.assertRaises(self.repo.RepoError),
+        ):
+            self.repo.commit(self.settings, ["recipes/indexed.md"], "Update indexed.")
+        self.assertEqual(self.indexed_title(), "Local")

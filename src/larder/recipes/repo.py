@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Literal
 
 from larder.config import Settings
+from larder.recipes.index import index_recipes
 from larder.scheduler import Scheduler
 
 logger = logging.getLogger(__name__)
@@ -230,6 +231,7 @@ def _pull(settings: Settings) -> bool:
                 ahead,
             ),
         )
+        _index(settings)
         return True
     except RepoError as error:
         if (settings.recipes_dir / ".git").is_dir():
@@ -238,6 +240,14 @@ def _pull(settings: Settings) -> bool:
                 replace(previous, state="needs_attention", detail=str(error)),
             )
         raise
+
+
+def _index(settings: Settings) -> None:
+    try:
+        index_recipes(settings)
+    except Exception:  # noqa: BLE001 - indexing must never fail a successful sync
+        # Parser and database diagnostics can include private recipe content.
+        logger.error("Recipe indexing failed; will retry after the next sync.")
 
 
 def pull(settings: Settings) -> None:
@@ -284,6 +294,7 @@ def commit(settings: Settings, paths: Sequence[str | Path], message: str) -> Non
         _require_main(settings)
         _git(settings, "add", "--", *(str(path) for path in paths))
         _git(settings, "commit", "-m", message, "--", *(str(path) for path in paths))
+        _index(settings)
         if _pull(settings):
             _push(settings)
 

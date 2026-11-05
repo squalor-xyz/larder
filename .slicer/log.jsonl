@@ -430,3 +430,13 @@
 {"when": "2026-11-04T14:31:18Z", "item": "S14", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-04T14:37:39Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-04T14:49:07Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-04T15:11:02Z", "item": "S13", "action": "status", "from": "open", "to": "started", "note": "", "by": "Jon R"}
+{"when": "2026-11-04T15:11:31Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-04T15:11:32Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-04T15:17:16Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-05T12:35:08Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-05T12:35:08Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-05T12:38:29Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Files"}
+{"when": "2026-11-05T12:38:29Z", "item": "S13", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
+{"when": "2026-11-05T12:58:16Z", "item": "S13", "action": "note", "from": "", "to": "", "note": "Verified recipe indexing on successful pulls and commits, me", "by": "Jon R"}
+{"when": "2026-11-05T12:58:20Z", "item": "S13", "action": "status", "from": "started", "to": "done", "note": "Verified recipe indexing on successful pulls and commits, metadata and parse-override preservation, archive and restore behaviour, draft exclusion, and per-file error isolation with sanitized slug logs. Full suite: 227 passed, 0 failed; lint, formatting, mutation checks and slicer validation passed. Reviewer gate passed and owner approved.", "by": "Jon R"}

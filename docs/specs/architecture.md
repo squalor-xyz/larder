@@ -140,6 +140,32 @@ service (stdlib first, [ADR 0002](../decisions/0002-python.md)).
   stops it afterwards. Starting it under a WSGI server is decided with the
   container (S28).
 
+## Recipe index
+
+After every successful pull and local commit, `repo.py` indexes the clone's
+`recipes/<slug>.md` files while holding `recipes.lock`. Push and scheduled sync
+also use this pull path. Indexing opens and closes its own database connection.
+A database indexing failure logs a generic error, leaves sync successful, and
+is retried on the next successful pull or commit. Recipe content is never
+included in that error log.
+
+The mirror uses one `recipe_source` with kind `recipe-repo` and location
+`recipes`; `source_ref` is the repo-relative `recipes/<slug>.md` path. SHA-256
+of the file bytes detects content changes. Unchanged files keep their rows and
+ingredient lines. Changed files update the title and Markdown body and replace
+the raw ingredient lines (positions start at 1, confidence is 0, unconfirmed).
+Ingredient parsing is a separate step. `recipe_meta` and `parse_override` are
+never replaced by indexing.
+
+A missing file archives its recipe, retaining its metadata. Restoring the same
+slug unarchives that row, including when its content hash is unchanged. Renaming
+a file creates a new recipe and archives the old slug; metadata stays with the
+old slug. A file that cannot be read or parsed, or has no title, is skipped;
+its existing row and ingredient lines stay unchanged, and an error log names
+only its slug. Other valid files are still indexed. Files with `draft = true`
+are excluded; a previously indexed recipe that becomes a draft is archived,
+keeping its metadata. All database writes share one transaction.
+
 ## Recipe sync
 
 When `recipe_repo_url` is set, `create_app` registers the `recipe-sync` job.
