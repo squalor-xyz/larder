@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. Who can plan: admin only, or both (per the planning interview)?\n2. Is one tap on \"swap\" enough (shows the next alternative), or show a picker of 3?\n\nOwner decisions: 2026-11-04, ADR 0013 Rules (S19): everyone can plan (any paired person can edit the plan); the planning session is Saturday evening; 6 dinners and 1 open night, the open night chosen when planning; a skipped meal rolls to the next open night. The swap question (one tap or a picker of 3) is still open."
+      "body": "None. Owner decisions: 2026-11-04 (ADR 0013 Rules, S19): everyone can plan (any paired person can edit the plan); the planning session is Saturday evening; 6 dinners and 1 open night, the open night chosen when planning; a skipped meal rolls to the next open night. 2026-11-05: one tap on 'swap' replaces the meal with the next-ranked alternative (no picker). The S20 'suggested week looks sensible on imported recipes' check was deferred to this slice or the S30 trial: run it here once imported and tagged recipes exist, otherwise leave it for S30."
     },
     {
       "heading": "Files",
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Git",
-      "body": "Commit only when the owner asks; no AI attribution."
+      "body": "Add the weekly planning session (S21)."
     }
   ],
   "notes": []

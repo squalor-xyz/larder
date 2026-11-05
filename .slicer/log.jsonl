@@ -499,3 +499,5 @@
 {"when": "2026-11-05T14:09:48Z", "item": "S14", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
 {"when": "2026-11-05T17:00:08Z", "item": "S14", "action": "note", "from": "", "to": "", "note": "Add member recipe browsing and escaped Markdown views, admin", "by": "Jon R"}
 {"when": "2026-11-05T17:00:12Z", "item": "S14", "action": "status", "from": "started", "to": "done", "note": "Add member recipe browsing and escaped Markdown views, admin metadata editing and filtered bulk rotation updates; preserve metadata through reindexing. Verified 285 tests passing, lint and formatting checks passing, and gate VERDICT: PASS.", "by": "Jon R"}
+{"when": "2026-11-05T17:05:41Z", "item": "S21", "action": "edit", "from": "", "to": "", "note": "Owner input"}
+{"when": "2026-11-05T17:05:41Z", "item": "S21", "action": "edit", "from": "", "to": "", "note": "Git"}
