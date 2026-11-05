@@ -5,7 +5,8 @@ The MVP tables below are the schema in
 `pairing_token` from
 [`0002_pairing.sql`](../../src/larder/migrations/0002_pairing.sql), ranges and
 alternatives from migration 0003, and `category` from
-[`0004_categories.sql`](../../src/larder/migrations/0004_categories.sql). Phase 2 tables
+[`0004_categories.sql`](../../src/larder/migrations/0004_categories.sql), plus
+`parse_override.optional` from migration 0005. Phase 2 tables
 are indicative only; each is added by its own slice as a new migration.
 
 Conventions:
@@ -37,7 +38,7 @@ Conventions:
 | **item_alias** | id, item_id, alias (unique) | Learned from review |
 | **ingredient_line** | id, recipe_id, position, raw_text, qty, qty_max, unit_id, item_id, notes, optional, is_food, confidence (0–1), confirmed | One per Markdown list item. Unique on (recipe_id, position). A range ("2–3") keeps its lower bound in `qty` and its upper bound in `qty_max`; `qty_max` is null for a plain quantity, needs `qty` and is not below it. For an alternatives line the first choice stays here |
 | **ingredient_line_alt** | id, line_id, position, alt_text, item_id | The other choices of an alternatives line ("honey, maple syrup, or agave"), in order. `position` starts at 1 and is unique per line. The choices share the line's `qty` and `unit_id`. `alt_text` is the alternative as written; `item_id` stays null until it is matched to a canonical item |
-| **parse_override** | id, normalized_text (unique), qty, qty_max, unit_id, item_id, notes, is_food | One confirmation applies everywhere ([ADR 0007](../decisions/0007-rule-based-ingredient-parsing.md)). `qty_max` works as on `ingredient_line` |
+| **parse_override** | id, normalized_text (unique), qty, qty_max, unit_id, item_id, notes, optional, is_food | One confirmation applies everywhere ([ADR 0007](../decisions/0007-rule-based-ingredient-parsing.md)). `qty_max` works as on `ingredient_line` |
 | **parse_override_alt** | id, override_id, position, alt_text, item_id | Alternatives of an override, the same shape as `ingredient_line_alt`. Unique on (override_id, position) |
 | **meal_plan** | id, week_start (unique) | One row per week |
 | **planned_meal** | id, meal_plan_id, date, recipe_id, status (planned/made/skipped), locked | |
@@ -79,8 +80,9 @@ the best item candidate even at low confidence; each alternative stores its
 original text and its own candidate (or null). Line confidence is the minimum of
 the parse score and all choice match scores. A line below `REVIEW_THRESHOLD`
 (0.8) needs review. This callable requires the unit seed; a missing recognized
-unit raises instead of silently dropping the unit. S18 wires it into indexing
-and applies cached parse overrides; S17 adds no review UI or order-line flow.
+unit raises instead of silently dropping the unit. Indexing calls it within
+the mirror transaction. Cached overrides take priority over rule-based parsing
+and matching; applying one sets confidence to 1 and marks the line confirmed.
 
 ### Deletes
 
@@ -142,3 +144,11 @@ ListItem *─1 Person (added_by)
 Staple 1─1 Item
 OrderLine *─1 Item ; PantryEvent *─1 Item ; PantryEstimate 1─1 Item
 ```
+
+Migration 0005 adds `parse_override.optional` so cached review edits preserve the
+optional flag. Override keys casefold the raw line and collapse whitespace only.
+Review answers copy the ordered alternatives verbatim, including null item ids.
+
+Review answers immediately update identical active, unconfirmed ingredient lines
+in the same transaction as the override and alias; indexing applies the cache
+to future occurrences. Archived and confirmed lines are preserved.

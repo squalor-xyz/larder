@@ -7,6 +7,7 @@ from contextlib import closing
 
 from larder import db, recipes_db
 from larder.config import Settings
+from larder.ingredients.match import parse_and_match_recipe
 from larder.recipes.doc import RecipeParseError, parse_recipe
 
 logger = logging.getLogger(__name__)
@@ -18,8 +19,8 @@ def index_recipes(settings: Settings) -> None:
     Skip unreadable or invalid files, retaining their existing rows. Drafts
     are excluded and any existing rows for them are archived. All database
     writes share one transaction. The app migrates the database at startup;
-    this function opens and closes its own connection. Ingredient lines remain
-    raw and unconfirmed.
+    this function opens and closes its own connection. Ingredient lines are
+    parsed and matched, applying permanent human answers first.
     """
     documents = []
     skipped: set[str] = set()
@@ -41,7 +42,10 @@ def index_recipes(settings: Settings) -> None:
     with closing(db.connect(settings)) as conn, db.transaction(conn):
         source_id = recipes_db.recipe_source(conn)
         for document, content_hash in documents:
-            recipes_db.mirror_recipe(conn, source_id, document, content_hash)
+            recipe_id = recipes_db.mirror_recipe(
+                conn, source_id, document, content_hash
+            )
+            parse_and_match_recipe(conn, recipe_id)
         recipes_db.archive_missing(
             conn, source_id, {doc.slug for doc, _ in documents} | skipped
         )

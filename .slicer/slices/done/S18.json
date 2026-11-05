@@ -22,11 +22,11 @@
     },
     {
       "heading": "Files",
-      "body": "- `src/larder/web/review_views.py`, template `review/queue.html`\n- `src/larder/ingredients/overrides.py`\n- `tests/test_review.py`"
+      "body": "- `src/larder/web/review_views.py`, `src/larder/web/templates/review/queue.html`\n- `src/larder/ingredients/overrides.py` (`answer`), `src/larder/ingredients_db.py` (`active_unconfirmed_lines`, override SQL)\n- `src/larder/ingredients/match.py` (`parse_and_match_recipe`), `src/larder/recipes/index.py` (`index_recipes`), `src/larder/recipes_db.py` (`mirror_recipe`)\n- `src/larder/web/__init__.py` (`create_app`), `src/larder/web/templates/base.html`\n- `src/larder/migrations/0005_override_optional.sql`\n- `tests/test_review.py` (`ReviewTest`), `tests/test_recipe_index.py`, `tests/test_db.py` (migration version expectations)\n- `docs/specs/architecture.md`, `docs/specs/data-model.md`, `AGENTS.md`"
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_queue_lists_low_confidence_and_unmatched_lines`\n2. `test_confirm_writes_override_and_alias`\n3. `test_override_applies_to_identical_line_in_other_recipe`\n4. `test_mark_non_food_excludes_from_lists`\n5. `test_create_new_item_from_review`"
+      "body": "In `tests/test_review.py::ReviewTest`:\n1. `test_queue_lists_low_confidence_and_unmatched_lines`\n2. `test_confirm_writes_override_and_alias`\n3. `test_override_applies_to_identical_line_in_other_recipe`\n4. `test_mark_non_food_excludes_from_lists`\n5. `test_create_new_item_from_review`\n6. `test_answer_resolves_identical_queued_lines`: confirmation immediately resolves matching active unconfirmed lines and clears their badge; unrelated, archived and confirmed lines stay unchanged.\nAlso cover editing, alternatives (including null item), authorization, CSRF, validation and atomic rollback. In `test_invalid_edit_rolls_back_and_unmatched_confirm_rejected`, cover unknown action, stale/confirmed 404 responses, and new-item precedence over a selected candidate. Update existing index expectations from raw to parsed fields."
     },
     {
       "heading": "Implement",

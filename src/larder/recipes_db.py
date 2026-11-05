@@ -19,7 +19,7 @@ def recipe_source(conn: sqlite3.Connection) -> int:
 
 def mirror_recipe(
     conn: sqlite3.Connection, source_id: int, doc: RecipeDoc, content_hash: str
-) -> None:
+) -> int:
     """Insert or refresh file content without replacing metadata or overrides."""
     existing = conn.execute(
         "SELECT id, content_hash, archived FROM recipe WHERE source_id=? AND slug=?",
@@ -28,7 +28,7 @@ def mirror_recipe(
     if existing is not None and existing["content_hash"] == content_hash:
         if existing["archived"]:
             conn.execute("UPDATE recipe SET archived=0 WHERE id=?", (existing["id"],))
-        return
+        return existing["id"]
     values = (
         doc.front_matter["title"],
         f"recipes/{doc.slug}.md",
@@ -59,6 +59,7 @@ def mirror_recipe(
             for position, line in enumerate(doc.ingredients, 1)
         ),
     )
+    return recipe_id
 
 
 def archive_missing(conn: sqlite3.Connection, source_id: int, slugs: set[str]) -> None:

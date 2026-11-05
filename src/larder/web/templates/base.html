@@ -17,6 +17,7 @@
         {% if person and person.role == "admin" %}
         <nav class="site-nav" aria-label="Admin">
           <a href="{{ url_for('admin.devices') }}">Devices</a>
+          <a href="{{ url_for('admin.review_queue') }}">Parse review ({{ review_count }})</a>
           <a href="{{ url_for('admin.recipe_repo') }}">Recipe repo</a>
         </nav>
         {% endif %}

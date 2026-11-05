@@ -16,7 +16,8 @@ the recipe index (`larder.recipes.index`: mirrors recipe files on sync while pre
 the ingredient line parser (`larder.ingredients.parse`: one line to a `ParsedLine`, no item matching or DB),
 and the item matcher (`larder.ingredients.match`: missing categories, items,
 aliases and units seeded at startup; `parse_and_match_recipe` writes parsed
-lines and alternatives, not yet wired into indexing).
+lines and alternatives, applies permanent review overrides, and runs during indexing),
+and the admin parse review queue (confirm, edit, create item, mark non-food).
 Recipe sync clones, rebases and pushes using a repo-scoped deploy key, with persisted conflict status.
 Not built yet: planning and the shopping list.
 

@@ -154,8 +154,9 @@ The mirror uses one `recipe_source` with kind `recipe-repo` and location
 of the file bytes detects content changes. Unchanged files keep their rows and
 ingredient lines. Changed files update the title and Markdown body and replace
 the raw ingredient lines (positions start at 1, confidence is 0, unconfirmed).
-Ingredient parsing is a separate step. `recipe_meta` and `parse_override` are
-never replaced by indexing.
+Within the same transaction, `parse_and_match_recipe` parses and matches each
+unconfirmed line, applying cached human answers first. Confirmed lines stay
+unchanged. `recipe_meta` and `parse_override` are never replaced by indexing.
 
 A missing file archives its recipe, retaining its metadata. Restoring the same
 slug unarchives that row, including when its content hash is unchanged. Renaming
@@ -234,3 +235,24 @@ git operations in tests without host credentials or network access.
   `HttpOnly`, `SameSite`, and `Secure` behind HTTPS; a per-session CSRF token
   on every state-changing request; larder refuses to start without an admin in
   config ([ADR 0010](../decisions/0010-device-cookie-auth.md)).
+
+## Parse review
+
+Admins open `/admin/review` from the navigation, which shows the unresolved line
+count. The queue contains unconfirmed low-confidence or unmatched food lines
+from active recipes. Each row shows raw text, parsed fields and the first item
+candidate. Confirm accepts the suggestion with one tap; Edit opens quantity,
+range, unit, notes, optional and item controls. An admin can choose an existing
+item, create one, or mark a line non-food. A non-empty new-item name takes
+precedence over the selected candidate. Unmatched food needs an item before
+confirmation. Existing admin and CSRF protections cover every action.
+
+Answers and learned item aliases are saved atomically. The override key is the
+raw line casefolded with whitespace collapsed; quantities and punctuation are
+retained. An answer immediately applies to every active, unconfirmed line with
+the same key, within the answer transaction. Archived and already-confirmed
+lines stay unchanged. Indexing reuses the answer across recipes and changed
+files, marks it confirmed and gives it confidence 1. Alternatives are copied unchanged, including
+unknown item ids; review edits only the first choice and line fields. Non-food
+answers persist `is_food=0` for exclusion by future shopping-list generation.
+LLM suggestions and shopping-list generation are outside this feature.

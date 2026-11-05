@@ -62,7 +62,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
         conn.close()
 
     # Imported here: the views import this module for get_db and SETTINGS_KEY.
-    from larder.web import auth_views, home_views, pwa_views, repo_views  # noqa: F401
+    from larder.web import auth_views, home_views, pwa_views, repo_views, review_views  # noqa: F401
 
     app = Flask(__name__)
     app.config[SETTINGS_KEY] = settings
