@@ -1,0 +1,40 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}Recipes - larder{% endblock %}
+{% block main %}
+<h1>Recipes</h1>
+<form method="get">
+  <label>Meal type <select name="meal_type">
+    <option value="">All meal types</option>
+    {% for value in meal_types %}<option value="{{ value }}"{% if value == meal_type %} selected{% endif %}>{{ value | capitalize }}</option>{% endfor %}
+  </select></label>
+  <label>Rotation <select name="in_rotation">
+    <option value="">All recipes</option>
+    <option value="1"{% if rotation == 1 %} selected{% endif %}>In rotation</option>
+    <option value="0"{% if rotation == 0 %} selected{% endif %}>Out of rotation</option>
+  </select></label>
+  <button type="submit">Filter</button>
+</form>
+{% if person.role == 'admin' %}
+<form method="post" action="{{ url_for('admin.recipe_rotation', meal_type=meal_type or '', in_rotation=rotation if rotation is not none else '') }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <p>Check recipes to keep in rotation. Unchecked recipes on this page will be taken out.</p>
+{% endif %}
+<ul>
+{% for recipe in recipes %}
+  <li>
+    {% if person.role == 'admin' %}
+    <input type="hidden" name="page_id" value="{{ recipe.id }}">
+    <label><input type="checkbox" name="in_rotation" value="{{ recipe.id }}"{% if recipe.in_rotation %} checked{% endif %}> In rotation: {{ recipe.title }}</label>
+    {% endif %}
+    <a href="{{ url_for('recipes.recipe_view', recipe_id=recipe.id) }}">{{ recipe.title }}</a>
+    {% if recipe.meal_type %} · {{ recipe.meal_type }}{% endif %}
+    {% if recipe.favorite %} · Favorite{% endif %}
+  </li>
+{% else %}<li>No recipes match these filters.</li>{% endfor %}
+</ul>
+{% if person.role == 'admin' %}
+  <button type="submit">Save rotation</button>
+</form>
+{% endif %}
+{% endblock %}

@@ -1011,7 +1011,7 @@
       "id": "S14",
       "title": "Recipe browse and metadata editing",
       "short_title": "Recipe browse and metadata editing",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S13",
@@ -1024,6 +1024,20 @@
           "text": "**2026-10-13** — From S07 review: the admin 403 check is request.blueprint == auth_views.admin. Register new admin pages on that blueprint or extend the guard.",
           "created_at": "2026-10-13T15:00:32Z",
           "attempt": 0,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        },
+        {
+          "id": "157aba85-a10c-442d-94e1-50e11bb3372d",
+          "kind": "",
+          "text": "**2026-11-05** — Add member recipe browsing and escaped Markdown views, admin metadata editing and filtered bulk rotation updates; preserve metadata through reindexing. Verified 285 tests passing, lint and formatting checks passing, and gate VERDICT: PASS.",
+          "created_at": "2026-11-05T17:00:08Z",
+          "attempt": 1,
           "by": "Jon R",
           "verified_by": "",
           "verified_at": "",
@@ -1052,7 +1066,7 @@
         "importance": 3,
         "urgency": 2,
         "effort": 2,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {

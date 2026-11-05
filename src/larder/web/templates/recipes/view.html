@@ -1,0 +1,16 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}{{ recipe.title }} - larder{% endblock %}
+{% block main %}
+<p><a href="{{ url_for('recipes.recipe_list') }}">All recipes</a></p>
+<h1>{{ recipe.title }}</h1>
+<dl>
+  <dt>Meal type</dt><dd>{{ recipe.meal_type or 'Not set' }}</dd>
+  <dt>Servings</dt><dd>{{ recipe.servings or 'Not set' }}</dd>
+  <dt>In rotation</dt><dd>{{ 'Yes' if recipe.in_rotation else 'No' }}</dd>
+  <dt>Favorite</dt><dd>{{ 'Yes' if recipe.favorite else 'No' }}</dd>
+  <dt>Effort</dt><dd>{{ recipe.effort or 'Not set' }}</dd>
+</dl>
+{% if person.role == 'admin' %}<p><a href="{{ url_for('admin.recipe_meta', recipe_id=recipe.id) }}">Edit metadata</a></p>{% endif %}
+<article>{{ body }}</article>
+{% endblock %}

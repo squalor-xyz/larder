@@ -22,11 +22,11 @@
     },
     {
       "heading": "Files",
-      "body": "- `src/larder/web/recipes_views.py`, templates `recipes/list.html`, `recipes/view.html`, `recipes/meta_form.html`\n- `tests/test_recipes_web.py`"
+      "body": "- `src/larder/web/recipes_views.py`; templates `src/larder/web/templates/recipes/list.html`, `src/larder/web/templates/recipes/view.html`, `src/larder/web/templates/recipes/meta_form.html`\n- `src/larder/recipes_db.py` (recipe browse and metadata SQL helpers)\n- `src/larder/web/__init__.py` (`create_app` blueprint wiring); templates `src/larder/web/templates/base.html`, `src/larder/web/templates/home.html` (navigation and Today recipe link)\n- `tests/test_recipes_web.py` (web integration tests)\n- `docs/specs/architecture.md` (shipped recipe browsing and metadata behavior)"
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_list_filters_by_meal_type_and_rotation`\n2. `test_view_renders_ingredients_and_directions_safely` (HTML-escaped Markdown)\n3. `test_admin_can_edit_meta_member_cannot`\n4. `test_meta_survives_reindex`"
+      "body": "In `tests/test_recipes_web.py::RecipesWebTest`:\n1. `test_list_filters_by_meal_type_and_rotation`\n2. `test_view_renders_ingredients_and_directions_safely` (escaped headings, lists, bold and paragraphs)\n3. `test_admin_can_edit_meta_member_cannot`\n4. `test_meta_survives_reindex`\n5. `test_bulk_rotation_changes_only_displayed_rows`\n6. `test_writes_require_csrf`\n7. `test_invalid_metadata_does_not_write`\n8. `test_member_browse_navigation_and_today_link`\n9. `test_unknown_and_archived_recipes_are_not_available`\n10. `test_bulk_rejects_rows_outside_filter`"
     },
     {
       "heading": "Implement",

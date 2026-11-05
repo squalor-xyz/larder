@@ -256,3 +256,26 @@ files, marks it confirmed and gives it confidence 1. Alternatives are copied unc
 unknown item ids; review edits only the first choice and line fields. Non-food
 answers persist `is_food=0` for exclusion by future shopping-list generation.
 LLM suggestions and shopping-list generation are outside this feature.
+
+## Recipe browsing and metadata
+
+Every paired household member can browse `/recipes`, filter by meal type and
+in/out of rotation, and open `/recipes/<id>`. The navigation links to the list;
+when Tonight has a planned meal, its View recipe link opens that recipe.
+Archived recipes are omitted and their detail and metadata URLs return 404.
+Recipe bodies render a small Markdown subset: headings, flat ordered and
+unordered lists, bold text and paragraphs. Source HTML is escaped; other
+Markdown syntax (including links) is displayed literally.
+
+Admins can edit meal type (dinner/breakfast/lunch/side/dessert), positive integer
+servings, in rotation, favorite and effort (quick/normal/project) through
+`/admin/recipes/<id>/meta`. Meal type, servings and effort may be unset. These
+values stay in `recipe_meta` and survive recipe reindexing. Recipe content is
+edited in git, and ingredient review remains on the separate review page.
+
+The admin list shows rotation checkboxes initialized from saved metadata. Save
+rotation applies checked and unchecked states only to submitted rows on the
+filtered page; recipes outside that page stay unchanged. New recipes retain
+the schema default of in rotation. Both metadata saves and bulk rotation saves
+use explicit transactions and the existing admin and CSRF guards. Members see
+read-only pages without these controls.
