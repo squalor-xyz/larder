@@ -1,0 +1,51 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}Plan the week · larder{% endblock %}
+{% block main %}
+<h1>Week of {{ week_start.isoformat() }}</h1>
+<p>{% if read_only %}Past week — read only{% elif saved.confirmed_at %}Confirmed{% else %}Draft — review your suggested dinners{% endif %}</p>
+{% if not read_only %}
+<p>Choose an open night if you like. Skip keeps a meal for later; Open night clears it.</p>
+{% endif %}
+<ol class="plan-week">
+{% for day in days %}
+{% set key = day.isoformat() %}
+{% set meal = meals.get(key) %}
+<li class="plan-night">
+  <h2>{{ day.strftime('%A') }} <small>{{ day.strftime('%b %d') }}</small></h2>
+  {% if meal %}
+  <a href="{{ url_for('recipes.recipe_view', recipe_id=meal.recipe_id) }}">{{ meal.title }}</a>
+  {% if meal.status == 'skipped' %}<span class="tag">Skipped</span>{% endif %}
+  {% if meal.locked %}<span class="tag">Locked</span>{% endif %}
+  {% else %}<span>Open night</span>{% endif %}
+  {% if not read_only %}
+  <form method="post" class="inline">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="day" value="{{ key }}">
+    <input type="hidden" name="seen" value="{{ shown[key]|join(',') }}">
+    <button name="action" value="swap"{% if meal and meal.locked %} disabled{% endif %}>Swap</button>
+    {% if meal %}
+    <button name="action" value="skip">Skip</button>
+    <button name="action" value="lock">{{ 'Unlock' if meal.locked else 'Lock' }}</button>
+    <button name="action" value="open">Open night</button>
+    {% endif %}
+    <details>
+      <summary>Pick a recipe</summary>
+      <label for="pick-{{ key }}">Recipe for {{ day.strftime('%A') }}</label>
+      <select id="pick-{{ key }}" name="recipe_id">
+        {% for recipe in recipes %}<option value="{{ recipe.id }}"{% if meal and meal.recipe_id == recipe.id %} selected{% endif %}>{{ recipe.title }}</option>{% endfor %}
+      </select>
+      <button name="action" value="pick">Pick</button>
+    </details>
+  </form>
+  {% endif %}
+</li>
+{% endfor %}
+</ol>
+{% if not read_only %}
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button name="action" value="confirm">Confirm plan</button>
+</form>
+{% endif %}
+{% endblock %}

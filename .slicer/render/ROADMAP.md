@@ -22,7 +22,7 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 - NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).
 - NG5: Exact, item-by-item inventory tracking.
 
-67 items · — 29 · done 26 · later 12
+67 items · — 28 · done 27 · later 12
 
 Pass 1 — Unblock: interviews and foundation fixes
 
@@ -64,7 +64,7 @@ Pass 2 — Core MVP: recipes, ingredients, planner
 | 18 | [S18](slices/S18.md) | Parse review queue | M | 2 | web |  | done |
 | Phase 1c — Planner | | | | | | | |
 | 19 | [S20](slices/S20.md) | Meal suggestion ranking | M | 2 | core |  | done |
-| 20 | [S21](slices/S21.md) | Weekly planning session | M | 2 | web |  | — |
+| 20 | [S21](slices/S21.md) | Weekly planning session | M | 2 | web |  | done |
 | 21 | [S22](slices/S22.md) | Today view | S | 1 | web |  | — |
 | Phase 1a — Recipes | | | | | | | |
 | 22 | [S12](slices/S12.md) | Hugo site one-time importer | S | 1 | recipes |  | — |

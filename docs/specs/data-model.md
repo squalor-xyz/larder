@@ -6,8 +6,8 @@ The MVP tables below are the schema in
 [`0002_pairing.sql`](../../src/larder/migrations/0002_pairing.sql), ranges and
 alternatives from migration 0003, and `category` from
 [`0004_categories.sql`](../../src/larder/migrations/0004_categories.sql), plus
-`parse_override.optional` from migration 0005. Phase 2 tables
-are indicative only; each is added by its own slice as a new migration.
+`parse_override.optional` from migration 0005 and `meal_plan.confirmed_at` from
+migration 0006. Phase 2 tables are indicative only; each is added by its own slice as a new migration.
 
 Conventions:
 
@@ -40,7 +40,7 @@ Conventions:
 | **ingredient_line_alt** | id, line_id, position, alt_text, item_id | The other choices of an alternatives line ("honey, maple syrup, or agave"), in order. `position` starts at 1 and is unique per line. The choices share the line's `qty` and `unit_id`. `alt_text` is the alternative as written; `item_id` stays null until it is matched to a canonical item |
 | **parse_override** | id, normalized_text (unique), qty, qty_max, unit_id, item_id, notes, optional, is_food | One confirmation applies everywhere ([ADR 0007](../decisions/0007-rule-based-ingredient-parsing.md)). `qty_max` works as on `ingredient_line` |
 | **parse_override_alt** | id, override_id, position, alt_text, item_id | Alternatives of an override, the same shape as `ingredient_line_alt`. Unique on (override_id, position) |
-| **meal_plan** | id, week_start (unique) | One row per week |
+| **meal_plan** | id, week_start (unique), confirmed_at | One row per Sunday-starting week; null means draft, otherwise UTC ISO text |
 | **planned_meal** | id, meal_plan_id, date, recipe_id, status (planned/made/skipped), locked | |
 | **shopping_list** | id, created_at, archived_at | At most one row has `archived_at` null: the one active shared list |
 | **list_item** | id, list_id, item_id, free_text, qty, unit_id, source (plan/staple/manual/runout), checked, added_by, added_at | `item_id` or `free_text` must be set |

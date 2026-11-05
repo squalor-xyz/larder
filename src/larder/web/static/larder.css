@@ -190,3 +190,41 @@ button:focus-visible {
 .break {
   overflow-wrap: anywhere;
 }
+
+/* Keep seven nights together with wrapping controls and no horizontal scroll. */
+.site-header-inner {
+  flex-wrap: wrap;
+}
+
+.plan-week {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.plan-night {
+  border-top: 1px solid var(--rule);
+  padding: 0.5rem 0;
+}
+
+.plan-night h2 {
+  margin: 0;
+}
+
+.plan-night small {
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.plan-night details {
+  max-width: 100%;
+}
+
+.plan-night summary {
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.plan-night select {
+  width: 100%;
+}

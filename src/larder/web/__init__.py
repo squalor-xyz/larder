@@ -65,6 +65,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
     from larder.web import (
         auth_views,
         home_views,
+        plan_views,
         pwa_views,
         recipes_views,
         repo_views,  # noqa: F401
@@ -81,6 +82,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
     auth_views.init_app(app, session_key)
     app.register_blueprint(recipes_views.recipes)
     app.register_blueprint(home_views.home)
+    app.register_blueprint(plan_views.planning)
     app.register_blueprint(pwa_views.pwa)
     app.register_error_handler(404, _not_found)
     app.after_request(_security_headers)

@@ -1429,13 +1429,28 @@
       "id": "S21",
       "title": "Weekly planning session",
       "short_title": "Weekly planning session",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S20",
         "S07"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "b92467d6-b532-4dab-8006-387a7e18be4c",
+          "kind": "",
+          "text": "**2026-11-05** — Add the weekly planning session with swap, skip, lock, pick, open nights and post-commit confirmation hooks; keep ended weeks read-only without autofill. Verified 329 passing tests and 23 detected mutations; gate PASS and owner approval received.",
+          "created_at": "2026-11-05T21:47:57Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",
@@ -1455,7 +1470,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 2,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {

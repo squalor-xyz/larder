@@ -336,3 +336,29 @@ filtered page; recipes outside that page stay unchanged. New recipes retain
 the schema default of in rotation. Both metadata saves and bulk rotation saves
 use explicit transactions and the existing admin and CSRF guards. Members see
 read-only pages without these controls.
+
+## Weekly planning session
+
+Every paired person can review and edit `/plan`. It defaults to the first Sunday
+on or after today; `?week=YYYY-MM-DD` selects any Sunday, including the current
+week for edits. A first visit to a current or future week saves seven ranked
+suggestions (or open slots when the rotation is insufficient); revisiting preserves
+saved choices. A week whose Saturday is before today is read-only: it shows stored
+meals, or empty slots if none exist, without creating a plan or suggestions.
+POST requests for ended weeks are rejected without writes.
+
+Swap chooses the next ranked alternative, excluding recipes already shown for
+that night in the form and recipes occupying other active nights. The form carries
+the shown ids through successive swaps without a schema change. Locked nights
+have no automatic swaps; Lock toggles the lock. Pick can choose any active recipe,
+including recipes outside rotation. Skip retains a row with status `skipped`,
+which frees that recipe from ranking history. Open night removes that night's row.
+Rolling skipped meals forward belongs to the Today view (S22).
+
+Confirm accepts zero, one or several open nights and saves `confirmed_at` as UTC
+ISO text. `larder.planner.plan.subscribe(fn)` registers process-local callbacks;
+`fire("plan_confirmed", week_start)` calls them synchronously after the save
+transaction commits. Callbacks receive the event name and Sunday as a `date`.
+Every subsequent save of a confirmed plan fires the same event. Callback errors
+propagate after commit; the saved plan remains committed. List generation is a
+separate subscriber implemented by the shopping-list slice.
