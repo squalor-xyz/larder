@@ -5,5 +5,6 @@
   <h1>You're paired</h1>
   {% if meal %}
   <p>Tonight: {{ meal["title"] }}</p>
+  <p><a href="{{ url_for('recipes.recipe_view', recipe_id=meal['recipe_id']) }}">View recipe</a></p>
   {% endif %}
 {% endblock %}

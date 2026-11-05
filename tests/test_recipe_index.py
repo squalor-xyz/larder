@@ -9,6 +9,7 @@ from pathlib import Path
 
 from larder import db
 from larder.config import load_settings
+from larder.ingredients.match import seed_items
 
 
 class RecipeIndexTest(unittest.TestCase):
@@ -21,6 +22,7 @@ class RecipeIndexTest(unittest.TestCase):
         self.conn = db.connect(self.settings)
         self.addCleanup(self.conn.close)
         db.migrate(self.conn)
+        seed_items(self.conn)
 
     def index(self) -> None:
         from larder.recipes.index import index_recipes
@@ -73,7 +75,7 @@ class RecipeIndexTest(unittest.TestCase):
             "SELECT position, raw_text, qty, confidence, confirmed FROM ingredient_line WHERE recipe_id=?",
             (recipe["id"],),
         ).fetchall()
-        self.assertEqual([tuple(row) for row in lines], [(1, "2 onions", None, 0.0, 0)])
+        self.assertEqual([tuple(row) for row in lines], [(1, "2 onions", 2.0, 0.7, 0)])
         self.assertEqual(
             self.conn.execute("SELECT count(*) FROM recipe").fetchone()[0], 4
         )
@@ -114,7 +116,7 @@ class RecipeIndexTest(unittest.TestCase):
                     "SELECT raw_text, qty, confirmed FROM ingredient_line"
                 )
             ],
-            [("3 carrots", None, 0)],
+            [("3 carrots", 3.0, 0)],
         )
 
     def test_renamed_slug_handling(self) -> None:
@@ -192,6 +194,7 @@ class RecipeIndexTest(unittest.TestCase):
                 files.mkdir(parents=True)
                 with closing(db.connect(settings)) as conn:
                     db.migrate(conn)
+                    seed_items(conn)
                     for slug in ("soup", "bad"):
                         (files / f"{slug}.md").write_text(good)
                     index_recipes(settings)

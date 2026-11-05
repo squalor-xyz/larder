@@ -4,11 +4,13 @@
 import re
 import sqlite3
 import tomllib
+from contextlib import nullcontext
 from dataclasses import dataclass
 from difflib import SequenceMatcher
 from importlib import resources
 
 from larder import db, ingredients_db
+from larder.ingredients import overrides
 from larder.ingredients.parse import parse_line
 from larder.ingredients.units import REVIEW_THRESHOLD
 
@@ -91,10 +93,13 @@ def parse_and_match_recipe(conn: sqlite3.Connection, recipe_id: int) -> None:
 
     Confidence is the minimum of parsing and all choice matches. The primary
     candidate is retained even for review; unmatched alternatives keep NULL ids.
-    S18 wires this callable into indexing and applies cached parse overrides.
+    Cached human answers take priority. Join an existing caller transaction
+    during indexing; otherwise own the recipe transaction.
     """
-    with db.transaction(conn):
+    with nullcontext() if conn.in_transaction else db.transaction(conn):
         for line in ingredients_db.unconfirmed_lines(conn, recipe_id):
+            if overrides.apply(conn, line["id"], line["raw_text"]):
+                continue
             parsed = parse_line(line["raw_text"])
             primary = match_item(conn, parsed.item_text)
             choices = [(text, match_item(conn, text)) for text in parsed.alternatives]
