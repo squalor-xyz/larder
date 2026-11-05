@@ -1,0 +1,45 @@
+{
+  "id": "S17",
+  "title": "Canonical item matching",
+  "lead": [
+    "Map parsed item text to canonical grocery items with categories and aliases (I6)."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "M",
+  "flags": [],
+  "trees_note": "recipes, core",
+  "trees_plural": true,
+  "boundary": "**Not in this slice:** the review UI (next slice); order-line matching (Phase 2 reuses this).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "\"ground turkey meat\" and \"ground turkey\" must be the same thing on the list. Order lines in Phase 2 will reuse the same matcher."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None beyond ADR 0019.\n\nOwner decisions: 2026-11-04, ADR 0019 (S15): no staples are seeded (the household adds them); category order is produce, meat, dairy, bakery, canned, dry goods, spices, frozen, household, pet.\n\nOwner decisions: 2026-11-04, ADR 0019 amended (S16): the unit table is Python constants in src/larder/ingredients/units.py; S17 seeds the unit and unit_alias rows from it.\n\nOwner decisions: 2026-11-04, answered in the spec check: (1) the seed is an idempotent insert-missing step at startup beside db.migrate and sync_people; it only inserts missing items, categories by name, aliases and unit rows and never updates or deletes existing rows; (2) ingredient_line.confidence stores the lower of the parse confidence and the match confidence, a line is flagged below the existing REVIEW_THRESHOLD of 0.8, and item_id is set to the best candidate when one exists (NULL only when there is no token overlap); (3) S17 ships a callable such as parse_and_match_recipe(conn, recipe_id) and its writer, and S18's 're-apply during indexing' step wires it into the S13 index flow; S13 is not a dependency of S17."
+    },
+    {
+      "heading": "Files",
+      "body": "- `AGENTS.md:11` (Status; document the item matcher, startup seed and callable pending indexing).\n- `src/larder/ingredients/match.py:21` (Match), `:32` (normalize_item), `:48` (match_item), `:77` (seed_items), `:89` (parse_and_match_recipe).\n- `src/larder/data/seed_items.toml` (generic fixture/example items, aliases and category order).\n- `src/larder/ingredients_db.py:15` (insert_seed), `:73` (unconfirmed_lines), `:92` (write_parse); SQL only here.\n- `src/larder/migrations/0004_categories.sql:3` (category table approved by owner; item.category stays text).\n- `src/larder/ingredients/units.py:14` (UNIT_SYNONYMS), `:29` (UNIT_DIMENSIONS).\n- `src/larder/web/__init__.py:41` (create_app; startup seed after migration).\n- `pyproject.toml:22` (package-data larder entry includes seed TOML).\n- `tests/test_item_match.py:51` (MatchTest), `:108` (SeedTest), `:227` (StartupSeedTest), `:245` (PersistenceTest), `:402` (UnitDimensionTest).\n- `tests/test_db.py:16` (MVP_TABLES), `:141`, `:193`, `:246` (migration inventories).\n- `docs/specs/data-model.md:35` (category table and seed/matching/persistence documentation).\n\nRead-only anchors: src/larder/ingredients/parse.py:83 (ParsedLine), :96 (parse_line); src/larder/db.py:55 (transaction); migration 0001:50 (unit), :63 (item); migration 0003:17 (ingredient_line_alt). Owner-approved minimal model and generic catalog implemented; no ADR edited."
+    },
+    {
+      "heading": "Failing tests",
+      "body": "Tests in `tests/test_item_match.py` (qualified names and final source lines):\n- `MatchTest.test_exact_and_alias_match` at line 68.\n- `MatchTest.test_normalization_plural_case_descriptors` at line 73.\n- `MatchTest.test_unknown_item_returns_candidate_with_low_confidence` at line 84.\n- `MatchTest.test_no_token_overlap_returns_no_candidate` at line 88.\n- `MatchTest.test_alias_learned_from_confirmation_is_used` at line 91.\n- `MatchTest.test_canonical_name_wins_over_alias` at line 98.\n- `MatchTest.test_empty_catalog_returns_no_candidate` at line 102.\n- `SeedTest.test_seed_loads_categories_in_order` at line 109.\n- `SeedTest.test_seed_loads_items_aliases_and_no_staples` at line 130.\n- `SeedTest.test_seed_loads_units_and_aliases` at line 148.\n- `SeedTest.test_seed_preserves_existing_rows` at line 166.\n- `SeedTest.test_seed_reinserts_missing_rows` at line 211.\n- `SeedTest.test_seed_toml_ships_as_package_data` at line 220.\n- `StartupSeedTest.test_startup_seeds_real_database` at line 228.\n- `PersistenceTest.test_writer_stores_whole_parse` at line 256.\n- `PersistenceTest.test_writer_preserves_non_food` at line 281.\n- `PersistenceTest.test_writer_stores_ordered_alternatives` at line 286.\n- `PersistenceTest.test_writer_replaces_stale_alternatives` at line 297.\n- `PersistenceTest.test_writer_keeps_low_parse_confidence` at line 306.\n- `PersistenceTest.test_writer_keeps_low_match_confidence_and_candidate` at line 311.\n- `PersistenceTest.test_writer_marks_unknown_for_review` at line 321.\n- `PersistenceTest.test_unknown_alternative_keeps_line_in_review` at line 328.\n- `PersistenceTest.test_writer_preserves_confirmed_lines` at line 340.\n- `PersistenceTest.test_writer_only_processes_requested_recipe` at line 361.\n- `PersistenceTest.test_writer_rolls_back_whole_recipe_on_failure` at line 369.\n- `PersistenceTest.test_golden_fixture_ingredients_map_or_need_review` at line 386.\n- `UnitDimensionTest.test_canonical_unit_dimensions` at line 403.\n\nAll new matching, seed and writer tests were observed red before their implementation. The unit-dimension test was red/green in the prior attempt. Mutation checks cover all new assertion sites, including startup wiring and writer removal. Existing tests/test_db.py migration inventories updated for version 4."
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Seed items, categories and aliases from TOML (ADR 0019).\n2. Normalize: lowercase, strip descriptors (fresh, chopped, sliced, …), and singularize with simple rules.\n3. Match on exact, then alias, then token overlap (stdlib `difflib` for the score).\n4. Return the item with a confidence; below the threshold → review queue.\n5. Store the whole parse from S16's `ParsedLine` on `ingredient_line` (qty, qty_max, unit_id, item_id, notes, optional, is_food, confidence), and the extra choices in `ingredient_line_alt` (S59). This slice is the only writer of parsed fields; S13 writes raw lines and S16 stays pure.\n\nSpec-check note from S16 review (2026-11-04): src/larder/ingredients/units.py has no dimension per unit, but the unit table's dimension column is NOT NULL with the values mass, volume, count and package (migration 0001). Add a canonical-unit-to-dimension map next to UNIT_SYNONYMS before seeding the unit table: clove is a count; can and jar are packages (PACKAGE_UNITS); tbsp, tsp, cup, ml and l are volume; lb, oz, g and kg are mass."
+    },
+    {
+      "heading": "Check",
+      "body": "- Matching tests pass; all fixture ingredients map or are queued."
+    },
+    {
+      "heading": "Git",
+      "body": "Add canonical item matching with seeded items and aliases (S17)."
+    }
+  ],
+  "notes": []
+}

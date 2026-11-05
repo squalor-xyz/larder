@@ -14,6 +14,7 @@ from larder.config import load_settings
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 MVP_TABLES = {
+    "category",
     "person",
     "device",
     "pairing_token",
@@ -137,7 +138,7 @@ class MigrateTest(DbTestCase):
 
         second = db.migrate(conn)
 
-        self.assertEqual(first, [1, 2, 3])
+        self.assertEqual(first, [1, 2, 3, 4])
         self.assertEqual(second, [])
         self.assertEqual(self.master(conn), before)
 
@@ -189,7 +190,7 @@ class MigrateTest(DbTestCase):
             "INSERT INTO parse_override (normalized_text, qty) VALUES ('1 egg', 1)"
         )
 
-        self.assertEqual(db.migrate(conn), [3])
+        self.assertEqual(db.migrate(conn), [3, 4])
 
         line = conn.execute("SELECT raw_text, qty, qty_max FROM ingredient_line")
         self.assertEqual(tuple(line.fetchone()), ("2 onions", 2.0, None))
@@ -242,7 +243,7 @@ class MigrateTest(DbTestCase):
         ):
             applied = db.migrate(second)
 
-        self.assertEqual(first_applied, [[1, 2, 3]])
+        self.assertEqual(first_applied, [[1, 2, 3, 4]])
         self.assertEqual(applied, [])
         self.assertIn("person", self.table_names(second))
 

@@ -3,7 +3,9 @@
 The MVP tables below are the schema in
 [`0001_init.sql`](../../src/larder/migrations/0001_init.sql), plus
 `pairing_token` from
-[`0002_pairing.sql`](../../src/larder/migrations/0002_pairing.sql). Phase 2 tables
+[`0002_pairing.sql`](../../src/larder/migrations/0002_pairing.sql), ranges and
+alternatives from migration 0003, and `category` from
+[`0004_categories.sql`](../../src/larder/migrations/0004_categories.sql). Phase 2 tables
 are indicative only; each is added by its own slice as a new migration.
 
 Conventions:
@@ -30,6 +32,7 @@ Conventions:
 | **recipe_meta** | recipe_id, meal_type, servings, in_rotation, favorite, effort | Edited in the UI; survives re-indexing ([ADR 0006](../decisions/0006-metadata-in-larder-db.md)). `servings` is positive when set |
 | **unit** | id, name (unique), dimension (mass/volume/count/package) | |
 | **unit_alias** | id, unit_id, alias (unique) | Spellings that map to a unit (`tbsp`, `tablespoon`) |
+| **category** | id, name (unique), sort_order | Seeded order; `item.category` remains text, without a foreign key |
 | **item** | id, canonical_name (unique), category | Canonical grocery item |
 | **item_alias** | id, item_id, alias (unique) | Learned from review |
 | **ingredient_line** | id, recipe_id, position, raw_text, qty, qty_max, unit_id, item_id, notes, optional, is_food, confidence (0–1), confirmed | One per Markdown list item. Unique on (recipe_id, position). A range ("2–3") keeps its lower bound in `qty` and its upper bound in `qty_max`; `qty_max` is null for a plain quantity, needs `qty` and is not below it. For an alternatives line the first choice stays here |
@@ -44,6 +47,40 @@ Conventions:
 
 `schema_migrations` (version, name, applied_at) records applied migrations. It
 is not part of the domain model.
+
+The canonical unit vocabulary in `larder.ingredients.units` includes
+`UNIT_DIMENSIONS` for database seeding: tbsp, tsp, cup, ml and l are volume;
+lb, oz, g and kg are mass; clove is a count; can and jar are packages.
+This classification does not convert quantities.
+
+### Item seed and matching
+
+After migration, `create_app` calls `larder.ingredients.match.seed_items` before
+syncing people. The packaged `data/seed_items.toml` holds category order and a
+small generic item/alias catalog drawn from the recipe fixtures and matching
+examples. No staples are seeded. Units and their aliases come from the Python
+vocabulary above. The seed is one explicit transaction that inserts missing
+categories by name, items by canonical name, units by name and aliases by alias.
+It never updates or deletes existing rows, including edited category order or
+alias targets. Editing TOML changes future insertions; it does not overwrite
+existing database values or remove old rows.
+
+`match_item(conn, item_text)` normalizes case, preparation descriptors and simple
+plurals. It tries canonical names before stored aliases. Either exact normalized
+match scores 1. Otherwise, only canonical names sharing a normalized token are
+candidates; `difflib.SequenceMatcher` scores them, with canonical-name/id order
+breaking ties. Fuzzy confidence is capped at 0.79 so it always needs review.
+Without token overlap there is no candidate and confidence is 0.
+
+`parse_and_match_recipe(conn, recipe_id)` parses that recipe's unconfirmed raw
+ingredient lines and replaces all parsed fields and ordered alternatives in one
+transaction. It preserves raw text and confirmed parses. The first choice keeps
+the best item candidate even at low confidence; each alternative stores its
+original text and its own candidate (or null). Line confidence is the minimum of
+the parse score and all choice match scores. A line below `REVIEW_THRESHOLD`
+(0.8) needs review. This callable requires the unit seed; a missing recognized
+unit raises instead of silently dropping the unit. S18 wires it into indexing
+and applies cached parse overrides; S17 adds no review UI or order-line flow.
 
 ### Deletes
 
@@ -76,9 +113,9 @@ their pairing links stop being valid.
 - Ranges and alternatives in ingredient lines ("1–2 onions", "butter or oil")
   are added by migration 0003 (slice S59): `qty_max` on `ingredient_line` and
   `parse_override`, plus the child tables `ingredient_line_alt` and
-  `parse_override_alt`. Nothing reads or writes them yet. The parser (S16) fills
-  them; how list generation treats a range or an alternative is decided
-  separately.
+  `parse_override_alt`. S16 stays pure; S17 writes parsed recipe lines and their
+  alternatives. Override application belongs to S18. How list generation treats
+  a range or an alternative is decided separately.
 
 ## Phase 2
 

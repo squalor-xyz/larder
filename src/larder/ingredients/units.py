@@ -25,6 +25,21 @@ UNIT_SYNONYMS = {
     "jar": ("jar", "jars"),
     "clove": ("clove", "cloves"),
 }
+# Database seed dimensions; classification does not convert quantities.
+UNIT_DIMENSIONS = {
+    "tbsp": "volume",
+    "tsp": "volume",
+    "cup": "volume",
+    "ml": "volume",
+    "l": "volume",
+    "lb": "mass",
+    "oz": "mass",
+    "g": "mass",
+    "kg": "mass",
+    "clove": "count",
+    "can": "package",
+    "jar": "package",
+}
 UNIT_ALIASES = {
     alias: canonical
     for canonical, aliases in UNIT_SYNONYMS.items()

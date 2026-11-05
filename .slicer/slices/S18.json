@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "1. Queue placement: an admin page with a count badge (recommended)?\n2. Confirm in bulk (one tap per line) vs. a full edit form per line?"
+      "body": "1. Queue placement: an admin page with a count badge (recommended)?\n2. Confirm in bulk (one tap per line) vs. a full edit form per line?\n\nOwner decisions: 2026-11-05, answered by the owner: (1) the queue is an admin page with a count badge in the nav; (2) confirmation is bulk: one tap per line confirms the suggested parse, and an Edit control opens the full form (fields, item choice, new item, non-food) only on demand."
     },
     {
       "heading": "Files",
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Git",
-      "body": "Commit only when the owner asks; no AI attribution."
+      "body": "Add the parse review queue with persisted overrides (S18)."
     }
   ],
   "notes": []

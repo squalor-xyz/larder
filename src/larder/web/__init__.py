@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 """Flask web shell: the app factory, base layout, health check and proxy trust.
 
-``create_app`` creates the data layout, migrates the database once and returns
-the app. Each request opens its own connection through ``get_db``, which closes
-it at teardown.
+``create_app`` creates the data layout, migrates the database, seeds missing
+categories, items, aliases and units, and returns the app. Request connections
+from ``get_db`` close at teardown.
 """
 
 import ipaddress
@@ -16,6 +16,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from larder import auth, db
 from larder.config import IPNetwork, Settings, ensure_data_dirs
+from larder.ingredients.match import seed_items
 from larder.recipes.repo import register_sync
 from larder.scheduler import Scheduler
 
@@ -40,10 +41,10 @@ WSGIApp = Callable[[dict[str, Any], Callable[..., Any]], Iterable[bytes]]
 def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
     """Build the app.
 
-    Creates the data layout, migrates the database, syncs the config people
-    into it and, when ``bootstrap`` is true, logs a bootstrap pairing link
-    while no admin has a device (replacing an unused one). A WSGI entrypoint
-    that starts several processes passes ``bootstrap=False`` and runs
+    Creates the data layout, migrates the database, seeds missing categories,
+    items, aliases and units, then syncs config people. When ``bootstrap`` is
+    true, logs a bootstrap pairing link while no admin has a device (replacing
+    an unused one). Multiple WSGI processes pass ``bootstrap=False`` and run
     ``python -m larder bootstrap`` once before the server instead.
     Raises ConfigError when config names no admin.
     """
@@ -53,6 +54,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
     conn = db.connect(settings)
     try:
         db.migrate(conn)
+        seed_items(conn)
         auth.sync_people(conn, settings)
         if bootstrap:
             auth.ensure_bootstrap(conn, settings)
