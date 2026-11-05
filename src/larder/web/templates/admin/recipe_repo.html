@@ -1,0 +1,21 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}Recipe repo - larder{% endblock %}
+{% block main %}
+  <h1>Recipe repo</h1>
+  <h2>{{ {"ok": "In sync", "needs_attention": "Needs attention", "not_cloned": "Not cloned yet"}[status.state] }}</h2>
+  <p>{{ status.detail }}</p>
+  <p>Last sync: {{ status.last_sync_at | when }}</p>
+  <p>Ahead: {{ status.ahead }}. Behind: {{ status.behind }}.</p>
+  {% if status.conflicted_files %}
+  <h2>Conflicted files</h2>
+  <ul>
+    {% for path in status.conflicted_files %}
+    <li>{{ path }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if status.state == "needs_attention" %}
+  <p>Fix the clone in the recipes directory on the host. The next successful sync clears the status.</p>
+  {% endif %}
+{% endblock %}

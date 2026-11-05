@@ -2091,13 +2091,28 @@
       "id": "S66",
       "title": "Recipe repo status page",
       "short_title": "Recipe repo status page",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S11",
         "S07"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "1012fac6-f392-4c3a-876c-bf7be59ea818",
+          "kind": "",
+          "text": "**2026-11-05** — Added the read-only admin recipe repo status page with sync state, last sync time, ahead/behind counts, escaped diagnostics and conflict files, host recovery guidance, and admin navigation. All 251 tests, lint, formatting, and tracking checks passed; all seven new tests were observed failing before implementation and mutation-checked.",
+          "created_at": "2026-11-05T12:59:29Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "S",
@@ -2117,7 +2132,7 @@
         "importance": 2,
         "urgency": 1,
         "effort": 1,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {
