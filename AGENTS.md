@@ -12,12 +12,13 @@ It reads grocery order emails and recipe files.
 app shell, people sync, device pairing with an admin bootstrap, admin device management,
 brand icons, the in-process scheduler with recipe repo sync, a placeholder landing page at `/` for paired devices, the PWA shell (manifest, icons, service worker),
 the recipe file parser (`larder.recipes.doc`: parse and serialize one recipe file, no ingredient-line parsing, git or DB),
+the recipe index (`larder.recipes.index`: mirrors recipe files on sync while preserving metadata),
 the ingredient line parser (`larder.ingredients.parse`: one line to a `ParsedLine`, no item matching or DB),
 and the item matcher (`larder.ingredients.match`: missing categories, items,
 aliases and units seeded at startup; `parse_and_match_recipe` writes parsed
 lines and alternatives, not yet wired into indexing).
 Recipe sync clones, rebases and pushes using a repo-scoped deploy key, with persisted conflict status.
-Not built yet: the recipe index, planning and the shopping list.
+Not built yet: planning and the shopping list.
 
 Read these before you propose features or change behavior:
 
