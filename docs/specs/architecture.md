@@ -209,6 +209,63 @@ excluding URLs, paths, commit messages and raw git diagnostics. The sync
 module never reads the deploy key itself. Local bare repos exercise the same
 git operations in tests without host credentials or network access.
 
+## Planner
+
+`larder.planner.rank` is pure Python on frozen dataclasses. It performs no SQL,
+clock reads or writes. Its inputs are:
+
+- `Candidate(recipe_id, title, favorite=False, effort=None)`: a rotation dinner.
+- `History(recipe_id, day)`: one made or planned event, with a Python `date`;
+  skipped events are omitted. Future planned events are included.
+- `Rules(nights=7, min_repeat_days=10, recency_weight=1, favorite_weight=7,
+  effort_weight=1, recency_cap=365)`: programmatic tuning, with no new TOML keys.
+- `Seed(value=0)`: deterministic tie-breaking, independent of the global RNG.
+- `Pick(day, recipe_id, locked=False, effort=None)`: a dated slot; a null
+  recipe id means the household must fill it. Supply effort for existing picks
+  outside the candidate pool so archived project meals still count during swaps.
+
+`planner_db.rotation_candidates(conn)` returns rows containing recipe_id,
+title, favorite and effort for unarchived, in-rotation recipes with meal_type
+null or `dinner`. `planner_db.meal_history(conn)` returns recipe_id and ISO date
+for every made or planned event. Both borrow the caller's connection and write
+nothing. Convert candidates with `Candidate(**dict(row))` and history with
+`History(row["recipe_id"], date.fromisoformat(row["date"]))`.
+
+`suggest_week(week_start, rules, history, *, candidates, seed=Seed())` returns
+a tuple of dated picks starting on Sunday. `rules.nights` must be 1–7; the
+default returns all seven nights. The planning session (S21) removes the
+household's chosen open night, yielding six dinners. This engine does not
+persist a plan, roll skipped meals forward or provide planning UI.
+
+Eligibility precedes scoring: a recipe cannot occur twice within the suggested
+week; project meals are allowed only on Sunday or Saturday, at most one per
+week. A history event less than `min_repeat_days` before or after the slot
+normally excludes its recipe. Exactly ten days is eligible with the defaults.
+If no remaining meal satisfies the repeat gap for a slot, that gap alone is
+relaxed and the least recently made or planned remaining meal comes first.
+The weekly uniqueness and project restrictions never relax. An insufficient
+pool leaves dated empty slots.
+
+For eligible meals, score is capped age × recency weight + favorite flag ×
+favorite weight + effort fit × effort weight. Age is days since the latest
+made or planned event, clamped to 0–365 by default; never-made meals receive
+the cap, and a future latest plan has age zero. A favorite's default bonus is
+equivalent to seven recency days. Effort fit is 1 for a `quick` meal on a
+weekday or a `project` meal on a weekend, otherwise 0 (including null or
+unknown effort). These weights were delegated for implementation by the owner
+on 2026-11-05 and remain reviewable tuning choices. Relaxed repeats sort by
+uncapped age before score. Equal ranks use a local RNG seeded by the supplied
+seed and slot date; sorting candidates by recipe id before drawing tie values
+makes input order irrelevant.
+
+`alternatives(week, night, k, *, candidates, rules, history, seed=Seed())`
+returns up to k ranked candidates for an existing slot in the in-progress
+week. A night absent from the week raises `ValueError("night is not in week")`.
+It excludes every occupied recipe, including the target's current recipe,
+counts project meals in the other slots, and offers no swaps for a locked
+target or nonpositive k. Strict repeat-gap candidates precede relaxed repeats.
+The function leaves every pick and lock unchanged.
+
 ## Deployment
 
 - A single container image plus a data volume (`larder.db`, recipe clone, raw
