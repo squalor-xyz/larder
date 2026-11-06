@@ -550,3 +550,4 @@
 {"when": "2026-11-06T12:12:49Z", "item": "S22", "action": "status", "from": "started", "to": "done", "note": "Implemented the Today view at / with recipe and shopping-list links, made and same-week skip controls, confirmation states, preserved shopping-list checks, and planned-row precedence coverage. Verified 358 passing tests, lint, formatting and mutation checks; gate PASS and owner approval received.", "by": "Jon R"}
 {"when": "2026-11-06T12:11:59Z", "item": "S25", "action": "edit", "from": "", "to": "", "note": "Owner input"}
 {"when": "2026-11-06T12:11:59Z", "item": "S25", "action": "edit", "from": "", "to": "", "note": "Git"}
+{"when": "2026-11-06T12:18:05Z", "item": "S25", "action": "edit", "from": "", "to": "", "note": "Owner input"}
