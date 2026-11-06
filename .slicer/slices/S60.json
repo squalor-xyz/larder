@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None if the planning rules interview is done (S19): which nights are planned and which day a week starts. A night with no meal shows as empty."
+      "body": "None. The planning rules interview is done (ADR 0013 Rules, S19): the planning week starts on Sunday and covers 7 nights; a night with no meal shows as empty; everyone can view the plan."
     },
     {
       "heading": "Files",
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Git",
-      "body": "Commit only when the owner asks; no AI attribution."
+      "body": "Add the read-only week view (S60)."
     }
   ],
   "notes": []
