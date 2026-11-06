@@ -2,7 +2,7 @@
   "version": 11,
   "id_prefix": "S",
   "id_width": 2,
-  "next_id": 68,
+  "next_id": 70,
   "preamble": "larder: a self-hosted, FLOSS household food system (recipes, weekly dinner planning, shared shopping list; later, pantry estimates driven by receipts). Specs: docs/goals.md, docs/requirements.md, docs/specs/, docs/decisions/. Slices titled \"Interview:\" collect the owner's decisions and come before the slices that depend on them. Every slice has an \"Owner input\" section listing what to confirm before starting. Household-specific answers go in the gitignored local/ folder, never in committed files.",
   "passes": [
     {
@@ -2987,6 +2987,70 @@
         "importance": 1,
         "urgency": 1,
         "effort": null,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S68",
+      "title": "Staple management",
+      "short_title": "Staple management",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S25"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "S25",
+        "parent": "",
+        "cites": [],
+        "key": "staple-management-2026-11-06",
+        "pass": "ship-trial",
+        "group": "",
+        "reason": "",
+        "importance": 3,
+        "urgency": 3,
+        "effort": 2,
+        "attempts": 0
+      }
+    },
+    {
+      "id": "S69",
+      "title": "Household timezone in the planner views",
+      "short_title": "Household timezone in the planner views",
+      "status": "open",
+      "has_slice": true,
+      "depends_on": [
+        "S21"
+      ],
+      "note_records": [],
+      "claim": null,
+      "fields": {
+        "size": "S",
+        "flags": [],
+        "trees": [
+          "web"
+        ],
+        "trees_literal": false,
+        "findings": "",
+        "discovered_from": "S21",
+        "parent": "",
+        "cites": [],
+        "key": "planner-timezone-2026-11-06",
+        "pass": "ship-trial",
+        "group": "",
+        "reason": "",
+        "importance": 2,
+        "urgency": 2,
+        "effort": 1,
         "attempts": 0
       }
     }

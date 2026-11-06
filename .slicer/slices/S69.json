@@ -1,0 +1,45 @@
+{
+  "id": "S69",
+  "title": "Household timezone in the planner views",
+  "lead": [
+    "Make the planning page and the list generation use the configured household timezone for \"today\", as the Today view does."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** any new setting. `Settings.timezone` already exists.",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "`home_views.today(settings)` returns the date in `settings.timezone` (host local time when unset). `plan_views.today` is `date.today`, and the S24 generation follows the planner's host-local convention, so on a host whose clock is not in the household's timezone the three can disagree around midnight. Found in the S21 and S24 reviews."
+    },
+    {
+      "heading": "Owner input",
+      "body": "None. The household timezone is `Settings.timezone`, as ADR 0013's Saturday-evening session implies."
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/plan_views.py`\n- `src/larder/shopping/generate.py` (wherever generation reads today's date; re-anchor at start)\n- `tests/test_plan_web.py`, `tests/test_list_generate.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_plan_page_uses_the_configured_timezone_for_the_default_week`\n2. `test_past_week_check_uses_the_configured_timezone`\n3. `test_generation_uses_the_configured_timezone_for_live_weeks`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Take \"today\" from one helper that uses `settings.timezone`, shared with the Today view.\n2. Replace `date.today` in the planner view and the list generation with it."
+    },
+    {
+      "heading": "Check",
+      "body": "- The three tests pass, the full suite passes, and `ruff check .` and `ruff format --check .` exit 0."
+    },
+    {
+      "heading": "Git",
+      "body": "Use the household timezone in the planner views (S69)."
+    }
+  ],
+  "notes": []
+}
