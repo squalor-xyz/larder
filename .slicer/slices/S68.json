@@ -1,0 +1,45 @@
+{
+  "id": "S68",
+  "title": "Staple management",
+  "lead": [
+    "Let the household create, edit and remove staples in the app, so the Staples drawer on the shopping list is not empty."
+  ],
+  "depends_note": null,
+  "findings_note": "",
+  "size": "S",
+  "flags": [],
+  "trees_note": "web",
+  "trees_plural": false,
+  "boundary": "**Not in this slice:** pantry estimates, runout prediction, or auto-adding staples to the generated list (S39, S40).",
+  "sections": [
+    {
+      "heading": "Why",
+      "body": "ADR 0019 says no staples are seeded and the household adds them in the app, but no slice builds that. The Staples drawer built in S25 lists existing `staple` rows with one-tap add, so in real use it stays empty. Found while specifying S25."
+    },
+    {
+      "heading": "Owner input",
+      "body": "1. Which fields does a staple have besides the item: a default quantity and unit (`staple.default_qty`, `staple.unit_id`), a note, anything else?\n2. Where does the staple page live: an admin page, or a page every paired person can use? (S19 says everyone can plan.)\n3. How does a household member make a staple: from a list item (\"Make staple\"), from a staple page with an item picker, or both?\n4. Can a staple be removed, and does removing it also remove it from the current list?"
+    },
+    {
+      "heading": "Files",
+      "body": "- `src/larder/web/staples_views.py`, template `staples/index.html`\n- `src/larder/shopping_db.py` (staple create, update, delete)\n- `tests/test_staples_web.py`"
+    },
+    {
+      "heading": "Failing tests",
+      "body": "1. `test_staple_can_be_created_from_an_item_and_appears_in_the_drawer`\n2. `test_staple_quantity_and_unit_can_be_edited`\n3. `test_staple_can_be_removed_without_touching_list_items`\n4. `test_unpaired_device_cannot_reach_the_staple_page`\n5. `test_csrf_is_required_for_every_staple_write`"
+    },
+    {
+      "heading": "Implement",
+      "body": "1. Add the staple page and the writes in `shopping_db.py`, following the owner's answers above.\n2. Link it from the Staples drawer.\n3. Document the page in `docs/specs/architecture.md`."
+    },
+    {
+      "heading": "Check",
+      "body": "- `PYTHONPATH=src .venv/bin/python -m unittest tests.test_staples_web` passes, the full suite passes, and `ruff check .` and `ruff format --check .` exit 0."
+    },
+    {
+      "heading": "Git",
+      "body": "Add staple management (S68)."
+    }
+  ],
+  "notes": []
+}

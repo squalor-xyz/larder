@@ -570,3 +570,7 @@
 {"when": "2026-11-06T13:30:46Z", "item": "S60", "action": "edit", "from": "", "to": "", "note": "Failing tests"}
 {"when": "2026-11-06T13:35:03Z", "item": "S60", "action": "note", "from": "", "to": "", "note": "Add the read-only current week for paired members with seven", "by": "Jon R"}
 {"when": "2026-11-06T13:35:03Z", "item": "S60", "action": "status", "from": "started", "to": "done", "note": "Add the read-only current week for paired members with seven Sunday-starting dates, all saved meal titles and recipe links, draft and skipped labels, timezone handling and access controls; verified with 378 passing tests, mutation checks, lint and formatting.", "by": "Jon R"}
+{"when": "2026-11-06T13:22:38Z", "item": "S68", "action": "add", "from": "", "to": "open", "note": "Staple management"}
+{"when": "2026-11-06T13:22:38Z", "item": "S69", "action": "add", "from": "", "to": "open", "note": "Household timezone in the planner views"}
+{"when": "2026-11-06T13:23:16Z", "item": "S68", "action": "promote", "from": "", "to": "", "note": ""}
+{"when": "2026-11-06T13:23:16Z", "item": "S69", "action": "promote", "from": "", "to": "", "note": ""}
