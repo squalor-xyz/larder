@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None if the list interview is done. Confirm the final wording of buttons with the owner.\n\nOwner decisions: 2026-11-04, ADR 0020 (S23): phones poll every few seconds, no live push; checked items are struck through until 'Clear'; the list resets with a manual 'Ordered' button, not weekly; free-text items are allowed; one category order for every store. The final button wording is still to confirm with the owner.\n\nOwner decisions: 2026-11-05, from S22: the Today view links to /list, so S25 registers the list page at the path /list."
+      "body": "None if the list interview is done. Confirm the final wording of buttons with the owner.\n\nOwner decisions: 2026-11-04, ADR 0020 (S23): phones poll every few seconds, no live push; checked items are struck through until 'Clear'; the list resets with a manual 'Ordered' button, not weekly; free-text items are allowed; one category order for every store. The final button wording is still to confirm with the owner.\n\nOwner decisions: 2026-11-05, from S22: the Today view links to /list, so S25 registers the list page at the path /list.\n\nOwner decisions: 2026-11-06, answered by the owner: the button wording is 'Add' (the add box), 'Clear checked' (removes the struck-through items) and 'Ordered' (resets the list after the order is placed); the staples drawer is titled 'Staples'. The wording question is closed."
     },
     {
       "heading": "Files",
@@ -38,7 +38,7 @@
     },
     {
       "heading": "Git",
-      "body": "Commit only when the owner asks; no AI attribution."
+      "body": "Add the shared shopping list page with polling and staples (S25)."
     }
   ],
   "notes": []
