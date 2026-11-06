@@ -19,6 +19,7 @@ from larder.config import IPNetwork, Settings, ensure_data_dirs
 from larder.ingredients.match import seed_items
 from larder.recipes.repo import register_sync
 from larder.scheduler import Scheduler
+from larder.shopping import generate  # noqa: F401 - register the plan subscriber
 
 SETTINGS_KEY = "LARDER_SETTINGS"
 SCHEDULER_KEY = "larder.scheduler"

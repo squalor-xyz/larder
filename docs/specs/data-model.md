@@ -152,3 +152,12 @@ Review answers copy the ordered alternatives verbatim, including null item ids.
 Review answers immediately update identical active, unconfirmed ingredient lines
 in the same transaction as the override and alias; indexing applies the cache
 to future occurrences. Archived and confirmed lines are preserved.
+
+### Generated list recipe sources (S24)
+
+Migration `0007_list_item_recipe.sql` adds `list_item_recipe` with composite
+primary key `(list_item_id, recipe_id)`. The list item foreign key cascades on
+delete; the recipe foreign key restricts deletion and has an index. One row per
+contributing recipe records provenance, even when a recipe occurs on multiple
+nights. Regeneration replaces these links together with the plan list rows in
+one transaction. No new list warning or staple classification column is added.

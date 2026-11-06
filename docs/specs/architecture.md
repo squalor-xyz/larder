@@ -362,3 +362,39 @@ transaction commits. Callbacks receive the event name and Sunday as a `date`.
 Every subsequent save of a confirmed plan fires the same event. Callback errors
 propagate after commit; the saved plan remains committed. List generation is a
 separate subscriber implemented by the shopping-list slice.
+
+## Shopping list generation
+
+S24 adds `shopping.generate.regenerate(conn, today=...)`. It replaces plan rows
+on the active shared list in one immediate transaction, creating the list when
+needed. It reads every confirmed week whose Saturday is on or after today;
+only `planned` meals contribute. Each occurrence of a recipe contributes its
+recipe quantities, without serving scaling. Optional and non-food lines, and
+resolved items with a `staple` row, are excluded. Untrusted guesses to staples
+keep their raw text and unresolved warning. Manual, staple and runout rows survive.
+
+Ranges use `qty_max`; alternatives use only the parent (first choice), without
+joining the alternative rows. Quantities sum per item and compatible dimension.
+US customary tsp/tbsp/cup and metric ml/l convert within volume; avoirdupois
+oz/lb and metric g/kg convert within mass. The largest contributing unit is
+shown. Package units (including cans and jars), other units and unitless lines
+stay separate. If any contributing quantity is unknown, the sum stays unknown.
+A plan row retains its check only when its summed quantity is unchanged,
+comparing in the previous display unit to avoid conversion roundoff.
+
+Unmatched lines and unconfirmed matches below the parser review threshold keep
+their raw text as free-text items. Generation returns deduplicated warnings
+(`Unresolved ingredient: ...`) to its caller; warnings are not stored. Identical
+raw texts with compatible units aggregate. Each generated row links to every
+contributing recipe through `list_item_recipe`. `shopping_db.list_items` reads
+items in configured category order, with uncategorized items after known
+categories and free text last.
+
+Importing `larder.web` registers a single process-local plan subscriber, even
+without calling `create_app`. Confirming or
+editing a confirmed plan in an app context regenerates the list synchronously
+after the plan commit, using that app's connection and host-local date (the
+same date convention as the planner view). No app or connection is captured by
+the subscriber. Non-web callers invoke `regenerate` directly. As with other
+plan subscribers, an error propagates after the plan commit; the list transaction
+rolls back. Pantry subtraction, staple buttons and list UI belong to later slices.
