@@ -423,6 +423,21 @@ precedence, then the lowest id wins. These actions never fire `plan_confirmed`
 or change the week's confirmation timestamp: shopping-list items and checks
 remain until the next confirmed plan save.
 
+## Read-only week view
+
+Every paired person can open `/week` from the header's Week link. It shows
+the seven ISO dates in the Sunday-starting week containing today, using the
+household timezone or host local date when unset. All saved meals appear in
+date then id order, including multiple meals on a night, with recipe links.
+Skipped meals remain visible and are labelled Skipped.
+Nights without meals say Open night. With no saved plan the page also says
+Nothing planned for this week. Drafts show saved meals with Draft, not confirmed
+yet until `meal_plan.confirmed_at` is set.
+
+The page only reads the saved plan; it creates no suggestions or drafts, offers
+no editing controls or week navigation, and rejects POST with 405. Unpaired
+devices receive the existing 401 page.
+
 ## Shared shopping list
 
 Paired devices use `/list`. Plain CSRF-protected forms add free text or an exact

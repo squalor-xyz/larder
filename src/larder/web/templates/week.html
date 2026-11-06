@@ -1,0 +1,23 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}Week · larder{% endblock %}
+{% block main %}
+<h1>Week of {{ week_start }}</h1>
+{% if not saved %}
+<p>Nothing planned for this week.</p>
+{% elif not saved.confirmed_at %}
+<p>Draft, not confirmed yet</p>
+{% endif %}
+<ol class="plan-week">
+{% for day in days %}
+<li class="plan-night">
+  <h2><time datetime="{{ day }}">{{ day }}</time></h2>
+  {% for meal in meals[day] %}
+  <p><a href="{{ url_for('recipes.recipe_view', recipe_id=meal.recipe_id) }}">{{ meal.title }}</a>{% if meal.status == 'skipped' %} <span class="tag">Skipped</span>{% endif %}</p>
+  {% else %}
+  <p>Open night</p>
+  {% endfor %}
+</li>
+{% endfor %}
+</ol>
+{% endblock %}

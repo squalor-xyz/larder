@@ -16,6 +16,7 @@
         <a class="site-name" href="/">larder</a>
         {% if person %}
         <a href="{{ url_for('planning.week') }}">Plan</a>
+        <a href="{{ url_for('week.index') }}">Week</a>
         <a href="{{ url_for('recipes.recipe_list') }}">Recipes</a>
         {% endif %}
         {% if person and person.role == "admin" %}

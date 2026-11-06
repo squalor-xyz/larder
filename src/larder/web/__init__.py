@@ -72,6 +72,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
         recipes_views,
         repo_views,  # noqa: F401
         review_views,  # noqa: F401
+        week_views,
     )
 
     app = Flask(__name__)
@@ -82,6 +83,7 @@ def create_app(settings: Settings, *, bootstrap: bool = True) -> Flask:
         register_sync(app.extensions[SCHEDULER_KEY], settings)
     app.register_blueprint(shell)
     auth_views.init_app(app, session_key)
+    app.register_blueprint(week_views.week)
     app.register_blueprint(recipes_views.recipes)
     app.register_blueprint(home_views.home)
     app.register_blueprint(list_views.shopping)

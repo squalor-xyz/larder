@@ -108,14 +108,20 @@ def week_plan(conn: sqlite3.Connection, week_start: str) -> sqlite3.Row | None:
     ).fetchone()
 
 
-def week_meals(conn: sqlite3.Connection, plan_id: int) -> list[sqlite3.Row]:
-    """Load persisted meals, including skipped and archived recipes."""
+def week_meals(conn: sqlite3.Connection, week_start: str | int) -> list[sqlite3.Row]:
+    """Load saved meals by ISO week start, ordered by date then id.
+
+    Includes skipped meals and archived recipes. Integer plan ids remain
+    supported for the planning session's existing callers.
+    """
+    column = "w.id" if isinstance(week_start, int) else "w.week_start"
     return conn.execute(
         "SELECT p.*, r.title, m.effort FROM planned_meal p "
+        "JOIN meal_plan w ON w.id=p.meal_plan_id "
         "JOIN recipe r ON r.id=p.recipe_id "
         "LEFT JOIN recipe_meta m ON m.recipe_id=r.id "
-        "WHERE p.meal_plan_id=? ORDER BY p.date,p.id",
-        (plan_id,),
+        f"WHERE {column}=? ORDER BY p.date,p.id",
+        (week_start,),
     ).fetchall()
 
 
