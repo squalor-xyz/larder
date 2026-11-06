@@ -22,11 +22,11 @@
     },
     {
       "heading": "Files",
-      "body": "- `src/larder/web/home_views.py` and `src/larder/web/templates/home.html` (from S62; replace the body, keep the route)\n- `src/larder/planner_db.py` (extend S62's `meal_on`)\n- `tests/test_today.py` (replaces the placeholder checks in `tests/test_home.py`)"
+      "body": "- `src/larder/web/home_views.py`: `index` and `today`; keep `/` and `home.index`.\n- `src/larder/web/templates/home.html`: replace placeholder main block.\n- `src/larder/planner_db.py`: `meal_on` (line 13; planned-first ordering at line 25) and `finish_tonight` (line 30).\n- `tests/test_today.py`: `TodayTest`, including precedence checks in `test_repeated_skip_and_stale_meal_do_not_write` (line 179) and `test_planned_meal_precedes_completed_meal_in_either_insertion_order` (line 201); `tests/test_home.py`: retained pairing/auth checks.\n- `docs/specs/architecture.md`: Today view (line 402), including planned-row precedence (lines 421-422)."
     },
     {
       "heading": "Failing tests",
-      "body": "1. `test_root_shows_tonights_planned_meal`\n2. `test_no_plan_shows_friendly_prompt`\n3. `test_made_updates_recency_history`\n4. `test_skip_applies_roll_forward_rule`\n5. `test_page_has_large_tap_targets_and_no_admin_links_for_member`\n6. `test_root_url_and_endpoint_are_unchanged_from_the_placeholder`"
+      "body": "In `tests/test_today.py::TodayTest`:\n1. `test_root_shows_tonights_planned_meal`\n2. `test_no_plan_shows_friendly_prompt`\n3. `test_made_updates_recency_history`\n4. `test_skip_applies_roll_forward_rule`\n5. `test_page_has_large_tap_targets_and_no_admin_links_for_member`\n6. `test_root_url_and_endpoint_are_unchanged_from_the_placeholder`\nAdditional focused edge checks cover full-week skips, replay, validation and CSRF. `test_repeated_skip_and_stale_meal_do_not_write` checks that a later planned replacement is displayed with controls. `test_planned_meal_precedes_completed_meal_in_either_insertion_order` covers made/skipped rows and both insertion orders."
     },
     {
       "heading": "Implement",

@@ -1,10 +1,28 @@
 {# SPDX-License-Identifier: AGPL-3.0-only #}
 {% extends "base.html" %}
-{% block title %}larder{% endblock %}
+{% block title %}Tonight · larder{% endblock %}
 {% block main %}
-  <h1>You're paired</h1>
+  <h1>Tonight’s dinner</h1>
   {% if meal %}
-  <p>Tonight: {{ meal["title"] }}</p>
-  <p><a href="{{ url_for('recipes.recipe_view', recipe_id=meal['recipe_id']) }}">View recipe</a></p>
+    {% if meal.status == 'made' %}
+    <p role="status">Made it — {{ meal.title }}</p>
+    {% elif meal.status == 'skipped' %}
+    <p role="status">Skipped {{ meal.title }}{% if moved_to %} — moved to {{ moved_to.strftime('%A') }} ({{ moved_to.isoformat() }}){% endif %}.</p>
+    {% if action == 'skip' and not moved_to %}<p>No open night left this week.</p>{% endif %}
+    {% else %}
+    <h2>{{ meal.title }}</h2>
+    {% endif %}
+    <p><a class="site-name" href="{{ url_for('recipes.recipe_view', recipe_id=meal.recipe_id) }}">View recipe</a></p>
+    {% if meal.status == 'planned' %}
+    <form method="post" class="stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="meal_id" value="{{ meal.id }}">
+      <button name="action" value="made">Made it</button>
+      <button name="action" value="skip">Skip tonight</button>
+    </form>
+    {% endif %}
+  {% else %}
+  <p>Nothing planned for tonight. Enjoy an open night, or <a class="site-name" href="{{ url_for('planning.week') }}">plan a dinner</a>.</p>
   {% endif %}
+  <p><a class="site-name" href="/list">Shopping list</a></p>
 {% endblock %}

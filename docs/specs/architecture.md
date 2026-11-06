@@ -398,3 +398,27 @@ same date convention as the planner view). No app or connection is captured by
 the subscriber. Non-web callers invoke `regenerate` directly. As with other
 plan subscribers, an error propagates after the plan commit; the list transaction
 rolls back. Pantry subtraction, staple buttons and list UI belong to later slices.
+
+## Today view
+
+Every paired device opens tonight's dinner at `/` (`home.index`), using the
+household timezone or host local time when unset. The page links to the recipe
+and `/list` (served by S25). With no meal it offers a friendly open-night prompt
+and a planning link. It shows neither tomorrow's dinner nor a defrost hint.
+
+The CSRF-protected Made it and Skip tonight buttons apply only to the meal
+shown for today. Made it changes its status to `made`; `meal_history` already
+includes that row for recency. Skip tonight retains a `skipped` row and copies
+the recipe to the next date with no meal row, strictly before the next Sunday.
+Made and skipped rows occupy their nights; existing meals are never replaced.
+If the week is full it only skips tonight and explains that no open night was
+available. Status and roll-forward commit in one immediate transaction.
+
+The action response shows the made/skipped meal instead of controls and names
+the destination night when moved. Later GET visits retain the completed status;
+the destination message is specific to the skip response. Repeated submissions
+of a completed meal do not write; stale meal ids return 409. Malformed ids or
+unknown actions return 400. With several rows on today, a planned row takes
+precedence, then the lowest id wins. These actions never fire `plan_confirmed`
+or change the week's confirmation timestamp: shopping-list items and checks
+remain until the next confirmed plan save.

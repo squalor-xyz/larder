@@ -5,23 +5,72 @@ Plain functions that take a connection first.
 """
 
 import sqlite3
+from datetime import date, timedelta
+
+from larder import db
 
 
-def meal_on(conn: sqlite3.Connection, day: str) -> sqlite3.Row | None:
-    """Return the planned meal on the ISO date ``day`` with its recipe title.
+def meal_on(
+    conn: sqlite3.Connection, day: str, *, include_completed: bool = False
+) -> sqlite3.Row | None:
+    """Load tonight's meal and title; prefer planned rows, then the lowest id.
 
-    Only meals with status ``planned`` count. With several, the lowest id wins.
-    Returns None when there is none.
+    By default only planned meals count. Today also shows made/skipped rows
+    as confirmation after an action, including on later visits.
     """
-    row: sqlite3.Row | None = conn.execute(
-        "SELECT planned_meal.id, planned_meal.date, planned_meal.recipe_id, "
-        "recipe.title FROM planned_meal "
-        "JOIN recipe ON recipe.id = planned_meal.recipe_id "
-        "WHERE planned_meal.date = ? AND planned_meal.status = 'planned' "
-        "ORDER BY planned_meal.id LIMIT 1",
-        (day,),
+    return conn.execute(
+        "SELECT p.*, r.title FROM planned_meal p "
+        "JOIN recipe r ON r.id=p.recipe_id "
+        "WHERE p.date=? AND (p.status='planned' OR ?) "
+        "ORDER BY (p.status='planned') DESC, p.id LIMIT 1",
+        (day, include_completed),
     ).fetchone()
-    return row
+
+
+def finish_tonight(
+    conn: sqlite3.Connection, day: date, meal_id: int, action: str
+) -> tuple[date | None, bool]:
+    """Finish tonight atomically; return (skip destination, status changed).
+
+    A stale form raises ValueError. Repeated actions on a completed meal do
+    nothing. An open night has no row, including no made/skipped history row.
+    Roll-forward creates a new planned row in this Sunday-start week only.
+    No plan-confirmed event is emitted: list regeneration waits for a plan save.
+    """
+    if action not in ("made", "skip"):
+        raise ValueError("invalid action")
+    with db.transaction(conn):
+        meal = meal_on(conn, day.isoformat(), include_completed=True)
+        if meal is None or meal["id"] != meal_id:
+            raise ValueError("tonight's meal changed")
+        if meal["status"] != "planned":
+            return None, False
+        conn.execute(
+            "UPDATE planned_meal SET status=? WHERE id=?",
+            ("made" if action == "made" else "skipped", meal_id),
+        )
+        if action == "skip":
+            sunday = day - timedelta(days=(day.weekday() + 1) % 7)
+            for offset in range(1, (sunday + timedelta(days=7) - day).days):
+                destination = day + timedelta(days=offset)
+                if (
+                    conn.execute(
+                        "SELECT 1 FROM planned_meal WHERE date=? LIMIT 1",
+                        (destination.isoformat(),),
+                    ).fetchone()
+                    is None
+                ):
+                    conn.execute(
+                        "INSERT INTO planned_meal (meal_plan_id,date,recipe_id) "
+                        "VALUES (?,?,?)",
+                        (
+                            meal["meal_plan_id"],
+                            destination.isoformat(),
+                            meal["recipe_id"],
+                        ),
+                    )
+                    return destination, True
+    return None, True
 
 
 def rotation_candidates(conn: sqlite3.Connection) -> list[sqlite3.Row]:

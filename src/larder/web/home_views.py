@@ -1,12 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""The landing page for paired devices.
-
-A placeholder until the Today view replaces its body and keeps the URL.
-"""
+"""Tonight's dinner and one-tap status controls for paired devices."""
 
 import datetime
 
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, abort, current_app, render_template, request
 
 from larder import planner_db
 from larder.config import Settings
@@ -20,9 +17,27 @@ def today(settings: Settings) -> datetime.date:
     return datetime.datetime.now(settings.timezone).date()
 
 
-@home.get("/")
+@home.route("/", methods=["GET", "POST"])
 def index() -> str:
-    """Say the device is paired and show tonight's planned meal, if any."""
+    """Show tonight's dinner and record made/skipped without regenerating lists."""
     settings: Settings = current_app.config[SETTINGS_KEY]
-    meal = planner_db.meal_on(get_db(), today(settings).isoformat())
-    return render_template("home.html", meal=meal)
+    day = today(settings)
+    conn = get_db()
+    moved_to = None
+    action = None
+    if request.method == "POST":
+        action = request.form.get("action")
+        try:
+            meal_id = int(request.form.get("meal_id", ""))
+        except ValueError:
+            abort(400)
+        if action not in ("made", "skip") or not 0 < meal_id <= 2**63 - 1:
+            abort(400)
+        try:
+            moved_to, changed = planner_db.finish_tonight(conn, day, meal_id, action)
+            if not changed:
+                action = None
+        except ValueError:
+            abort(409)
+    meal = planner_db.meal_on(conn, day.isoformat(), include_completed=True)
+    return render_template("home.html", meal=meal, moved_to=moved_to, action=action)
