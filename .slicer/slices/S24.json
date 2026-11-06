@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None. The list interview is done (ADR 0019, ADR 0020); see the Owner decisions paragraphs below."
+      "body": "None. The list interview is done (ADR 0019, ADR 0020). Owner decisions: 2026-11-04, ADR 0019 (S15): sum the same item across recipes within one unit dimension, never across volume and weight; cans count as cans; basics (salt, pepper, oil) never appear automatically unless a staple that is low; category order per ADR 0019. 2026-11-04, ADR 0020 (S23): a range puts its high end (qty_max) on the list; an alternatives line lists its first choice only; quantities shown are the recipe quantities, summed within a unit dimension, with the source recipes kept on each line; free-text items are allowed and sort after the categorized items; the list resets with a manual 'Ordered' button and checked items are struck through until 'Clear' (those two belong to S25)."
     },
     {
       "heading": "Files",
