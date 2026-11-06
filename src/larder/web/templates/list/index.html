@@ -1,0 +1,19 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% extends "base.html" %}
+{% block title %}Shopping list - larder{% endblock %}
+{% block main %}
+<h1>Shopping list</h1>
+<form method="post" class="inline list-add">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="list_id" value="{{ list_id }}">
+  <label for="add-item">Item</label>
+  <input type="text" id="add-item" name="text" list="canonical-items" required maxlength="500">
+  <button name="action" value="add">Add</button>
+</form>
+<datalist id="canonical-items">
+{% for item in catalog %}<option value="{{ item.canonical_name }}">{% endfor %}
+</datalist>
+{% include "list/_items.html" %}
+<p><small>Shared changes refresh every 5 seconds. Editing requires a connection.</small></p>
+<script src="{{ url_for('static', filename='list.js') }}" defer></script>
+{% endblock %}

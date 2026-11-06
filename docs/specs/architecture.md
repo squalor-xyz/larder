@@ -422,3 +422,27 @@ unknown actions return 400. With several rows on today, a planned row takes
 precedence, then the lowest id wins. These actions never fire `plan_confirmed`
 or change the week's confirmation timestamp: shopping-list items and checks
 remain until the next confirmed plan save.
+
+## Shared shopping list
+
+Paired devices use `/list`. Plain CSRF-protected forms add free text or an exact
+canonical name (case insensitive), check/uncheck, remove, clear checked rows,
+and add existing Staples with their default quantity and unit. Checks retain
+the original added-by person. Checked names stay struck through until removed.
+The sticky add box offers canonical names; categories follow the configured
+shared order, with free text under Other. Creating staples is separate work.
+
+Ordered archives the whole active list and creates an empty one atomically;
+plan rows return on the next confirmed plan edit or confirmation. Add and Staple
+always use the current active list, even when a phone posts an old list id.
+Check, remove, clear and Ordered require the current list id; stale submissions
+return 409 so they cannot modify or reset the replacement list.
+
+`list.js` polls `/list/refresh` every 5 seconds, with no overlapping requests.
+A SHA-256 content version covers the active list id, displayed rows (including
+item, quantity, unit, checked, added-by and category) and staples. Equal versions
+return 204; changed versions return the items and Staples fragment. Responses
+are not cached. Unsaved checkbox edits defer replacement;
+the drawer's open state survives replacement. Checkbox changes submit the form
+when JavaScript is available; without it, Save applies the selected state.
+There is no offline editing or store submission.

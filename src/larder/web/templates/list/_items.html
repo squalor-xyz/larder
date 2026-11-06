@@ -1,0 +1,42 @@
+{# SPDX-License-Identifier: AGPL-3.0-only #}
+{% macro fields() -%}
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<input type="hidden" name="list_id" value="{{ list_id }}">
+{%- endmacro %}
+<div id="list-items" data-version="{{ version }}" data-list-id="{{ list_id }}" data-refresh-url="{{ url_for('shopping.refresh') }}" data-poll-ms="5000">
+{% for category, rows in groups.items() %}
+<section><h2>{{ category }}</h2>
+<ul class="shopping-items">
+{% for row in rows %}
+<li>
+  <form method="post" action="{{ url_for('shopping.index') }}" class="inline">
+    {{ fields() }}
+    <input type="hidden" name="row_id" value="{{ row.id }}">
+    <label class="list-check"><input type="checkbox" name="checked" value="1" {% if row.checked %}checked{% endif %}>
+      {% if row.checked %}<s>{{ row.canonical_name or row.free_text }}</s>{% else %}{{ row.canonical_name or row.free_text }}{% endif %}
+      {% if row.qty is not none %}{{ '%g'|format(row.qty) }}{% endif %}{% if row.unit_name %} {{ row.unit_name }}{% endif %}
+    </label>
+    <input type="hidden" name="checked" value="0">
+    <button name="action" value="check">Save</button>
+    <button name="action" value="remove">Remove</button>
+    {% if row.added_by_name %}<small>added by {{ row.added_by_name }}</small>{% endif %}
+  </form>
+</li>
+{% endfor %}
+</ul></section>
+{% else %}<p>Your list is empty.</p>{% endfor %}
+<details id="staples"><summary>Staples</summary>
+{% for staple in staples %}
+<form method="post" action="{{ url_for('shopping.index') }}" class="inline">
+  {{ fields() }}
+  <input type="hidden" name="staple_id" value="{{ staple.id }}">
+  <button name="action" value="staple">Add {{ staple.canonical_name }}</button>
+</form>
+{% else %}<p>No staples configured yet.</p>{% endfor %}
+</details>
+<form method="post" action="{{ url_for('shopping.index') }}" class="inline">
+  {{ fields() }}
+  <button name="action" value="clear">Clear checked</button>
+  <button name="action" value="ordered">Ordered</button>
+</form>
+</div>

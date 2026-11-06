@@ -1622,13 +1622,28 @@
       "id": "S25",
       "title": "Shared shopping list UI",
       "short_title": "Shared shopping list UI",
-      "status": "open",
+      "status": "done",
       "has_slice": true,
       "depends_on": [
         "S24",
         "S07"
       ],
-      "note_records": [],
+      "note_records": [
+        {
+          "id": "f8848a1b-4588-4f6f-9f52-1322cdb1f80f",
+          "kind": "",
+          "text": "**2026-11-06** — Implemented the shared shopping list at /list with category grouping, plain forms, Staples, added-by names, Ordered archive/reset and 5-second content-versioned polling. Verified stale Add/Staple use the current list, stale destructive actions are rejected, and polling defers only for unsaved checkbox edits. Full suite: 364 passed; ruff checks passed; mutation checks passed. Gate PASS and owner approval received.",
+          "created_at": "2026-11-06T12:59:07Z",
+          "attempt": 1,
+          "by": "Jon R",
+          "verified_by": "",
+          "verified_at": "",
+          "stale_after": "",
+          "retracted_by": "",
+          "retracted_at": "",
+          "retracted_reason": ""
+        }
+      ],
       "claim": null,
       "fields": {
         "size": "M",
@@ -1648,7 +1663,7 @@
         "importance": 3,
         "urgency": 3,
         "effort": 2,
-        "attempts": 0
+        "attempts": 1
       }
     },
     {

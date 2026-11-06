@@ -22,7 +22,7 @@ larder: a self-hosted, FLOSS household food system (recipes, weekly dinner plann
 - NG4: Multi-household or hosted operation in the MVP (future direction, ADR 0016).
 - NG5: Exact, item-by-item inventory tracking.
 
-67 items · — 26 · done 29 · later 12
+67 items · — 25 · done 30 · later 12
 
 Pass 1 — Unblock: interviews and foundation fixes
 
@@ -80,7 +80,7 @@ Pass 3 — Ship and trial: list, deploy, two-week trial
 |---|---|---|---|---|---|---|---|
 | Phase 1d — Shopping list | | | | | | | |
 | 25 | [S24](slices/S24.md) | Shopping list generation | M | 2 | core |  | done |
-| 26 | [S25](slices/S25.md) | Shared shopping list UI | M | 2 | web |  | — |
+| 26 | [S25](slices/S25.md) | Shared shopping list UI | M | 2 | web |  | done |
 | Phase 1e — Deploy and trial | | | | | | | |
 | 27 | [S27](slices/S27.md) | Spike: HTTPS on the deployment network | S | 2 | deploy |  | — |
 | 28 | [S28](slices/S28.md) | Container image and deployment | L | 3 | deploy |  | — |

@@ -228,3 +228,18 @@ button:focus-visible {
 .plan-night select {
   width: 100%;
 }
+
+/* Shared list: the add box stays within reach while shopping. */
+.list-add {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0.5rem 0;
+  background: var(--bg);
+}
+.shopping-items { list-style: none; padding: 0; }
+.shopping-items li { border-bottom: 1px solid var(--rule); padding: 0.5rem 0; }
+.list-check { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; }
+.list-check input { width: 28px; height: 28px; }
+.shopping-items small { font-size: 0.85rem; opacity: 0.8; }
+#staples summary { min-height: 44px; cursor: pointer; }
