@@ -18,7 +18,7 @@
     },
     {
       "heading": "Owner input",
-      "body": "None if the list interview is done. Confirm the final wording of buttons with the owner.\n\nOwner decisions: 2026-11-04, ADR 0020 (S23): phones poll every few seconds, no live push; checked items are struck through until 'Clear'; the list resets with a manual 'Ordered' button, not weekly; free-text items are allowed; one category order for every store. The final button wording is still to confirm with the owner."
+      "body": "None if the list interview is done. Confirm the final wording of buttons with the owner.\n\nOwner decisions: 2026-11-04, ADR 0020 (S23): phones poll every few seconds, no live push; checked items are struck through until 'Clear'; the list resets with a manual 'Ordered' button, not weekly; free-text items are allowed; one category order for every store. The final button wording is still to confirm with the owner.\n\nOwner decisions: 2026-11-05, from S22: the Today view links to /list, so S25 registers the list page at the path /list."
     },
     {
       "heading": "Files",
